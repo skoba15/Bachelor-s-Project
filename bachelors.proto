@@ -1,0 +1,353 @@
+syntax = "proto3";
+
+
+
+service Service {
+
+
+    // რეგისტრაცია
+    rpc RegisterUser (RegisterRequest) returns (RegisterResponse) {
+    }
+
+    // ავტორიზაცია, რეგისტრაციის წარმატებით გავლის შემთხვევაში ავტომატურად დალოგინდება.
+    rpc LoginUser (LoginRequest) returns (LoginResponse) {
+    }
+
+
+    // პროფილის რედაქტირება
+    rpc ResetPassword (ResetPasswordRequest) returns (ResetPasswordResponse) {
+    }
+
+    // კონტაქტის დამატება
+    rpc AddContact (ContactRequest) returns (ContactResponse) {
+    }
+
+    rpc DeleteContact (ContactRequest) returns (ContactResponse) {
+    }
+
+    // სამეზობლოს დამატება
+    rpc AddNeighborhood (AddNeighborhoodRequest) returns (AddNeighborhoodResponse) {
+    }
+
+    // გადაცემული პარამეტრების მიხედვით გაფილტრავს და დააბრუნებს სამეზობლოების სიას
+    rpc GetNeighborhoodList (GetNeighborhoodRequest) returns (GetNeighborhoodResponse) {
+    }
+
+    // მენეჯერი მენეჯერს აძლევს სხვას
+    rpc AddManager (AddManagerRequest) returns (AddManagerResponse) {
+    }
+
+
+    // გაწევრიანების მოთხოვნა
+    rpc AddUserToNeighborhood (AddUserToNeighborhoodRequest) returns (AddUserToNeighborhoodResponse) {
+    }
+
+
+    // გაწევრიანებაზე პასუხი
+    rpc ApproveUserToNeighborhood (UserToNeighborhoodRequest) returns (UserToNeighborhoodResponse) {
+    }
+
+    rpc RejectUserFromNeighborhood (UserToNeighborhoodRequest) returns (UserToNeighborhoodResponse) {
+    }
+
+
+    // სამეზობლოში გაწევრიანების მოთხოვნების სია მენეჯერებისთვის
+    rpc GetUserRequestList  (GetUserRequestListRequest) returns (GetUserRequestListResponse) {
+    }
+
+    // მომხმარებელი ნივთს იმატებს
+    rpc AddItemToUser (ItemToUserRequest) returns (ItemToUserResponse) {
+    }
+
+    // მომხმარებელი ნივთს შლის სიიდან
+    rpc DeleteItemFromUser (ItemToUserRequest) returns (ItemToUserResponse) {
+    }
+
+    // სამეზობლოში ნივთის ძებნა
+    rpc SearchItem (SearchItemRequest) returns (SearchItemResponse) {
+    }
+
+    // პოსტის დამატება, წაშლა და წამოღება
+    rpc AddPost (PostRequest) returns (PostResponse) {
+    }
+
+    rpc DeletePost (PostRequest) returns (PostResponse) {
+    }
+
+    rpc GetPosts (PostRequest) returns (PostResponse) {
+    }
+
+    // დავალებების მენეჯმენტი
+    rpc AddTask (TaskRequest) returns (TaskResponse) {
+    }
+
+    rpc GetTasks (GetTaskRequest) returns (GetTaskResponse) {
+    }
+
+
+    rpc ChangeTaskStatus (ChangeTaskStatusRequest) returns (ChangeTaskStatusResponse) {
+    }
+
+    // კომენტარი
+    rpc AddComment (AddCommentRequest) returns (AddCommentResponse) {
+    }
+
+    // მანქანასთან დაკავშირებული სერვისები
+    rpc AddCar (AddCarRequest) returns (AddCarResponse) {
+    }
+
+    rpc GetCar (GetCarRequest) returns (GetCarResponse) {
+    }
+
+    rpc GetContactByCar (GetContactByCarRequest) returns (GetContactByCarResponse) {
+    }
+}
+
+
+message Car {
+    string plateNumber = 1;
+}
+
+
+message Comment {
+    string text = 1;
+    User user = 2;
+    int32 postId = 3;
+}
+
+// დავალება
+message Task {
+    int32 id = 1;
+    User creator = 2;
+    int32 days = 3;
+    User assignee = 4;
+}
+
+
+// პოსტი
+message Post {
+    User user = 1;
+    int32 neighborhoodId = 2;
+    int32 id = 3;
+    string text = 4;
+}
+
+// დალოგინებული უზერის ტოკენი და უზერნეიმი
+message User {
+    string username = 1;
+    string token = 2;
+}
+
+// ქალაქი, რაიონი და მისამართი უნიკალური სამეულია
+message Neighborhood {
+    int32 id = 1;
+    string name = 2;
+    string city = 3;
+    string district = 4;
+    string address = 5;
+}
+
+// ნივთი
+message Item {
+    string tag = 1;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string resultCode = 1;
+    string sessionToken = 2;
+}
+
+message RegisterRequest {
+    string name = 1;
+    string lastName = 2;
+    string username = 3;
+    string password = 4;
+    string repeatedPassword = 5;
+}
+
+message RegisterResponse {
+    string resultCode = 1;
+    string sessionToken = 2;
+}
+
+message ResetPasswordRequest {
+    User user = 1;
+    string oldPassword = 2;
+    string newPassword = 3;
+    string repeatNewPassword = 4;
+}
+
+message ResetPasswordResponse {
+    string resultCode = 1;
+}
+
+message ContactRequest {
+    User user = 1;
+    string contactValue = 2;
+}
+
+message ContactResponse {
+    string resultCode = 1;
+}
+
+message AddNeighborhoodRequest {
+    User user = 1;
+    Neighborhood neighborhood = 2;
+}
+
+message AddNeighborhoodResponse {
+    string resultCode = 1;
+}
+
+message GetNeighborhoodRequest {
+    User user = 1;
+    Neighborhood neighborhood = 2;
+}
+
+message GetNeighborhoodResponse {
+    string resultCode = 1;
+    repeated Neighborhood neighborhoods = 2;
+}
+
+message AddManagerRequest {
+    User currentManager = 1;
+    User newManager = 2;
+    Neighborhood neighborhood = 3;
+}
+
+message AddManagerResponse {
+    string resultCode = 1;
+}
+
+message AddUserToNeighborhoodRequest {
+    User user = 1;
+    Neighborhood neighborhood = 2;
+}
+
+message AddUserToNeighborhoodResponse {
+    string resultCode = 1;
+}
+
+
+message UserToNeighborhoodRequest {
+    User manager = 1;
+    User neighbor = 2;
+    Neighborhood neighborhood = 3;
+}
+
+message UserToNeighborhoodResponse {
+    string resultCode = 1;
+}
+
+message GetUserRequestListRequest {
+    User manager = 1;
+    Neighborhood neighborhood = 2;
+}
+
+message GetUserRequestListResponse {
+    repeated User users = 1;
+}
+
+message ItemToUserRequest {
+    User user = 1;
+    Item item = 2;
+}
+
+message ItemToUserResponse {
+    string resultCode = 1;
+}
+
+message SearchItemRequest {
+    Neighborhood neighbrhood = 1;
+    Item item = 2;
+}
+
+message SearchItemResponse {
+    string resultCode = 1;
+    repeated User users = 2;
+}
+
+message PostRequest {
+    Post post = 1;
+}
+
+message PostResponse {
+    string resultCode = 1;
+}
+
+
+
+
+message TaskRequest {
+    int32 task = 1;
+}
+
+message TaskResponse {
+    string resultCode = 1;
+}
+
+message GetTaskRequest {
+    int32 neighborhoodId = 1;
+}
+
+message GetTaskResponse {
+    string resultCode = 1;
+    repeated Task tasks = 2;
+}
+
+
+message ChangeTaskStatusRequest {
+    User user = 1;
+    string status = 2;
+}
+
+message ChangeTaskStatusResponse {
+    string resultCode = 1;
+    Task task = 2;
+}
+
+
+message AddCommentRequest {
+    Comment comment = 1;
+}
+
+message AddCommentResponse {
+    string resultCode = 1;
+}
+
+
+
+message AddCarRequest {
+    Car car = 1;
+}
+
+message AddCarResponse {
+    string resultCode = 1;
+}
+
+
+message GetCarRequest {
+    User user = 1;
+}
+
+message GetCarResponse {
+    string resultCode = 1;
+    repeated Car car = 2;
+}
+
+message GetContactByCarRequest {
+    Car car = 1;
+}
+
+message GetContactByCarResponse {
+    string contact = 1;
+}
+
+
+
+
