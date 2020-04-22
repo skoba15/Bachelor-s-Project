@@ -165,7 +165,6 @@ message RegisterUserRequest {
     string username = 3;
     string phone_number = 4;
     string password = 5;
-    string repeated_password = 6;
 }
 
 message RegisterUserResponse {

@@ -1,0 +1,382 @@
+syntax = "proto3";
+
+package neighborhood.server;
+
+option java_package = "neighborhood.server";
+option java_outer_classname = "NeighborhoodAPI";
+
+service Service {
+
+    // რეგისტრაცია
+    rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse) {
+    }
+
+    // ავტორიზაცია
+    rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {
+    }
+
+    // პროფილის რედაქტირება
+    rpc ResetPassword (ResetPasswordRequest) returns (ResetPasswordResponse) {
+    }
+
+
+    rpc DeleteContact (DeleteContactRequest) returns (DeleteContactResponse) {
+    }
+
+    // სამეზობლოს დამატება
+    rpc AddNeighborhood (AddNeighborhoodRequest) returns (AddNeighborhoodResponse) {
+    }
+
+    // გადაცემული პარამეტრების მიხედვით გაფილტრავს და დააბრუნებს სამეზობლოების სიას
+    rpc GetNeighborhoodList (GetNeighborhoodRequest) returns (GetNeighborhoodResponse) {
+    }
+
+    // მენეჯერი მენეჯერს აძლევს სხვას
+    rpc AddManager (AddManagerRequest) returns (AddManagerResponse) {
+    }
+
+    // გაწევრიანების მოთხოვნა
+    rpc AddUserToNeighborhood (AddUserToNeighborhoodRequest) returns (AddUserToNeighborhoodResponse) {
+    }
+
+    // გაწევრიანებაზე პასუხი
+    rpc ApproveUserToNeighborhood (ApproveUserToNeighborhoodRequest) returns (ApproveUserToNeighborhoodResponse) {
+    }
+
+    rpc RejectUserFromNeighborhood (RejectUserToNeighborhoodRequest) returns (RejectUserToNeighborhoodResponse) {
+    }
+
+    // სამეზობლოში გაწევრიანების მოთხოვნების სია მენეჯერებისთვის
+    rpc GetUserRequestList (GetUserRequestListRequest) returns (GetUserRequestListResponse) {
+    }
+
+    // მომხმარებელი ნივთს იმატებს
+    rpc AddItemToUser (AddItemToUserRequest) returns (AddItemToUserResponse) {
+    }
+
+    // მომხმარებელი ნივთს შლის სიიდან
+    rpc DeleteItemFromUser (DeleteItemToUserRequest) returns (DeleteItemToUserResponse) {
+    }
+
+    // სამეზობლოში ნივთის ძებნა
+    rpc SearchItem (SearchItemRequest) returns (SearchItemResponse) {
+    }
+
+    // პოსტის დამატება, წაშლა და წამოღება
+    rpc AddPost (AddPostRequest) returns (AddPostResponse) {
+    }
+
+    rpc DeletePost (DeletePostRequest) returns (DeletePostResponse) {
+    }
+
+    rpc GetPosts (GetPostRequest) returns (GetPostResponse) {
+    }
+
+    // დავალებების მენეჯმენტი
+    rpc AddTask (AddTaskRequest) returns (AddTaskResponse) {
+    }
+
+    rpc GetTask (GetTaskRequest) returns (GetTaskResponse) {
+    }
+
+    rpc GetTaskByNeighborhood (GetTaskByNeighborhoodRequest) returns (GetTaskByNeighborhoodResponse) {
+    }
+
+
+    rpc ChangeTaskStatus (ChangeTaskStatusRequest) returns (ChangeTaskStatusResponse) {
+    }
+
+    // კომენტარი
+    rpc AddComment (AddCommentRequest) returns (AddCommentResponse) {
+    }
+
+    // მანქანასთან დაკავშირებული სერვისები
+    rpc AddCar (AddCarRequest) returns (AddCarResponse) {
+    }
+
+    rpc GetCar (GetCarRequest) returns (GetCarResponse) {
+    }
+
+    rpc GetContactByCar (GetContactByCarRequest) returns (GetContactByCarResponse) {
+    }
+
+
+}
+
+
+message Car {
+    string plate_number = 1;
+}
+
+
+message Comment {
+    string text = 1;
+    int32 post_id = 2;
+}
+
+// დავალება
+message Task {
+    int32 id = 1;
+    int32 creator_id = 2;
+    string title = 3;
+    int32 days = 4;
+    int32 assignee_id = 5;
+}
+
+// პოსტი
+message Post {
+    int32 id = 1;
+    int32 user_id = 2;
+    int32 neighborhood_id = 3;
+    string title = 4;
+    string text = 5;
+}
+
+// ქალაქი, რაიონი და მისამართი უნიკალური სამეულია
+message Neighborhood {
+    string name = 1;
+    string city = 2;
+    string district = 3;
+    string address = 4;
+}
+
+// ნივთი
+message Item {
+    string tag = 1;
+}
+
+message LoginUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginUserResponse {
+    string result_code = 1;
+}
+
+message RegisterUserRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string username = 3;
+    string phone_number = 4;
+    string password = 5;
+}
+
+message RegisterUserResponse {
+    string result_code = 1;
+}
+
+message ResetPasswordRequest {
+    int32 user_id = 1;
+    string old_password = 2;
+    string new_password = 3;
+    string repeat_new_password = 4;
+}
+
+message ResetPasswordResponse {
+    string result_code = 1;
+}
+
+
+message DeleteContactRequest {
+    int32 user_id = 1;
+    string phone_number = 2;
+}
+
+
+message DeleteContactResponse {
+    string result_code = 1;
+}
+
+message AddNeighborhoodRequest {
+    Neighborhood neighborhood = 2;
+}
+
+message AddNeighborhoodResponse {
+    string result_code = 1;
+    int32 neighborhood_id = 2;
+}
+
+message GetNeighborhoodRequest {
+    int32 neighborhood_id = 1;
+}
+
+message GetNeighborhoodResponse {
+    string result_code = 1;
+    Neighborhood neighborhood = 2;
+}
+
+message AddManagerRequest {
+    int32 new_manager_id = 1;
+    int32 neighborhood_id = 2;
+}
+
+message AddManagerResponse {
+    string result_code = 1;
+}
+
+message AddUserToNeighborhoodRequest {
+    int32 neighborhood_id = 1;
+}
+
+message AddUserToNeighborhoodResponse {
+    string result_code = 1;
+}
+
+
+message ApproveUserToNeighborhoodRequest {
+    int32 neighborhood_join_request_id = 1;
+}
+
+message RejectUserToNeighborhoodRequest {
+    int32 neighborhood_join_request_id = 1;
+}
+
+
+message ApproveUserToNeighborhoodResponse {
+    string result_code = 1;
+}
+
+message RejectUserToNeighborhoodResponse {
+    string result_code = 1;
+}
+
+message GetUserRequestListRequest {
+    int32 neighborhood_id = 1;
+}
+
+message GetUserRequestListResponse {
+    repeated int32 neighborhood_join_request_id = 1;
+}
+
+message AddItemToUserRequest {
+    Item item = 1;
+}
+
+
+message DeleteItemToUserRequest {
+    int32 item_id = 1;
+}
+
+message AddItemToUserResponse {
+    string result_code = 1;
+}
+
+message DeleteItemToUserResponse {
+    string result_code = 1;
+}
+
+message SearchItemRequest {
+    int32 neighborhood_id = 1;
+    int32 item_id = 2;
+}
+
+message SearchItemResponse {
+    string result_code = 1;
+    repeated int32 user_ids = 2;
+}
+
+message AddPostRequest {
+    Post post = 1;
+}
+
+message DeletePostRequest {
+    int32 post_id = 1;
+}
+
+message GetPostRequest {
+    int32 post_id = 1;
+}
+
+message AddPostResponse {
+    string result_code = 1;
+}
+
+
+message DeletePostResponse {
+    string result_code = 1;
+}
+
+message GetPostResponse {
+    string result_code = 1;
+    Post post = 2;
+}
+
+
+message AddTaskRequest {
+    Task task = 1;
+}
+
+message AddTaskResponse {
+    string result_code = 1;
+}
+
+message GetTaskRequest {
+    int32 task_id = 1;
+}
+
+message GetTaskResponse {
+    string result_code = 1;
+    Task task = 2;
+}
+
+
+message GetTaskByNeighborhoodRequest {
+    int32 neighborhood_id = 1;
+}
+
+message GetTaskByNeighborhoodResponse {
+    string result_code = 1;
+    repeated Task tasks = 2;
+}
+
+
+message ChangeTaskStatusRequest {
+    int32 task_id = 1;
+    string status = 2;
+}
+
+message ChangeTaskStatusResponse {
+    string result_code = 1;
+    Task task = 2;
+}
+
+
+message AddCommentRequest {
+    Comment comment = 1;
+}
+
+message AddCommentResponse {
+    string result_code = 1;
+}
+
+
+message AddCarRequest {
+    Car car = 1;
+}
+
+message AddCarResponse {
+    string result_code = 1;
+}
+
+
+message GetCarRequest {
+    int32 user_id = 1;
+}
+
+message GetCarResponse {
+    string result_code = 1;
+    repeated Car car = 2;
+}
+
+message GetContactByCarRequest {
+    Car car = 1;
+}
+
+message GetContactByCarResponse {
+    string phone_number = 1;
+}
+
+
+
+
