@@ -1,11 +1,38 @@
 import io.grpc.stub.*;
+import models.*;
 import neighborhood.server.*;
+import org.slf4j.*;
+
+import java.sql.*;
+import java.util.*;
+import java.util.Date;
+
 
 public class NeighborhoodServiceImpl implements ServiceGrpc.Service {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
+    private ArrayList<UserEntity> users = new ArrayList<UserEntity>();
+
     @Override
     public void registerUser(NeighborhoodAPI.RegisterUserRequest request, StreamObserver<NeighborhoodAPI.RegisterUserResponse> responseObserver) {
-
+           log.info(" Username  {}", request.getUsername());
+           for (UserEntity user: users)
+           {
+               if(user.getUserName().equals(request.getUsername()))
+               {
+                   responseObserver.onNext(NeighborhoodAPI.RegisterUserResponse.newBuilder()
+                           .setResultCode("user already exists...")
+                           .build());
+                   responseObserver.onCompleted();
+                   return;
+               }
+           }
+           users.add(new UserEntity(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(), request.getPhoneNumber(), new Timestamp(new Date().getTime())));
+           responseObserver.onNext(NeighborhoodAPI.RegisterUserResponse.newBuilder()
+                    .setResultCode("user successfully registered!")
+                    .build());
+           responseObserver.onCompleted();
     }
 
     @Override

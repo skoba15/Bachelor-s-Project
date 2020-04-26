@@ -16,151 +16,151 @@ export 'bachelors.pb.dart';
 class ServiceClient extends $grpc.Client {
   static final _$registerUser =
       $grpc.ClientMethod<$0.RegisterUserRequest, $0.RegisterUserResponse>(
-          '/Service/RegisterUser',
+          '/neighborhood.server.Service/RegisterUser',
           ($0.RegisterUserRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.RegisterUserResponse.fromBuffer(value));
   static final _$loginUser =
       $grpc.ClientMethod<$0.LoginUserRequest, $0.LoginUserResponse>(
-          '/Service/LoginUser',
+          '/neighborhood.server.Service/LoginUser',
           ($0.LoginUserRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.LoginUserResponse.fromBuffer(value));
   static final _$resetPassword =
       $grpc.ClientMethod<$0.ResetPasswordRequest, $0.ResetPasswordResponse>(
-          '/Service/ResetPassword',
+          '/neighborhood.server.Service/ResetPassword',
           ($0.ResetPasswordRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.ResetPasswordResponse.fromBuffer(value));
   static final _$deleteContact =
       $grpc.ClientMethod<$0.DeleteContactRequest, $0.DeleteContactResponse>(
-          '/Service/DeleteContact',
+          '/neighborhood.server.Service/DeleteContact',
           ($0.DeleteContactRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.DeleteContactResponse.fromBuffer(value));
   static final _$addNeighborhood =
       $grpc.ClientMethod<$0.AddNeighborhoodRequest, $0.AddNeighborhoodResponse>(
-          '/Service/AddNeighborhood',
+          '/neighborhood.server.Service/AddNeighborhood',
           ($0.AddNeighborhoodRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddNeighborhoodResponse.fromBuffer(value));
   static final _$getNeighborhoodList =
       $grpc.ClientMethod<$0.GetNeighborhoodRequest, $0.GetNeighborhoodResponse>(
-          '/Service/GetNeighborhoodList',
+          '/neighborhood.server.Service/GetNeighborhoodList',
           ($0.GetNeighborhoodRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetNeighborhoodResponse.fromBuffer(value));
   static final _$addManager =
       $grpc.ClientMethod<$0.AddManagerRequest, $0.AddManagerResponse>(
-          '/Service/AddManager',
+          '/neighborhood.server.Service/AddManager',
           ($0.AddManagerRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddManagerResponse.fromBuffer(value));
   static final _$addUserToNeighborhood = $grpc.ClientMethod<
           $0.AddUserToNeighborhoodRequest, $0.AddUserToNeighborhoodResponse>(
-      '/Service/AddUserToNeighborhood',
+      '/neighborhood.server.Service/AddUserToNeighborhood',
       ($0.AddUserToNeighborhoodRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.AddUserToNeighborhoodResponse.fromBuffer(value));
   static final _$approveUserToNeighborhood = $grpc.ClientMethod<
           $0.ApproveUserToNeighborhoodRequest,
           $0.ApproveUserToNeighborhoodResponse>(
-      '/Service/ApproveUserToNeighborhood',
+      '/neighborhood.server.Service/ApproveUserToNeighborhood',
       ($0.ApproveUserToNeighborhoodRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.ApproveUserToNeighborhoodResponse.fromBuffer(value));
   static final _$rejectUserFromNeighborhood = $grpc.ClientMethod<
           $0.RejectUserToNeighborhoodRequest,
           $0.RejectUserToNeighborhoodResponse>(
-      '/Service/RejectUserFromNeighborhood',
+      '/neighborhood.server.Service/RejectUserFromNeighborhood',
       ($0.RejectUserToNeighborhoodRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.RejectUserToNeighborhoodResponse.fromBuffer(value));
   static final _$getUserRequestList = $grpc.ClientMethod<
           $0.GetUserRequestListRequest, $0.GetUserRequestListResponse>(
-      '/Service/GetUserRequestList',
+      '/neighborhood.server.Service/GetUserRequestList',
       ($0.GetUserRequestListRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.GetUserRequestListResponse.fromBuffer(value));
   static final _$addItemToUser =
       $grpc.ClientMethod<$0.AddItemToUserRequest, $0.AddItemToUserResponse>(
-          '/Service/AddItemToUser',
+          '/neighborhood.server.Service/AddItemToUser',
           ($0.AddItemToUserRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddItemToUserResponse.fromBuffer(value));
   static final _$deleteItemFromUser = $grpc.ClientMethod<
           $0.DeleteItemToUserRequest, $0.DeleteItemToUserResponse>(
-      '/Service/DeleteItemFromUser',
+      '/neighborhood.server.Service/DeleteItemFromUser',
       ($0.DeleteItemToUserRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.DeleteItemToUserResponse.fromBuffer(value));
   static final _$searchItem =
       $grpc.ClientMethod<$0.SearchItemRequest, $0.SearchItemResponse>(
-          '/Service/SearchItem',
+          '/neighborhood.server.Service/SearchItem',
           ($0.SearchItemRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.SearchItemResponse.fromBuffer(value));
   static final _$addPost =
       $grpc.ClientMethod<$0.AddPostRequest, $0.AddPostResponse>(
-          '/Service/AddPost',
+          '/neighborhood.server.Service/AddPost',
           ($0.AddPostRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddPostResponse.fromBuffer(value));
   static final _$deletePost =
       $grpc.ClientMethod<$0.DeletePostRequest, $0.DeletePostResponse>(
-          '/Service/DeletePost',
+          '/neighborhood.server.Service/DeletePost',
           ($0.DeletePostRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.DeletePostResponse.fromBuffer(value));
   static final _$getPosts =
       $grpc.ClientMethod<$0.GetPostRequest, $0.GetPostResponse>(
-          '/Service/GetPosts',
+          '/neighborhood.server.Service/GetPosts',
           ($0.GetPostRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetPostResponse.fromBuffer(value));
   static final _$addTask =
       $grpc.ClientMethod<$0.AddTaskRequest, $0.AddTaskResponse>(
-          '/Service/AddTask',
+          '/neighborhood.server.Service/AddTask',
           ($0.AddTaskRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddTaskResponse.fromBuffer(value));
   static final _$getTask =
       $grpc.ClientMethod<$0.GetTaskRequest, $0.GetTaskResponse>(
-          '/Service/GetTask',
+          '/neighborhood.server.Service/GetTask',
           ($0.GetTaskRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetTaskResponse.fromBuffer(value));
   static final _$getTaskByNeighborhood = $grpc.ClientMethod<
           $0.GetTaskByNeighborhoodRequest, $0.GetTaskByNeighborhoodResponse>(
-      '/Service/GetTaskByNeighborhood',
+      '/neighborhood.server.Service/GetTaskByNeighborhood',
       ($0.GetTaskByNeighborhoodRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.GetTaskByNeighborhoodResponse.fromBuffer(value));
   static final _$changeTaskStatus = $grpc.ClientMethod<
           $0.ChangeTaskStatusRequest, $0.ChangeTaskStatusResponse>(
-      '/Service/ChangeTaskStatus',
+      '/neighborhood.server.Service/ChangeTaskStatus',
       ($0.ChangeTaskStatusRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.ChangeTaskStatusResponse.fromBuffer(value));
   static final _$addComment =
       $grpc.ClientMethod<$0.AddCommentRequest, $0.AddCommentResponse>(
-          '/Service/AddComment',
+          '/neighborhood.server.Service/AddComment',
           ($0.AddCommentRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddCommentResponse.fromBuffer(value));
   static final _$addCar =
       $grpc.ClientMethod<$0.AddCarRequest, $0.AddCarResponse>(
-          '/Service/AddCar',
+          '/neighborhood.server.Service/AddCar',
           ($0.AddCarRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.AddCarResponse.fromBuffer(value));
   static final _$getCar =
       $grpc.ClientMethod<$0.GetCarRequest, $0.GetCarResponse>(
-          '/Service/GetCar',
+          '/neighborhood.server.Service/GetCar',
           ($0.GetCarRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.GetCarResponse.fromBuffer(value));
   static final _$getContactByCar =
       $grpc.ClientMethod<$0.GetContactByCarRequest, $0.GetContactByCarResponse>(
-          '/Service/GetContactByCar',
+          '/neighborhood.server.Service/GetContactByCar',
           ($0.GetContactByCarRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetContactByCarResponse.fromBuffer(value));
@@ -382,7 +382,7 @@ class ServiceClient extends $grpc.Client {
 }
 
 abstract class ServiceBase extends $grpc.Service {
-  $core.String get $name => 'Service';
+  $core.String get $name => 'neighborhood.server.Service';
 
   ServiceBase() {
     $addMethod(

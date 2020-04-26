@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class Car extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Car', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Car', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'plateNumber')
     ..hasRequiredFields = false
   ;
@@ -41,7 +41,7 @@ class Car extends $pb.GeneratedMessage {
 }
 
 class Comment extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Comment', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Comment', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'text')
     ..a<$core.int>(2, 'postId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -82,7 +82,7 @@ class Comment extends $pb.GeneratedMessage {
 }
 
 class Task extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Task', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Task', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
     ..a<$core.int>(2, 'creatorId', $pb.PbFieldType.O3)
     ..aOS(3, 'title')
@@ -153,7 +153,7 @@ class Task extends $pb.GeneratedMessage {
 }
 
 class Post extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Post', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Post', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
     ..a<$core.int>(2, 'userId', $pb.PbFieldType.O3)
     ..a<$core.int>(3, 'neighborhoodId', $pb.PbFieldType.O3)
@@ -224,7 +224,7 @@ class Post extends $pb.GeneratedMessage {
 }
 
 class Neighborhood extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Neighborhood', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Neighborhood', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'name')
     ..aOS(2, 'city')
     ..aOS(3, 'district')
@@ -285,7 +285,7 @@ class Neighborhood extends $pb.GeneratedMessage {
 }
 
 class Item extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Item', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Item', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'tag')
     ..hasRequiredFields = false
   ;
@@ -316,7 +316,7 @@ class Item extends $pb.GeneratedMessage {
 }
 
 class LoginUserRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('LoginUserRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('LoginUserRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'username')
     ..aOS(2, 'password')
     ..hasRequiredFields = false
@@ -357,7 +357,7 @@ class LoginUserRequest extends $pb.GeneratedMessage {
 }
 
 class LoginUserResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('LoginUserResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('LoginUserResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -388,7 +388,7 @@ class LoginUserResponse extends $pb.GeneratedMessage {
 }
 
 class RegisterUserRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RegisterUserRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RegisterUserRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'firstName')
     ..aOS(2, 'lastName')
     ..aOS(3, 'username')
@@ -459,7 +459,7 @@ class RegisterUserRequest extends $pb.GeneratedMessage {
 }
 
 class RegisterUserResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RegisterUserResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RegisterUserResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -490,7 +490,7 @@ class RegisterUserResponse extends $pb.GeneratedMessage {
 }
 
 class ResetPasswordRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResetPasswordRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResetPasswordRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
     ..aOS(2, 'oldPassword')
     ..aOS(3, 'newPassword')
@@ -551,7 +551,7 @@ class ResetPasswordRequest extends $pb.GeneratedMessage {
 }
 
 class ResetPasswordResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResetPasswordResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResetPasswordResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -582,7 +582,7 @@ class ResetPasswordResponse extends $pb.GeneratedMessage {
 }
 
 class DeleteContactRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteContactRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteContactRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
     ..aOS(2, 'phoneNumber')
     ..hasRequiredFields = false
@@ -623,7 +623,7 @@ class DeleteContactRequest extends $pb.GeneratedMessage {
 }
 
 class DeleteContactResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteContactResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteContactResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -654,7 +654,7 @@ class DeleteContactResponse extends $pb.GeneratedMessage {
 }
 
 class AddNeighborhoodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddNeighborhoodRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<Neighborhood>(2, 'neighborhood', subBuilder: Neighborhood.create)
     ..hasRequiredFields = false
   ;
@@ -687,7 +687,7 @@ class AddNeighborhoodRequest extends $pb.GeneratedMessage {
 }
 
 class AddNeighborhoodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddNeighborhoodResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -728,7 +728,7 @@ class AddNeighborhoodResponse extends $pb.GeneratedMessage {
 }
 
 class GetNeighborhoodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetNeighborhoodRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -759,7 +759,7 @@ class GetNeighborhoodRequest extends $pb.GeneratedMessage {
 }
 
 class GetNeighborhoodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetNeighborhoodResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..aOM<Neighborhood>(2, 'neighborhood', subBuilder: Neighborhood.create)
     ..hasRequiredFields = false
@@ -802,7 +802,7 @@ class GetNeighborhoodResponse extends $pb.GeneratedMessage {
 }
 
 class AddManagerRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddManagerRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddManagerRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'newManagerId', $pb.PbFieldType.O3)
     ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -843,7 +843,7 @@ class AddManagerRequest extends $pb.GeneratedMessage {
 }
 
 class AddManagerResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddManagerResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddManagerResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -874,7 +874,7 @@ class AddManagerResponse extends $pb.GeneratedMessage {
 }
 
 class AddUserToNeighborhoodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddUserToNeighborhoodRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -905,7 +905,7 @@ class AddUserToNeighborhoodRequest extends $pb.GeneratedMessage {
 }
 
 class AddUserToNeighborhoodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddUserToNeighborhoodResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddUserToNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -936,7 +936,7 @@ class AddUserToNeighborhoodResponse extends $pb.GeneratedMessage {
 }
 
 class ApproveUserToNeighborhoodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ApproveUserToNeighborhoodRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ApproveUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodJoinRequestId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -967,7 +967,7 @@ class ApproveUserToNeighborhoodRequest extends $pb.GeneratedMessage {
 }
 
 class RejectUserToNeighborhoodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RejectUserToNeighborhoodRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RejectUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodJoinRequestId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -998,7 +998,7 @@ class RejectUserToNeighborhoodRequest extends $pb.GeneratedMessage {
 }
 
 class ApproveUserToNeighborhoodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ApproveUserToNeighborhoodResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ApproveUserToNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1029,7 +1029,7 @@ class ApproveUserToNeighborhoodResponse extends $pb.GeneratedMessage {
 }
 
 class RejectUserToNeighborhoodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RejectUserToNeighborhoodResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RejectUserToNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1060,7 +1060,7 @@ class RejectUserToNeighborhoodResponse extends $pb.GeneratedMessage {
 }
 
 class GetUserRequestListRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -1091,7 +1091,7 @@ class GetUserRequestListRequest extends $pb.GeneratedMessage {
 }
 
 class GetUserRequestListResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..p<$core.int>(1, 'neighborhoodJoinRequestId', $pb.PbFieldType.P3)
     ..hasRequiredFields = false
   ;
@@ -1116,7 +1116,7 @@ class GetUserRequestListResponse extends $pb.GeneratedMessage {
 }
 
 class AddItemToUserRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddItemToUserRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddItemToUserRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<Item>(1, 'item', subBuilder: Item.create)
     ..hasRequiredFields = false
   ;
@@ -1149,7 +1149,7 @@ class AddItemToUserRequest extends $pb.GeneratedMessage {
 }
 
 class DeleteItemToUserRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteItemToUserRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteItemToUserRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'itemId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -1180,7 +1180,7 @@ class DeleteItemToUserRequest extends $pb.GeneratedMessage {
 }
 
 class AddItemToUserResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddItemToUserResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddItemToUserResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1211,7 +1211,7 @@ class AddItemToUserResponse extends $pb.GeneratedMessage {
 }
 
 class DeleteItemToUserResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteItemToUserResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteItemToUserResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1242,7 +1242,7 @@ class DeleteItemToUserResponse extends $pb.GeneratedMessage {
 }
 
 class SearchItemRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SearchItemRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SearchItemRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
     ..a<$core.int>(2, 'itemId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -1283,7 +1283,7 @@ class SearchItemRequest extends $pb.GeneratedMessage {
 }
 
 class SearchItemResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SearchItemResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SearchItemResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..p<$core.int>(2, 'userIds', $pb.PbFieldType.P3)
     ..hasRequiredFields = false
@@ -1318,7 +1318,7 @@ class SearchItemResponse extends $pb.GeneratedMessage {
 }
 
 class AddPostRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddPostRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddPostRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<Post>(1, 'post', subBuilder: Post.create)
     ..hasRequiredFields = false
   ;
@@ -1351,7 +1351,7 @@ class AddPostRequest extends $pb.GeneratedMessage {
 }
 
 class DeletePostRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeletePostRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeletePostRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'postId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -1382,7 +1382,7 @@ class DeletePostRequest extends $pb.GeneratedMessage {
 }
 
 class GetPostRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetPostRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetPostRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'postId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -1413,7 +1413,7 @@ class GetPostRequest extends $pb.GeneratedMessage {
 }
 
 class AddPostResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddPostResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddPostResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1444,7 +1444,7 @@ class AddPostResponse extends $pb.GeneratedMessage {
 }
 
 class DeletePostResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeletePostResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeletePostResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1475,7 +1475,7 @@ class DeletePostResponse extends $pb.GeneratedMessage {
 }
 
 class GetPostResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetPostResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetPostResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..aOM<Post>(2, 'post', subBuilder: Post.create)
     ..hasRequiredFields = false
@@ -1518,7 +1518,7 @@ class GetPostResponse extends $pb.GeneratedMessage {
 }
 
 class AddTaskRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddTaskRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddTaskRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<Task>(1, 'task', subBuilder: Task.create)
     ..hasRequiredFields = false
   ;
@@ -1551,7 +1551,7 @@ class AddTaskRequest extends $pb.GeneratedMessage {
 }
 
 class AddTaskResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddTaskResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddTaskResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1582,7 +1582,7 @@ class AddTaskResponse extends $pb.GeneratedMessage {
 }
 
 class GetTaskRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'taskId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -1613,7 +1613,7 @@ class GetTaskRequest extends $pb.GeneratedMessage {
 }
 
 class GetTaskResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..aOM<Task>(2, 'task', subBuilder: Task.create)
     ..hasRequiredFields = false
@@ -1656,7 +1656,7 @@ class GetTaskResponse extends $pb.GeneratedMessage {
 }
 
 class GetTaskByNeighborhoodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskByNeighborhoodRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskByNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -1687,7 +1687,7 @@ class GetTaskByNeighborhoodRequest extends $pb.GeneratedMessage {
 }
 
 class GetTaskByNeighborhoodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskByNeighborhoodResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskByNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..pc<Task>(2, 'tasks', $pb.PbFieldType.PM, subBuilder: Task.create)
     ..hasRequiredFields = false
@@ -1722,7 +1722,7 @@ class GetTaskByNeighborhoodResponse extends $pb.GeneratedMessage {
 }
 
 class ChangeTaskStatusRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeTaskStatusRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeTaskStatusRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'taskId', $pb.PbFieldType.O3)
     ..aOS(2, 'status')
     ..hasRequiredFields = false
@@ -1763,7 +1763,7 @@ class ChangeTaskStatusRequest extends $pb.GeneratedMessage {
 }
 
 class ChangeTaskStatusResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeTaskStatusResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeTaskStatusResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..aOM<Task>(2, 'task', subBuilder: Task.create)
     ..hasRequiredFields = false
@@ -1806,7 +1806,7 @@ class ChangeTaskStatusResponse extends $pb.GeneratedMessage {
 }
 
 class AddCommentRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCommentRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCommentRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<Comment>(1, 'comment', subBuilder: Comment.create)
     ..hasRequiredFields = false
   ;
@@ -1839,7 +1839,7 @@ class AddCommentRequest extends $pb.GeneratedMessage {
 }
 
 class AddCommentResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCommentResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCommentResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1870,7 +1870,7 @@ class AddCommentResponse extends $pb.GeneratedMessage {
 }
 
 class AddCarRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCarRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCarRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<Car>(1, 'car', subBuilder: Car.create)
     ..hasRequiredFields = false
   ;
@@ -1903,7 +1903,7 @@ class AddCarRequest extends $pb.GeneratedMessage {
 }
 
 class AddCarResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCarResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCarResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..hasRequiredFields = false
   ;
@@ -1934,7 +1934,7 @@ class AddCarResponse extends $pb.GeneratedMessage {
 }
 
 class GetCarRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCarRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCarRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -1965,7 +1965,7 @@ class GetCarRequest extends $pb.GeneratedMessage {
 }
 
 class GetCarResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCarResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCarResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
     ..pc<Car>(2, 'car', $pb.PbFieldType.PM, subBuilder: Car.create)
     ..hasRequiredFields = false
@@ -2000,7 +2000,7 @@ class GetCarResponse extends $pb.GeneratedMessage {
 }
 
 class GetContactByCarRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetContactByCarRequest', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetContactByCarRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<Car>(1, 'car', subBuilder: Car.create)
     ..hasRequiredFields = false
   ;
@@ -2033,7 +2033,7 @@ class GetContactByCarRequest extends $pb.GeneratedMessage {
 }
 
 class GetContactByCarResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetContactByCarResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetContactByCarResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'phoneNumber')
     ..hasRequiredFields = false
   ;

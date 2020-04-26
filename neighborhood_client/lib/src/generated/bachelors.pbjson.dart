@@ -127,7 +127,7 @@ const DeleteContactResponse$json = const {
 const AddNeighborhoodRequest$json = const {
   '1': 'AddNeighborhoodRequest',
   '2': const [
-    const {'1': 'neighborhood', '3': 2, '4': 1, '5': 11, '6': '.Neighborhood', '10': 'neighborhood'},
+    const {'1': 'neighborhood', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Neighborhood', '10': 'neighborhood'},
   ],
 };
 
@@ -150,7 +150,7 @@ const GetNeighborhoodResponse$json = const {
   '1': 'GetNeighborhoodResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'neighborhood', '3': 2, '4': 1, '5': 11, '6': '.Neighborhood', '10': 'neighborhood'},
+    const {'1': 'neighborhood', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Neighborhood', '10': 'neighborhood'},
   ],
 };
 
@@ -228,7 +228,7 @@ const GetUserRequestListResponse$json = const {
 const AddItemToUserRequest$json = const {
   '1': 'AddItemToUserRequest',
   '2': const [
-    const {'1': 'item', '3': 1, '4': 1, '5': 11, '6': '.Item', '10': 'item'},
+    const {'1': 'item', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Item', '10': 'item'},
   ],
 };
 
@@ -272,7 +272,7 @@ const SearchItemResponse$json = const {
 const AddPostRequest$json = const {
   '1': 'AddPostRequest',
   '2': const [
-    const {'1': 'post', '3': 1, '4': 1, '5': 11, '6': '.Post', '10': 'post'},
+    const {'1': 'post', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Post', '10': 'post'},
   ],
 };
 
@@ -308,14 +308,14 @@ const GetPostResponse$json = const {
   '1': 'GetPostResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'post', '3': 2, '4': 1, '5': 11, '6': '.Post', '10': 'post'},
+    const {'1': 'post', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Post', '10': 'post'},
   ],
 };
 
 const AddTaskRequest$json = const {
   '1': 'AddTaskRequest',
   '2': const [
-    const {'1': 'task', '3': 1, '4': 1, '5': 11, '6': '.Task', '10': 'task'},
+    const {'1': 'task', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Task', '10': 'task'},
   ],
 };
 
@@ -337,7 +337,7 @@ const GetTaskResponse$json = const {
   '1': 'GetTaskResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.Task', '10': 'task'},
+    const {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Task', '10': 'task'},
   ],
 };
 
@@ -352,7 +352,7 @@ const GetTaskByNeighborhoodResponse$json = const {
   '1': 'GetTaskByNeighborhoodResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'tasks', '3': 2, '4': 3, '5': 11, '6': '.Task', '10': 'tasks'},
+    const {'1': 'tasks', '3': 2, '4': 3, '5': 11, '6': '.neighborhood.server.Task', '10': 'tasks'},
   ],
 };
 
@@ -368,14 +368,14 @@ const ChangeTaskStatusResponse$json = const {
   '1': 'ChangeTaskStatusResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.Task', '10': 'task'},
+    const {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Task', '10': 'task'},
   ],
 };
 
 const AddCommentRequest$json = const {
   '1': 'AddCommentRequest',
   '2': const [
-    const {'1': 'comment', '3': 1, '4': 1, '5': 11, '6': '.Comment', '10': 'comment'},
+    const {'1': 'comment', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Comment', '10': 'comment'},
   ],
 };
 
@@ -389,7 +389,7 @@ const AddCommentResponse$json = const {
 const AddCarRequest$json = const {
   '1': 'AddCarRequest',
   '2': const [
-    const {'1': 'car', '3': 1, '4': 1, '5': 11, '6': '.Car', '10': 'car'},
+    const {'1': 'car', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Car', '10': 'car'},
   ],
 };
 
@@ -411,14 +411,14 @@ const GetCarResponse$json = const {
   '1': 'GetCarResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'car', '3': 2, '4': 3, '5': 11, '6': '.Car', '10': 'car'},
+    const {'1': 'car', '3': 2, '4': 3, '5': 11, '6': '.neighborhood.server.Car', '10': 'car'},
   ],
 };
 
 const GetContactByCarRequest$json = const {
   '1': 'GetContactByCarRequest',
   '2': const [
-    const {'1': 'car', '3': 1, '4': 1, '5': 11, '6': '.Car', '10': 'car'},
+    const {'1': 'car', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Car', '10': 'car'},
   ],
 };
 

@@ -1,6 +1,9 @@
 syntax = "proto3";
 
+package neighborhood.server;
 
+option java_package = "neighborhood.server";
+option java_outer_classname = "NeighborhoodAPI";
 
 service Service {
 
