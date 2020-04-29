@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:neighborhood_client/src/screens/Login.dart';
+import 'package:neighborhood_client/src/screens/Register.dart';
 
 void main() {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
       '/': (context) => Login(),
+      '/Register': (context) => Register(),
     },
   ));
 }

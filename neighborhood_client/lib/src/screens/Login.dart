@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
+import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
+import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -10,16 +13,22 @@ class _LoginState extends State<Login> {
 
   final _formKey = GlobalKey<FormState>();
 
+  String _username = "";
+  String _password = "";
+  bool _autoValidate = false;
+  bool _wrongInput = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Neighborhood App'),
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.black,
         centerTitle: true,
       ),
       body: Form(
         key: _formKey,
+        autovalidate: _autoValidate,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,9 +40,12 @@ class _LoginState extends State<Login> {
                 decoration: const InputDecoration(
                   labelText: 'Username'
                 ),
+                onSaved: (String val) {
+                  _username = val;
+                },
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Username';
+                    return 'Empty usernames not allowed';
                   }
                   return null;
                 }
@@ -43,24 +55,68 @@ class _LoginState extends State<Login> {
               decoration: const InputDecoration(
                   labelText: 'Password'
               ),
+              onSaved: (String val) {
+                _password = val;
+              },
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Empty password not allowed';
                 }
                 return null;
               },
+              obscureText: true,
             ),
+            SizedBox(height: 10,),
+            Text(_wrongInput ? 'wrong username or password' : '', style: TextStyle(color: Colors.red)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: RaisedButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
 
+              child: RaisedButton(
+                color: Colors.black,
+                textColor: Colors.white,
+                onPressed: () async {
+                  print("movida1");
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    final response = await ServiceClient(ClientSingleton().getChannel()).loginUser(LoginUserRequest()..username = _username..password = _password);
+                    if (response.resultCode == "ok") {
+                      print("success!");
+                    }
+                    else {
+                      setState(() {
+                        _wrongInput = true;
+                      });
+                    }
+                  }
+                  else {
+                    print("movida2");
+                      setState(() {
+                        _autoValidate = true;
+                      });
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Sign in'),
               ),
             ),
+            SizedBox(height: 10,),
+            Center(
+              child: Column(
+                children: <Widget>[
+                  Text('Don\'t have an account?'),
+                  RaisedButton(
+                  child:Text(
+                    'Sign up'
+                  ),
+                  color: Colors.black,
+                  textColor: Colors.white,
+                  onPressed: () {
+                     Navigator.pushNamed(context, '/Register');
+                  },
+
+                  ),
+                ]
+              )
+            )
           ],
         ),
       )

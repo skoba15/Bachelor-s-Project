@@ -5,18 +5,18 @@ class ClientSingleton {
   static final ClientSingleton _clientSingleton = ClientSingleton._internal();
 
 
-  ClientChannel channel;
+  ClientChannel _channel;
 
   factory ClientSingleton() {
     return _clientSingleton;
   }
 
   ClientChannel getChannel() {
-    return channel;
+    return _channel;
   }
 
   ClientSingleton._internal() {
-    channel = ClientChannel(
+    _channel = ClientChannel(
       'localhost',
       port: 8080,
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),

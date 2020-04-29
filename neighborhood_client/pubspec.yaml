@@ -29,6 +29,7 @@ dependencies:
         url: https://github.com/grpc/grpc-dart
         ref: grpc-web
         resolved-ref: af63deb
+  intl_phone_number_input: ^0.4.0+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
