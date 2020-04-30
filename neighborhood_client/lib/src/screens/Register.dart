@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:international_phone_input/international_phone_input.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
@@ -20,13 +20,11 @@ class _RegisterState extends State<Register> {
   String _password = "";
   String _phoneNumber = "";
   bool _autoValidate = false;
-  bool _validPhoneNumber = false;
   bool _success = false;
-  String _initialCountry = 'GE';
-  PhoneNumber _number = PhoneNumber(isoCode: 'GE');
+
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _repeatedPasswordController = new TextEditingController();
-  final TextEditingController controller = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,18 +89,20 @@ class _RegisterState extends State<Register> {
                   return null;
                 },
               ),
-              InternationalPhoneNumberInput(
-                onInputChanged: (PhoneNumber number) {
-                  print(number.isoCode);
+              new TextFormField(
+                decoration: const InputDecoration(
+                    labelText: 'Mobile'
+                ),
+                keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (value.length != 9) {
+                    return 'invalid phone number';
+                  }
+                  return null;
                 },
-                onInputValidated: (bool value) {
-                  print(value);
+                onSaved: (String val) {
+                  _phoneNumber = val;
                 },
-                ignoreBlank: false,
-                autoValidate: true,
-                initialValue: _number,
-                textFieldController: controller,
-                inputBorder: OutlineInputBorder(),
               ),
               TextFormField(
                 controller: _passwordController,
@@ -145,7 +145,7 @@ class _RegisterState extends State<Register> {
                 color: Colors.black,
                 textColor: Colors.white,
                 onPressed: () async {
-                  if (_formKey.currentState.validate() && _validPhoneNumber) {
+                  if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     final response = await ServiceClient(ClientSingleton().getChannel()).registerUser(
                         RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password);
