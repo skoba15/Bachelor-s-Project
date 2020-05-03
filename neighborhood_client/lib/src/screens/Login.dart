@@ -75,7 +75,6 @@ class _LoginState extends State<Login> {
                 color: Colors.black,
                 textColor: Colors.white,
                 onPressed: () async {
-                  print("movida1");
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     final response = await ServiceClient(ClientSingleton().getChannel()).loginUser(LoginUserRequest()..username = _username..password = _password);
@@ -89,7 +88,6 @@ class _LoginState extends State<Login> {
                     }
                   }
                   else {
-                    print("movida2");
                       setState(() {
                         _autoValidate = true;
                       });
@@ -104,15 +102,14 @@ class _LoginState extends State<Login> {
                 children: <Widget>[
                   Text('Don\'t have an account?'),
                   RaisedButton(
-                  child:Text(
-                    'Sign up'
-                  ),
-                  color: Colors.black,
-                  textColor: Colors.white,
-                  onPressed: () {
-                     Navigator.pushNamed(context, '/Register');
-                  },
-
+                    child:Text(
+                      'Sign up'
+                    ),
+                    color: Colors.black,
+                    textColor: Colors.white,
+                    onPressed: () {
+                       Navigator.pushNamed(context, '/Register');
+                    },
                   ),
                 ]
               )

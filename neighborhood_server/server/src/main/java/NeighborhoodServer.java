@@ -13,8 +13,8 @@ public final class NeighborhoodServer {
 
     public NeighborhoodServer(int port) {
         this.port = port;
-        this.server = ServerBuilder.forPort(port)
-                .addService(ServiceGrpc.bindService(new NeighborhoodServiceImpl()))
+        this.server = ServerBuilder.forPort(port).
+                 addService(ServiceGrpc.bindService(new NeighborhoodServiceImpl()))
                 .build();
     }
 
@@ -47,7 +47,7 @@ public final class NeighborhoodServer {
     }
 
     public static void main(String[] args) throws Exception {
-        NeighborhoodServer server = new NeighborhoodServer(8080);
+        NeighborhoodServer server = new NeighborhoodServer(8081);
         server.start();
         server.blockUntilShutdown();
     }

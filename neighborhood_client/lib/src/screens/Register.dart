@@ -3,7 +3,7 @@ import 'package:international_phone_input/international_phone_input.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
-
+import 'package:grpc/grpc_web.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -24,6 +24,7 @@ class _RegisterState extends State<Register> {
 
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _repeatedPasswordController = new TextEditingController();
+
 
 
   @override
@@ -149,11 +150,7 @@ class _RegisterState extends State<Register> {
                     _formKey.currentState.save();
                     final response = await ServiceClient(ClientSingleton().getChannel()).registerUser(
                         RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password);
-                    if(response.resultCode == "ok") {
-                      setState(() {
-                        _success = true;
-                      });
-                    }
+                    print(response.resultCode);
                   }
                   else {
                     setState(() {
