@@ -1,0 +1,1 @@
+docker run -v $pwd\envoy.yaml:/etc/envoy.yaml -p 9901:9901  -p 8080:8080 envoyproxy/envoy-alpine:v1.14.1 /usr/local/bin/envoy -c /etc/envoy.yaml 
