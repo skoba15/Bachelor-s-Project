@@ -1,16 +1,38 @@
 package models;
 
+import javax.persistence.*;
 import java.sql.*;
 
+@Entity
+@Table(name = "NB_USERS")
 public class UserEntity {
 
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "USERNAME", unique = true)
     private String userName;
+
+    @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @Column(name = "LAST_NAME")
     private String lastName;
+
+    @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    @Column(name = "REGISTRATION_DATE")
     private Timestamp registrationDate;
+
+    public UserEntity() {
+
+    }
 
     public UserEntity(String userName, String password, String firstName, String lastName, String phoneNumber, Timestamp registrationDate) {
         this.userName = userName;

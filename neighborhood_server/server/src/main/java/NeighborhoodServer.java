@@ -1,10 +1,17 @@
+
+import db.*;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import models.*;
 import neighborhood.server.*;
+import org.hibernate.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import services.*;
 
 import java.io.IOException;
+import java.sql.*;
+import java.util.Date;
 
 public final class NeighborhoodServer {
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -49,6 +56,13 @@ public final class NeighborhoodServer {
     public static void main(String[] args) throws Exception {
         NeighborhoodServer server = new NeighborhoodServer(8081);
         server.start();
+        JdbcConnection conn = new JdbcConnection();
+
+        UserService service = new UserServiceImpl();
+        UserEntity user = new UserEntity("shota4", null, null, null, null, null);
+        service.save(user);
+        user.setFirstName("shota5");
+        service.save(user);
         server.blockUntilShutdown();
     }
 }
