@@ -149,8 +149,7 @@ class _RegisterState extends State<Register> {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     final response = await ServiceClient(ClientSingleton().getChannel()).registerUser(
-                        RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password,
-                    );
+                        RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password);
                     print(response.resultCode);
                   }
                   else {

@@ -19,8 +19,12 @@ public class JwtUtil {
 
     public static Jws<Claims> decodeJWT(String jwt) {
         //This line will throw an exception if it is not a signed JWS (as expected)
-        Jws<Claims> claims = parser.parseClaimsJws(jwt);
-        return claims;
+        try {
+            Jws<Claims> claims = parser.parseClaimsJws(jwt);
+            return claims;
+        } catch (JwtException e) {
+            return null;
+        }
     }
 
 }

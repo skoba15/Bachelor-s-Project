@@ -21,7 +21,8 @@ public class JwtServerInterceptor implements ServerInterceptor {
                 return Contexts.interceptCall(ctx, serverCall, metadata, serverCallHandler);
             }
             else{
-                return null;
+                serverCall.close(Status.UNAUTHENTICATED, new Metadata());
+                return new ServerCall.Listener<ReqT>() {};
             }
         }
     }
