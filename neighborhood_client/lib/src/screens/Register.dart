@@ -52,7 +52,7 @@ class _RegisterState extends State<Register> {
                       labelText: 'First Name'
                   ),
                   onSaved: (String val) {
-                    _username = val;
+                    _firstName = val;
                   },
                   validator: (value) {
                     if (value.isEmpty) {
@@ -67,7 +67,7 @@ class _RegisterState extends State<Register> {
                     labelText: 'Last Name'
                 ),
                 onSaved: (String val) {
-                  _password = val;
+                  _lastName = val;
                 },
                 validator: (value) {
                   if (value.isEmpty) {
@@ -81,7 +81,7 @@ class _RegisterState extends State<Register> {
                     labelText: 'Username'
                 ),
                 onSaved: (String val) {
-                  _password = val;
+                  _username = val;
                 },
                 validator: (value) {
                   if (value.isEmpty) {
@@ -149,7 +149,8 @@ class _RegisterState extends State<Register> {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     final response = await ServiceClient(ClientSingleton().getChannel()).registerUser(
-                        RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password);
+                        RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password,
+                    );
                     print(response.resultCode);
                   }
                   else {

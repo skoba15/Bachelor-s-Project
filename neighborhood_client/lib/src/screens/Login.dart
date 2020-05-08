@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ class _LoginState extends State<Login> {
   String _password = "";
   bool _autoValidate = false;
   bool _wrongInput = false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,8 +81,11 @@ class _LoginState extends State<Login> {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     final response = await ServiceClient(ClientSingleton().getChannel()).loginUser(LoginUserRequest()..username = _username..password = _password);
-                    if (response.resultCode == "ok") {
-                      print("success!");
+                    if (response.resultCode != "failed") {
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        String token = response.resultCode;
+                        await prefs.setString('jwt', token);
+                        print(prefs.get('jwt'));
                     }
                     else {
                       setState(() {

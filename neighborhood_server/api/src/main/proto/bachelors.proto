@@ -15,6 +15,7 @@ service Service {
     rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {
     }
 
+
     // პროფილის რედაქტირება
     rpc ResetPassword (ResetPasswordRequest) returns (ResetPasswordResponse) {
     }
@@ -165,6 +166,8 @@ message RegisterUserRequest {
 message RegisterUserResponse {
     string result_code = 1;
 }
+
+
 
 message ResetPasswordRequest {
     int32 user_id = 1;

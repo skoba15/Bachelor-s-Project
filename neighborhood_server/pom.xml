@@ -24,7 +24,7 @@
         <protobuf.version>3.0.0-beta-2</protobuf.version>
 
         <!-- GRPC -->
-        <grpc.version>0.13.2</grpc.version>
+        <grpc.version>1.29.0</grpc.version>
 
         <!--  compiler settings -->
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -114,6 +114,11 @@
                 <version>${grpc.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-auth</artifactId>
+                <version>1.29.0</version>
+            </dependency>
             <!-- Test scope -->
             <dependency>
                 <groupId>junit</groupId>
@@ -157,6 +162,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.2.6.Final</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
 
         <dependency>

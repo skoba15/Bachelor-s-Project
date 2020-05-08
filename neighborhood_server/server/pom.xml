@@ -32,6 +32,14 @@
             <artifactId>grpc-netty</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.grpc/grpc-auth -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-auth</artifactId>
+            <version>1.29.0</version>
+        </dependency>
+
+
     </dependencies>
 
 

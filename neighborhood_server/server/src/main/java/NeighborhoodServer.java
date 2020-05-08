@@ -1,17 +1,14 @@
 
 import db.*;
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
+import io.grpc.*;
+import jwt.*;
 import models.*;
-import neighborhood.server.*;
-import org.hibernate.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import services.*;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.Date;
+
 
 public final class NeighborhoodServer {
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -21,7 +18,7 @@ public final class NeighborhoodServer {
     public NeighborhoodServer(int port) {
         this.port = port;
         this.server = ServerBuilder.forPort(port).
-                 addService(ServiceGrpc.bindService(new NeighborhoodServiceImpl()))
+                 addService(new NeighborhoodServiceImpl()).intercept(new JwtServerInterceptor())
                 .build();
     }
 
