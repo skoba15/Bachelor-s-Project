@@ -5,6 +5,8 @@ import neighborhood.server.*;
 import org.slf4j.*;
 import services.*;
 
+import javax.validation.*;
+
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
@@ -24,10 +26,15 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void registerUser(NeighborhoodAPI.RegisterUserRequest request, StreamObserver<NeighborhoodAPI.RegisterUserResponse> responseObserver) {
            log.info(" Username  {}", request.getUsername());
-           userService.save(new UserEntity(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(), request.getPhoneNumber(), new Timestamp(new Date().getTime())));
+           UserEntity newUser = new UserEntity(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(), request.getPhoneNumber(), new Timestamp(new Date().getTime()));
+           Long result = userService.save(newUser);
+           String resultCode = "User Successfully registered!";
+           if(result == null) {
+               resultCode = "failed";
+           }
            responseObserver.onNext(NeighborhoodAPI.RegisterUserResponse.newBuilder()
-                .setResultCode("User Successfully registered!")
-                .build());
+                   .setResultCode(resultCode)
+                   .build());
            responseObserver.onCompleted();
     }
 

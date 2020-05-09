@@ -20,7 +20,7 @@ class _RegisterState extends State<Register> {
   String _password = "";
   String _phoneNumber = "";
   bool _autoValidate = false;
-  bool _success = false;
+  bool _usernameExists = false;
 
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _repeatedPasswordController = new TextEditingController();
@@ -90,6 +90,7 @@ class _RegisterState extends State<Register> {
                   return null;
                 },
               ),
+              Text(_usernameExists ? 'username exists' : '', style: TextStyle(color: Colors.red),),
               new TextFormField(
                 decoration: const InputDecoration(
                     labelText: 'Mobile'
@@ -141,7 +142,6 @@ class _RegisterState extends State<Register> {
                 obscureText: true,
               ),
               SizedBox(height: 20,),
-              Text(_success ? 'You have successfully registered' : ''),
               RaisedButton(
                 color: Colors.black,
                 textColor: Colors.white,
@@ -150,7 +150,15 @@ class _RegisterState extends State<Register> {
                     _formKey.currentState.save();
                     final response = await ServiceClient(ClientSingleton().getChannel()).registerUser(
                         RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password);
-                    print(response.resultCode);
+                    if(response.resultCode == "failed") {
+                      setState(() {
+                        _autoValidate = true;
+                        _usernameExists = true;
+                      });
+                    }
+                    else {
+                      Navigator.pushReplacementNamed(context, '/Success');
+                    }
                   }
                   else {
                     setState(() {

@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.sql.*;
 
 @Entity
@@ -13,21 +15,29 @@ public class UserEntity {
     private Long id;
 
     @Column(name = "USERNAME", unique = true)
+    @NotNull
     private String userName;
 
     @Column(name = "PASSWORD")
+    @NotNull
+    @Size(min = 8)
     private String password;
 
     @Column(name = "FIRST_NAME")
+    @NotNull
     private String firstName;
 
     @Column(name = "LAST_NAME")
+    @NotNull
     private String lastName;
 
     @Column(name = "PHONE_NUMBER")
+    @NotNull
+    @Pattern(regexp = "[\\d]{9}")
     private String phoneNumber;
 
     @Column(name = "REGISTRATION_DATE")
+    @NotNull
     private Timestamp registrationDate;
 
     public UserEntity() {

@@ -16,25 +16,29 @@ public class UserServiceImpl implements UserService{
         String hql = "FROM UserEntity as u WHERE u.userName = :username";
         Query query = session.createQuery(hql);
         query.setParameter("username", username);
-        UserEntity user = (UserEntity) query.getSingleResult();
+        UserEntity user;
+        try {
+            user = (UserEntity) query.getSingleResult();
+        } catch (Exception e) {
+            user = null;
+        }
         session.getTransaction().commit();
         session.close();
         return user;
     }
 
     @Override
-    public void save(UserEntity user) {
+    public Long save(UserEntity user) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
-        Long id = getIdByUsername(user.getUserName());
-        if (id != null) {
-            session.merge(user);
+        Long result = (Long) session.save(user);
+        try {
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            result = null;
         }
-        else {
-            session.save(user);
-        }
-        session.getTransaction().commit();
         session.close();
+        return result;
     }
 
     private Long getIdByUsername(String username) {

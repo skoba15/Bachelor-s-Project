@@ -6,5 +6,5 @@ public interface UserService {
 
     UserEntity findUserByUsername(String username);
 
-    void save(UserEntity entity);
+    Long save(UserEntity entity);
 }
