@@ -42,14 +42,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     public void loginUser(NeighborhoodAPI.LoginUserRequest request, StreamObserver<NeighborhoodAPI.LoginUserResponse> responseObserver) {
         log.info(" Username  {}", request.getUsername());
         UserEntity user = userService.findUserByUsername(request.getUsername());
-        if(user == null || !user.getPassword().equals(request.getPassword())) {
-            responseObserver.onNext(NeighborhoodAPI.LoginUserResponse.newBuilder()
-                    .setResultCode("failed")
-                    .build());
-        }
-        else {
+        log.info(" ===========================================  {}", user.toString());
+        if(user != null && user.getPassword().equals(request.getPassword())) {
             responseObserver.onNext(NeighborhoodAPI.LoginUserResponse.newBuilder()
                     .setResultCode(JwtUtil.createJWT(""+user.getId()))
+                    .build());
+        } else {
+            responseObserver.onNext(NeighborhoodAPI.LoginUserResponse.newBuilder()
+                    .setResultCode("failed")
                     .build());
         }
         responseObserver.onCompleted();
