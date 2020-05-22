@@ -5,6 +5,7 @@ import models.NeighborhoodEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NeighborhoodManagementServiceImpl implements NeighborhoodManagementService {
@@ -42,6 +43,13 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
 
     @Override
     public List<NeighborhoodEntity> getNeighborhoodList() {
-        return null;
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+        String hql = "FROM NeighborhoodEntity";
+        Query query = session.createQuery(hql);
+        List<NeighborhoodEntity> result = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return result;
     }
 }

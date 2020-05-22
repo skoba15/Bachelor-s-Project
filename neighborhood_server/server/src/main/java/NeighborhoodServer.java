@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import services.*;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public final class NeighborhoodServer {
@@ -69,7 +70,13 @@ public final class NeighborhoodServer {
         NeighborhoodEntity n2 = service.getNeighborhoodByName("N2");
 
         System.out.println(n1.toString());
-        System.out.println(n2 == null ? "ARSEBOBS" : "ARARSEBOBS");
+        System.out.println(n2 != null ? "ARSEBOBS" : "ARARSEBOBS");
+
+        List<NeighborhoodEntity> ls = service.getNeighborhoodList();
+
+        for(NeighborhoodEntity ent : ls) {
+            System.out.println(ent.toString());
+        }
 
         server.blockUntilShutdown();
     }
