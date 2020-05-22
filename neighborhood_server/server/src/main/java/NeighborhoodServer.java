@@ -62,8 +62,15 @@ public final class NeighborhoodServer {
 //        service.save(user);
 
         NeighborhoodManagementService service = new NeighborhoodManagementServiceImpl();
-        NeighborhoodEntity n = new NeighborhoodEntity("N1","Tbilisi", "Dighomi", "Address");
+        NeighborhoodEntity n = new NeighborhoodEntity("N3","Tbilisi", "Dighomi", "Address");
         service.save(n);
+
+        NeighborhoodEntity n1 = service.getNeighborhoodByName("N1");
+        NeighborhoodEntity n2 = service.getNeighborhoodByName("N2");
+
+        System.out.println(n1.toString());
+        System.out.println(n2 == null ? "ARSEBOBS" : "ARARSEBOBS");
+
         server.blockUntilShutdown();
     }
 }

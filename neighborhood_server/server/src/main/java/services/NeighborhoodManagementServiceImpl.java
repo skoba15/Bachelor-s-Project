@@ -3,6 +3,9 @@ package services;
 import db.JdbcConnection;
 import models.NeighborhoodEntity;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class NeighborhoodManagementServiceImpl implements NeighborhoodManagementService {
     @Override
@@ -17,5 +20,28 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         }
         session.close();
         return result;
+    }
+
+    @Override
+    public NeighborhoodEntity getNeighborhoodByName(String neighborhoodName) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+        String hql = "FROM NeighborhoodEntity as n WHERE n.name = :name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", neighborhoodName);
+        NeighborhoodEntity result;
+        try {
+            result = (NeighborhoodEntity) query.getSingleResult();
+        } catch (Exception e) {
+            result = null;
+        }
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+    @Override
+    public List<NeighborhoodEntity> getNeighborhoodList() {
+        return null;
     }
 }

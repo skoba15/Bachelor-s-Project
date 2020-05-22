@@ -25,6 +25,8 @@ public class NeighborhoodEntity {
     @Column(name = "ADDRESS")
     private String address;
 
+    public NeighborhoodEntity() {}
+
     public NeighborhoodEntity(@NotNull String name, String city, String district, String address) {
         this.name = name;
         this.city = city;
