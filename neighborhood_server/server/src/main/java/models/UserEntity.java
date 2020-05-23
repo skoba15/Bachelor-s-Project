@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.validation.constraints.NotNull;
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "NB_USERS")
@@ -40,9 +42,11 @@ public class UserEntity {
     @NotNull
     private Timestamp registrationDate;
 
-    public UserEntity() {
+    @OneToMany(mappedBy = "neighborhoodEntity", fetch = FetchType.EAGER)
+    private Set<UserToNeighborhoodEntity> neighborhoodsList = new HashSet<UserToNeighborhoodEntity>();
 
-    }
+
+    public UserEntity() {}
 
     public UserEntity(String userName, String password, String firstName, String lastName, String phoneNumber, Timestamp registrationDate) {
         this.userName = userName;
@@ -104,6 +108,14 @@ public class UserEntity {
 
     public void setRegistrationDate(Timestamp registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public Set<UserToNeighborhoodEntity> getNeighborhoodsList() {
+        return neighborhoodsList;
+    }
+
+    public void setNeighborhoodsList(Set<UserToNeighborhoodEntity> neighborhoodsList) {
+        this.neighborhoodsList = neighborhoodsList;
     }
 
     @Override

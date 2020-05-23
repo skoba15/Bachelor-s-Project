@@ -2,6 +2,8 @@ package models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "NB_NEIGHBORHOOD")
@@ -24,6 +26,9 @@ public class NeighborhoodEntity {
 
     @Column(name = "ADDRESS")
     private String address;
+
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.EAGER)
+    private Set<UserToNeighborhoodEntity> usersList = new HashSet<UserToNeighborhoodEntity>();
 
     public NeighborhoodEntity() {}
 
@@ -72,6 +77,14 @@ public class NeighborhoodEntity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<UserToNeighborhoodEntity> getUsersList() {
+        return usersList;
+    }
+
+    public void setUsersList(Set<UserToNeighborhoodEntity> usersList) {
+        this.usersList = usersList;
     }
 
     @Override

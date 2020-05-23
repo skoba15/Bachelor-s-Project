@@ -59,4 +59,22 @@ public class UserServiceImpl implements UserService{
         session.close();
         return id;
     }
+
+    @Override
+    public UserEntity findUserById(Long id) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+        String hql = "FROM UserEntity as u WHERE u.id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        UserEntity user;
+        try {
+            user = (UserEntity) query.getSingleResult();
+        } catch (Exception e) {
+            user = null;
+        }
+        session.getTransaction().commit();
+        session.close();
+        return user;
+    }
 }
