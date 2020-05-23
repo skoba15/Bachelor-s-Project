@@ -36,4 +36,15 @@ public class UserToNeighborhoodTest {
 
         assertEquals(2, pendingUsers.size());
     }
+
+    @Test
+    public void checkProcessRequest() {
+        NeighborhoodManagementService service = new NeighborhoodManagementServiceImpl();
+        service.processUserRequest((long)105, (long)44, UserToNeighborhoodStatus.DECLINED);
+        service.processUserRequest((long)107, (long)44, UserToNeighborhoodStatus.ACTIVE);
+
+        List<UserEntity> pendingUsers = service.getPendingUsers((long)44);
+
+        assertEquals(2, pendingUsers.size());
+    }
 }

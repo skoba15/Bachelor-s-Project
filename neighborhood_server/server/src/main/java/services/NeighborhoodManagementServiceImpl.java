@@ -2,7 +2,6 @@ package services;
 
 import db.JdbcConnection;
 import models.*;
-import neighborhood.server.NeighborhoodAPI;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -72,6 +71,24 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         return result;
     }
 
+    public UserToNeighborhoodEntity getUserToNeighborhoodEntity(Long userId, Long neighborhoodId) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+        String hql = "SELECT r FROM UserToNeighborhoodEntity r WHERE r.id.userId = :userId AND r.id.neighborhoodId = :neighborhoodId";
+        Query query = session.createQuery(hql);
+        query.setParameter("userId", userId);
+        query.setParameter("neighborhoodId", neighborhoodId);
+        UserToNeighborhoodEntity result;
+        try{
+            result = (UserToNeighborhoodEntity) query.getSingleResult();
+        } catch (Exception e) {
+            result = null;
+        }
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
     public int addUserToNeighborhood(Long userId, Long neighborhoodId, UserRole userRole, UserToNeighborhoodStatus status) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
@@ -118,9 +135,21 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         return result;
     }
 
-//    public void processUserRequest(Long userId, Long neighborhoodId, UserToNeighborhoodStatus status) {
-//        Session session = JdbcConnection.getSessionFactory().openSession();
-//        session.beginTransaction();
-//
-//    }
+
+
+    public int processUserRequest(Long userId, Long neighborhoodId, UserToNeighborhoodStatus status) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        UserToNeighborhoodEntity userToNeighborhood = getUserToNeighborhoodEntity(userId, neighborhoodId);
+        if(userToNeighborhood == null) {
+            return -1;
+        }
+        userToNeighborhood.setStatus(status);
+        session.merge(userToNeighborhood);
+
+        session.getTransaction().commit();
+        session.close();
+        return 0;
+    }
 }
