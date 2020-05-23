@@ -10,12 +10,12 @@ public class UserToNeighborhoodEntity {
     @EmbeddedId
     private UserToNeighborhoodKey id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("USER_ID")
     @JoinColumn(name = "USER_ID")
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("NEIGHBORHOOD_ID")
     @JoinColumn(name = "NEIGHBORHOOD_ID")
     private NeighborhoodEntity neighborhoodEntity;

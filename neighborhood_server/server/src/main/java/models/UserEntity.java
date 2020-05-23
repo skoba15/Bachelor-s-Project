@@ -42,7 +42,7 @@ public class UserEntity {
     @NotNull
     private Timestamp registrationDate;
 
-    @OneToMany(mappedBy = "neighborhoodEntity", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.EAGER)
     private Set<UserToNeighborhoodEntity> neighborhoodsList = new HashSet<UserToNeighborhoodEntity>();
 
 

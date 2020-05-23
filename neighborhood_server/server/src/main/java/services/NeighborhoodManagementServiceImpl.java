@@ -92,10 +92,12 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         utn.setUserRole(userRole);
         utn.setId(new UserToNeighborhoodKey(user.getId(), neighborhood.getId()));
 
-        session.save(utn);
-
         user.getNeighborhoodsList().add(utn);
         neighborhood.getUsersList().add(utn);
+
+        session.save(utn);
+        session.merge(user);
+        session.merge(neighborhood);
 
         session.getTransaction().commit();
         session.close();

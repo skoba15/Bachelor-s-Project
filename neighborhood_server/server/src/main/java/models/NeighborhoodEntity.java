@@ -27,7 +27,7 @@ public class NeighborhoodEntity {
     @Column(name = "ADDRESS")
     private String address;
 
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "neighborhoodEntity", fetch = FetchType.EAGER)
     private Set<UserToNeighborhoodEntity> usersList = new HashSet<UserToNeighborhoodEntity>();
 
     public NeighborhoodEntity() {}
