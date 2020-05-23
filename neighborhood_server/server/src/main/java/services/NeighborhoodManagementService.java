@@ -1,6 +1,9 @@
 package services;
 
 import models.NeighborhoodEntity;
+import models.UserEntity;
+import models.UserRole;
+import models.UserToNeighborhoodStatus;
 
 import java.util.List;
 
@@ -10,9 +13,11 @@ public interface NeighborhoodManagementService {
 
     NeighborhoodEntity getNeighborhoodByName(String neighborhoodName);
 
-    NeighborhoodEntity findNeighborhoodById(Long neighborhoodId);
+    NeighborhoodEntity getNeighborhoodById(Long neighborhoodId);
 
     List<NeighborhoodEntity> getNeighborhoodList();
 
-    int addUserToNeighborhood(Long userId, Long neighborhoodId, Long userRole);
+    int addUserToNeighborhood(Long userId, Long neighborhoodId, UserRole userRole, UserToNeighborhoodStatus status);
+
+    List<UserEntity> getPendingUsers(Long neighborhoodId);
 }

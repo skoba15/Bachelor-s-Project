@@ -1,13 +1,12 @@
 package services;
 
 import db.JdbcConnection;
-import models.NeighborhoodEntity;
-import models.UserEntity;
-import models.UserToNeighborhoodEntity;
-import models.UserToNeighborhoodKey;
+import models.*;
+import neighborhood.server.NeighborhoodAPI;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NeighborhoodManagementServiceImpl implements NeighborhoodManagementService {
@@ -44,7 +43,7 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
     }
 
     @Override
-    public NeighborhoodEntity findNeighborhoodById(Long neighborhoodId) {
+    public NeighborhoodEntity getNeighborhoodById(Long neighborhoodId) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
         String hql = "FROM NeighborhoodEntity as n WHERE n.id = :id";
@@ -73,14 +72,14 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         return result;
     }
 
-    public int addUserToNeighborhood(Long userId, Long neighborhoodId, Long userRole) {
+    public int addUserToNeighborhood(Long userId, Long neighborhoodId, UserRole userRole, UserToNeighborhoodStatus status) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
 
         UserService userService = new UserServiceImpl();
 
         UserEntity user = userService.findUserById(userId);
-        NeighborhoodEntity neighborhood = findNeighborhoodById(neighborhoodId);
+        NeighborhoodEntity neighborhood = getNeighborhoodById(neighborhoodId);
 
         if(user == null || neighborhood == null) {
             return -1;
@@ -90,6 +89,7 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         utn.setUserEntity(user);
         utn.setNeighborhoodEntity(neighborhood);
         utn.setUserRole(userRole);
+        utn.setStatus(status);
         utn.setId(new UserToNeighborhoodKey(user.getId(), neighborhood.getId()));
 
         user.getNeighborhoodsList().add(utn);
@@ -103,4 +103,24 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         session.close();
         return 0;
     }
+
+    public List<UserEntity> getPendingUsers(Long neighborhoodId) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        NeighborhoodEntity neighborhood = getNeighborhoodById(neighborhoodId);
+        List<UserEntity> result = new ArrayList<>();
+
+        for(UserToNeighborhoodEntity req : neighborhood.getUsersList()) {
+            if(req.getStatus() == UserToNeighborhoodStatus.PENDING) result.add(req.getUserEntity());
+        }
+
+        return result;
+    }
+
+//    public void processUserRequest(Long userId, Long neighborhoodId, UserToNeighborhoodStatus status) {
+//        Session session = JdbcConnection.getSessionFactory().openSession();
+//        session.beginTransaction();
+//
+//    }
 }

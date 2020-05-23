@@ -20,9 +20,13 @@ public class UserToNeighborhoodEntity {
     @JoinColumn(name = "NEIGHBORHOOD_ID")
     private NeighborhoodEntity neighborhoodEntity;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "USER_ROLE")
-    private Long userRole;
+    private UserRole userRole;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS")
+    private UserToNeighborhoodStatus status;
 
     public UserToNeighborhoodEntity() {}
 
@@ -50,12 +54,20 @@ public class UserToNeighborhoodEntity {
         this.neighborhoodEntity = neighborhoodEntity;
     }
 
-    public Long getUserRole() {
+    public UserRole getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(Long userRole) {
+    public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    public UserToNeighborhoodStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserToNeighborhoodStatus status) {
+        this.status = status;
     }
 
     @Override
