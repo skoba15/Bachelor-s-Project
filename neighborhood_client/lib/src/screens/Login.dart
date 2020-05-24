@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:grpc/grpc.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,20 +54,20 @@ class _LoginState extends State<Login> {
               ),
             SizedBox(height: 20),
             TextFormField(
-              decoration: const InputDecoration(
-                  labelText: 'Password'
+                decoration: const InputDecoration(
+                    labelText: 'Password'
+                ),
+                onSaved: (String val) {
+                  _password = val;
+                },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Empty password not allowed';
+                  }
+                  return null;
+                },
+                obscureText: true,
               ),
-              onSaved: (String val) {
-                _password = val;
-              },
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Empty password not allowed';
-                }
-                return null;
-              },
-              obscureText: true,
-            ),
             SizedBox(height: 10,),
             Text(_wrongInput ? 'wrong username or password' : '', style: TextStyle(color: Colors.red)),
             Padding(
@@ -85,7 +84,7 @@ class _LoginState extends State<Login> {
                         SharedPreferences prefs = await SharedPreferences.getInstance();
                         String token = response.resultCode;
                         await prefs.setString('jwt', token);
-                        print(prefs.get('jwt'));
+//                        Navigator.pushReplacementNamed(context, '/Profile', arguments: {'id' : 5});
                     }
                     else {
                       setState(() {

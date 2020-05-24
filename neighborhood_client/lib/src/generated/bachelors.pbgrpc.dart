@@ -26,6 +26,29 @@ class ServiceClient extends $grpc.Client {
           ($0.LoginUserRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.LoginUserResponse.fromBuffer(value));
+  static final _$userProfile =
+      $grpc.ClientMethod<$0.UserProfileRequest, $0.UserProfileResponse>(
+          '/neighborhood.server.Service/UserProfile',
+          ($0.UserProfileRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.UserProfileResponse.fromBuffer(value));
+  static final _$userId =
+      $grpc.ClientMethod<$0.UserIdRequest, $0.UserIdResponse>(
+          '/neighborhood.server.Service/UserId',
+          ($0.UserIdRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.UserIdResponse.fromBuffer(value));
+  static final _$editPhoneNumber =
+      $grpc.ClientMethod<$0.EditPhoneNumberRequest, $0.EditPhoneNumberResponse>(
+          '/neighborhood.server.Service/EditPhoneNumber',
+          ($0.EditPhoneNumberRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.EditPhoneNumberResponse.fromBuffer(value));
+  static final _$editPlateNumber =
+      $grpc.ClientMethod<$0.EditPlateNumberRequest, $0.EditPlateNumberResponse>(
+          '/neighborhood.server.Service/EditPlateNumber',
+          ($0.EditPlateNumberRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.EditPlateNumberResponse.fromBuffer(value));
   static final _$resetPassword =
       $grpc.ClientMethod<$0.ResetPasswordRequest, $0.ResetPasswordResponse>(
           '/neighborhood.server.Service/ResetPassword',
@@ -181,6 +204,40 @@ class ServiceClient extends $grpc.Client {
       $0.LoginUserRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$loginUser, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.UserProfileResponse> userProfile(
+      $0.UserProfileRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$userProfile, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.UserIdResponse> userId($0.UserIdRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$userId, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.EditPhoneNumberResponse> editPhoneNumber(
+      $0.EditPhoneNumberRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$editPhoneNumber, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.EditPlateNumberResponse> editPlateNumber(
+      $0.EditPlateNumberRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$editPlateNumber, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -402,6 +459,40 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) => $0.LoginUserRequest.fromBuffer(value),
         ($0.LoginUserResponse value) => value.writeToBuffer()));
     $addMethod(
+        $grpc.ServiceMethod<$0.UserProfileRequest, $0.UserProfileResponse>(
+            'UserProfile',
+            userProfile_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $0.UserProfileRequest.fromBuffer(value),
+            ($0.UserProfileResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UserIdRequest, $0.UserIdResponse>(
+        'UserId',
+        userId_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UserIdRequest.fromBuffer(value),
+        ($0.UserIdResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EditPhoneNumberRequest,
+            $0.EditPhoneNumberResponse>(
+        'EditPhoneNumber',
+        editPhoneNumber_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.EditPhoneNumberRequest.fromBuffer(value),
+        ($0.EditPhoneNumberResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.EditPlateNumberRequest,
+            $0.EditPlateNumberResponse>(
+        'EditPlateNumber',
+        editPlateNumber_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.EditPlateNumberRequest.fromBuffer(value),
+        ($0.EditPlateNumberResponse value) => value.writeToBuffer()));
+    $addMethod(
         $grpc.ServiceMethod<$0.ResetPasswordRequest, $0.ResetPasswordResponse>(
             'ResetPassword',
             resetPassword_Pre,
@@ -601,6 +692,28 @@ abstract class ServiceBase extends $grpc.Service {
     return loginUser(call, await request);
   }
 
+  $async.Future<$0.UserProfileResponse> userProfile_Pre($grpc.ServiceCall call,
+      $async.Future<$0.UserProfileRequest> request) async {
+    return userProfile(call, await request);
+  }
+
+  $async.Future<$0.UserIdResponse> userId_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.UserIdRequest> request) async {
+    return userId(call, await request);
+  }
+
+  $async.Future<$0.EditPhoneNumberResponse> editPhoneNumber_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.EditPhoneNumberRequest> request) async {
+    return editPhoneNumber(call, await request);
+  }
+
+  $async.Future<$0.EditPlateNumberResponse> editPlateNumber_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.EditPlateNumberRequest> request) async {
+    return editPlateNumber(call, await request);
+  }
+
   $async.Future<$0.ResetPasswordResponse> resetPassword_Pre(
       $grpc.ServiceCall call,
       $async.Future<$0.ResetPasswordRequest> request) async {
@@ -733,6 +846,14 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.RegisterUserRequest request);
   $async.Future<$0.LoginUserResponse> loginUser(
       $grpc.ServiceCall call, $0.LoginUserRequest request);
+  $async.Future<$0.UserProfileResponse> userProfile(
+      $grpc.ServiceCall call, $0.UserProfileRequest request);
+  $async.Future<$0.UserIdResponse> userId(
+      $grpc.ServiceCall call, $0.UserIdRequest request);
+  $async.Future<$0.EditPhoneNumberResponse> editPhoneNumber(
+      $grpc.ServiceCall call, $0.EditPhoneNumberRequest request);
+  $async.Future<$0.EditPlateNumberResponse> editPlateNumber(
+      $grpc.ServiceCall call, $0.EditPlateNumberRequest request);
   $async.Future<$0.ResetPasswordResponse> resetPassword(
       $grpc.ServiceCall call, $0.ResetPasswordRequest request);
   $async.Future<$0.DeleteContactResponse> deleteContact(

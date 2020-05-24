@@ -92,6 +92,81 @@ const RegisterUserResponse$json = const {
   ],
 };
 
+const EditPlateNumberRequest$json = const {
+  '1': 'EditPlateNumberRequest',
+  '2': const [
+    const {'1': 'plate_number', '3': 1, '4': 1, '5': 9, '10': 'plateNumber'},
+  ],
+};
+
+const EditPlateNumberResponse$json = const {
+  '1': 'EditPlateNumberResponse',
+  '2': const [
+    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
+  ],
+};
+
+const UserProfileRequest$json = const {
+  '1': 'UserProfileRequest',
+  '2': const [
+    const {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+  ],
+};
+
+const UserIdRequest$json = const {
+  '1': 'UserIdRequest',
+  '2': const [
+    const {'1': 'dummy', '3': 1, '4': 1, '5': 5, '10': 'dummy'},
+  ],
+};
+
+const UserIdResponse$json = const {
+  '1': 'UserIdResponse',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+  ],
+};
+
+const EditPhoneNumberRequest$json = const {
+  '1': 'EditPhoneNumberRequest',
+  '2': const [
+    const {'1': 'phone_number', '3': 1, '4': 1, '5': 9, '10': 'phoneNumber'},
+  ],
+};
+
+const EditPhoneNumberResponse$json = const {
+  '1': 'EditPhoneNumberResponse',
+  '2': const [
+    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
+  ],
+};
+
+const UserProfileResponse$json = const {
+  '1': 'UserProfileResponse',
+  '2': const [
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
+    const {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
+    const {'1': 'last_name', '3': 3, '4': 1, '5': 9, '10': 'lastName'},
+    const {'1': 'phone_number', '3': 4, '4': 1, '5': 9, '10': 'phoneNumber'},
+    const {'1': 'car_plate_number', '3': 5, '4': 1, '5': 9, '10': 'carPlateNumber'},
+    const {'1': 'items', '3': 6, '4': 3, '5': 9, '10': 'items'},
+  ],
+};
+
+const ItemListRequest$json = const {
+  '1': 'ItemListRequest',
+  '2': const [
+    const {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+  ],
+};
+
+const ItemListResponse$json = const {
+  '1': 'ItemListResponse',
+  '2': const [
+    const {'1': 'items', '3': 1, '4': 3, '5': 9, '10': 'items'},
+  ],
+};
+
 const ResetPasswordRequest$json = const {
   '1': 'ResetPasswordRequest',
   '2': const [
@@ -228,14 +303,14 @@ const GetUserRequestListResponse$json = const {
 const AddItemToUserRequest$json = const {
   '1': 'AddItemToUserRequest',
   '2': const [
-    const {'1': 'item', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Item', '10': 'item'},
+    const {'1': 'item_name', '3': 1, '4': 1, '5': 9, '10': 'itemName'},
   ],
 };
 
 const DeleteItemToUserRequest$json = const {
   '1': 'DeleteItemToUserRequest',
   '2': const [
-    const {'1': 'item_id', '3': 1, '4': 1, '5': 5, '10': 'itemId'},
+    const {'1': 'item_name', '3': 1, '4': 1, '5': 9, '10': 'itemName'},
   ],
 };
 

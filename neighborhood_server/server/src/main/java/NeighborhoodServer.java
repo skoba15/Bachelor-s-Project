@@ -53,13 +53,17 @@ public final class NeighborhoodServer {
     public static void main(String[] args) throws Exception {
         NeighborhoodServer server = new NeighborhoodServer(8081);
         server.start();
-        JdbcConnection conn = new JdbcConnection();
-
-        UserService service = new UserServiceImpl();
-        UserEntity user = new UserEntity("shota4", null, null, null, null, null);
-        service.save(user);
-        user.setFirstName("shota5");
-        service.save(user);
+//        JdbcConnection conn = new JdbcConnection();
+//
+//        UserService service = new UserServiceImpl();
+//        UserEntity user = service.findUserByUsername("makhvshi");
+//        ItemEntity item = new ItemEntity("Hammer");
+//        ItemEntity item2 = new ItemEntity("Android Charger");
+//        ItemEntity item3 = new ItemEntity("Axe");
+//        ItemService serv2 = new ItemServiceImpl();
+//        serv2.add(user.getId(), item);
+//        serv2.add(user.getId(), item2);
+//        serv2.add(user.getId(), item3);
         server.blockUntilShutdown();
     }
 }

@@ -11,6 +11,8 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+
 
 public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
@@ -21,6 +23,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     private UserService userService = new UserServiceImpl();
 
+    private ItemService itemService = new ItemServiceImpl();
 
 
     @Override
@@ -54,6 +57,56 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         }
         responseObserver.onCompleted();
     }
+
+    private List<String> getItemNames(Set<ItemEntity> items) {
+        List<String> itemNames = new ArrayList<String>();
+        for(ItemEntity item : items) {
+            itemNames.add(item.getName());
+        }
+        return itemNames;
+    }
+
+    @Override
+    public void userProfile(NeighborhoodAPI.UserProfileRequest request, StreamObserver<neighborhood.server.NeighborhoodAPI.UserProfileResponse> responseObserver) {
+        UserEntity user = userService.findUserById((long) request.getUserId());
+        log.info(" ===========================================  {}", user.toString());
+        responseObserver.onNext(NeighborhoodAPI.UserProfileResponse.newBuilder()
+                .setUsername(user.getUserName()).setFirstName(user.getFirstName()).setLastName(user.getLastName())
+                .setPhoneNumber(user.getPhoneNumber()).setCarPlateNumber(user.getCar() != null ? user.getCar().getPlateNumber() : "N/A").addAllItems(getItemNames(user.getItems()))
+                .build());
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
+    public void editPhoneNumber(NeighborhoodAPI.EditPhoneNumberRequest request, StreamObserver<NeighborhoodAPI.EditPhoneNumberResponse> responseObserver) {
+        int id = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        String result = userService.editPhoneNumber((long) id, request.getPhoneNumber());
+        responseObserver.onNext(NeighborhoodAPI.EditPhoneNumberResponse.newBuilder()
+                .setResultCode(result)
+                .build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void editPlateNumber(NeighborhoodAPI.EditPlateNumberRequest request, StreamObserver<NeighborhoodAPI.EditPlateNumberResponse> responseObserver) {
+        int id = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        String result = userService.editCarPlateNUmber((long) id, request.getPlateNumber());
+        responseObserver.onNext(NeighborhoodAPI.EditPlateNumberResponse.newBuilder()
+                .setResultCode(result)
+                .build());
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
+    public void userId(NeighborhoodAPI.UserIdRequest request, StreamObserver<NeighborhoodAPI.UserIdResponse> responseObserver) {
+        responseObserver.onNext(NeighborhoodAPI.UserIdResponse.newBuilder().setId(Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get()))
+               .build());
+        responseObserver.onCompleted();
+    }
+
+
 
     @Override
     public void resetPassword(NeighborhoodAPI.ResetPasswordRequest request, StreamObserver<NeighborhoodAPI.ResetPasswordResponse> responseObserver) {
@@ -102,12 +155,19 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addItemToUser(NeighborhoodAPI.AddItemToUserRequest request, StreamObserver<NeighborhoodAPI.AddItemToUserResponse> responseObserver) {
-
+        int id = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        responseObserver.onNext(NeighborhoodAPI.AddItemToUserResponse.newBuilder().setResultCode(itemService.add((long) id, request.getItemName()))
+                .build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void deleteItemFromUser(NeighborhoodAPI.DeleteItemToUserRequest request, StreamObserver<NeighborhoodAPI.DeleteItemToUserResponse> responseObserver) {
-
+        int id = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        itemService.remove((long) id, request.getItemName());
+        responseObserver.onNext(NeighborhoodAPI.DeleteItemToUserResponse.newBuilder().setResultCode("ok")
+                .build());
+        responseObserver.onCompleted();
     }
 
     @Override

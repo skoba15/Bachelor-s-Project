@@ -1,6 +1,4 @@
-import 'package:grpc/grpc.dart';
 import 'package:grpc/grpc_web.dart';
-import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 
 class ClientSingleton {
   static final ClientSingleton _clientSingleton = ClientSingleton._internal();
