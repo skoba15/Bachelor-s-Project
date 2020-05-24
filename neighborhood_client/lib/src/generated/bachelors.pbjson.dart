@@ -49,6 +49,7 @@ const Neighborhood$json = const {
     const {'1': 'city', '3': 2, '4': 1, '5': 9, '10': 'city'},
     const {'1': 'district', '3': 3, '4': 1, '5': 9, '10': 'district'},
     const {'1': 'address', '3': 4, '4': 1, '5': 9, '10': 'address'},
+    const {'1': 'is_manager', '3': 5, '4': 1, '5': 5, '10': 'isManager'},
   ],
 };
 
@@ -139,18 +140,18 @@ const AddNeighborhoodResponse$json = const {
   ],
 };
 
-const GetNeighborhoodRequest$json = const {
-  '1': 'GetNeighborhoodRequest',
+const GetMyNeighborhoodRequest$json = const {
+  '1': 'GetMyNeighborhoodRequest',
   '2': const [
-    const {'1': 'neighborhood_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodId'},
+    const {'1': 'dummy', '3': 1, '4': 1, '5': 5, '10': 'dummy'},
   ],
 };
 
-const GetNeighborhoodResponse$json = const {
-  '1': 'GetNeighborhoodResponse',
+const GetMyNeighborhoodResponse$json = const {
+  '1': 'GetMyNeighborhoodResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'neighborhood', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Neighborhood', '10': 'neighborhood'},
+    const {'1': 'neighborhood', '3': 2, '4': 3, '5': 11, '6': '.neighborhood.server.Neighborhood', '10': 'neighborhood'},
   ],
 };
 

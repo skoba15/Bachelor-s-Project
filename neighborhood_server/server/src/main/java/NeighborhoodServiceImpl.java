@@ -71,8 +71,19 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     }
 
     @Override
-    public void getNeighborhoodList(NeighborhoodAPI.GetNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetNeighborhoodResponse> responseObserver) {
+    public void getMyNeighborhoodList(NeighborhoodAPI.GetMyNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetMyNeighborhoodResponse> responseObserver) {
+//        Long id = Long.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        UserEntity user = userService.findUserById((long)107);
 
+        NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
+
+        for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
+            NeighborhoodEntity n = utn.getNeighborhoodEntity();
+            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getAddress()).setIsManager(1));
+        }
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
     }
 
     @Override

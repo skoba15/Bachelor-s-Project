@@ -229,6 +229,7 @@ class Neighborhood extends $pb.GeneratedMessage {
     ..aOS(2, 'city')
     ..aOS(3, 'district')
     ..aOS(4, 'address')
+    ..a<$core.int>(5, 'isManager', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -282,6 +283,15 @@ class Neighborhood extends $pb.GeneratedMessage {
   $core.bool hasAddress() => $_has(3);
   @$pb.TagNumber(4)
   void clearAddress() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get isManager => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set isManager($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasIsManager() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearIsManager() => clearField(5);
 }
 
 class Item extends $pb.GeneratedMessage {
@@ -727,58 +737,58 @@ class AddNeighborhoodResponse extends $pb.GeneratedMessage {
   void clearNeighborhoodId() => clearField(2);
 }
 
-class GetNeighborhoodRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
+class GetMyNeighborhoodRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetMyNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'dummy', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
-  GetNeighborhoodRequest._() : super();
-  factory GetNeighborhoodRequest() => create();
-  factory GetNeighborhoodRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetNeighborhoodRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  GetNeighborhoodRequest clone() => GetNeighborhoodRequest()..mergeFromMessage(this);
-  GetNeighborhoodRequest copyWith(void Function(GetNeighborhoodRequest) updates) => super.copyWith((message) => updates(message as GetNeighborhoodRequest));
+  GetMyNeighborhoodRequest._() : super();
+  factory GetMyNeighborhoodRequest() => create();
+  factory GetMyNeighborhoodRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMyNeighborhoodRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetMyNeighborhoodRequest clone() => GetMyNeighborhoodRequest()..mergeFromMessage(this);
+  GetMyNeighborhoodRequest copyWith(void Function(GetMyNeighborhoodRequest) updates) => super.copyWith((message) => updates(message as GetMyNeighborhoodRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static GetNeighborhoodRequest create() => GetNeighborhoodRequest._();
-  GetNeighborhoodRequest createEmptyInstance() => create();
-  static $pb.PbList<GetNeighborhoodRequest> createRepeated() => $pb.PbList<GetNeighborhoodRequest>();
+  static GetMyNeighborhoodRequest create() => GetMyNeighborhoodRequest._();
+  GetMyNeighborhoodRequest createEmptyInstance() => create();
+  static $pb.PbList<GetMyNeighborhoodRequest> createRepeated() => $pb.PbList<GetMyNeighborhoodRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetNeighborhoodRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetNeighborhoodRequest>(create);
-  static GetNeighborhoodRequest _defaultInstance;
+  static GetMyNeighborhoodRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMyNeighborhoodRequest>(create);
+  static GetMyNeighborhoodRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get neighborhoodId => $_getIZ(0);
+  $core.int get dummy => $_getIZ(0);
   @$pb.TagNumber(1)
-  set neighborhoodId($core.int v) { $_setSignedInt32(0, v); }
+  set dummy($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasNeighborhoodId() => $_has(0);
+  $core.bool hasDummy() => $_has(0);
   @$pb.TagNumber(1)
-  void clearNeighborhoodId() => clearField(1);
+  void clearDummy() => clearField(1);
 }
 
-class GetNeighborhoodResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+class GetMyNeighborhoodResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetMyNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
-    ..aOM<Neighborhood>(2, 'neighborhood', subBuilder: Neighborhood.create)
+    ..pc<Neighborhood>(2, 'neighborhood', $pb.PbFieldType.PM, subBuilder: Neighborhood.create)
     ..hasRequiredFields = false
   ;
 
-  GetNeighborhoodResponse._() : super();
-  factory GetNeighborhoodResponse() => create();
-  factory GetNeighborhoodResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetNeighborhoodResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  GetNeighborhoodResponse clone() => GetNeighborhoodResponse()..mergeFromMessage(this);
-  GetNeighborhoodResponse copyWith(void Function(GetNeighborhoodResponse) updates) => super.copyWith((message) => updates(message as GetNeighborhoodResponse));
+  GetMyNeighborhoodResponse._() : super();
+  factory GetMyNeighborhoodResponse() => create();
+  factory GetMyNeighborhoodResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetMyNeighborhoodResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetMyNeighborhoodResponse clone() => GetMyNeighborhoodResponse()..mergeFromMessage(this);
+  GetMyNeighborhoodResponse copyWith(void Function(GetMyNeighborhoodResponse) updates) => super.copyWith((message) => updates(message as GetMyNeighborhoodResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static GetNeighborhoodResponse create() => GetNeighborhoodResponse._();
-  GetNeighborhoodResponse createEmptyInstance() => create();
-  static $pb.PbList<GetNeighborhoodResponse> createRepeated() => $pb.PbList<GetNeighborhoodResponse>();
+  static GetMyNeighborhoodResponse create() => GetMyNeighborhoodResponse._();
+  GetMyNeighborhoodResponse createEmptyInstance() => create();
+  static $pb.PbList<GetMyNeighborhoodResponse> createRepeated() => $pb.PbList<GetMyNeighborhoodResponse>();
   @$core.pragma('dart2js:noInline')
-  static GetNeighborhoodResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetNeighborhoodResponse>(create);
-  static GetNeighborhoodResponse _defaultInstance;
+  static GetMyNeighborhoodResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMyNeighborhoodResponse>(create);
+  static GetMyNeighborhoodResponse _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get resultCode => $_getSZ(0);
@@ -790,15 +800,7 @@ class GetNeighborhoodResponse extends $pb.GeneratedMessage {
   void clearResultCode() => clearField(1);
 
   @$pb.TagNumber(2)
-  Neighborhood get neighborhood => $_getN(1);
-  @$pb.TagNumber(2)
-  set neighborhood(Neighborhood v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasNeighborhood() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearNeighborhood() => clearField(2);
-  @$pb.TagNumber(2)
-  Neighborhood ensureNeighborhood() => $_ensure(1);
+  $core.List<Neighborhood> get neighborhood => $_getList(1);
 }
 
 class AddManagerRequest extends $pb.GeneratedMessage {

@@ -4,8 +4,8 @@ package neighborhood.server;
 
 option java_package = "neighborhood.server";
 option java_outer_classname = "NeighborhoodAPI";
-
 service Service {
+
 
     // რეგისტრაცია
     rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse) {
@@ -29,16 +29,18 @@ service Service {
     }
 
     // გადაცემული პარამეტრების მიხედვით გაფილტრავს და დააბრუნებს სამეზობლოების სიას
-    rpc GetNeighborhoodList (GetNeighborhoodRequest) returns (GetNeighborhoodResponse) {
+    rpc GetMyNeighborhoodList (GetMyNeighborhoodRequest) returns (GetMyNeighborhoodResponse) {
     }
 
     // მენეჯერი მენეჯერს აძლევს სხვას
     rpc AddManager (AddManagerRequest) returns (AddManagerResponse) {
     }
 
+
     // გაწევრიანების მოთხოვნა
     rpc AddUserToNeighborhood (AddUserToNeighborhoodRequest) returns (AddUserToNeighborhoodResponse) {
     }
+
 
     // გაწევრიანებაზე პასუხი
     rpc ApproveUserToNeighborhood (ApproveUserToNeighborhoodRequest) returns (ApproveUserToNeighborhoodResponse) {
@@ -47,8 +49,9 @@ service Service {
     rpc RejectUserFromNeighborhood (RejectUserToNeighborhoodRequest) returns (RejectUserToNeighborhoodResponse) {
     }
 
+
     // სამეზობლოში გაწევრიანების მოთხოვნების სია მენეჯერებისთვის
-    rpc GetUserRequestList (GetUserRequestListRequest) returns (GetUserRequestListResponse) {
+    rpc GetUserRequestList  (GetUserRequestListRequest) returns (GetUserRequestListResponse) {
     }
 
     // მომხმარებელი ნივთს იმატებს
@@ -124,6 +127,7 @@ message Task {
     int32 assignee_id = 5;
 }
 
+
 // პოსტი
 message Post {
     int32 id = 1;
@@ -133,12 +137,15 @@ message Post {
     string text = 5;
 }
 
+
+
 // ქალაქი, რაიონი და მისამართი უნიკალური სამეულია
 message Neighborhood {
     string name = 1;
     string city = 2;
     string district = 3;
     string address = 4;
+    int32 is_manager = 5;
 }
 
 // ნივთი
@@ -167,8 +174,6 @@ message RegisterUserResponse {
     string result_code = 1;
 }
 
-
-
 message ResetPasswordRequest {
     int32 user_id = 1;
     string old_password = 2;
@@ -181,10 +186,12 @@ message ResetPasswordResponse {
 }
 
 
+
 message DeleteContactRequest {
     int32 user_id = 1;
     string phone_number = 2;
 }
+
 
 
 message DeleteContactResponse {
@@ -200,13 +207,13 @@ message AddNeighborhoodResponse {
     int32 neighborhood_id = 2;
 }
 
-message GetNeighborhoodRequest {
-    int32 neighborhood_id = 1;
+message GetMyNeighborhoodRequest {
+    int32 dummy = 1;
 }
 
-message GetNeighborhoodResponse {
+message GetMyNeighborhoodResponse {
     string result_code = 1;
-    Neighborhood neighborhood = 2;
+    repeated Neighborhood neighborhood = 2;
 }
 
 message AddManagerRequest {
@@ -234,6 +241,7 @@ message ApproveUserToNeighborhoodRequest {
 message RejectUserToNeighborhoodRequest {
     int32 neighborhood_join_request_id = 1;
 }
+
 
 
 message ApproveUserToNeighborhoodResponse {
@@ -354,6 +362,7 @@ message AddCommentResponse {
 }
 
 
+
 message AddCarRequest {
     Car car = 1;
 }
@@ -379,7 +388,3 @@ message GetContactByCarRequest {
 message GetContactByCarResponse {
     string phone_number = 1;
 }
-
-
-
-

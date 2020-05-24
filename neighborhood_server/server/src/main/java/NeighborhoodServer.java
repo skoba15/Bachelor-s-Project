@@ -56,12 +56,6 @@ public final class NeighborhoodServer {
         server.start();
         JdbcConnection conn = new JdbcConnection();
 
-//        UserService service = new UserServiceImpl();
-//        UserEntity user = new UserEntity("shota4", null, null, null, null, null);
-//        service.save(user);
-//        user.setFirstName("shota5");
-//        service.save(user);
-
         NeighborhoodManagementService service = new NeighborhoodManagementServiceImpl();
         NeighborhoodEntity n = new NeighborhoodEntity("N3","Tbilisi", "Dighomi", "Address");
         service.save(n);

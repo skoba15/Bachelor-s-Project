@@ -44,12 +44,12 @@ class ServiceClient extends $grpc.Client {
           ($0.AddNeighborhoodRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddNeighborhoodResponse.fromBuffer(value));
-  static final _$getNeighborhoodList =
-      $grpc.ClientMethod<$0.GetNeighborhoodRequest, $0.GetNeighborhoodResponse>(
-          '/neighborhood.server.Service/GetNeighborhoodList',
-          ($0.GetNeighborhoodRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $0.GetNeighborhoodResponse.fromBuffer(value));
+  static final _$getMyNeighborhoodList = $grpc.ClientMethod<
+          $0.GetMyNeighborhoodRequest, $0.GetMyNeighborhoodResponse>(
+      '/neighborhood.server.Service/GetMyNeighborhoodList',
+      ($0.GetMyNeighborhoodRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetMyNeighborhoodResponse.fromBuffer(value));
   static final _$addManager =
       $grpc.ClientMethod<$0.AddManagerRequest, $0.AddManagerResponse>(
           '/neighborhood.server.Service/AddManager',
@@ -212,11 +212,11 @@ class ServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.GetNeighborhoodResponse> getNeighborhoodList(
-      $0.GetNeighborhoodRequest request,
+  $grpc.ResponseFuture<$0.GetMyNeighborhoodResponse> getMyNeighborhoodList(
+      $0.GetMyNeighborhoodRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$getNeighborhoodList, $async.Stream.fromIterable([request]),
+        _$getMyNeighborhoodList, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -428,15 +428,15 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.AddNeighborhoodRequest.fromBuffer(value),
         ($0.AddNeighborhoodResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetNeighborhoodRequest,
-            $0.GetNeighborhoodResponse>(
-        'GetNeighborhoodList',
-        getNeighborhoodList_Pre,
+    $addMethod($grpc.ServiceMethod<$0.GetMyNeighborhoodRequest,
+            $0.GetMyNeighborhoodResponse>(
+        'GetMyNeighborhoodList',
+        getMyNeighborhoodList_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $0.GetNeighborhoodRequest.fromBuffer(value),
-        ($0.GetNeighborhoodResponse value) => value.writeToBuffer()));
+            $0.GetMyNeighborhoodRequest.fromBuffer(value),
+        ($0.GetMyNeighborhoodResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddManagerRequest, $0.AddManagerResponse>(
         'AddManager',
         addManager_Pre,
@@ -619,10 +619,10 @@ abstract class ServiceBase extends $grpc.Service {
     return addNeighborhood(call, await request);
   }
 
-  $async.Future<$0.GetNeighborhoodResponse> getNeighborhoodList_Pre(
+  $async.Future<$0.GetMyNeighborhoodResponse> getMyNeighborhoodList_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$0.GetNeighborhoodRequest> request) async {
-    return getNeighborhoodList(call, await request);
+      $async.Future<$0.GetMyNeighborhoodRequest> request) async {
+    return getMyNeighborhoodList(call, await request);
   }
 
   $async.Future<$0.AddManagerResponse> addManager_Pre($grpc.ServiceCall call,
@@ -739,8 +739,8 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.DeleteContactRequest request);
   $async.Future<$0.AddNeighborhoodResponse> addNeighborhood(
       $grpc.ServiceCall call, $0.AddNeighborhoodRequest request);
-  $async.Future<$0.GetNeighborhoodResponse> getNeighborhoodList(
-      $grpc.ServiceCall call, $0.GetNeighborhoodRequest request);
+  $async.Future<$0.GetMyNeighborhoodResponse> getMyNeighborhoodList(
+      $grpc.ServiceCall call, $0.GetMyNeighborhoodRequest request);
   $async.Future<$0.AddManagerResponse> addManager(
       $grpc.ServiceCall call, $0.AddManagerRequest request);
   $async.Future<$0.AddUserToNeighborhoodResponse> addUserToNeighborhood(
