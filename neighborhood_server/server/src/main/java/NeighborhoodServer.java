@@ -57,20 +57,14 @@ public final class NeighborhoodServer {
         JdbcConnection conn = new JdbcConnection();
 
         NeighborhoodManagementService service = new NeighborhoodManagementServiceImpl();
-        NeighborhoodEntity n = new NeighborhoodEntity("N3","Tbilisi", "Dighomi", "Address");
-        service.save(n);
-
-        NeighborhoodEntity n1 = service.getNeighborhoodByName("N1");
-        NeighborhoodEntity n2 = service.getNeighborhoodByName("N2");
-
-        System.out.println(n1.toString());
-        System.out.println(n2 != null ? "ARSEBOBS" : "ARARSEBOBS");
-
-        List<NeighborhoodEntity> ls = service.getNeighborhoodList();
-
-        for(NeighborhoodEntity ent : ls) {
-            System.out.println(ent.toString());
-        }
+//        NeighborhoodEntity n = new NeighborhoodEntity("N3","Tbilisi", "Dighomi", "Address");
+//        service.save(n);
+//
+//        NeighborhoodEntity n1 = new NeighborhoodEntity("N2", "Tbilisi", "Dighomi", "Address");
+//        service.save(n1);
+//
+//        service.addUserToNeighborhood((long)5, (long)137, UserRole.NEIGHBOUR, UserToNeighborhoodStatus.ACTIVE);
+//        service.addUserToNeighborhood((long) 5, (long) 139, UserRole.MANAGER, UserToNeighborhoodStatus.ACTIVE);
 
         server.blockUntilShutdown();
     }

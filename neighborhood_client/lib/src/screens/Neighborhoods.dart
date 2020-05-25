@@ -15,14 +15,13 @@ class _NeighborhoodsState extends State<Neighborhoods> {
 
   Future<String> getMyNeighborhoodsList(int id) async{
     _response = await ServiceClient(ClientSingleton().getChannel()).getMyNeighborhoodList(GetMyNeighborhoodRequest()..dummy = 1);
-    print(_response.neighborhood.length);
     return Future.value("WTF");
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
-        future: getMyNeighborhoodsList(107),
+        future: getMyNeighborhoodsList(5),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return DefaultTabController(
@@ -41,6 +40,40 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                 ),
                 body: TabBarView(
                   children: [
+                      ListView.builder(
+                          itemCount: _response.neighborhood.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: Column(
+                                children: <Widget>[
+                                   ListTile(
+                                    title: Text(
+                                      '${_response.neighborhood[index].name}',
+                                      style: TextStyle(
+                                          color: Colors.black, fontWeight: FontWeight.bold),),
+                                    leading : Icon(Icons.perm_identity, color : _response.neighborhood[index].isManager == 1 ? Colors.green : Colors.white,),
+                                    subtitle: Text(
+                                      '${_response.neighborhood[index].city}, ${_response.neighborhood[index].district}, ${_response.neighborhood[index].address}',
+                                      style: TextStyle(
+                                          color: Colors.black),),
+                                    onTap: () {
+  
+                                    },
+
+                                  ),
+                                ]
+
+                              ),
+
+                            );
+                          },
+                    ),
+                    new Container(
+                      color: Colors.redAccent,
+                      child: Center(child: Text(
+                        'Hi from School', style: TextStyle(color: Colors
+                          .white),),),
+                    ),
                   ],
                 ),
               ),
@@ -51,4 +84,6 @@ class _NeighborhoodsState extends State<Neighborhoods> {
         }
     );
   }
+
+
 }
