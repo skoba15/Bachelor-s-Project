@@ -50,6 +50,12 @@ class ServiceClient extends $grpc.Client {
       ($0.GetMyNeighborhoodRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.GetMyNeighborhoodResponse.fromBuffer(value));
+  static final _$getOtherNeighborhoodList = $grpc.ClientMethod<
+          $0.GetOtherNeighborhoodRequest, $0.GetOtherNeighborhoodResponse>(
+      '/neighborhood.server.Service/GetOtherNeighborhoodList',
+      ($0.GetOtherNeighborhoodRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetOtherNeighborhoodResponse.fromBuffer(value));
   static final _$addManager =
       $grpc.ClientMethod<$0.AddManagerRequest, $0.AddManagerResponse>(
           '/neighborhood.server.Service/AddManager',
@@ -217,6 +223,15 @@ class ServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getMyNeighborhoodList, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetOtherNeighborhoodResponse>
+      getOtherNeighborhoodList($0.GetOtherNeighborhoodRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getOtherNeighborhoodList, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -437,6 +452,15 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.GetMyNeighborhoodRequest.fromBuffer(value),
         ($0.GetMyNeighborhoodResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetOtherNeighborhoodRequest,
+            $0.GetOtherNeighborhoodResponse>(
+        'GetOtherNeighborhoodList',
+        getOtherNeighborhoodList_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.GetOtherNeighborhoodRequest.fromBuffer(value),
+        ($0.GetOtherNeighborhoodResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddManagerRequest, $0.AddManagerResponse>(
         'AddManager',
         addManager_Pre,
@@ -625,6 +649,12 @@ abstract class ServiceBase extends $grpc.Service {
     return getMyNeighborhoodList(call, await request);
   }
 
+  $async.Future<$0.GetOtherNeighborhoodResponse> getOtherNeighborhoodList_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.GetOtherNeighborhoodRequest> request) async {
+    return getOtherNeighborhoodList(call, await request);
+  }
+
   $async.Future<$0.AddManagerResponse> addManager_Pre($grpc.ServiceCall call,
       $async.Future<$0.AddManagerRequest> request) async {
     return addManager(call, await request);
@@ -741,6 +771,8 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.AddNeighborhoodRequest request);
   $async.Future<$0.GetMyNeighborhoodResponse> getMyNeighborhoodList(
       $grpc.ServiceCall call, $0.GetMyNeighborhoodRequest request);
+  $async.Future<$0.GetOtherNeighborhoodResponse> getOtherNeighborhoodList(
+      $grpc.ServiceCall call, $0.GetOtherNeighborhoodRequest request);
   $async.Future<$0.AddManagerResponse> addManager(
       $grpc.ServiceCall call, $0.AddManagerRequest request);
   $async.Future<$0.AddUserToNeighborhoodResponse> addUserToNeighborhood(

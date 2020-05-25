@@ -33,6 +33,9 @@ service Service {
     rpc GetMyNeighborhoodList (GetMyNeighborhoodRequest) returns (GetMyNeighborhoodResponse) {
     }
 
+    rpc GetOtherNeighborhoodList (GetOtherNeighborhoodRequest) returns (GetOtherNeighborhoodResponse) {
+    }
+
     // მენეჯერი მენეჯერს აძლევს სხვას
     rpc AddManager (AddManagerRequest) returns (AddManagerResponse) {
     }
@@ -216,6 +219,16 @@ message GetMyNeighborhoodResponse {
     string result_code = 1;
     repeated Neighborhood neighborhood = 2;
 }
+
+message GetOtherNeighborhoodRequest {
+    int32 dummy = 1;
+}
+
+message GetOtherNeighborhoodResponse {
+    string result_code = 1;
+    repeated Neighborhood neighborhood = 2;
+}
+
 
 message AddManagerRequest {
     int32 new_manager_id = 1;

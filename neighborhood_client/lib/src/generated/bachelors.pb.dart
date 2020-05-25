@@ -803,6 +803,72 @@ class GetMyNeighborhoodResponse extends $pb.GeneratedMessage {
   $core.List<Neighborhood> get neighborhood => $_getList(1);
 }
 
+class GetOtherNeighborhoodRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetOtherNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'dummy', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  GetOtherNeighborhoodRequest._() : super();
+  factory GetOtherNeighborhoodRequest() => create();
+  factory GetOtherNeighborhoodRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetOtherNeighborhoodRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetOtherNeighborhoodRequest clone() => GetOtherNeighborhoodRequest()..mergeFromMessage(this);
+  GetOtherNeighborhoodRequest copyWith(void Function(GetOtherNeighborhoodRequest) updates) => super.copyWith((message) => updates(message as GetOtherNeighborhoodRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetOtherNeighborhoodRequest create() => GetOtherNeighborhoodRequest._();
+  GetOtherNeighborhoodRequest createEmptyInstance() => create();
+  static $pb.PbList<GetOtherNeighborhoodRequest> createRepeated() => $pb.PbList<GetOtherNeighborhoodRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetOtherNeighborhoodRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetOtherNeighborhoodRequest>(create);
+  static GetOtherNeighborhoodRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get dummy => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set dummy($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDummy() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDummy() => clearField(1);
+}
+
+class GetOtherNeighborhoodResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetOtherNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'resultCode')
+    ..pc<Neighborhood>(2, 'neighborhood', $pb.PbFieldType.PM, subBuilder: Neighborhood.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetOtherNeighborhoodResponse._() : super();
+  factory GetOtherNeighborhoodResponse() => create();
+  factory GetOtherNeighborhoodResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetOtherNeighborhoodResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetOtherNeighborhoodResponse clone() => GetOtherNeighborhoodResponse()..mergeFromMessage(this);
+  GetOtherNeighborhoodResponse copyWith(void Function(GetOtherNeighborhoodResponse) updates) => super.copyWith((message) => updates(message as GetOtherNeighborhoodResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetOtherNeighborhoodResponse create() => GetOtherNeighborhoodResponse._();
+  GetOtherNeighborhoodResponse createEmptyInstance() => create();
+  static $pb.PbList<GetOtherNeighborhoodResponse> createRepeated() => $pb.PbList<GetOtherNeighborhoodResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetOtherNeighborhoodResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetOtherNeighborhoodResponse>(create);
+  static GetOtherNeighborhoodResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get resultCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set resultCode($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResultCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResultCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<Neighborhood> get neighborhood => $_getList(1);
+}
+
 class AddManagerRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddManagerRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'newManagerId', $pb.PbFieldType.O3)

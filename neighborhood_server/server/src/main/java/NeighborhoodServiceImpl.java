@@ -16,12 +16,9 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private ArrayList<UserEntity> users = new ArrayList<UserEntity>();
-
-
     private UserService userService = new UserServiceImpl();
 
-
+    private NeighborhoodManagementService neighborhoodService = new NeighborhoodManagementServiceImpl();
 
     @Override
     public void registerUser(NeighborhoodAPI.RegisterUserRequest request, StreamObserver<NeighborhoodAPI.RegisterUserResponse> responseObserver) {
@@ -78,9 +75,32 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         System.out.println("===============================" + id);
         NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
 
+        // TODO real manager value
+
         for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
             NeighborhoodEntity n = utn.getNeighborhoodEntity();
             builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(1));
+        }
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getOtherNeighborhoodList(NeighborhoodAPI.GetOtherNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetOtherNeighborhoodResponse> responseObserver) {
+        int id = 5;
+        UserEntity user = userService.findUserById((long)id);
+        System.out.println("===============================" + id);
+        NeighborhoodAPI.GetOtherNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetOtherNeighborhoodResponse.newBuilder();
+
+        Set<NeighborhoodEntity> otherNeighborhoods = new HashSet<>(neighborhoodService.getNeighborhoodList());
+
+        for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
+            otherNeighborhoods.remove(utn.getNeighborhoodEntity());
+        }
+
+        for(NeighborhoodEntity n : otherNeighborhoods) {
+            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(0));
         }
 
         responseObserver.onNext(builder.build());

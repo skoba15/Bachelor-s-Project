@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -85,6 +86,20 @@ public class NeighborhoodEntity {
 
     public void setUsersList(Set<UserToNeighborhoodEntity> usersList) {
         this.usersList = usersList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NeighborhoodEntity)) return false;
+        NeighborhoodEntity that = (NeighborhoodEntity) o;
+        return id.equals(that.id) &&
+                name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     @Override
