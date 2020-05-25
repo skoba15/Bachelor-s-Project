@@ -13,8 +13,11 @@ class _NeighborhoodsState extends State<Neighborhoods> {
 
   GetMyNeighborhoodResponse _response;
 
+  GetOtherNeighborhoodResponse _response2;
+
   Future<String> getMyNeighborhoodsList(int id) async{
     _response = await ServiceClient(ClientSingleton().getChannel()).getMyNeighborhoodList(GetMyNeighborhoodRequest()..dummy = 1);
+    _response2 = await ServiceClient(ClientSingleton().getChannel()).getOtherNeighborhoodList(GetOtherNeighborhoodRequest()..dummy = 1);
     return Future.value("WTF");
   }
 
@@ -34,7 +37,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                   bottom: TabBar(
                       tabs: [
                         Tab(icon: Icon(Icons.people), text: 'MY NEIGHBORHOODS'),
-                        Tab(icon: Icon(Icons.store), text: 'ALL NEIGHBORHOODS',),
+                        Tab(icon: Icon(Icons.store), text: 'OTHER NEIGHBORHOODS',),
                       ]
                   ),
                 ),
@@ -51,7 +54,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                       '${_response.neighborhood[index].name}',
                                       style: TextStyle(
                                           color: Colors.black, fontWeight: FontWeight.bold),),
-                                    leading : Icon(Icons.perm_identity, color : _response.neighborhood[index].isManager == 1 ? Colors.green : Colors.white,),
+                                    leading : Icon(Icons.perm_identity, color : _response.neighborhood[index].isManager == 1 ? Colors.green : Colors.black,),
                                     subtitle: Text(
                                       '${_response.neighborhood[index].city}, ${_response.neighborhood[index].district}, ${_response.neighborhood[index].address}',
                                       style: TextStyle(
@@ -68,11 +71,40 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                             );
                           },
                     ),
-                    new Container(
-                      color: Colors.redAccent,
-                      child: Center(child: Text(
-                        'Hi from School', style: TextStyle(color: Colors
-                          .white),),),
+                    ListView.builder(
+                      itemCount: _response2.neighborhood.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  title: Text(
+                                    '${_response2.neighborhood[index].name}',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),),
+                                  leading: Icon(Icons.perm_identity,
+                                    color: _response2.neighborhood[index]
+                                        .isManager == 1 ? Colors.green : Colors
+                                        .black,),
+                                  subtitle: Text(
+                                    '${_response2.neighborhood[index]
+                                        .city}, ${_response2.neighborhood[index]
+                                        .district}, ${_response2
+                                        .neighborhood[index].address}',
+                                    style: TextStyle(
+                                        color: Colors.black),),
+                                  onTap: () {
+
+                                  },
+
+                                ),
+                              ]
+
+                          ),
+
+                        );
+                      },
                     ),
                   ],
                 ),
