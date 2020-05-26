@@ -150,6 +150,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         NeighborhoodAPI.GetUserRequestListResponse.Builder builder = NeighborhoodAPI.GetUserRequestListResponse.newBuilder();
 
         List<UserToNeighborhoodEntity> requests = neighborhoodService.getUserRequestListByNeighborhood((long) neighborhoodId);
+        System.out.println("===================" + requests.size());
         for(UserToNeighborhoodEntity utn : requests) {
             UserEntity user = utn.getUserEntity();
             builder.addRequests(NeighborhoodAPI.GetUserRequestListResponseItem.newBuilder().setUserId(user.getId().intValue()).setUserName(user.getUserName()));
