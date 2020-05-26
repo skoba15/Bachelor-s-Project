@@ -1147,6 +1147,47 @@ class RejectUserToNeighborhoodResponse extends $pb.GeneratedMessage {
   void clearResultCode() => clearField(1);
 }
 
+class GetUserRequestListResponseItem extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListResponseItem', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..aOS(2, 'userName', protoName: 'userName')
+    ..hasRequiredFields = false
+  ;
+
+  GetUserRequestListResponseItem._() : super();
+  factory GetUserRequestListResponseItem() => create();
+  factory GetUserRequestListResponseItem.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserRequestListResponseItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetUserRequestListResponseItem clone() => GetUserRequestListResponseItem()..mergeFromMessage(this);
+  GetUserRequestListResponseItem copyWith(void Function(GetUserRequestListResponseItem) updates) => super.copyWith((message) => updates(message as GetUserRequestListResponseItem));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetUserRequestListResponseItem create() => GetUserRequestListResponseItem._();
+  GetUserRequestListResponseItem createEmptyInstance() => create();
+  static $pb.PbList<GetUserRequestListResponseItem> createRepeated() => $pb.PbList<GetUserRequestListResponseItem>();
+  @$core.pragma('dart2js:noInline')
+  static GetUserRequestListResponseItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserRequestListResponseItem>(create);
+  static GetUserRequestListResponseItem _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get userName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set userName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserName() => clearField(2);
+}
+
 class GetUserRequestListRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
@@ -1180,7 +1221,7 @@ class GetUserRequestListRequest extends $pb.GeneratedMessage {
 
 class GetUserRequestListResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..p<$core.int>(1, 'neighborhoodJoinRequestId', $pb.PbFieldType.P3)
+    ..pc<GetUserRequestListResponseItem>(1, 'requests', $pb.PbFieldType.PM, subBuilder: GetUserRequestListResponseItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -1200,7 +1241,7 @@ class GetUserRequestListResponse extends $pb.GeneratedMessage {
   static GetUserRequestListResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$core.int> get neighborhoodJoinRequestId => $_getList(0);
+  $core.List<GetUserRequestListResponseItem> get requests => $_getList(0);
 }
 
 class AddItemToUserRequest extends $pb.GeneratedMessage {

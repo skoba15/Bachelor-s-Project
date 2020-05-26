@@ -71,6 +71,18 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         return result;
     }
 
+    public List<UserToNeighborhoodEntity> getUserRequestListByNeighborhood(Long neighborhoodId) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+        String hql = "SELECT r FROM UserToNeighborhoodEntity r WHERE r.id.neighborhoodId = :neighborhoodId AND r.status = 'PENDING'";
+        Query query = session.createQuery(hql);
+        query.setParameter("neighborhoodId", neighborhoodId);
+        List<UserToNeighborhoodEntity> result = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
     public UserToNeighborhoodEntity getUserToNeighborhoodEntity(Long userId, Long neighborhoodId) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();

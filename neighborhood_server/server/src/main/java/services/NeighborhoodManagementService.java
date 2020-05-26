@@ -14,6 +14,8 @@ public interface NeighborhoodManagementService {
 
     List<NeighborhoodEntity> getNeighborhoodList();
 
+    List<UserToNeighborhoodEntity> getUserRequestListByNeighborhood(Long neighborhoodId);
+
     UserToNeighborhoodEntity getUserToNeighborhoodEntity(Long userId, Long neighborhoodId);
 
     int addUserToNeighborhood(Long userId, Long neighborhoodId, UserRole userRole, UserToNeighborhoodStatus status);

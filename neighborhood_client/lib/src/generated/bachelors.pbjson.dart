@@ -229,6 +229,14 @@ const RejectUserToNeighborhoodResponse$json = const {
   ],
 };
 
+const GetUserRequestListResponseItem$json = const {
+  '1': 'GetUserRequestListResponseItem',
+  '2': const [
+    const {'1': 'userId', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'userName', '3': 2, '4': 1, '5': 9, '10': 'userName'},
+  ],
+};
+
 const GetUserRequestListRequest$json = const {
   '1': 'GetUserRequestListRequest',
   '2': const [
@@ -239,7 +247,7 @@ const GetUserRequestListRequest$json = const {
 const GetUserRequestListResponse$json = const {
   '1': 'GetUserRequestListResponse',
   '2': const [
-    const {'1': 'neighborhood_join_request_id', '3': 1, '4': 3, '5': 5, '10': 'neighborhoodJoinRequestId'},
+    const {'1': 'requests', '3': 1, '4': 3, '5': 11, '6': '.neighborhood.server.GetUserRequestListResponseItem', '10': 'requests'},
   ],
 };
 

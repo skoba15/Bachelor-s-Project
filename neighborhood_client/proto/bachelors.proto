@@ -142,7 +142,6 @@ message Post {
 }
 
 
-
 // ქალაქი, რაიონი და მისამართი უნიკალური სამეულია
 message Neighborhood {
     int32 id = 1;
@@ -268,12 +267,17 @@ message RejectUserToNeighborhoodResponse {
     string result_code = 1;
 }
 
+message GetUserRequestListResponseItem {
+    int32 userId = 1;
+    string userName = 2;
+}
+
 message GetUserRequestListRequest {
     int32 neighborhood_id = 1;
 }
 
 message GetUserRequestListResponse {
-    repeated int32 neighborhood_join_request_id = 1;
+    repeated GetUserRequestListResponseItem requests = 1;
 }
 
 message AddItemToUserRequest {
