@@ -30,6 +30,11 @@ class _NeighborhoodsState extends State<Neighborhoods> {
             return DefaultTabController(
               length: 2,
               child: Scaffold(
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {},
+                  child: Icon(Icons.add),
+                  backgroundColor: Colors.black,
+                ),
                 appBar: AppBar(
                   title: Text('Neighborhood App'),
                   backgroundColor: Colors.black,
@@ -75,32 +80,46 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                       itemCount: _response2.neighborhood.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          child: Column(
-                              children: <Widget>[
-                                ListTile(
-                                  title: Text(
-                                    '${_response2.neighborhood[index].name}',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),),
-                                  leading: Icon(Icons.perm_identity,
-                                    color: _response2.neighborhood[index]
-                                        .isManager == 1 ? Colors.green : Colors
-                                        .black,),
-                                  subtitle: Text(
-                                    '${_response2.neighborhood[index]
-                                        .city}, ${_response2.neighborhood[index]
-                                        .district}, ${_response2
-                                        .neighborhood[index].address}',
-                                    style: TextStyle(
-                                        color: Colors.black),),
-                                  onTap: () {
+                          child: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                            return Column(
+                                children: <Widget>[
+                                  ListTile(
+                                    title: Text(
+                                      '${_response2.neighborhood[index].name}',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),),
+                                    leading: Icon(Icons.perm_identity,
+                                      color: _response2.neighborhood[index]
+                                          .isManager == 1
+                                          ? Colors.green
+                                          : Colors
+                                          .black,),
+                                    subtitle: Text(
+                                      '${_response2.neighborhood[index]
+                                          .city}, ${_response2
+                                          .neighborhood[index]
+                                          .district}, ${_response2
+                                          .neighborhood[index].address}',
+                                      style: TextStyle(
+                                          color: Colors.black),),
+                                    trailing: (_response2.neighborhood[index].name == 'N4')
+                                        ? FlatButton.icon(
+                                        icon: Icon(Icons.send),
+                                        label: Text('SEND REQUEST'),
+                                        onPressed: () {
+                                          stState(() {
+                                            _response2.neighborhood[index]
+                                                .name = 'N5';
+                                          });
+                                        })
+                                        : Text('PENDING', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.orange),),
 
-                                  },
+                                  ),
+                                ]
 
-                                ),
-                              ]
-
+                            );
+                            }
                           ),
 
                         );
