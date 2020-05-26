@@ -101,7 +101,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         for(NeighborhoodEntity n : otherNeighborhoods) {
             UserToNeighborhoodEntity utn = neighborhoodService.getUserToNeighborhoodEntity((long)userId, n.getId());
             int isPending = 0;
-            if (utn != null && utn.getStatus().equals(UserToNeighborhoodStatus.PENDING.name()) {
+            if (utn != null && utn.getStatus().equals(UserToNeighborhoodStatus.PENDING.name())) {
                 isPending = 1;
             }
             builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(0).setStatus(isPending));
