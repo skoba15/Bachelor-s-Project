@@ -107,17 +107,17 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                         ? FlatButton.icon(
                                         icon: Icon(Icons.send),
                                         label: Text('SEND REQUEST'),
-                                        onPressed: () {
-                                          stState(() async {
+                                        onPressed: () async {
+                                          stState(()  {
                                             _response2.neighborhood[index]
                                                 .status = 1;
-                                            await ServiceClient(ClientSingleton()
-                                                .getChannel())
-                                                .addUserToNeighborhood(
-                                                AddUserToNeighborhoodRequest()
-                                                  ..neighborhoodId = _response2
-                                                      .neighborhood[index].id);
                                           });
+                                          await ServiceClient(ClientSingleton()
+                                              .getChannel())
+                                              .addUserToNeighborhood(
+                                              AddUserToNeighborhoodRequest()
+                                                ..neighborhoodId = _response2
+                                                    .neighborhood[index].id);
                                         })
                                         : Text('PENDING', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.orange),),
 

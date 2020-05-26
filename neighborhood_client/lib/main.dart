@@ -3,15 +3,17 @@ import 'package:neighborhood_client/src/screens/Login.dart';
 import 'package:neighborhood_client/src/screens/Neighborhoods.dart';
 import 'package:neighborhood_client/src/screens/Register.dart';
 import 'package:neighborhood_client/src/screens/Success.dart';
+import 'package:neighborhood_client/src/screens/Neighborhood.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/Neighborhoods',
+    initialRoute: '/Neighborhood',
     routes: {
       '/': (context) => Login(),
       '/Register': (context) => Register(),
       '/Success': (context) => Success(),
       '/Neighborhoods': (context) => Neighborhoods(),
+      '/Neighborhood': (context) => Neighborhood(),
     },
   ));
 }
