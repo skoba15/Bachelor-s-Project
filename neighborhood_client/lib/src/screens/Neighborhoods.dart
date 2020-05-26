@@ -103,14 +103,20 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                           .neighborhood[index].address}',
                                       style: TextStyle(
                                           color: Colors.black),),
-                                    trailing: (_response2.neighborhood[index].name == 'N4')
+                                    trailing: (_response2.neighborhood[index].status == 0)
                                         ? FlatButton.icon(
                                         icon: Icon(Icons.send),
                                         label: Text('SEND REQUEST'),
                                         onPressed: () {
-                                          stState(() {
+                                          stState(() async {
                                             _response2.neighborhood[index]
-                                                .name = 'N5';
+                                                .status = 1;
+                                            await ServiceClient(ClientSingleton()
+                                                .getChannel())
+                                                .addUserToNeighborhood(
+                                                AddUserToNeighborhoodRequest()
+                                                  ..neighborhoodId = _response2
+                                                      .neighborhood[index].id);
                                           });
                                         })
                                         : Text('PENDING', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.orange),),
