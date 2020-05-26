@@ -76,6 +76,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
 
         for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
+            if(utn.getStatus() == UserToNeighborhoodStatus.PENDING) continue;
             NeighborhoodEntity n = utn.getNeighborhoodEntity();
             int isManager = utn.getStatus().equals(UserRole.MANAGER.name()) ? 1 : 0;
             builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(isManager).setStatus(0));
@@ -95,7 +96,9 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         Set<NeighborhoodEntity> otherNeighborhoods = new HashSet<>(neighborhoodService.getNeighborhoodList());
 
         for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
-            otherNeighborhoods.remove(utn.getNeighborhoodEntity());
+            if(utn.getStatus() == UserToNeighborhoodStatus.ACTIVE) {
+                otherNeighborhoods.remove(utn.getNeighborhoodEntity());
+            }
         }
 
         for(NeighborhoodEntity n : otherNeighborhoods) {
