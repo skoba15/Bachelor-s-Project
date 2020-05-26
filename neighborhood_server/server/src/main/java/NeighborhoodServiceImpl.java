@@ -75,11 +75,10 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         System.out.println("===============================" + id);
         NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
 
-        // TODO real manager value
-
         for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
             NeighborhoodEntity n = utn.getNeighborhoodEntity();
-            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(1));
+            int isManager = utn.getStatus().equals(UserRole.MANAGER.name()) ? 1 : 0;
+            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(isManager).setStatus(0));
         }
 
         responseObserver.onNext(builder.build());
@@ -88,9 +87,9 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getOtherNeighborhoodList(NeighborhoodAPI.GetOtherNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetOtherNeighborhoodResponse> responseObserver) {
-        int id = 5;
-        UserEntity user = userService.findUserById((long)id);
-        System.out.println("===============================" + id);
+        int userId = 5;
+        UserEntity user = userService.findUserById((long)userId);
+        System.out.println("===============================" + userId);
         NeighborhoodAPI.GetOtherNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetOtherNeighborhoodResponse.newBuilder();
 
         Set<NeighborhoodEntity> otherNeighborhoods = new HashSet<>(neighborhoodService.getNeighborhoodList());
@@ -100,7 +99,8 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         }
 
         for(NeighborhoodEntity n : otherNeighborhoods) {
-            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(0));
+            int isPending = neighborhoodService.getUserToNeighborhoodEntity((long)userId, n.getId()).getStatus().equals(UserToNeighborhoodStatus.PENDING.name()) ? 1 : 0;
+            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(0).setStatus(isPending));
         }
 
         responseObserver.onNext(builder.build());

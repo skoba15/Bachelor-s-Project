@@ -50,6 +50,7 @@ const Neighborhood$json = const {
     const {'1': 'district', '3': 3, '4': 1, '5': 9, '10': 'district'},
     const {'1': 'address', '3': 4, '4': 1, '5': 9, '10': 'address'},
     const {'1': 'is_manager', '3': 5, '4': 1, '5': 5, '10': 'isManager'},
+    const {'1': 'status', '3': 6, '4': 1, '5': 5, '10': 'status'},
   ],
 };
 

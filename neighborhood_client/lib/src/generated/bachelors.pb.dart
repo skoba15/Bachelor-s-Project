@@ -230,6 +230,7 @@ class Neighborhood extends $pb.GeneratedMessage {
     ..aOS(3, 'district')
     ..aOS(4, 'address')
     ..a<$core.int>(5, 'isManager', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, 'status', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -292,6 +293,15 @@ class Neighborhood extends $pb.GeneratedMessage {
   $core.bool hasIsManager() => $_has(4);
   @$pb.TagNumber(5)
   void clearIsManager() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get status => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set status($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasStatus() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearStatus() => clearField(6);
 }
 
 class Item extends $pb.GeneratedMessage {
