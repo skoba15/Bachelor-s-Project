@@ -45,12 +45,13 @@ const Post$json = const {
 const Neighborhood$json = const {
   '1': 'Neighborhood',
   '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'city', '3': 2, '4': 1, '5': 9, '10': 'city'},
-    const {'1': 'district', '3': 3, '4': 1, '5': 9, '10': 'district'},
-    const {'1': 'address', '3': 4, '4': 1, '5': 9, '10': 'address'},
-    const {'1': 'is_manager', '3': 5, '4': 1, '5': 5, '10': 'isManager'},
-    const {'1': 'status', '3': 6, '4': 1, '5': 5, '10': 'status'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'city', '3': 3, '4': 1, '5': 9, '10': 'city'},
+    const {'1': 'district', '3': 4, '4': 1, '5': 9, '10': 'district'},
+    const {'1': 'address', '3': 5, '4': 1, '5': 9, '10': 'address'},
+    const {'1': 'is_manager', '3': 6, '4': 1, '5': 5, '10': 'isManager'},
+    const {'1': 'status', '3': 7, '4': 1, '5': 5, '10': 'status'},
   ],
 };
 

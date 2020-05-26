@@ -225,12 +225,13 @@ class Post extends $pb.GeneratedMessage {
 
 class Neighborhood extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Neighborhood', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'name')
-    ..aOS(2, 'city')
-    ..aOS(3, 'district')
-    ..aOS(4, 'address')
-    ..a<$core.int>(5, 'isManager', $pb.PbFieldType.O3)
-    ..a<$core.int>(6, 'status', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
+    ..aOS(2, 'name')
+    ..aOS(3, 'city')
+    ..aOS(4, 'district')
+    ..aOS(5, 'address')
+    ..a<$core.int>(6, 'isManager', $pb.PbFieldType.O3)
+    ..a<$core.int>(7, 'status', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -250,58 +251,67 @@ class Neighborhood extends $pb.GeneratedMessage {
   static Neighborhood _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get city => $_getSZ(1);
+  $core.String get name => $_getSZ(1);
   @$pb.TagNumber(2)
-  set city($core.String v) { $_setString(1, v); }
+  set name($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCity() => $_has(1);
+  $core.bool hasName() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCity() => clearField(2);
+  void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get district => $_getSZ(2);
+  $core.String get city => $_getSZ(2);
   @$pb.TagNumber(3)
-  set district($core.String v) { $_setString(2, v); }
+  set city($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasDistrict() => $_has(2);
+  $core.bool hasCity() => $_has(2);
   @$pb.TagNumber(3)
-  void clearDistrict() => clearField(3);
+  void clearCity() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get address => $_getSZ(3);
+  $core.String get district => $_getSZ(3);
   @$pb.TagNumber(4)
-  set address($core.String v) { $_setString(3, v); }
+  set district($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasAddress() => $_has(3);
+  $core.bool hasDistrict() => $_has(3);
   @$pb.TagNumber(4)
-  void clearAddress() => clearField(4);
+  void clearDistrict() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get isManager => $_getIZ(4);
+  $core.String get address => $_getSZ(4);
   @$pb.TagNumber(5)
-  set isManager($core.int v) { $_setSignedInt32(4, v); }
+  set address($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasIsManager() => $_has(4);
+  $core.bool hasAddress() => $_has(4);
   @$pb.TagNumber(5)
-  void clearIsManager() => clearField(5);
+  void clearAddress() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.int get status => $_getIZ(5);
+  $core.int get isManager => $_getIZ(5);
   @$pb.TagNumber(6)
-  set status($core.int v) { $_setSignedInt32(5, v); }
+  set isManager($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasStatus() => $_has(5);
+  $core.bool hasIsManager() => $_has(5);
   @$pb.TagNumber(6)
-  void clearStatus() => clearField(6);
+  void clearIsManager() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get status => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set status($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasStatus() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStatus() => clearField(7);
 }
 
 class Item extends $pb.GeneratedMessage {

@@ -79,7 +79,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             if(utn.getStatus() == UserToNeighborhoodStatus.PENDING) continue;
             NeighborhoodEntity n = utn.getNeighborhoodEntity();
             int isManager = utn.getUserRole() == UserRole.MANAGER ? 1 : 0;
-            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(isManager).setStatus(0));
+            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setId(n.getId().intValue()).setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(isManager).setStatus(0));
         }
 
         responseObserver.onNext(builder.build());
@@ -107,7 +107,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             if (utn != null && utn.getStatus().equals(UserToNeighborhoodStatus.PENDING.name())) {
                 isPending = 1;
             }
-            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(0).setStatus(isPending));
+            builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setId(n.getId().intValue()).setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(0).setStatus(isPending));
         }
 
         responseObserver.onNext(builder.build());
@@ -121,7 +121,15 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addUserToNeighborhood(NeighborhoodAPI.AddUserToNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.AddUserToNeighborhoodResponse> responseObserver) {
+        int userId = 5;
+        int neighborhoodId = request.getNeighborhoodId();
 
+        int resultCode = neighborhoodService.addUserToNeighborhood((long) userId, (long) neighborhoodId, UserRole.NEIGHBOUR, UserToNeighborhoodStatus.PENDING);
+
+        String resultCodeStr = resultCode == 0 ? "Success" : "Fail";
+        responseObserver.onNext(NeighborhoodAPI.AddUserToNeighborhoodResponse.newBuilder()
+                .setResultCode(resultCodeStr)
+                .build());
     }
 
     @Override
