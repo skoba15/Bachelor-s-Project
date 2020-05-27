@@ -114,20 +114,25 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
             return -1;
         }
 
-        UserToNeighborhoodEntity utn = new UserToNeighborhoodEntity();
-        utn.setUserEntity(user);
-        utn.setNeighborhoodEntity(neighborhood);
-        utn.setUserRole(userRole);
-        utn.setStatus(status);
-        utn.setId(new UserToNeighborhoodKey(user.getId(), neighborhood.getId()));
+        UserToNeighborhoodEntity relation = getUserToNeighborhoodEntity(userId, neighborhoodId);
+        if(relation != null) {
+            relation.setStatus(UserToNeighborhoodStatus.PENDING);
+            session.merge(relation);
+        } else {
+            UserToNeighborhoodEntity utn = new UserToNeighborhoodEntity();
+            utn.setUserEntity(user);
+            utn.setNeighborhoodEntity(neighborhood);
+            utn.setUserRole(userRole);
+            utn.setStatus(status);
+            utn.setId(new UserToNeighborhoodKey(user.getId(), neighborhood.getId()));
 
-        user.getNeighborhoodsList().add(utn);
-        neighborhood.getUsersList().add(utn);
+            user.getNeighborhoodsList().add(utn);
+            neighborhood.getUsersList().add(utn);
 
-        session.save(utn);
-        session.merge(user);
-        session.merge(neighborhood);
-
+            session.save(utn);
+            session.merge(user);
+            session.merge(neighborhood);
+        }
         session.getTransaction().commit();
         session.close();
         return 0;
