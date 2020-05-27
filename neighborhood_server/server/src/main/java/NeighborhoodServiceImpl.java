@@ -134,12 +134,30 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void approveUserToNeighborhood(NeighborhoodAPI.ApproveUserToNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.ApproveUserToNeighborhoodResponse> responseObserver) {
+        int managerId = 5;
+        int userId = request.getUserId();
+        int neighborhoodId = request.getNeighborhoodId();
 
+        int statusCode = neighborhoodService.processUserRequest((long) userId, (long) neighborhoodId, UserToNeighborhoodStatus.ACTIVE);
+
+        String resultCodeStr = statusCode == 0 ? "Success" : "Fail";
+        responseObserver.onNext(NeighborhoodAPI.ApproveUserToNeighborhoodResponse.newBuilder()
+                .setResultCode(resultCodeStr)
+                .build());
     }
 
     @Override
     public void rejectUserFromNeighborhood(NeighborhoodAPI.RejectUserToNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.RejectUserToNeighborhoodResponse> responseObserver) {
+        int managerId = 5;
+        int userId = request.getUserId();
+        int neighborhoodId = request.getNeighborhoodId();
 
+        int statusCode = neighborhoodService.processUserRequest((long) userId, (long) neighborhoodId, UserToNeighborhoodStatus.DECLINED);
+
+        String resultCodeStr = statusCode == 0 ? "Success" : "Fail";
+        responseObserver.onNext(NeighborhoodAPI.RejectUserToNeighborhoodResponse.newBuilder()
+                .setResultCode(resultCodeStr)
+                .build());
     }
 
     @Override

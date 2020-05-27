@@ -204,14 +204,16 @@ const AddUserToNeighborhoodResponse$json = const {
 const ApproveUserToNeighborhoodRequest$json = const {
   '1': 'ApproveUserToNeighborhoodRequest',
   '2': const [
-    const {'1': 'neighborhood_join_request_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodJoinRequestId'},
+    const {'1': 'userId', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'neighborhoodId', '3': 2, '4': 1, '5': 5, '10': 'neighborhoodId'},
   ],
 };
 
 const RejectUserToNeighborhoodRequest$json = const {
   '1': 'RejectUserToNeighborhoodRequest',
   '2': const [
-    const {'1': 'neighborhood_join_request_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodJoinRequestId'},
+    const {'1': 'userId', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'neighborhoodId', '3': 2, '4': 1, '5': 5, '10': 'neighborhoodId'},
   ],
 };
 

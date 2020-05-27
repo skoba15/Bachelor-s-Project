@@ -197,8 +197,6 @@ message DeleteContactRequest {
     string phone_number = 2;
 }
 
-
-
 message DeleteContactResponse {
     string result_code = 1;
 }
@@ -250,14 +248,14 @@ message AddUserToNeighborhoodResponse {
 
 
 message ApproveUserToNeighborhoodRequest {
-    int32 neighborhood_join_request_id = 1;
+    int32 userId = 1;
+    int32 neighborhoodId = 2;
 }
 
 message RejectUserToNeighborhoodRequest {
-    int32 neighborhood_join_request_id = 1;
+    int32 userId = 1;
+    int32 neighborhoodId = 2;
 }
-
-
 
 message ApproveUserToNeighborhoodResponse {
     string result_code = 1;

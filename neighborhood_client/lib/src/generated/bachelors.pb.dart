@@ -1025,7 +1025,8 @@ class AddUserToNeighborhoodResponse extends $pb.GeneratedMessage {
 
 class ApproveUserToNeighborhoodRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ApproveUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'neighborhoodJoinRequestId', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3, protoName: 'neighborhoodId')
     ..hasRequiredFields = false
   ;
 
@@ -1045,18 +1046,28 @@ class ApproveUserToNeighborhoodRequest extends $pb.GeneratedMessage {
   static ApproveUserToNeighborhoodRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get neighborhoodJoinRequestId => $_getIZ(0);
+  $core.int get userId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set neighborhoodJoinRequestId($core.int v) { $_setSignedInt32(0, v); }
+  set userId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasNeighborhoodJoinRequestId() => $_has(0);
+  $core.bool hasUserId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearNeighborhoodJoinRequestId() => clearField(1);
+  void clearUserId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get neighborhoodId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set neighborhoodId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNeighborhoodId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNeighborhoodId() => clearField(2);
 }
 
 class RejectUserToNeighborhoodRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('RejectUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'neighborhoodJoinRequestId', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3, protoName: 'neighborhoodId')
     ..hasRequiredFields = false
   ;
 
@@ -1076,13 +1087,22 @@ class RejectUserToNeighborhoodRequest extends $pb.GeneratedMessage {
   static RejectUserToNeighborhoodRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get neighborhoodJoinRequestId => $_getIZ(0);
+  $core.int get userId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set neighborhoodJoinRequestId($core.int v) { $_setSignedInt32(0, v); }
+  set userId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasNeighborhoodJoinRequestId() => $_has(0);
+  $core.bool hasUserId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearNeighborhoodJoinRequestId() => clearField(1);
+  void clearUserId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get neighborhoodId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set neighborhoodId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNeighborhoodId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNeighborhoodId() => clearField(2);
 }
 
 class ApproveUserToNeighborhoodResponse extends $pb.GeneratedMessage {
