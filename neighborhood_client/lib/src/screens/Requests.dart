@@ -41,53 +41,69 @@ class _RequestsState extends State<Requests> {
                 itemCount: _userRequests.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    child: ListTile(
-                      title: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: '${_userRequests[index].userName}',
-                                recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                    print("yeah");
-                                  },
-                                style: TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)
+                    child: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                      return Column(
+                        children: <Widget>[
+                            ListTile(
+                              title: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: '${_userRequests[index].userName}',
+                                        recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                            print("yeah");
+                                          },
+                                        style: TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)
+                                      ),
+                                      TextSpan(text: ' wants to join the neighborhood', style: TextStyle(color : Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
+                                    ]
+                                  )
                               ),
-                              TextSpan(text: ' wants to join the neighborhood', style: TextStyle(color : Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
-                            ]
-                          )
-                      ),
-                      onTap: () {
-
-                      },
-                      trailing: Container(
-                        width: 250,
-                        child: Row(
-                          children: <Widget>[
-                            RaisedButton(
-                              child: Text(
-                                  'ACCEPT'
-                              ),
-                              color: Colors.green,
-                              textColor: Colors.white,
-                              onPressed: () {
+                              onTap: () {
 
                               },
-                            ),
-                            SizedBox(width: 15,),
-                            RaisedButton(
-                              child: Text(
-                                  'REJECT'
+                              trailing: Container(
+                                width: 250,
+                                child: Row(
+                                  children: <Widget>[
+                                    RaisedButton(
+                                      child: Text(
+                                          'ACCEPT'
+                                      ),
+                                      color: Colors.green,
+                                      textColor: Colors.white,
+                                      onPressed: () async {
+                                        await ServiceClient(ClientSingleton()
+                                            .getChannel()).approveUserToNeighborhood(
+                                            ApproveUserToNeighborhoodRequest()
+                                              ..neighborhoodId = 139..userId = _userRequests[index].userId);
+                                      },
+                                    ),
+                                    SizedBox(width: 15,),
+                                    RaisedButton(
+                                      child: Text(
+                                          'REJECT'
+                                      ),
+                                      color: Colors.red,
+                                      textColor: Colors.white,
+                                      onPressed: () async {
+                                        await ServiceClient(ClientSingleton()
+                                            .getChannel())
+                                            .rejectUserFromNeighborhood(
+                                            RejectUserToNeighborhoodRequest()
+                                              ..neighborhoodId = 139
+                                              ..userId = _userRequests[index]
+                                                  .userId);
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
-                              color: Colors.red,
-                              textColor: Colors.white,
-                              onPressed: () {
-
-                              },
-                            ),
-                          ],
                         ),
-                      ),
+                        ]
+                      );
+                    }
                     ),
                   );
                 }

@@ -70,13 +70,13 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void getMyNeighborhoodList(NeighborhoodAPI.GetMyNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetMyNeighborhoodResponse> responseObserver) {
 //        Long id = Long.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        int id = 5;
+        int id = 24;
         UserEntity user = userService.findUserById((long)id);
         System.out.println("===============================" + id);
         NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
 
         for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
-            if(utn.getStatus() == UserToNeighborhoodStatus.PENDING) continue;
+            if(utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
             NeighborhoodEntity n = utn.getNeighborhoodEntity();
             int isManager = utn.getUserRole() == UserRole.MANAGER ? 1 : 0;
             builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setId(n.getId().intValue()).setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(isManager).setStatus(0));
@@ -88,7 +88,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getOtherNeighborhoodList(NeighborhoodAPI.GetOtherNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetOtherNeighborhoodResponse> responseObserver) {
-        int userId = 5;
+        int userId = 24;
         UserEntity user = userService.findUserById((long)userId);
         System.out.println("===============================" + userId);
         NeighborhoodAPI.GetOtherNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetOtherNeighborhoodResponse.newBuilder();

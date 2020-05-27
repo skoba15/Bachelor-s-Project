@@ -24,7 +24,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
-        future: getMyNeighborhoodsList(5),
+        future: getMyNeighborhoodsList(24),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return DefaultTabController(
