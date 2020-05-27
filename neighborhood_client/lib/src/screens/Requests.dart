@@ -16,12 +16,14 @@ class _RequestsState extends State<Requests> {
 
   GetUserRequestListResponse _requests;
   List<GetUserRequestListResponseItem> _userRequests;
+  List<int> _statuses;
 
   Future<String> getRequests(int id) async {
     _requests = await ServiceClient(ClientSingleton().getChannel()).getUserRequestList(
         GetUserRequestListRequest()
           ..neighborhoodId = 139);
     _userRequests = _requests.requests;
+    _statuses = List.filled(_userRequests.length, 0);
     return Future.value("WTF");
   }
 
@@ -63,7 +65,7 @@ class _RequestsState extends State<Requests> {
                               onTap: () {
 
                               },
-                              trailing: Container(
+                              trailing: (_statuses[index] == 0) ? Container(
                                 width: 250,
                                 child: Row(
                                   children: <Widget>[
@@ -74,6 +76,9 @@ class _RequestsState extends State<Requests> {
                                       color: Colors.green,
                                       textColor: Colors.white,
                                       onPressed: () async {
+                                        stState(() {
+                                          _statuses[index] = 1;
+                                        });
                                         await ServiceClient(ClientSingleton()
                                             .getChannel()).approveUserToNeighborhood(
                                             ApproveUserToNeighborhoodRequest()
@@ -88,6 +93,9 @@ class _RequestsState extends State<Requests> {
                                       color: Colors.red,
                                       textColor: Colors.white,
                                       onPressed: () async {
+                                        stState(() {
+                                          _statuses[index] = -1;
+                                        });
                                         await ServiceClient(ClientSingleton()
                                             .getChannel())
                                             .rejectUserFromNeighborhood(
@@ -95,11 +103,17 @@ class _RequestsState extends State<Requests> {
                                               ..neighborhoodId = 139
                                               ..userId = _userRequests[index]
                                                   .userId);
+
                                       },
                                     ),
                                   ],
                                 ),
-                              ),
+                              )
+                              : ((_statuses[index] == -1) ? Text('REJECTED', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.red),) : Text(
+                                'ACCEPTED', style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.green),))
                         ),
                         ]
                       );

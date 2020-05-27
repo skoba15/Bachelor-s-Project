@@ -121,7 +121,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addUserToNeighborhood(NeighborhoodAPI.AddUserToNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.AddUserToNeighborhoodResponse> responseObserver) {
-        int userId = 5;
+        int userId = 24;
         int neighborhoodId = request.getNeighborhoodId();
 
         int resultCode = neighborhoodService.addUserToNeighborhood((long) userId, (long) neighborhoodId, UserRole.NEIGHBOUR, UserToNeighborhoodStatus.PENDING);
