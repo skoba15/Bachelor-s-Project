@@ -685,7 +685,7 @@ class DeleteContactResponse extends $pb.GeneratedMessage {
 
 class AddNeighborhoodRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOM<Neighborhood>(2, 'neighborhood', subBuilder: Neighborhood.create)
+    ..aOM<Neighborhood>(1, 'neighborhood', subBuilder: Neighborhood.create)
     ..hasRequiredFields = false
   ;
 
@@ -704,15 +704,15 @@ class AddNeighborhoodRequest extends $pb.GeneratedMessage {
   static AddNeighborhoodRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddNeighborhoodRequest>(create);
   static AddNeighborhoodRequest _defaultInstance;
 
-  @$pb.TagNumber(2)
+  @$pb.TagNumber(1)
   Neighborhood get neighborhood => $_getN(0);
-  @$pb.TagNumber(2)
-  set neighborhood(Neighborhood v) { setField(2, v); }
-  @$pb.TagNumber(2)
+  @$pb.TagNumber(1)
+  set neighborhood(Neighborhood v) { setField(1, v); }
+  @$pb.TagNumber(1)
   $core.bool hasNeighborhood() => $_has(0);
-  @$pb.TagNumber(2)
-  void clearNeighborhood() => clearField(2);
-  @$pb.TagNumber(2)
+  @$pb.TagNumber(1)
+  void clearNeighborhood() => clearField(1);
+  @$pb.TagNumber(1)
   Neighborhood ensureNeighborhood() => $_ensure(0);
 }
 

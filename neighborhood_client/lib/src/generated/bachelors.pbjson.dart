@@ -130,7 +130,7 @@ const DeleteContactResponse$json = const {
 const AddNeighborhoodRequest$json = const {
   '1': 'AddNeighborhoodRequest',
   '2': const [
-    const {'1': 'neighborhood', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Neighborhood', '10': 'neighborhood'},
+    const {'1': 'neighborhood', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Neighborhood', '10': 'neighborhood'},
   ],
 };
 

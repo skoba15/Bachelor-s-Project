@@ -80,7 +80,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         }
 
         responseObserver.onNext(NeighborhoodAPI.AddNeighborhoodResponse.newBuilder()
-                .setResultCode(resultCodeStr)
+                .setResultCode(resultCodeStr).setNeighborhoodId(request != null ? result.intValue() : -1)
                 .build());
     }
 

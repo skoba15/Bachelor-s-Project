@@ -202,7 +202,7 @@ message DeleteContactResponse {
 }
 
 message AddNeighborhoodRequest {
-    Neighborhood neighborhood = 2;
+    Neighborhood neighborhood = 1;
 }
 
 message AddNeighborhoodResponse {
