@@ -64,7 +64,24 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addNeighborhood(NeighborhoodAPI.AddNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.AddNeighborhoodResponse> responseObserver) {
+        int userId = 5;
 
+        NeighborhoodAPI.Neighborhood nr = request.getNeighborhood();
+        NeighborhoodEntity newNeighborhood = new NeighborhoodEntity(nr.getName(), nr.getCity(), nr.getDistrict(), nr.getAddress());
+        Long result = neighborhoodService.save(newNeighborhood);
+
+        String resultCodeStr = "Neighborhood Already Exists";
+
+        if(result != null) {
+            int addManagerStatus = neighborhoodService.addUserToNeighborhood((long) userId, result, UserRole.MANAGER, UserToNeighborhoodStatus.ACTIVE);
+            if(addManagerStatus == 0) {
+                resultCodeStr = "Neighborhood Successfully Added";
+            }
+        }
+
+        responseObserver.onNext(NeighborhoodAPI.AddNeighborhoodResponse.newBuilder()
+                .setResultCode(resultCodeStr)
+                .build());
     }
 
     @Override
