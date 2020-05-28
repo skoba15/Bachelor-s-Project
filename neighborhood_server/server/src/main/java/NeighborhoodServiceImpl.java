@@ -70,12 +70,12 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         NeighborhoodEntity newNeighborhood = new NeighborhoodEntity(nr.getName(), nr.getCity(), nr.getDistrict(), nr.getAddress());
         Long result = neighborhoodService.save(newNeighborhood);
 
-        String resultCodeStr = "Neighborhood Already Exists";
+        String resultCodeStr = "Fail";
 
         if(result != null) {
             int addManagerStatus = neighborhoodService.addUserToNeighborhood((long) userId, result, UserRole.MANAGER, UserToNeighborhoodStatus.ACTIVE);
             if(addManagerStatus == 0) {
-                resultCodeStr = "Neighborhood Successfully Added";
+                resultCodeStr = "Success";
             }
         }
 
