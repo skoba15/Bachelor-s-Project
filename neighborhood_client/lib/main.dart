@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neighborhood_client/src/screens/Createneighborhood.dart';
 import 'package:neighborhood_client/src/screens/Login.dart';
 import 'package:neighborhood_client/src/screens/Neighborhoods.dart';
 import 'package:neighborhood_client/src/screens/Register.dart';
@@ -8,7 +9,7 @@ import 'package:neighborhood_client/src/screens/Neighborhood.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/Neighborhood',
+    initialRoute: '/Createneighborhood',
     routes: {
       '/': (context) => Login(),
       '/Register': (context) => Register(),
@@ -16,6 +17,7 @@ void main() {
       '/Neighborhoods': (context) => Neighborhoods(),
       '/Neighborhood': (context) => Neighborhood(),
       '/Requests': (context) => Requests(),
+      '/Createneighborhood': (context) => CreateNeighborhood(),
     },
   ));
 }

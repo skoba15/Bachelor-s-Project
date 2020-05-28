@@ -5,9 +5,8 @@ import models.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import javax.validation.ConstraintViolationException;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.*;
+import java.util.*;
 
 public class NeighborhoodManagementServiceImpl implements NeighborhoodManagementService {
     @Override
@@ -17,8 +16,7 @@ public class NeighborhoodManagementServiceImpl implements NeighborhoodManagement
         Long result = (Long) session.save(neighborhoodEntity);
         try {
             session.getTransaction().commit();
-        } catch (ConstraintViolationException e) {
-            e.getCause();
+        } catch (Exception e) {
             result = null;
         }
         session.close();
