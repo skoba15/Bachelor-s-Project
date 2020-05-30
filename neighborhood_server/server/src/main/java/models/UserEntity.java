@@ -53,8 +53,6 @@ public class UserEntity {
     @JoinColumn(name = "car_id", referencedColumnName = "ID")
     private CarEntity car;
 
-
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "ITEM_OWNING",
@@ -62,9 +60,6 @@ public class UserEntity {
             inverseJoinColumns = {@JoinColumn(name = "ITEM_ID")}
     )
     private Set<ItemEntity> items = new HashSet<>();
-
-    public UserEntity() {
-
 
     public UserEntity() {}
 
