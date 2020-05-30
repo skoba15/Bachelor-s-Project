@@ -144,7 +144,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         UserEntity user = userService.findUserById((long)id);
         System.out.println("===============================" + id);
         NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
-
         for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
             if(utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
             NeighborhoodEntity n = utn.getNeighborhoodEntity();

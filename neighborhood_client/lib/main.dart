@@ -10,7 +10,7 @@ import 'package:neighborhood_client/src/screens/Neighborhood.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/Createneighborhood',
+    initialRoute: '/Login',
     routes: {
       '/': (context) => Login(),
       '/Register': (context) => Register(),

@@ -4,6 +4,7 @@ import 'package:grpc/service_api.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Requests extends StatefulWidget {
   @override
@@ -17,11 +18,17 @@ class _RequestsState extends State<Requests> {
   GetUserRequestListResponse _requests;
   List<GetUserRequestListResponseItem> _userRequests;
   List<int> _statuses;
+  SharedPreferences _prefs;
+  int _neighborhoodId;
+
 
   Future<String> getRequests(int id) async {
-    _requests = await ServiceClient(ClientSingleton().getChannel()).getUserRequestList(
+    _prefs = await SharedPreferences.getInstance();
+    _requests = await ServiceClient(ClientSingleton().getChannel(),
+        options: CallOptions(
+            metadata: {'jwt': _prefs.get('jwt')})).getUserRequestList(
         GetUserRequestListRequest()
-          ..neighborhoodId = 139);
+          ..neighborhoodId = _neighborhoodId);
     _userRequests = _requests.requests;
     _statuses = List.filled(_userRequests.length, 0);
     return Future.value("WTF");
@@ -29,6 +36,11 @@ class _RequestsState extends State<Requests> {
 
   @override
   Widget build(BuildContext context) {
+    Map args = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
+    _neighborhoodId = args['neighborhoodId'];
     return FutureBuilder<String> (
       future: getRequests(5),
       builder: (context, AsyncSnapshot<String> snapshot) {
@@ -54,7 +66,7 @@ class _RequestsState extends State<Requests> {
                                         text: '${_userRequests[index].userName}',
                                         recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                            print("yeah");
+                                            Navigator.pushNamed(context, '/Profile', arguments : {'id' : _userRequests[index].userId});
                                           },
                                         style: TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)
                                       ),
@@ -80,9 +92,12 @@ class _RequestsState extends State<Requests> {
                                           _statuses[index] = 1;
                                         });
                                         await ServiceClient(ClientSingleton()
-                                            .getChannel()).approveUserToNeighborhood(
+                                            .getChannel(), options: CallOptions(
+                                            metadata: {
+                                              'jwt': _prefs.get('jwt')
+                                            })).approveUserToNeighborhood(
                                             ApproveUserToNeighborhoodRequest()
-                                              ..neighborhoodId = 139..userId = _userRequests[index].userId);
+                                              ..neighborhoodId = _neighborhoodId..userId = _userRequests[index].userId);
                                       },
                                     ),
                                     SizedBox(width: 15,),
@@ -97,10 +112,13 @@ class _RequestsState extends State<Requests> {
                                           _statuses[index] = -1;
                                         });
                                         await ServiceClient(ClientSingleton()
-                                            .getChannel())
+                                            .getChannel(), options: CallOptions(
+                                            metadata: {
+                                              'jwt': _prefs.get('jwt')
+                                            }))
                                             .rejectUserFromNeighborhood(
                                             RejectUserToNeighborhoodRequest()
-                                              ..neighborhoodId = 139
+                                              ..neighborhoodId = _neighborhoodId
                                               ..userId = _userRequests[index]
                                                   .userId);
 

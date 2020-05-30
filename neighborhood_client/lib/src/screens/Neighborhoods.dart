@@ -3,6 +3,7 @@ import 'package:grpc/service_api.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Neighborhoods extends StatefulWidget {
   @override
@@ -15,22 +16,68 @@ class _NeighborhoodsState extends State<Neighborhoods> {
 
   GetOtherNeighborhoodResponse _response2;
 
+  SharedPreferences _prefs;
 
-  Future<String> getMyNeighborhoodsList(int id) async{
-    _response = await ServiceClient(ClientSingleton().getChannel()).getMyNeighborhoodList(GetMyNeighborhoodRequest()..dummy = 1);
-    _response2 = await ServiceClient(ClientSingleton().getChannel()).getOtherNeighborhoodList(GetOtherNeighborhoodRequest()..dummy = 1);
+
+  Future<String> getMyNeighborhoodsList() async{
+    _prefs = await SharedPreferences.getInstance();
+    _response = await ServiceClient(ClientSingleton().getChannel()).getMyNeighborhoodList(GetMyNeighborhoodRequest()..dummy = 1,
+        options: CallOptions(
+            metadata: {
+              'jwt': _prefs.get('jwt')
+            }));
+    _response2 = await ServiceClient(ClientSingleton().getChannel()).getOtherNeighborhoodList(GetOtherNeighborhoodRequest()..dummy = 1,
+        options: CallOptions(
+            metadata: {
+              'jwt': _prefs.get('jwt')
+            }));
     return Future.value("WTF");
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
-        future: getMyNeighborhoodsList(5),
+        future: getMyNeighborhoodsList(),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return DefaultTabController(
               length: 2,
               child: Scaffold(
+                drawer: Drawer(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: <Widget>[
+                      DrawerHeader(
+                        decoration: BoxDecoration(
+                          color: Colors.yellow,
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.people),
+                        title: Text('Neighborhoods', style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),),
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, '/Neighborhoods');
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('Profile', style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),),
+                        onTap: () async {
+                          UserIdResponse idResponse = await ServiceClient(
+                              ClientSingleton().getChannel(),
+                              options: CallOptions(
+                                  metadata: {'jwt': _prefs.get('jwt')}))
+                              .userId(UserIdRequest()
+                            ..dummy = 1);
+                          Navigator.pushNamed(
+                              context, '/Profile', arguments: {'id' : idResponse.id});
+                        },
+                      ),
+                    ],
+                  ),
+                ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/Createneighborhood');
@@ -68,7 +115,9 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                       style: TextStyle(
                                           color: Colors.black),),
                                     onTap: () {
-  
+                                      Navigator.pushNamed(
+                                          context, '/Neighborhood', arguments: {'neighborhoodId' : _response.neighborhood[index].id, 'isManager' : _response
+                                          .neighborhood[index].isManager});
                                     },
 
                                   ),
@@ -116,7 +165,11 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                                 .status = 1;
                                           });
                                           await ServiceClient(ClientSingleton()
-                                              .getChannel())
+                                              .getChannel(),
+                                              options: CallOptions(
+                                                  metadata: {
+                                                    'jwt': _prefs.get('jwt')
+                                                  }))
                                               .addUserToNeighborhood(
                                               AddUserToNeighborhoodRequest()
                                                 ..neighborhoodId = _response2
