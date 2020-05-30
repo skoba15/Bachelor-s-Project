@@ -54,18 +54,17 @@ public final class NeighborhoodServer {
     public static void main(String[] args) throws Exception {
         NeighborhoodServer server = new NeighborhoodServer(8081);
         server.start();
-        JdbcConnection conn = new JdbcConnection();
-
-//        NeighborhoodManagementService service = new NeighborhoodManagementServiceImpl();
-//        NeighborhoodEntity n = new NeighborhoodEntity("N4","Tbilisi", "Dighomi", "Address");
-//        service.save(n);
+//        JdbcConnection conn = new JdbcConnection();
 //
-//        NeighborhoodEntity n1 = new NeighborhoodEntity("N2", "Tbilisi", "Dighomi", "Address");
-//        service.save(n1);
-//
-//        service.addUserToNeighborhood((long)5, (long)137, UserRole.NEIGHBOUR, UserToNeighborhoodStatus.ACTIVE);
-//        service.addUserToNeighborhood((long) 5, (long) 139, UserRole.MANAGER, UserToNeighborhoodStatus.ACTIVE);
-
+//        UserService service = new UserServiceImpl();
+//        UserEntity user = service.findUserByUsername("makhvshi");
+//        ItemEntity item = new ItemEntity("Hammer");
+//        ItemEntity item2 = new ItemEntity("Android Charger");
+//        ItemEntity item3 = new ItemEntity("Axe");
+//        ItemService serv2 = new ItemServiceImpl();
+//        serv2.add(user.getId(), item);
+//        serv2.add(user.getId(), item2);
+//        serv2.add(user.getId(), item3);
         server.blockUntilShutdown();
     }
 }

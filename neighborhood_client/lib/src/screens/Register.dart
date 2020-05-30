@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:international_phone_input/international_phone_input.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
-import 'package:grpc/grpc_web.dart';
 
 class Register extends StatefulWidget {
   @override

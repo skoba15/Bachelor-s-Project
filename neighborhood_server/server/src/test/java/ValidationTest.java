@@ -58,4 +58,24 @@ public class ValidationTest {
                 validator.validate(user);
         assertEquals(constraintViolations.size(), 1);
     }
+
+
+    @Test
+    public void CorrectCarPlateNumber() {
+        CarEntity car = new CarEntity("AA-080-AA");
+
+        Set<ConstraintViolation<CarEntity>> constraintViolations =
+                validator.validate(car);
+        assertEquals(constraintViolations.size(), 0);
+    }
+
+
+    @Test
+    public void WrongCarPlateNumber() {
+        CarEntity car = new CarEntity("A1-080-AA");
+
+        Set<ConstraintViolation<CarEntity>> constraintViolations =
+                validator.validate(car);
+        assertEquals(constraintViolations.size(), 1);
+    }
 }

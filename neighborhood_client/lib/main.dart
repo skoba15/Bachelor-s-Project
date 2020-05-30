@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:neighborhood_client/src/screens/Createneighborhood.dart';
 import 'package:neighborhood_client/src/screens/Login.dart';
 import 'package:neighborhood_client/src/screens/Neighborhoods.dart';
+import 'package:neighborhood_client/src/screens/Profile.dart';
 import 'package:neighborhood_client/src/screens/Register.dart';
 import 'package:neighborhood_client/src/screens/Requests.dart';
 import 'package:neighborhood_client/src/screens/Success.dart';
@@ -18,6 +19,7 @@ void main() {
       '/Neighborhood': (context) => Neighborhood(),
       '/Requests': (context) => Requests(),
       '/Createneighborhood': (context) => CreateNeighborhood(),
+      '/Profile': (context) => Profile(),
     },
   ));
 }

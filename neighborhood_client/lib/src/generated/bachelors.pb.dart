@@ -519,6 +519,354 @@ class RegisterUserResponse extends $pb.GeneratedMessage {
   void clearResultCode() => clearField(1);
 }
 
+class EditPlateNumberRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EditPlateNumberRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'plateNumber')
+    ..hasRequiredFields = false
+  ;
+
+  EditPlateNumberRequest._() : super();
+  factory EditPlateNumberRequest() => create();
+  factory EditPlateNumberRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditPlateNumberRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EditPlateNumberRequest clone() => EditPlateNumberRequest()..mergeFromMessage(this);
+  EditPlateNumberRequest copyWith(void Function(EditPlateNumberRequest) updates) => super.copyWith((message) => updates(message as EditPlateNumberRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EditPlateNumberRequest create() => EditPlateNumberRequest._();
+  EditPlateNumberRequest createEmptyInstance() => create();
+  static $pb.PbList<EditPlateNumberRequest> createRepeated() => $pb.PbList<EditPlateNumberRequest>();
+  @$core.pragma('dart2js:noInline')
+  static EditPlateNumberRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditPlateNumberRequest>(create);
+  static EditPlateNumberRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get plateNumber => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set plateNumber($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlateNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlateNumber() => clearField(1);
+}
+
+class EditPlateNumberResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EditPlateNumberResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'resultCode')
+    ..hasRequiredFields = false
+  ;
+
+  EditPlateNumberResponse._() : super();
+  factory EditPlateNumberResponse() => create();
+  factory EditPlateNumberResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditPlateNumberResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EditPlateNumberResponse clone() => EditPlateNumberResponse()..mergeFromMessage(this);
+  EditPlateNumberResponse copyWith(void Function(EditPlateNumberResponse) updates) => super.copyWith((message) => updates(message as EditPlateNumberResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EditPlateNumberResponse create() => EditPlateNumberResponse._();
+  EditPlateNumberResponse createEmptyInstance() => create();
+  static $pb.PbList<EditPlateNumberResponse> createRepeated() => $pb.PbList<EditPlateNumberResponse>();
+  @$core.pragma('dart2js:noInline')
+  static EditPlateNumberResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditPlateNumberResponse>(create);
+  static EditPlateNumberResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get resultCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set resultCode($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResultCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResultCode() => clearField(1);
+}
+
+class UserProfileRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UserProfileRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  UserProfileRequest._() : super();
+  factory UserProfileRequest() => create();
+  factory UserProfileRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserProfileRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserProfileRequest clone() => UserProfileRequest()..mergeFromMessage(this);
+  UserProfileRequest copyWith(void Function(UserProfileRequest) updates) => super.copyWith((message) => updates(message as UserProfileRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserProfileRequest create() => UserProfileRequest._();
+  UserProfileRequest createEmptyInstance() => create();
+  static $pb.PbList<UserProfileRequest> createRepeated() => $pb.PbList<UserProfileRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UserProfileRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserProfileRequest>(create);
+  static UserProfileRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+}
+
+class UserIdRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UserIdRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'dummy', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  UserIdRequest._() : super();
+  factory UserIdRequest() => create();
+  factory UserIdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserIdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserIdRequest clone() => UserIdRequest()..mergeFromMessage(this);
+  UserIdRequest copyWith(void Function(UserIdRequest) updates) => super.copyWith((message) => updates(message as UserIdRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserIdRequest create() => UserIdRequest._();
+  UserIdRequest createEmptyInstance() => create();
+  static $pb.PbList<UserIdRequest> createRepeated() => $pb.PbList<UserIdRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UserIdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserIdRequest>(create);
+  static UserIdRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get dummy => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set dummy($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDummy() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDummy() => clearField(1);
+}
+
+class UserIdResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UserIdResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  UserIdResponse._() : super();
+  factory UserIdResponse() => create();
+  factory UserIdResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserIdResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserIdResponse clone() => UserIdResponse()..mergeFromMessage(this);
+  UserIdResponse copyWith(void Function(UserIdResponse) updates) => super.copyWith((message) => updates(message as UserIdResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserIdResponse create() => UserIdResponse._();
+  UserIdResponse createEmptyInstance() => create();
+  static $pb.PbList<UserIdResponse> createRepeated() => $pb.PbList<UserIdResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UserIdResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserIdResponse>(create);
+  static UserIdResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+}
+
+class EditPhoneNumberRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EditPhoneNumberRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'phoneNumber')
+    ..hasRequiredFields = false
+  ;
+
+  EditPhoneNumberRequest._() : super();
+  factory EditPhoneNumberRequest() => create();
+  factory EditPhoneNumberRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditPhoneNumberRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EditPhoneNumberRequest clone() => EditPhoneNumberRequest()..mergeFromMessage(this);
+  EditPhoneNumberRequest copyWith(void Function(EditPhoneNumberRequest) updates) => super.copyWith((message) => updates(message as EditPhoneNumberRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EditPhoneNumberRequest create() => EditPhoneNumberRequest._();
+  EditPhoneNumberRequest createEmptyInstance() => create();
+  static $pb.PbList<EditPhoneNumberRequest> createRepeated() => $pb.PbList<EditPhoneNumberRequest>();
+  @$core.pragma('dart2js:noInline')
+  static EditPhoneNumberRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditPhoneNumberRequest>(create);
+  static EditPhoneNumberRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get phoneNumber => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set phoneNumber($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPhoneNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPhoneNumber() => clearField(1);
+}
+
+class EditPhoneNumberResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EditPhoneNumberResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'resultCode')
+    ..hasRequiredFields = false
+  ;
+
+  EditPhoneNumberResponse._() : super();
+  factory EditPhoneNumberResponse() => create();
+  factory EditPhoneNumberResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditPhoneNumberResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EditPhoneNumberResponse clone() => EditPhoneNumberResponse()..mergeFromMessage(this);
+  EditPhoneNumberResponse copyWith(void Function(EditPhoneNumberResponse) updates) => super.copyWith((message) => updates(message as EditPhoneNumberResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EditPhoneNumberResponse create() => EditPhoneNumberResponse._();
+  EditPhoneNumberResponse createEmptyInstance() => create();
+  static $pb.PbList<EditPhoneNumberResponse> createRepeated() => $pb.PbList<EditPhoneNumberResponse>();
+  @$core.pragma('dart2js:noInline')
+  static EditPhoneNumberResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditPhoneNumberResponse>(create);
+  static EditPhoneNumberResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get resultCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set resultCode($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResultCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResultCode() => clearField(1);
+}
+
+class UserProfileResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UserProfileResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'username')
+    ..aOS(2, 'firstName')
+    ..aOS(3, 'lastName')
+    ..aOS(4, 'phoneNumber')
+    ..aOS(5, 'carPlateNumber')
+    ..pPS(6, 'items')
+    ..hasRequiredFields = false
+  ;
+
+  UserProfileResponse._() : super();
+  factory UserProfileResponse() => create();
+  factory UserProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserProfileResponse clone() => UserProfileResponse()..mergeFromMessage(this);
+  UserProfileResponse copyWith(void Function(UserProfileResponse) updates) => super.copyWith((message) => updates(message as UserProfileResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserProfileResponse create() => UserProfileResponse._();
+  UserProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<UserProfileResponse> createRepeated() => $pb.PbList<UserProfileResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UserProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserProfileResponse>(create);
+  static UserProfileResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get username => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set username($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsername() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsername() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get firstName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set firstName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasFirstName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFirstName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get lastName => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set lastName($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLastName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLastName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get phoneNumber => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set phoneNumber($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPhoneNumber() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPhoneNumber() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get carPlateNumber => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set carPlateNumber($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasCarPlateNumber() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCarPlateNumber() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<$core.String> get items => $_getList(5);
+}
+
+class ItemListRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ItemListRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  ItemListRequest._() : super();
+  factory ItemListRequest() => create();
+  factory ItemListRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ItemListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ItemListRequest clone() => ItemListRequest()..mergeFromMessage(this);
+  ItemListRequest copyWith(void Function(ItemListRequest) updates) => super.copyWith((message) => updates(message as ItemListRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ItemListRequest create() => ItemListRequest._();
+  ItemListRequest createEmptyInstance() => create();
+  static $pb.PbList<ItemListRequest> createRepeated() => $pb.PbList<ItemListRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ItemListRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ItemListRequest>(create);
+  static ItemListRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+}
+
+class ItemListResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ItemListResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..pPS(1, 'items')
+    ..hasRequiredFields = false
+  ;
+
+  ItemListResponse._() : super();
+  factory ItemListResponse() => create();
+  factory ItemListResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ItemListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ItemListResponse clone() => ItemListResponse()..mergeFromMessage(this);
+  ItemListResponse copyWith(void Function(ItemListResponse) updates) => super.copyWith((message) => updates(message as ItemListResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ItemListResponse create() => ItemListResponse._();
+  ItemListResponse createEmptyInstance() => create();
+  static $pb.PbList<ItemListResponse> createRepeated() => $pb.PbList<ItemListResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ItemListResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ItemListResponse>(create);
+  static ItemListResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.String> get items => $_getList(0);
+}
+
 class ResetPasswordRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResetPasswordRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
@@ -1266,7 +1614,7 @@ class GetUserRequestListResponse extends $pb.GeneratedMessage {
 
 class AddItemToUserRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddItemToUserRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOM<Item>(1, 'item', subBuilder: Item.create)
+    ..aOS(1, 'itemName')
     ..hasRequiredFields = false
   ;
 
@@ -1286,20 +1634,18 @@ class AddItemToUserRequest extends $pb.GeneratedMessage {
   static AddItemToUserRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  Item get item => $_getN(0);
+  $core.String get itemName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set item(Item v) { setField(1, v); }
+  set itemName($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasItem() => $_has(0);
+  $core.bool hasItemName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearItem() => clearField(1);
-  @$pb.TagNumber(1)
-  Item ensureItem() => $_ensure(0);
+  void clearItemName() => clearField(1);
 }
 
 class DeleteItemToUserRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteItemToUserRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'itemId', $pb.PbFieldType.O3)
+    ..aOS(1, 'itemName')
     ..hasRequiredFields = false
   ;
 
@@ -1319,13 +1665,13 @@ class DeleteItemToUserRequest extends $pb.GeneratedMessage {
   static DeleteItemToUserRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get itemId => $_getIZ(0);
+  $core.String get itemName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set itemId($core.int v) { $_setSignedInt32(0, v); }
+  set itemName($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasItemId() => $_has(0);
+  $core.bool hasItemName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearItemId() => clearField(1);
+  void clearItemName() => clearField(1);
 }
 
 class AddItemToUserResponse extends $pb.GeneratedMessage {
