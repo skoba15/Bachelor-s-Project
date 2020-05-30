@@ -117,7 +117,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addNeighborhood(NeighborhoodAPI.AddNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.AddNeighborhoodResponse> responseObserver) {
-        int userId = 5;
+        int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
 
         NeighborhoodAPI.Neighborhood nr = request.getNeighborhood();
         NeighborhoodEntity newNeighborhood = new NeighborhoodEntity(nr.getName(), nr.getCity(), nr.getDistrict(), nr.getAddress());
@@ -140,8 +140,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getMyNeighborhoodList(NeighborhoodAPI.GetMyNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetMyNeighborhoodResponse> responseObserver) {
-//        Long id = Long.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        int id = 24;
+        int id = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         UserEntity user = userService.findUserById((long)id);
         System.out.println("===============================" + id);
         NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
@@ -159,7 +158,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getOtherNeighborhoodList(NeighborhoodAPI.GetOtherNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetOtherNeighborhoodResponse> responseObserver) {
-        int userId = 24;
+        int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         UserEntity user = userService.findUserById((long)userId);
         System.out.println("===============================" + userId);
         NeighborhoodAPI.GetOtherNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetOtherNeighborhoodResponse.newBuilder();
@@ -192,7 +191,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addUserToNeighborhood(NeighborhoodAPI.AddUserToNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.AddUserToNeighborhoodResponse> responseObserver) {
-        int userId = 24;
+        int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         int neighborhoodId = request.getNeighborhoodId();
 
         int resultCode = neighborhoodService.addUserToNeighborhood((long) userId, (long) neighborhoodId, UserRole.NEIGHBOUR, UserToNeighborhoodStatus.PENDING);
@@ -205,7 +204,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void approveUserToNeighborhood(NeighborhoodAPI.ApproveUserToNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.ApproveUserToNeighborhoodResponse> responseObserver) {
-        int managerId = 5;
+        int managerId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         int userId = request.getUserId();
         int neighborhoodId = request.getNeighborhoodId();
 
@@ -219,7 +218,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void rejectUserFromNeighborhood(NeighborhoodAPI.RejectUserToNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.RejectUserToNeighborhoodResponse> responseObserver) {
-        int managerId = 5;
+        int managerId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         int userId = request.getUserId();
         int neighborhoodId = request.getNeighborhoodId();
 
@@ -233,7 +232,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getUserRequestList(NeighborhoodAPI.GetUserRequestListRequest request, StreamObserver<NeighborhoodAPI.GetUserRequestListResponse> responseObserver) {
-        int userId = 5;
+        int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         int neighborhoodId = request.getNeighborhoodId();
 
         NeighborhoodAPI.GetUserRequestListResponse.Builder builder = NeighborhoodAPI.GetUserRequestListResponse.newBuilder();
