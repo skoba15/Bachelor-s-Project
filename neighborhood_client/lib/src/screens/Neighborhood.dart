@@ -25,13 +25,20 @@ class _NeighborhoodState extends State<Neighborhood> {
   SharedPreferences _prefs;
 
   Future<String> getPreferences() async {
+    _neighborhoodId = widget.id;
     _prefs = await SharedPreferences.getInstance();
+    IsManagerResponse managerResponse = await ServiceClient(
+        ClientSingleton().getChannel(),
+        options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+        .isManager(IsManagerRequest()
+      ..neighborhoodId = _neighborhoodId);
+    _isManager = (managerResponse.resultCode == 'Y') ? 1 : 0;
     return Future.value("done");
   }
 
   @override
   Widget build(BuildContext context) {
-    _neighborhoodId = widget.id;
+
     return FutureBuilder < String > (
         future: getPreferences(),
         builder: (context, AsyncSnapshot<String> snapshot) {

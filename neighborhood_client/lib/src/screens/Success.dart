@@ -24,7 +24,7 @@ class  Success extends StatelessWidget {
               color: Colors.black,
               textColor: Colors.white,
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/');
+                Navigator.pushReplacementNamed(context, '/login');
               },
             ),
           ],
