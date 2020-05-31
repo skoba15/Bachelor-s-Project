@@ -1309,6 +1309,68 @@ class AddManagerResponse extends $pb.GeneratedMessage {
   void clearResultCode() => clearField(1);
 }
 
+class IsManagerRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('IsManagerRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  IsManagerRequest._() : super();
+  factory IsManagerRequest() => create();
+  factory IsManagerRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory IsManagerRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  IsManagerRequest clone() => IsManagerRequest()..mergeFromMessage(this);
+  IsManagerRequest copyWith(void Function(IsManagerRequest) updates) => super.copyWith((message) => updates(message as IsManagerRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static IsManagerRequest create() => IsManagerRequest._();
+  IsManagerRequest createEmptyInstance() => create();
+  static $pb.PbList<IsManagerRequest> createRepeated() => $pb.PbList<IsManagerRequest>();
+  @$core.pragma('dart2js:noInline')
+  static IsManagerRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IsManagerRequest>(create);
+  static IsManagerRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get neighborhoodId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set neighborhoodId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasNeighborhoodId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNeighborhoodId() => clearField(1);
+}
+
+class IsManagerResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('IsManagerResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'resultCode')
+    ..hasRequiredFields = false
+  ;
+
+  IsManagerResponse._() : super();
+  factory IsManagerResponse() => create();
+  factory IsManagerResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory IsManagerResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  IsManagerResponse clone() => IsManagerResponse()..mergeFromMessage(this);
+  IsManagerResponse copyWith(void Function(IsManagerResponse) updates) => super.copyWith((message) => updates(message as IsManagerResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static IsManagerResponse create() => IsManagerResponse._();
+  IsManagerResponse createEmptyInstance() => create();
+  static $pb.PbList<IsManagerResponse> createRepeated() => $pb.PbList<IsManagerResponse>();
+  @$core.pragma('dart2js:noInline')
+  static IsManagerResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IsManagerResponse>(create);
+  static IsManagerResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get resultCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set resultCode($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResultCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResultCode() => clearField(1);
+}
+
 class AddUserToNeighborhoodRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)

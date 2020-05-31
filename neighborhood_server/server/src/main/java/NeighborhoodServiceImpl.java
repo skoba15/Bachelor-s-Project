@@ -139,6 +139,25 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     }
 
     @Override
+    public void isManager(NeighborhoodAPI.IsManagerRequest request, StreamObserver<NeighborhoodAPI.IsManagerResponse> responseObserver) {
+        int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        int neighborhoodId = request.getNeighborhoodId();
+
+        UserToNeighborhoodEntity utn = neighborhoodService.getUserToNeighborhoodEntity((long) userId, (long)neighborhoodId);
+
+        String response = "N";
+
+        if(utn != null && utn.getStatus() == UserToNeighborhoodStatus.ACTIVE && utn.getUserRole() == UserRole.MANAGER) {
+            response = "Y";
+        }
+
+        responseObserver.onNext(NeighborhoodAPI.IsManagerResponse.newBuilder()
+                .setResultCode(response)
+                .build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void getMyNeighborhoodList(NeighborhoodAPI.GetMyNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetMyNeighborhoodResponse> responseObserver) {
         int id = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         UserEntity user = userService.findUserById((long)id);

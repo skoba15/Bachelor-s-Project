@@ -262,6 +262,20 @@ const AddManagerResponse$json = const {
   ],
 };
 
+const IsManagerRequest$json = const {
+  '1': 'IsManagerRequest',
+  '2': const [
+    const {'1': 'neighborhood_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodId'},
+  ],
+};
+
+const IsManagerResponse$json = const {
+  '1': 'IsManagerResponse',
+  '2': const [
+    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
+  ],
+};
+
 const AddUserToNeighborhoodRequest$json = const {
   '1': 'AddUserToNeighborhoodRequest',
   '2': const [

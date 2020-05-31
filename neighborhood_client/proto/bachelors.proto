@@ -53,6 +53,10 @@ service Service {
     rpc AddManager (AddManagerRequest) returns (AddManagerResponse) {
     }
 
+    rpc IsManager (IsManagerRequest) returns (IsManagerResponse) {
+
+    }
+
     // გაწევრიანების მოთხოვნა
     rpc AddUserToNeighborhood (AddUserToNeighborhoodRequest) returns (AddUserToNeighborhoodResponse) {
     }
@@ -292,6 +296,14 @@ message AddManagerRequest {
 }
 
 message AddManagerResponse {
+    string result_code = 1;
+}
+
+message IsManagerRequest {
+    int32 neighborhood_id = 1;
+}
+
+message IsManagerResponse {
     string result_code = 1;
 }
 

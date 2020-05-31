@@ -85,6 +85,12 @@ class ServiceClient extends $grpc.Client {
           ($0.AddManagerRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.AddManagerResponse.fromBuffer(value));
+  static final _$isManager =
+      $grpc.ClientMethod<$0.IsManagerRequest, $0.IsManagerResponse>(
+          '/neighborhood.server.Service/IsManager',
+          ($0.IsManagerRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.IsManagerResponse.fromBuffer(value));
   static final _$addUserToNeighborhood = $grpc.ClientMethod<
           $0.AddUserToNeighborhoodRequest, $0.AddUserToNeighborhoodResponse>(
       '/neighborhood.server.Service/AddUserToNeighborhood',
@@ -298,6 +304,14 @@ class ServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$addManager, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.IsManagerResponse> isManager(
+      $0.IsManagerRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$isManager, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -559,6 +573,13 @@ abstract class ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.AddManagerRequest.fromBuffer(value),
         ($0.AddManagerResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.IsManagerRequest, $0.IsManagerResponse>(
+        'IsManager',
+        isManager_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.IsManagerRequest.fromBuffer(value),
+        ($0.IsManagerResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddUserToNeighborhoodRequest,
             $0.AddUserToNeighborhoodResponse>(
         'AddUserToNeighborhood',
@@ -773,6 +794,11 @@ abstract class ServiceBase extends $grpc.Service {
     return addManager(call, await request);
   }
 
+  $async.Future<$0.IsManagerResponse> isManager_Pre($grpc.ServiceCall call,
+      $async.Future<$0.IsManagerRequest> request) async {
+    return isManager(call, await request);
+  }
+
   $async.Future<$0.AddUserToNeighborhoodResponse> addUserToNeighborhood_Pre(
       $grpc.ServiceCall call,
       $async.Future<$0.AddUserToNeighborhoodRequest> request) async {
@@ -896,6 +922,8 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.GetOtherNeighborhoodRequest request);
   $async.Future<$0.AddManagerResponse> addManager(
       $grpc.ServiceCall call, $0.AddManagerRequest request);
+  $async.Future<$0.IsManagerResponse> isManager(
+      $grpc.ServiceCall call, $0.IsManagerRequest request);
   $async.Future<$0.AddUserToNeighborhoodResponse> addUserToNeighborhood(
       $grpc.ServiceCall call, $0.AddUserToNeighborhoodRequest request);
   $async.Future<$0.ApproveUserToNeighborhoodResponse> approveUserToNeighborhood(
