@@ -6,6 +6,11 @@ import 'package:flutter/src/widgets/async.dart' as a;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Neighborhood extends StatefulWidget {
+
+  final int id;
+
+  Neighborhood({Key key, @required this.id}) : super(key: key);
+
   @override
   _NeighborhoodState createState() => _NeighborhoodState();
 }
@@ -14,7 +19,7 @@ class Neighborhood extends StatefulWidget {
 class _NeighborhoodState extends State<Neighborhood> {
 
 
-  int _isManager = 0;
+  int _isManager = 1;
   int _neighborhoodId;
 
   SharedPreferences _prefs;
@@ -26,13 +31,7 @@ class _NeighborhoodState extends State<Neighborhood> {
 
   @override
   Widget build(BuildContext context) {
-    Map args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
-    _isManager = args['isManager'];
-    print(_isManager);
-    _neighborhoodId = args['neighborhoodId'];
+    _neighborhoodId = widget.id;
     return FutureBuilder < String > (
         future: getPreferences(),
         builder: (context, AsyncSnapshot<String> snapshot) {
@@ -51,7 +50,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                             leading: Icon(Icons.accessibility),
                             title: Text('Requests', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                             onTap: () {
-                              Navigator.pushNamed(context, '/Requests', arguments: {'neighborhoodId' : _neighborhoodId});
+                              Navigator.pushNamed(context, '/Requests/$_neighborhoodId');
                             },
                           ),
                           ListTile(
@@ -65,8 +64,9 @@ class _NeighborhoodState extends State<Neighborhood> {
                                       metadata: {'jwt': _prefs.get('jwt')}))
                                   .userId(UserIdRequest()
                                 ..dummy = 1);
+                              int id = idResponse.id;
                               Navigator.pushNamed(
-                                  context, '/Profile', arguments: {'id': idResponse.id});
+                                  context, '/Profile/$id');
                               },
                           ),
                           ListTile(

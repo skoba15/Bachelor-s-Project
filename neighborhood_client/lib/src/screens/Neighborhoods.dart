@@ -71,8 +71,9 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                   metadata: {'jwt': _prefs.get('jwt')}))
                               .userId(UserIdRequest()
                             ..dummy = 1);
+                          int id = idResponse.id;
                           Navigator.pushNamed(
-                              context, '/Profile', arguments: {'id' : idResponse.id});
+                              context, '/Profile/$id');
                         },
                       ),
                     ],
@@ -115,9 +116,9 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                       style: TextStyle(
                                           color: Colors.black),),
                                     onTap: () {
+                                      int idd = _response.neighborhood[index].id;
                                       Navigator.pushNamed(
-                                          context, '/Neighborhood', arguments: {'neighborhoodId' : _response.neighborhood[index].id, 'isManager' : _response
-                                          .neighborhood[index].isManager});
+                                          context, '/Neighborhood/$idd');
                                     },
 
                                   ),

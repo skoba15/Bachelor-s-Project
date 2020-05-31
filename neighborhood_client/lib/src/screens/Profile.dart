@@ -14,6 +14,11 @@ import 'package:flutter/src/widgets/async.dart' as a;
 
 class Profile extends StatefulWidget {
 
+  final int id;
+
+  Profile({Key key, @required this.id}) : super(key: key);
+
+
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -40,7 +45,8 @@ class _ProfileState extends State<Profile> {
         .userProfile(UserProfileRequest()
       ..userId = id);
      _prefs = await SharedPreferences.getInstance();
-     UserIdResponse idResponse = await ServiceClient(ClientSingleton().getChannel(),
+     UserIdResponse idResponse = await ServiceClient(
+         ClientSingleton().getChannel(),
          options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
          .userId(UserIdRequest()
        ..dummy = 1);
@@ -54,13 +60,8 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(context) {
-    Map args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
-    _id = args['id'];
     return FutureBuilder<String>(
-        future: getProfile(_id),
+        future: getProfile(widget.id),
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return DefaultTabController(

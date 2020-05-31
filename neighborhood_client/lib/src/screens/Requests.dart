@@ -7,6 +7,11 @@ import 'package:flutter/src/widgets/async.dart' as a;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Requests extends StatefulWidget {
+
+  final int id;
+
+  Requests({Key key, @required this.id}) : super(key: key);
+
   @override
   _RequestsState createState() => _RequestsState();
 }
@@ -22,13 +27,14 @@ class _RequestsState extends State<Requests> {
   int _neighborhoodId;
 
 
-  Future<String> getRequests(int id) async {
+  Future<String> getRequests() async {
+    _neighborhoodId = widget.id;
     _prefs = await SharedPreferences.getInstance();
     _requests = await ServiceClient(ClientSingleton().getChannel(),
         options: CallOptions(
             metadata: {'jwt': _prefs.get('jwt')})).getUserRequestList(
         GetUserRequestListRequest()
-          ..neighborhoodId = _neighborhoodId);
+          ..neighborhoodId = widget.id);
     _userRequests = _requests.requests;
     _statuses = List.filled(_userRequests.length, 0);
     return Future.value("WTF");
@@ -36,13 +42,8 @@ class _RequestsState extends State<Requests> {
 
   @override
   Widget build(BuildContext context) {
-    Map args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
-    _neighborhoodId = args['neighborhoodId'];
     return FutureBuilder<String> (
-      future: getRequests(5),
+      future: getRequests(),
       builder: (context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == a.ConnectionState.done) {
           return Scaffold(
@@ -66,7 +67,8 @@ class _RequestsState extends State<Requests> {
                                         text: '${_userRequests[index].userName}',
                                         recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                            Navigator.pushNamed(context, '/Profile', arguments : {'id' : _userRequests[index].userId});
+                                            int idd = _userRequests[index].userId;
+                                            Navigator.pushNamed(context, '/Profile/$idd');
                                           },
                                         style: TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)
                                       ),
