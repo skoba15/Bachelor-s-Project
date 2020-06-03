@@ -34,6 +34,8 @@ public class JdbcConnection {
         configuration.addAnnotatedClass(models.UserToNeighborhoodEntity.class);
         configuration.addAnnotatedClass(models.ItemEntity.class);
         configuration.addAnnotatedClass(models.CarEntity.class);
+        configuration.addAnnotatedClass(models.TaskEntity.class);
+        configuration.addAnnotatedClass(models.SubTaskEntity.class);
         try {
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();

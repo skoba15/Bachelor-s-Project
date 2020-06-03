@@ -22,7 +22,7 @@ public class SubTaskEntity {
 
     @Column(name = "STATUS")
     @NotNull
-    private String status;
+    private TaskStatus status;
 
     @Column(name = "ASSIGNEE_ID")
     @NotNull
@@ -34,7 +34,7 @@ public class SubTaskEntity {
 
     public SubTaskEntity() {}
 
-    public SubTaskEntity(@NotNull String title, String description, @NotNull String status, @NotNull Long assigneeId) {
+    public SubTaskEntity(@NotNull String title, String description, @NotNull TaskStatus status, @NotNull Long assigneeId) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -65,11 +65,11 @@ public class SubTaskEntity {
         this.description = description;
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 

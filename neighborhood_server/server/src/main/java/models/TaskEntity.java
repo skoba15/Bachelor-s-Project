@@ -24,7 +24,7 @@ public class TaskEntity {
 
     @Column(name = "STATUS")
     @NotNull
-    private String status;
+    private TaskStatus status;
 
     @Column(name = "CREATE_DATE")
     @NotNull
@@ -46,7 +46,7 @@ public class TaskEntity {
 
     public TaskEntity() {}
 
-    public TaskEntity(@NotNull String title, String description, @NotNull String status, @NotNull Timestamp createDate, @NotNull Timestamp startDate, Timestamp closeDate, @NotNull Long creatorId) {
+    public TaskEntity(@NotNull String title, String description, @NotNull TaskStatus status, @NotNull Timestamp createDate, @NotNull Timestamp startDate, Timestamp closeDate, @NotNull Long creatorId) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -80,11 +80,11 @@ public class TaskEntity {
         this.description = description;
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
