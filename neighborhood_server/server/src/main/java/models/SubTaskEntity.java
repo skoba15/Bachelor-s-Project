@@ -24,21 +24,20 @@ public class SubTaskEntity {
     @NotNull
     private TaskStatus status;
 
-    @Column(name = "ASSIGNEE_ID")
-    @NotNull
-    private Long assigneeId;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PARENT_TASK")
     private TaskEntity parentTask;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ASSIGNEE")
+    private UserEntity assignee;
+
     public SubTaskEntity() {}
 
-    public SubTaskEntity(@NotNull String title, String description, @NotNull TaskStatus status, @NotNull Long assigneeId) {
+    public SubTaskEntity(@NotNull String title, String description, @NotNull TaskStatus status) {
         this.title = title;
         this.description = description;
         this.status = status;
-        this.assigneeId = assigneeId;
     }
 
     public Long getId() {
@@ -73,20 +72,20 @@ public class SubTaskEntity {
         this.status = status;
     }
 
-    public Long getAssigneeId() {
-        return assigneeId;
-    }
-
-    public void setAssigneeId(Long assigneeId) {
-        this.assigneeId = assigneeId;
-    }
-
     public TaskEntity getParentTask() {
         return parentTask;
     }
 
     public void setParentTask(TaskEntity parentTask) {
         this.parentTask = parentTask;
+    }
+
+    public UserEntity getUserEntity() {
+        return assignee;
+    }
+
+    public void setUserEntity(UserEntity assignee) {
+        this.assignee = assignee;
     }
 
     @Override
@@ -108,8 +107,9 @@ public class SubTaskEntity {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                ", assigneeId=" + assigneeId +
+                ", status=" + status +
+                ", parentTask=" + parentTask +
+                ", assignee=" + assignee +
                 '}';
     }
 }

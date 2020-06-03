@@ -61,6 +61,12 @@ public class UserEntity {
     )
     private Set<ItemEntity> items = new HashSet<>();
 
+    @OneToMany(mappedBy = "assignee", fetch = FetchType.EAGER)
+    private Set<SubTaskEntity> subTasksList = new HashSet<SubTaskEntity>();
+
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
+    private Set<TaskEntity> tasksList = new HashSet<TaskEntity>();
+
     public UserEntity() {}
 
     public UserEntity(String userName, String password, String firstName, String lastName, String phoneNumber, Timestamp registrationDate) {
@@ -139,6 +145,22 @@ public class UserEntity {
 
     public void setNeighborhoodsList(Set<UserToNeighborhoodEntity> neighborhoodsList) {
         this.neighborhoodsList = neighborhoodsList;
+    }
+
+    public Set<SubTaskEntity> getSubTasksList() {
+        return subTasksList;
+    }
+
+    public void setSubTasksList(Set<SubTaskEntity> subTasksList) {
+        this.subTasksList = subTasksList;
+    }
+
+    public Set<TaskEntity> getTasksList() {
+        return tasksList;
+    }
+
+    public void setTasksList(Set<TaskEntity> tasksList) {
+        this.tasksList = tasksList;
     }
 
     @Override

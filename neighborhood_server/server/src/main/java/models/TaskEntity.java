@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -37,23 +38,22 @@ public class TaskEntity {
     @Column(name = "CLOSE_DATE")
     private Timestamp closeDate;
 
-    @Column(name = "CREATOR_ID")
-    @NotNull
-    private Long creatorId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "creator")
+    private UserEntity creator;
 
     @OneToMany(mappedBy = "parentTask", fetch = FetchType.EAGER)
     private Set<SubTaskEntity> subTasks = new HashSet<>();
 
     public TaskEntity() {}
 
-    public TaskEntity(@NotNull String title, String description, @NotNull TaskStatus status, @NotNull Timestamp createDate, @NotNull Timestamp startDate, Timestamp closeDate, @NotNull Long creatorId) {
+    public TaskEntity(@NotNull String title, String description, @NotNull TaskStatus status, @NotNull Timestamp createDate, @NotNull Timestamp startDate, Timestamp closeDate) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.createDate = createDate;
         this.startDate = startDate;
         this.closeDate = closeDate;
-        this.creatorId = creatorId;
     }
 
     public Long getId() {
@@ -112,12 +112,12 @@ public class TaskEntity {
         this.closeDate = closeDate;
     }
 
-    public Long getCreatorId() {
-        return creatorId;
+    public UserEntity getCreator() {
+        return creator;
     }
 
-    public void setCreatorId(Long creatorId) {
-        this.creatorId = creatorId;
+    public void setCreator(UserEntity creator) {
+        this.creator = creator;
     }
 
     public Set<SubTaskEntity> getSubTasks() {
@@ -126,6 +126,19 @@ public class TaskEntity {
 
     public void setSubTasks(Set<SubTaskEntity> subTasks) {
         this.subTasks = subTasks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TaskEntity)) return false;
+        TaskEntity that = (TaskEntity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
@@ -138,7 +151,7 @@ public class TaskEntity {
                 ", createDate=" + createDate +
                 ", startDate=" + startDate +
                 ", closeDate=" + closeDate +
-                ", creatorId=" + creatorId +
+                ", cretor" + creator +
                 '}';
     }
 }
