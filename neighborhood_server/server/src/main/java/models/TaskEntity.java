@@ -3,6 +3,8 @@ package models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "NB_TASKS")
@@ -38,6 +40,9 @@ public class TaskEntity {
     @Column(name = "CREATOR_ID")
     @NotNull
     private Long creatorId;
+
+    @OneToMany(mappedBy = "parentTask", fetch = FetchType.EAGER)
+    private Set<SubTaskEntity> subTasks = new HashSet<>();
 
     public TaskEntity() {}
 
@@ -113,6 +118,14 @@ public class TaskEntity {
 
     public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
+    }
+
+    public Set<SubTaskEntity> getSubTasks() {
+        return subTasks;
+    }
+
+    public void setSubTasks(Set<SubTaskEntity> subTasks) {
+        this.subTasks = subTasks;
     }
 
     @Override
