@@ -77,6 +77,22 @@ class _NeighborhoodState extends State<Neighborhood> {
                               },
                           ),
                           ListTile(
+                            leading: Icon(Icons.assignment),
+                            title: Text('Tasks', style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),),
+                            onTap: () async {
+//                              UserIdResponse idResponse = await ServiceClient(
+//                                  ClientSingleton().getChannel(),
+//                                  options: CallOptions(
+//                                      metadata: {'jwt': _prefs.get('jwt')}))
+//                                  .userId(UserIdRequest()
+//                                ..dummy = 1);
+                              int id = 139;
+                              Navigator.pushNamed(
+                                  context, '/Tasks/$id');
+                            },
+                          ),
+                          ListTile(
                             leading: Icon(Icons.keyboard_backspace),
                             title: Text('Back', style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),),
