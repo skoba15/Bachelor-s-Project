@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:neighborhood_client/src/screens/CreateTask.dart';
 import 'package:neighborhood_client/src/screens/Createneighborhood.dart';
 import 'package:neighborhood_client/src/screens/Login.dart';
 import 'package:neighborhood_client/src/screens/Neighborhood.dart';
@@ -8,6 +9,7 @@ import 'package:neighborhood_client/src/screens/Profile.dart';
 import 'package:neighborhood_client/src/screens/Register.dart';
 import 'package:neighborhood_client/src/screens/Requests.dart';
 import 'package:neighborhood_client/src/screens/Success.dart';
+import 'package:neighborhood_client/src/screens/Tasks.dart';
 
 
 
@@ -38,6 +40,12 @@ class FluroRouter {
   static Handler _neighborhoodHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           Neighborhood(id: int.parse(params['id'][0]),));
+  static Handler _tasksHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          Tasks(id: int.parse(params['id'][0])));
+  static Handler _createTaskHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          CreateTask(id: int.parse(params['id'][0])));
 
   static void setupRouter() {
     router.define(
@@ -78,6 +86,16 @@ class FluroRouter {
     router.define(
       'Profile/:id',
       handler: _profileHandler,
+    );
+
+    router.define(
+      'tasks/:id',
+      handler: _tasksHandler,
+    );
+
+    router.define(
+      'CreateTask/:id',
+      handler: _createTaskHandler,
     );
   }
 }
