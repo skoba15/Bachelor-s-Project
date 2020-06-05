@@ -35,7 +35,11 @@ class _CreateTaskState extends State<CreateTask> {
 
   final format = DateFormat("yyyy-MM-dd");
 
-  TextEditingController _dateController = TextEditingController();
+  TextEditingController _startDateController = TextEditingController();
+
+  TextEditingController _endDateController = TextEditingController();
+
+
 
 
 
@@ -44,18 +48,6 @@ class _CreateTaskState extends State<CreateTask> {
     return Future.value("done");
   }
 
-
-  Future<Null> _selectDate(BuildContext context, DateTime date) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: date,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != date)
-      setState(() {
-        date = picked;
-      });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,63 +64,95 @@ class _CreateTaskState extends State<CreateTask> {
                 body: Form(
                   key: _formKey,
                   autovalidate: _autoValidate,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Center(child: Text('Create Task',
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,)),
-                      SizedBox(height: 20),
-                      TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: 'title',
+                  child: Wrap(
+                    children: [Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Center(child: Text('Create Task',
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,)),
+                        SizedBox(height: 20),
+                        TextFormField(
+                            decoration: const InputDecoration(
+                                labelText: 'title',
+                            ),
+                            onSaved: (String val) {
+                              _taskTitle = val;
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Empty titles not allowed';
+                              }
+                              return null;
+                            }
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          minLines: 3,
+                          maxLines: 15,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            hintText: 'Write task description here',
+                            filled: true,
+                            fillColor: Color(0xFFDBEDFF),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                           onSaved: (String val) {
-                            _taskTitle = val;
+                            _taskDescription = val;
                           },
                           validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Empty titles not allowed';
+                            if(value.length > 250) {
+                              return 'Too large text';
                             }
                             return null;
                           }
-                      ),
-                      SizedBox(height: 20),
-                      TextFormField(
-                        minLines: 5,
-                        maxLines: 15,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          hintText: 'Write task description here',
-                          filled: true,
-                          fillColor: Color(0xFFDBEDFF),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
                         ),
-                        onSaved: (String val) {
-                          _taskDescription = val;
-                        },
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Empty descriptions not allowed';
+                        StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                          return Container(
+                              child: DateTimeField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Start Date'
+                                ),
+                                format: format,
+                                onShowPicker: (context, currentValue) async {
+                                  final picked = await showDatePicker(
+                                      context: context,
+                                      firstDate: DateTime(1900),
+                                      initialDate: currentValue ?? DateTime.now(),
+                                      lastDate: DateTime(2100));
+                                  stState(() {
+                                    _startDate = picked;
+                                  });
+                                  return _startDate;
+                                },
+                                controller: _startDateController,
+                                validator: (value) {
+                                  if(value == null) {
+                                    return 'Please choose end date';
+                                  }
+                                  return null;
+                                }
+                              ),
+                              width: 200,
+                            );
                           }
-                          return null;
-                        }
-                      ),
-                      StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
-                        return Row(children: <Widget>[
-                          Text('Select start date'),
-                          SizedBox(width: 20,),
-                          Container(
+                        ),
+                        SizedBox(height: 20,),
+                        StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                          return Container(
                             child: DateTimeField(
+                              decoration: const InputDecoration(
+                                  labelText: 'End Date'
+                              ),
                               format: format,
                               onShowPicker: (context, currentValue) async {
                                 final picked = await showDatePicker(
@@ -137,34 +161,51 @@ class _CreateTaskState extends State<CreateTask> {
                                     initialDate: currentValue ?? DateTime.now(),
                                     lastDate: DateTime(2100));
                                 stState(() {
-                                  _startDate = picked;
+                                  _endDate = picked;
                                 });
-                                return _startDate;
+                                return _endDate;
                               },
-                              controller: _dateController,
+                              controller: _endDateController,
+                              validator: (value) {
+                                if(value == null) {
+                                    return 'Please choose end date';
+                                }
+                                return null;
+                              }
                             ),
                             width: 200,
-                          ),
-                        ]);
+                          );
                         }
-                      ),
-                      SizedBox(height: 20,),
-                      RaisedButton(
-                        color: Colors.black,
-                        textColor: Colors.white,
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-
-                          }
-                          else {
-                            setState(() {
-                              _autoValidate = true;
-                            });
-                          }
-                        },
-                        child: Text('Create'),
-                      ),
-                    ],
+                        ),
+                        RaisedButton(
+                          color: Colors.black,
+                          textColor: Colors.white,
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              _formKey.currentState.save();
+                              Task task = new Task();
+                              task.title = _taskTitle;
+                              task.description = _taskDescription;
+                              task.creatorId = 1;
+                              task.neighborhoodId = 1;
+                              task.startDate = new Date()..day = _startDate.day..month = _startDate.month..year = _startDate.year;
+                              task.closeDate = new Date()..day = _endDate.day..month = _endDate.month..year = _endDate.year;
+                              AddTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
+                                  .addTask(AddTaskRequest()
+                                ..task = task);
+                              print(response.resultCode);
+                            }
+                            else {
+                              setState(() {
+                                _autoValidate = true;
+                              });
+                            }
+                          },
+                          child: Text('Create'),
+                        ),
+                      ],
+                    ),
+                  ]
                   ),
                 )
             );
