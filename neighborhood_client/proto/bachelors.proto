@@ -136,13 +136,21 @@ message Comment {
     int32 post_id = 2;
 }
 
+message Date {
+    int32 day = 1;
+    int32 month = 2;
+    int32 year = 3;
+}
+
 // დავალება
 message Task {
     int32 id = 1;
-    int32 creator_id = 2;
-    string title = 3;
-    int32 days = 4;
-    int32 assignee_id = 5;
+    string title = 2;
+    string description = 3;
+    int32 assignee_id = 4;
+    int32 neighborhood_id = 5;
+    Date start_date = 6;
+    Date close_date = 7;
 }
 
 // პოსტი

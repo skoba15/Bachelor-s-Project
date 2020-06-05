@@ -8,6 +8,9 @@ import services.*;
 import javax.validation.*;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
@@ -21,6 +24,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     private UserService userService = new UserServiceImpl();
     private NeighborhoodManagementService neighborhoodService = new NeighborhoodManagementServiceImpl();
     private ItemService itemService = new ItemServiceImpl();
+    private TaskService taskService = new TaskServiceImpl();
 
 
     @Override
@@ -305,6 +309,35 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addTask(NeighborhoodAPI.AddTaskRequest request, StreamObserver<NeighborhoodAPI.AddTaskResponse> responseObserver) {
+        String resultCode;
+
+        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+
+        NeighborhoodAPI.Task taskInfo = request.getTask();
+        UserEntity creator = userService.findUserById((long)creatorId);
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)taskInfo.getNeighborhoodId());
+
+        if(creator == null) {
+            resultCode = "User does not exist";
+        }  else if(neighborhood == null) {
+            resultCode = "Neighborhood does not exist";
+        } else {
+            TaskEntity task = new TaskEntity();
+            task.setTitle(taskInfo.getTitle());
+            task.setDescription(taskInfo.getDescription());
+            task.setStatus(TaskStatus.NEW);
+            task.setCreateDate(new Timestamp(new Date().getTime()));
+            task.setStartDate(convertToTimestamp(taskInfo.getStartDate()));
+            task.setCloseDate(convertToTimestamp(taskInfo.getCloseDate()));
+            task.setCreator(creator);
+            task.setNeighborhood(neighborhood);
+
+            Long addTaskResult = taskService.addTask(task);
+            resultCode = addTaskResult != null ? "Task " + addTaskResult + " added" : "Could not add Task";
+        }
+
+        responseObserver.onNext(NeighborhoodAPI.AddTaskResponse.newBuilder().setResultCode(resultCode).build());
+        responseObserver.onCompleted();
 
     }
 
@@ -342,4 +375,16 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     public void getContactByCar(NeighborhoodAPI.GetContactByCarRequest request, StreamObserver<NeighborhoodAPI.GetContactByCarResponse> responseObserver) {
 
     }
+
+    private Timestamp convertToTimestamp(NeighborhoodAPI.Date dateInfo) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = dateFormat.parse(dateInfo.getDay() + "/" + dateInfo.getMonth() + "/" + dateInfo.getYear());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Timestamp(date.getTime());
+    }
+
 }

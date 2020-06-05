@@ -42,6 +42,10 @@ public class TaskEntity {
     @JoinColumn(name = "creator")
     private UserEntity creator;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "neighbrhood")
+    private NeighborhoodEntity neighborhood;
+
     @OneToMany(mappedBy = "parentTask", fetch = FetchType.EAGER)
     private Set<SubTaskEntity> subTasks = new HashSet<>();
 
@@ -120,6 +124,14 @@ public class TaskEntity {
         this.creator = creator;
     }
 
+    public NeighborhoodEntity getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(NeighborhoodEntity neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
     public Set<SubTaskEntity> getSubTasks() {
         return subTasks;
     }
@@ -152,6 +164,7 @@ public class TaskEntity {
                 ", startDate=" + startDate +
                 ", closeDate=" + closeDate +
                 ", cretor" + creator +
+                ", neighborhood" + neighborhood +
                 '}';
     }
 }

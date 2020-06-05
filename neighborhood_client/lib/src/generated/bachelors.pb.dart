@@ -81,13 +81,66 @@ class Comment extends $pb.GeneratedMessage {
   void clearPostId() => clearField(2);
 }
 
+class Date extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Date', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'day', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, 'month', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, 'year', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  Date._() : super();
+  factory Date() => create();
+  factory Date.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Date.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  Date clone() => Date()..mergeFromMessage(this);
+  Date copyWith(void Function(Date) updates) => super.copyWith((message) => updates(message as Date));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Date create() => Date._();
+  Date createEmptyInstance() => create();
+  static $pb.PbList<Date> createRepeated() => $pb.PbList<Date>();
+  @$core.pragma('dart2js:noInline')
+  static Date getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Date>(create);
+  static Date _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get day => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set day($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDay() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDay() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get month => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set month($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMonth() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMonth() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get year => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set year($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasYear() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearYear() => clearField(3);
+}
+
 class Task extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Task', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, 'creatorId', $pb.PbFieldType.O3)
-    ..aOS(3, 'title')
-    ..a<$core.int>(4, 'days', $pb.PbFieldType.O3)
-    ..a<$core.int>(5, 'assigneeId', $pb.PbFieldType.O3)
+    ..aOS(2, 'title')
+    ..aOS(3, 'description')
+    ..a<$core.int>(4, 'assigneeId', $pb.PbFieldType.O3)
+    ..a<$core.int>(5, 'neighborhoodId', $pb.PbFieldType.O3)
+    ..aOM<Date>(6, 'startDate', subBuilder: Date.create)
+    ..aOM<Date>(7, 'closeDate', subBuilder: Date.create)
     ..hasRequiredFields = false
   ;
 
@@ -116,40 +169,62 @@ class Task extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get creatorId => $_getIZ(1);
+  $core.String get title => $_getSZ(1);
   @$pb.TagNumber(2)
-  set creatorId($core.int v) { $_setSignedInt32(1, v); }
+  set title($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCreatorId() => $_has(1);
+  $core.bool hasTitle() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCreatorId() => clearField(2);
+  void clearTitle() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get title => $_getSZ(2);
+  $core.String get description => $_getSZ(2);
   @$pb.TagNumber(3)
-  set title($core.String v) { $_setString(2, v); }
+  set description($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasTitle() => $_has(2);
+  $core.bool hasDescription() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTitle() => clearField(3);
+  void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get days => $_getIZ(3);
+  $core.int get assigneeId => $_getIZ(3);
   @$pb.TagNumber(4)
-  set days($core.int v) { $_setSignedInt32(3, v); }
+  set assigneeId($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasDays() => $_has(3);
+  $core.bool hasAssigneeId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearDays() => clearField(4);
+  void clearAssigneeId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get assigneeId => $_getIZ(4);
+  $core.int get neighborhoodId => $_getIZ(4);
   @$pb.TagNumber(5)
-  set assigneeId($core.int v) { $_setSignedInt32(4, v); }
+  set neighborhoodId($core.int v) { $_setSignedInt32(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasAssigneeId() => $_has(4);
+  $core.bool hasNeighborhoodId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearAssigneeId() => clearField(5);
+  void clearNeighborhoodId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  Date get startDate => $_getN(5);
+  @$pb.TagNumber(6)
+  set startDate(Date v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasStartDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearStartDate() => clearField(6);
+  @$pb.TagNumber(6)
+  Date ensureStartDate() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  Date get closeDate => $_getN(6);
+  @$pb.TagNumber(7)
+  set closeDate(Date v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCloseDate() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCloseDate() => clearField(7);
+  @$pb.TagNumber(7)
+  Date ensureCloseDate() => $_ensure(6);
 }
 
 class Post extends $pb.GeneratedMessage {
