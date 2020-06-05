@@ -80,11 +80,11 @@ public class SubTaskEntity {
         this.parentTask = parentTask;
     }
 
-    public UserEntity getUserEntity() {
+    public UserEntity getAssignee() {
         return assignee;
     }
 
-    public void setUserEntity(UserEntity assignee) {
+    public void setAssignee(UserEntity assignee) {
         this.assignee = assignee;
     }
 

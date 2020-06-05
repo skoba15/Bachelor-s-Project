@@ -1,6 +1,8 @@
+import db.JdbcConnection;
 import models.TaskEntity;
 import models.TaskStatus;
 import models.UserEntity;
+import org.hibernate.Session;
 import org.testng.annotations.Test;
 import services.TaskService;
 import services.TaskServiceImpl;

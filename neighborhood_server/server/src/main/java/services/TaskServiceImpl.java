@@ -4,6 +4,7 @@ import db.JdbcConnection;
 import models.SubTaskEntity;
 import models.TaskEntity;
 import models.TaskStatus;
+import models.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -15,6 +16,13 @@ public class TaskServiceImpl implements TaskService {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
         Long result = (Long) session.save(taskEntity);
+        UserEntity creator = taskEntity.getCreator();
+
+        if(creator != null) {
+            creator.getTasksList().add(taskEntity);
+            session.merge(creator);
+        }
+
         try {
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -29,6 +37,14 @@ public class TaskServiceImpl implements TaskService {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
         Long result = (Long) session.save(subTaskEntity);
+
+        UserEntity assignee = subTaskEntity.getAssignee();
+
+        if(assignee != null) {
+            assignee.getSubTasksList().add(subTaskEntity);
+            session.merge(assignee);
+        }
+
         try {
             session.getTransaction().commit();
         } catch (Exception e) {
