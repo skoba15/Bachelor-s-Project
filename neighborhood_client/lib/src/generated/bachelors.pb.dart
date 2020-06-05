@@ -137,7 +137,7 @@ class Task extends $pb.GeneratedMessage {
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
     ..aOS(2, 'title')
     ..aOS(3, 'description')
-    ..a<$core.int>(4, 'assigneeId', $pb.PbFieldType.O3)
+    ..a<$core.int>(4, 'creatorId', $pb.PbFieldType.O3)
     ..a<$core.int>(5, 'neighborhoodId', $pb.PbFieldType.O3)
     ..aOM<Date>(6, 'startDate', subBuilder: Date.create)
     ..aOM<Date>(7, 'closeDate', subBuilder: Date.create)
@@ -187,13 +187,13 @@ class Task extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get assigneeId => $_getIZ(3);
+  $core.int get creatorId => $_getIZ(3);
   @$pb.TagNumber(4)
-  set assigneeId($core.int v) { $_setSignedInt32(3, v); }
+  set creatorId($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasAssigneeId() => $_has(3);
+  $core.bool hasCreatorId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearAssigneeId() => clearField(4);
+  void clearCreatorId() => clearField(4);
 
   @$pb.TagNumber(5)
   $core.int get neighborhoodId => $_getIZ(4);

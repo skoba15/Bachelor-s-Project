@@ -35,7 +35,7 @@ const Task$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     const {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     const {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    const {'1': 'assignee_id', '3': 4, '4': 1, '5': 5, '10': 'assigneeId'},
+    const {'1': 'creator_id', '3': 4, '4': 1, '5': 5, '10': 'creatorId'},
     const {'1': 'neighborhood_id', '3': 5, '4': 1, '5': 5, '10': 'neighborhoodId'},
     const {'1': 'start_date', '3': 6, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'startDate'},
     const {'1': 'close_date', '3': 7, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'closeDate'},

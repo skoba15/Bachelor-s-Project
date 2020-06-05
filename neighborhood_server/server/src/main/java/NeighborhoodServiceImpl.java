@@ -311,7 +311,8 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     public void addTask(NeighborhoodAPI.AddTaskRequest request, StreamObserver<NeighborhoodAPI.AddTaskResponse> responseObserver) {
         String resultCode;
 
-        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+//        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        int creatorId = 1;
 
         NeighborhoodAPI.Task taskInfo = request.getTask();
         UserEntity creator = userService.findUserById((long)creatorId);
