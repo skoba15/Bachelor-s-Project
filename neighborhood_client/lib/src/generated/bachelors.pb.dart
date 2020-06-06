@@ -137,10 +137,11 @@ class Task extends $pb.GeneratedMessage {
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
     ..aOS(2, 'title')
     ..aOS(3, 'description')
-    ..a<$core.int>(4, 'creatorId', $pb.PbFieldType.O3)
-    ..a<$core.int>(5, 'neighborhoodId', $pb.PbFieldType.O3)
-    ..aOM<Date>(6, 'startDate', subBuilder: Date.create)
-    ..aOM<Date>(7, 'closeDate', subBuilder: Date.create)
+    ..aOS(4, 'status')
+    ..a<$core.int>(5, 'creatorId', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, 'neighborhoodId', $pb.PbFieldType.O3)
+    ..aOM<Date>(7, 'startDate', subBuilder: Date.create)
+    ..aOM<Date>(8, 'closeDate', subBuilder: Date.create)
     ..hasRequiredFields = false
   ;
 
@@ -187,44 +188,53 @@ class Task extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get creatorId => $_getIZ(3);
+  $core.String get status => $_getSZ(3);
   @$pb.TagNumber(4)
-  set creatorId($core.int v) { $_setSignedInt32(3, v); }
+  set status($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasCreatorId() => $_has(3);
+  $core.bool hasStatus() => $_has(3);
   @$pb.TagNumber(4)
-  void clearCreatorId() => clearField(4);
+  void clearStatus() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get neighborhoodId => $_getIZ(4);
+  $core.int get creatorId => $_getIZ(4);
   @$pb.TagNumber(5)
-  set neighborhoodId($core.int v) { $_setSignedInt32(4, v); }
+  set creatorId($core.int v) { $_setSignedInt32(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasNeighborhoodId() => $_has(4);
+  $core.bool hasCreatorId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearNeighborhoodId() => clearField(5);
+  void clearCreatorId() => clearField(5);
 
   @$pb.TagNumber(6)
-  Date get startDate => $_getN(5);
+  $core.int get neighborhoodId => $_getIZ(5);
   @$pb.TagNumber(6)
-  set startDate(Date v) { setField(6, v); }
+  set neighborhoodId($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasStartDate() => $_has(5);
+  $core.bool hasNeighborhoodId() => $_has(5);
   @$pb.TagNumber(6)
-  void clearStartDate() => clearField(6);
-  @$pb.TagNumber(6)
-  Date ensureStartDate() => $_ensure(5);
+  void clearNeighborhoodId() => clearField(6);
 
   @$pb.TagNumber(7)
-  Date get closeDate => $_getN(6);
+  Date get startDate => $_getN(6);
   @$pb.TagNumber(7)
-  set closeDate(Date v) { setField(7, v); }
+  set startDate(Date v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasCloseDate() => $_has(6);
+  $core.bool hasStartDate() => $_has(6);
   @$pb.TagNumber(7)
-  void clearCloseDate() => clearField(7);
+  void clearStartDate() => clearField(7);
   @$pb.TagNumber(7)
-  Date ensureCloseDate() => $_ensure(6);
+  Date ensureStartDate() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  Date get closeDate => $_getN(7);
+  @$pb.TagNumber(8)
+  set closeDate(Date v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasCloseDate() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCloseDate() => clearField(8);
+  @$pb.TagNumber(8)
+  Date ensureCloseDate() => $_ensure(7);
 }
 
 class Post extends $pb.GeneratedMessage {
@@ -2320,8 +2330,7 @@ class GetTaskByNeighborhoodRequest extends $pb.GeneratedMessage {
 
 class GetTaskByNeighborhoodResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTaskByNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'resultCode')
-    ..pc<Task>(2, 'tasks', $pb.PbFieldType.PM, subBuilder: Task.create)
+    ..pc<Task>(1, 'tasks', $pb.PbFieldType.PM, subBuilder: Task.create)
     ..hasRequiredFields = false
   ;
 
@@ -2341,16 +2350,7 @@ class GetTaskByNeighborhoodResponse extends $pb.GeneratedMessage {
   static GetTaskByNeighborhoodResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get resultCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set resultCode($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResultCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResultCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.List<Task> get tasks => $_getList(1);
+  $core.List<Task> get tasks => $_getList(0);
 }
 
 class ChangeTaskStatusRequest extends $pb.GeneratedMessage {

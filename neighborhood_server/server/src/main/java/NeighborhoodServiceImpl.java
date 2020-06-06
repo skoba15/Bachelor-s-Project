@@ -350,6 +350,25 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void getTaskByNeighborhood(NeighborhoodAPI.GetTaskByNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetTaskByNeighborhoodResponse> responseObserver) {
 
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)request.getNeighborhoodId());
+
+        NeighborhoodAPI.GetTaskByNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetTaskByNeighborhoodResponse.newBuilder();
+
+        if(neighborhood != null) {
+            for(TaskEntity task : neighborhood.getTaskList()) {
+                builder.addTasks(NeighborhoodAPI.Task.newBuilder()
+                        .setId(task.getId().intValue())
+                        .setTitle(task.getTitle())
+                        .setDescription(task.getDescription())
+                        .setStatus(task.getStatus().name())
+                        .setStartDate(convertFromTimestamp(task.getStartDate()))
+                        .setCloseDate(convertFromTimestamp(task.getCloseDate()))
+                        .setCreatorId(task.getCreator().getId().intValue()));
+            }
+        }
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
     }
 
     @Override
@@ -388,4 +407,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         return new Timestamp(date.getTime());
     }
 
+    private NeighborhoodAPI.Date.Builder convertFromTimestamp(Timestamp timestamp) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(timestamp.getTime()));
+
+        NeighborhoodAPI.Date.Builder builder = NeighborhoodAPI.Date.newBuilder()
+                .setDay(cal.get(Calendar.DAY_OF_MONTH))
+                .setMonth(cal.get(Calendar.MONTH))
+                .setYear(cal.get(Calendar.YEAR));
+        return builder;
+    }
 }

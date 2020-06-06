@@ -147,10 +147,11 @@ message Task {
     int32 id = 1;
     string title = 2;
     string description = 3;
-    int32 creator_id = 4;
-    int32 neighborhood_id = 5;
-    Date start_date = 6;
-    Date close_date = 7;
+    string status = 4;
+    int32 creator_id = 5;
+    int32 neighborhood_id = 6;
+    Date start_date = 7;
+    Date close_date = 8;
 }
 
 // პოსტი
@@ -432,8 +433,7 @@ message GetTaskByNeighborhoodRequest {
 }
 
 message GetTaskByNeighborhoodResponse {
-    string result_code = 1;
-    repeated Task tasks = 2;
+    repeated Task tasks = 1;
 }
 
 

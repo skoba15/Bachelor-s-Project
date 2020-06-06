@@ -35,10 +35,11 @@ const Task$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     const {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     const {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    const {'1': 'creator_id', '3': 4, '4': 1, '5': 5, '10': 'creatorId'},
-    const {'1': 'neighborhood_id', '3': 5, '4': 1, '5': 5, '10': 'neighborhoodId'},
-    const {'1': 'start_date', '3': 6, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'startDate'},
-    const {'1': 'close_date', '3': 7, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'closeDate'},
+    const {'1': 'status', '3': 4, '4': 1, '5': 9, '10': 'status'},
+    const {'1': 'creator_id', '3': 5, '4': 1, '5': 5, '10': 'creatorId'},
+    const {'1': 'neighborhood_id', '3': 6, '4': 1, '5': 5, '10': 'neighborhoodId'},
+    const {'1': 'start_date', '3': 7, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'startDate'},
+    const {'1': 'close_date', '3': 8, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'closeDate'},
   ],
 };
 
@@ -479,8 +480,7 @@ const GetTaskByNeighborhoodRequest$json = const {
 const GetTaskByNeighborhoodResponse$json = const {
   '1': 'GetTaskByNeighborhoodResponse',
   '2': const [
-    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'tasks', '3': 2, '4': 3, '5': 11, '6': '.neighborhood.server.Task', '10': 'tasks'},
+    const {'1': 'tasks', '3': 1, '4': 3, '5': 11, '6': '.neighborhood.server.Task', '10': 'tasks'},
   ],
 };
 
