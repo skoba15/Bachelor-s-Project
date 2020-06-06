@@ -9,6 +9,7 @@ import 'package:neighborhood_client/src/screens/Profile.dart';
 import 'package:neighborhood_client/src/screens/Register.dart';
 import 'package:neighborhood_client/src/screens/Requests.dart';
 import 'package:neighborhood_client/src/screens/Success.dart';
+import 'package:neighborhood_client/src/screens/Task.dart';
 import 'package:neighborhood_client/src/screens/Tasks.dart';
 
 
@@ -46,6 +47,9 @@ class FluroRouter {
   static Handler _createTaskHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           CreateTask(id: int.parse(params['id'][0])));
+  static Handler _showTaskHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          ShowTask(id: int.parse(params['id'][0])));
 
   static void setupRouter() {
     router.define(
@@ -96,6 +100,11 @@ class FluroRouter {
     router.define(
       'CreateTask/:id',
       handler: _createTaskHandler,
+    );
+
+    router.define(
+      'task/:id',
+      handler: _showTaskHandler,
     );
   }
 }

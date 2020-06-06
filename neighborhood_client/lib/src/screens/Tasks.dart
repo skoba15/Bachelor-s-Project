@@ -22,9 +22,14 @@ class _TasksState extends State<Tasks> {
 
   SharedPreferences _prefs;
 
+  List<Task> _tasks;
 
   Future<String> getMyNeighborhoodsList() async {
-
+    GetTaskByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
+        .getTaskByNeighborhood(GetTaskByNeighborhoodRequest()
+      ..neighborhoodId = widget.id);
+    _tasks = response.tasks;
+    print(_tasks.length);
     return Future.value("WTF");
   }
 
@@ -58,111 +63,72 @@ class _TasksState extends State<Tasks> {
                       ]
                   ),
                 ),
-//                body: TabBarView(
-//                  children: [
-//                    ListView.builder(
-////                      itemCount: _response.neighborhood.length,
-////                      itemBuilder: (context, index) {
-////                        return Card(
-////                          child: Column(
-////                              children: <Widget>[
-////                                ListTile(
-////                                  title: Text(
-////                                    '${_response.neighborhood[index].name}',
-////                                    style: TextStyle(
-////                                        color: Colors.black,
-////                                        fontWeight: FontWeight.bold),),
-////                                  leading: Icon(Icons.perm_identity,
-////                                    color: _response.neighborhood[index]
-////                                        .isManager == 1 ? Colors.green : Colors
-////                                        .black,),
-////                                  subtitle: Text(
-////                                    '${_response.neighborhood[index]
-////                                        .city}, ${_response.neighborhood[index]
-////                                        .district}, ${_response
-////                                        .neighborhood[index].address}',
-////                                    style: TextStyle(
-////                                        color: Colors.black),),
-////                                  onTap: () {
-////                                    int idd = _response.neighborhood[index].id;
-////                                    Navigator.pushNamed(
-////                                        context, '/Neighborhood/$idd');
-////                                  },
-////
-////                                ),
-////                              ]
-////
-////                          ),
-////
-////                        );
-////                      },
-//                    ),
-//                    ListView.builder(
-////                      itemCount: _response2.neighborhood.length,
-////                      itemBuilder: (context, index) {
-////                        return Card(
-////                          child: StatefulBuilder(builder: (BuildContext context,
-////                              StateSetter stState) {
-////                            return Column(
-////                                children: <Widget>[
-////                                  ListTile(
-////                                    title: Text(
-////                                      '${_response2.neighborhood[index].name}',
-////                                      style: TextStyle(
-////                                          color: Colors.black,
-////                                          fontWeight: FontWeight.bold),),
-////                                    leading: Icon(Icons.perm_identity,
-////                                      color: _response2.neighborhood[index]
-////                                          .isManager == 1
-////                                          ? Colors.green
-////                                          : Colors
-////                                          .black,),
-////                                    subtitle: Text(
-////                                      '${_response2.neighborhood[index]
-////                                          .city}, ${_response2
-////                                          .neighborhood[index]
-////                                          .district}, ${_response2
-////                                          .neighborhood[index].address}',
-////                                      style: TextStyle(
-////                                          color: Colors.black),),
-////                                    trailing: (_response2.neighborhood[index]
-////                                        .status == 0)
-////                                        ? FlatButton.icon(
-////                                        icon: Icon(Icons.send),
-////                                        label: Text('SEND REQUEST'),
-////                                        onPressed: () async {
-////                                          stState(() {
-////                                            _response2.neighborhood[index]
-////                                                .status = 1;
-////                                          });
-////                                          await ServiceClient(ClientSingleton()
-////                                              .getChannel(),
-////                                              options: CallOptions(
-////                                                  metadata: {
-////                                                    'jwt': _prefs.get('jwt')
-////                                                  }))
-////                                              .addUserToNeighborhood(
-////                                              AddUserToNeighborhoodRequest()
-////                                                ..neighborhoodId = _response2
-////                                                    .neighborhood[index].id);
-////                                        })
-////                                        : Text('PENDING', style: TextStyle(
-////                                        fontWeight: FontWeight.bold,
-////                                        fontSize: 18,
-////                                        color: Colors.orange),),
-////
-////                                  ),
-////                                ]
-////
-////                            );
-////                          }
-////                          ),
-////
-////                        );
-////                      },
-//                    ),
-//                  ]
-//                ),
+                body: TabBarView(
+                  children: [
+                    ListView.builder(
+                      itemCount: _tasks.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  title: Text(
+                                    '${_tasks[index].title}',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),),
+                                  leading: Icon(Icons.note,),
+                                  subtitle: Text(
+                                    'Start Date: ${_tasks[index].startDate.day}/${_tasks[index].startDate.month}/${_tasks[index].startDate.year}\nEnd Date: ${_tasks[index].closeDate.day}/${_tasks[index].closeDate.month}/${_tasks[index].closeDate.year}',
+                                    style: TextStyle(
+                                        color: Colors.black),),
+                                  onTap: () {
+//                                    int idd = _response.neighborhood[index].id;
+//                                    Navigator.pushNamed(
+//                                        context, '/Neighborhood/$idd');
+                                  },
+                                  trailing: Text(_tasks[index].status),
+                                ),
+                              ]
+
+                          ),
+
+                        );
+                      },
+                    ),
+                    ListView.builder(
+                      itemCount: _tasks.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  title: Text(
+                                    '${_tasks[index].title}',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),),
+                                  leading: Icon(Icons.note,),
+                                  subtitle: Text(
+                                    'Start Date: ${_tasks[index].startDate.day}/${_tasks[index].startDate.month}/${_tasks[index].startDate.year}\nEnd Date: ${_tasks[index].closeDate.day}/${_tasks[index].closeDate.month}/${_tasks[index].closeDate.year}',
+                                    style: TextStyle(
+                                        color: Colors.black),),
+                                  onTap: () {
+                                    int idd = _tasks[index].id;
+                                    Navigator.pushNamed(
+                                        context, '/task/$idd');
+                                  },
+                                  trailing: Text(_tasks[index].status),
+                                ),
+                              ]
+
+                          ),
+
+                        );
+                      },
+                    ),
+                  ]
+                ),
               ),
             );
           } else {
