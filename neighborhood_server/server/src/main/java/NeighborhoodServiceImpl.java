@@ -207,6 +207,25 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     }
 
     @Override
+    public void getUsersByNeighborhood(NeighborhoodAPI.GetUsersByNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetUsersByNeighborhoodResponse> responseObserver) {
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)request.getNeighborhoodId());
+
+        NeighborhoodAPI.GetUsersByNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetUsersByNeighborhoodResponse.newBuilder();
+
+        if(neighborhood != null) {
+            for(UserToNeighborhoodEntity utn : neighborhood.getUsersList()) {
+                if(utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
+                UserEntity user = utn.getUserEntity();
+                builder.addUsers(NeighborhoodAPI.UserInfoItem.newBuilder()
+                        .setUserId(user.getId().intValue())
+                        .setUserFullName(user.getFirstName() + " " + user.getLastName()));
+            }
+        }
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void addManager(NeighborhoodAPI.AddManagerRequest request, StreamObserver<NeighborhoodAPI.AddManagerResponse> responseObserver) {
 
     }
@@ -437,7 +456,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     }
 
     @Override
-    public void getUserTasks(NeighborhoodAPI.getUserTasksRequest request, StreamObserver<NeighborhoodAPI.getUserTasksResponse> responseObserver) {
+    public void getUserTasks(NeighborhoodAPI.GetUserTasksRequest request, StreamObserver<NeighborhoodAPI.GetUserTasksResponse> responseObserver) {
 
     }
 

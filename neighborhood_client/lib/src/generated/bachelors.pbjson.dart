@@ -273,6 +273,28 @@ const GetOtherNeighborhoodResponse$json = const {
   ],
 };
 
+const UserInfoItem$json = const {
+  '1': 'UserInfoItem',
+  '2': const [
+    const {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'user_full_name', '3': 2, '4': 1, '5': 9, '10': 'userFullName'},
+  ],
+};
+
+const GetUsersByNeighborhoodRequest$json = const {
+  '1': 'GetUsersByNeighborhoodRequest',
+  '2': const [
+    const {'1': 'neighborhood_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodId'},
+  ],
+};
+
+const GetUsersByNeighborhoodResponse$json = const {
+  '1': 'GetUsersByNeighborhoodResponse',
+  '2': const [
+    const {'1': 'users', '3': 1, '4': 3, '5': 11, '6': '.neighborhood.server.UserInfoItem', '10': 'users'},
+  ],
+};
+
 const AddManagerRequest$json = const {
   '1': 'AddManagerRequest',
   '2': const [
@@ -528,15 +550,15 @@ const AddSubTaskResponse$json = const {
   ],
 };
 
-const getUserTasksRequest$json = const {
-  '1': 'getUserTasksRequest',
+const GetUserTasksRequest$json = const {
+  '1': 'GetUserTasksRequest',
   '2': const [
     const {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
   ],
 };
 
-const getUserTasksResponse$json = const {
-  '1': 'getUserTasksResponse',
+const GetUserTasksResponse$json = const {
+  '1': 'GetUserTasksResponse',
   '2': const [
     const {'1': 'sub_task', '3': 1, '4': 3, '5': 11, '6': '.neighborhood.server.SubTask', '10': 'subTask'},
   ],
