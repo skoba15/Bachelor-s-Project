@@ -142,6 +142,7 @@ class Task extends $pb.GeneratedMessage {
     ..a<$core.int>(6, 'neighborhoodId', $pb.PbFieldType.O3)
     ..aOM<Date>(7, 'startDate', subBuilder: Date.create)
     ..aOM<Date>(8, 'closeDate', subBuilder: Date.create)
+    ..pc<SubTask>(9, 'subTask', $pb.PbFieldType.PM, subBuilder: SubTask.create)
     ..hasRequiredFields = false
   ;
 
@@ -235,6 +236,9 @@ class Task extends $pb.GeneratedMessage {
   void clearCloseDate() => clearField(8);
   @$pb.TagNumber(8)
   Date ensureCloseDate() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  $core.List<SubTask> get subTask => $_getList(8);
 }
 
 class SubTask extends $pb.GeneratedMessage {

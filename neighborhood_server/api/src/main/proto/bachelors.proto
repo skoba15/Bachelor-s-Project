@@ -160,6 +160,7 @@ message Task {
     int32 neighborhood_id = 6;
     Date start_date = 7;
     Date close_date = 8;
+    repeated SubTask sub_task = 9;
 }
 
 // ქვედავალება
