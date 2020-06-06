@@ -40,6 +40,7 @@ const Task$json = const {
     const {'1': 'neighborhood_id', '3': 6, '4': 1, '5': 5, '10': 'neighborhoodId'},
     const {'1': 'start_date', '3': 7, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'startDate'},
     const {'1': 'close_date', '3': 8, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'closeDate'},
+    const {'1': 'sub_task', '3': 9, '4': 3, '5': 11, '6': '.neighborhood.server.SubTask', '10': 'subTask'},
   ],
 };
 

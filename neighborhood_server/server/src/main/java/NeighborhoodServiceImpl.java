@@ -350,15 +350,29 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         NeighborhoodAPI.GetTaskResponse.Builder builder = NeighborhoodAPI.GetTaskResponse.newBuilder();
 
         if(task != null) {
-            builder.setTask(NeighborhoodAPI.Task.newBuilder()
-                    .setId(task.getId().intValue())
+            NeighborhoodAPI.Task.Builder taskBuilder = NeighborhoodAPI.Task.newBuilder();
+
+            taskBuilder.setId(task.getId().intValue())
                     .setTitle(task.getTitle())
                     .setDescription(task.getDescription())
                     .setStatus(task.getStatus().name())
                     .setStartDate(convertFromTimestamp(task.getStartDate()))
                     .setCloseDate(convertFromTimestamp(task.getCloseDate()))
-                    .setCreatorId(task.getCreator().getId().intValue()))
-                    .setResultCode("200");
+                    .setCreatorId(task.getCreator().getId().intValue());
+
+            for(SubTaskEntity subTask : task.getSubTasks()) {
+                UserEntity assignee = subTask.getAssignee();
+                taskBuilder.addSubTask(NeighborhoodAPI.SubTask.newBuilder()
+                        .setId(subTask.getId().intValue())
+                        .setTitle(subTask.getTitle())
+                        .setDescription(subTask.getTitle())
+                        .setStatus(subTask.getStatus().name())
+                        .setAssigneeId(assignee.getId().intValue())
+                        .setAssigneeName(assignee.getFirstName() + " " + assignee.getLastName())
+                        .setTaskId(task.getId().intValue()));
+            }
+
+            builder.setTask(taskBuilder).setResultCode("200");
         }
 
         responseObserver.onNext(builder.build());
