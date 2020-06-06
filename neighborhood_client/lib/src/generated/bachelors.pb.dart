@@ -1417,6 +1417,103 @@ class GetOtherNeighborhoodResponse extends $pb.GeneratedMessage {
   $core.List<Neighborhood> get neighborhood => $_getList(1);
 }
 
+class UserInfoItem extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UserInfoItem', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..aOS(2, 'userFullName')
+    ..hasRequiredFields = false
+  ;
+
+  UserInfoItem._() : super();
+  factory UserInfoItem() => create();
+  factory UserInfoItem.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UserInfoItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UserInfoItem clone() => UserInfoItem()..mergeFromMessage(this);
+  UserInfoItem copyWith(void Function(UserInfoItem) updates) => super.copyWith((message) => updates(message as UserInfoItem));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UserInfoItem create() => UserInfoItem._();
+  UserInfoItem createEmptyInstance() => create();
+  static $pb.PbList<UserInfoItem> createRepeated() => $pb.PbList<UserInfoItem>();
+  @$core.pragma('dart2js:noInline')
+  static UserInfoItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserInfoItem>(create);
+  static UserInfoItem _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get userFullName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set userFullName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserFullName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserFullName() => clearField(2);
+}
+
+class GetUsersByNeighborhoodRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUsersByNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  GetUsersByNeighborhoodRequest._() : super();
+  factory GetUsersByNeighborhoodRequest() => create();
+  factory GetUsersByNeighborhoodRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUsersByNeighborhoodRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetUsersByNeighborhoodRequest clone() => GetUsersByNeighborhoodRequest()..mergeFromMessage(this);
+  GetUsersByNeighborhoodRequest copyWith(void Function(GetUsersByNeighborhoodRequest) updates) => super.copyWith((message) => updates(message as GetUsersByNeighborhoodRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetUsersByNeighborhoodRequest create() => GetUsersByNeighborhoodRequest._();
+  GetUsersByNeighborhoodRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUsersByNeighborhoodRequest> createRepeated() => $pb.PbList<GetUsersByNeighborhoodRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetUsersByNeighborhoodRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUsersByNeighborhoodRequest>(create);
+  static GetUsersByNeighborhoodRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get neighborhoodId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set neighborhoodId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasNeighborhoodId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNeighborhoodId() => clearField(1);
+}
+
+class GetUsersByNeighborhoodResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUsersByNeighborhoodResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..pc<UserInfoItem>(1, 'users', $pb.PbFieldType.PM, subBuilder: UserInfoItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetUsersByNeighborhoodResponse._() : super();
+  factory GetUsersByNeighborhoodResponse() => create();
+  factory GetUsersByNeighborhoodResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUsersByNeighborhoodResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetUsersByNeighborhoodResponse clone() => GetUsersByNeighborhoodResponse()..mergeFromMessage(this);
+  GetUsersByNeighborhoodResponse copyWith(void Function(GetUsersByNeighborhoodResponse) updates) => super.copyWith((message) => updates(message as GetUsersByNeighborhoodResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetUsersByNeighborhoodResponse create() => GetUsersByNeighborhoodResponse._();
+  GetUsersByNeighborhoodResponse createEmptyInstance() => create();
+  static $pb.PbList<GetUsersByNeighborhoodResponse> createRepeated() => $pb.PbList<GetUsersByNeighborhoodResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetUsersByNeighborhoodResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUsersByNeighborhoodResponse>(create);
+  static GetUsersByNeighborhoodResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<UserInfoItem> get users => $_getList(0);
+}
+
 class AddManagerRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddManagerRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'newManagerId', $pb.PbFieldType.O3)
@@ -2596,26 +2693,26 @@ class AddSubTaskResponse extends $pb.GeneratedMessage {
   void clearResultCode() => clearField(1);
 }
 
-class getUserTasksRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('getUserTasksRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+class GetUserTasksRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserTasksRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
-  getUserTasksRequest._() : super();
-  factory getUserTasksRequest() => create();
-  factory getUserTasksRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory getUserTasksRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  getUserTasksRequest clone() => getUserTasksRequest()..mergeFromMessage(this);
-  getUserTasksRequest copyWith(void Function(getUserTasksRequest) updates) => super.copyWith((message) => updates(message as getUserTasksRequest));
+  GetUserTasksRequest._() : super();
+  factory GetUserTasksRequest() => create();
+  factory GetUserTasksRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserTasksRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetUserTasksRequest clone() => GetUserTasksRequest()..mergeFromMessage(this);
+  GetUserTasksRequest copyWith(void Function(GetUserTasksRequest) updates) => super.copyWith((message) => updates(message as GetUserTasksRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static getUserTasksRequest create() => getUserTasksRequest._();
-  getUserTasksRequest createEmptyInstance() => create();
-  static $pb.PbList<getUserTasksRequest> createRepeated() => $pb.PbList<getUserTasksRequest>();
+  static GetUserTasksRequest create() => GetUserTasksRequest._();
+  GetUserTasksRequest createEmptyInstance() => create();
+  static $pb.PbList<GetUserTasksRequest> createRepeated() => $pb.PbList<GetUserTasksRequest>();
   @$core.pragma('dart2js:noInline')
-  static getUserTasksRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<getUserTasksRequest>(create);
-  static getUserTasksRequest _defaultInstance;
+  static GetUserTasksRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserTasksRequest>(create);
+  static GetUserTasksRequest _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get userId => $_getIZ(0);
@@ -2627,26 +2724,26 @@ class getUserTasksRequest extends $pb.GeneratedMessage {
   void clearUserId() => clearField(1);
 }
 
-class getUserTasksResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('getUserTasksResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+class GetUserTasksResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserTasksResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..pc<SubTask>(1, 'subTask', $pb.PbFieldType.PM, subBuilder: SubTask.create)
     ..hasRequiredFields = false
   ;
 
-  getUserTasksResponse._() : super();
-  factory getUserTasksResponse() => create();
-  factory getUserTasksResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory getUserTasksResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  getUserTasksResponse clone() => getUserTasksResponse()..mergeFromMessage(this);
-  getUserTasksResponse copyWith(void Function(getUserTasksResponse) updates) => super.copyWith((message) => updates(message as getUserTasksResponse));
+  GetUserTasksResponse._() : super();
+  factory GetUserTasksResponse() => create();
+  factory GetUserTasksResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetUserTasksResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetUserTasksResponse clone() => GetUserTasksResponse()..mergeFromMessage(this);
+  GetUserTasksResponse copyWith(void Function(GetUserTasksResponse) updates) => super.copyWith((message) => updates(message as GetUserTasksResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static getUserTasksResponse create() => getUserTasksResponse._();
-  getUserTasksResponse createEmptyInstance() => create();
-  static $pb.PbList<getUserTasksResponse> createRepeated() => $pb.PbList<getUserTasksResponse>();
+  static GetUserTasksResponse create() => GetUserTasksResponse._();
+  GetUserTasksResponse createEmptyInstance() => create();
+  static $pb.PbList<GetUserTasksResponse> createRepeated() => $pb.PbList<GetUserTasksResponse>();
   @$core.pragma('dart2js:noInline')
-  static getUserTasksResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<getUserTasksResponse>(create);
-  static getUserTasksResponse _defaultInstance;
+  static GetUserTasksResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserTasksResponse>(create);
+  static GetUserTasksResponse _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<SubTask> get subTask => $_getList(0);

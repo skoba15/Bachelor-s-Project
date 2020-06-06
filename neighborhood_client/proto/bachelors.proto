@@ -49,12 +49,14 @@ service Service {
     rpc GetOtherNeighborhoodList (GetOtherNeighborhoodRequest) returns (GetOtherNeighborhoodResponse) {
     }
 
+    rpc GetUsersByNeighborhood (GetUsersByNeighborhoodRequest) returns (GetUsersByNeighborhoodResponse) {
+    }
+
     // მენეჯერი მენეჯერს აძლევს სხვას
     rpc AddManager (AddManagerRequest) returns (AddManagerResponse) {
     }
 
     rpc IsManager (IsManagerRequest) returns (IsManagerResponse) {
-
     }
 
     // გაწევრიანების მოთხოვნა
@@ -110,7 +112,7 @@ service Service {
     rpc AddSubTask (AddSubTaskRequest) returns (AddSubTaskResponse) {
     }
 
-    rpc getUserTasks (getUserTasksRequest) returns (getUserTasksResponse) {
+    rpc GetUserTasks (GetUserTasksRequest) returns (GetUserTasksResponse) {
     }
 
     rpc ChangeSubTaskStatus (ChangeSubTaskStatusRequest) returns (ChangeSubTaskStatusResponse) {
@@ -319,6 +321,19 @@ message GetOtherNeighborhoodResponse {
     repeated Neighborhood neighborhood = 2;
 }
 
+message UserInfoItem {
+    int32 user_id = 1;
+    string user_full_name = 2;
+}
+
+message GetUsersByNeighborhoodRequest {
+    int32 neighborhood_id = 1;
+}
+
+message GetUsersByNeighborhoodResponse {
+    repeated UserInfoItem users = 1;
+}
+
 message AddManagerRequest {
     int32 new_manager_id = 1;
     int32 neighborhood_id = 2;
@@ -475,11 +490,11 @@ message AddSubTaskResponse {
     string result_code = 1;
 }
 
-message getUserTasksRequest {
+message GetUserTasksRequest {
     int32 user_id = 1;
 }
 
-message getUserTasksResponse {
+message GetUserTasksResponse {
     repeated SubTask sub_task = 1;
 }
 
