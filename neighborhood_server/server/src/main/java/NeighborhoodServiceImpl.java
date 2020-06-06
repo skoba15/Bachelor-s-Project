@@ -345,6 +345,24 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void getTask(NeighborhoodAPI.GetTaskRequest request, StreamObserver<NeighborhoodAPI.GetTaskResponse> responseObserver) {
 
+        TaskEntity task = taskService.getTaskById((long)request.getTaskId());
+
+        NeighborhoodAPI.GetTaskResponse.Builder builder = NeighborhoodAPI.GetTaskResponse.newBuilder();
+
+        if(task != null) {
+            builder.setTask(NeighborhoodAPI.Task.newBuilder()
+                    .setId(task.getId().intValue())
+                    .setTitle(task.getTitle())
+                    .setDescription(task.getDescription())
+                    .setStatus(task.getStatus().name())
+                    .setStartDate(convertFromTimestamp(task.getStartDate()))
+                    .setCloseDate(convertFromTimestamp(task.getCloseDate()))
+                    .setCreatorId(task.getCreator().getId().intValue()))
+                    .setResultCode("200");
+        }
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
     }
 
     @Override
