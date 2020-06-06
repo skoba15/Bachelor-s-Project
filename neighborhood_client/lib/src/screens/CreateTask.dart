@@ -31,7 +31,7 @@ class _CreateTaskState extends State<CreateTask> {
 
   DateTime _startDate = DateTime.now();
 
-  var _endDate;
+  DateTime _endDate;
 
   final format = DateFormat("yyyy-MM-dd");
 
@@ -40,7 +40,7 @@ class _CreateTaskState extends State<CreateTask> {
   TextEditingController _endDateController = TextEditingController();
 
 
-
+  bool _correctdate = true;
 
 
   Future<String> getPreferences() async {
@@ -177,11 +177,12 @@ class _CreateTaskState extends State<CreateTask> {
                           );
                         }
                         ),
+                        if(!_correctdate && _autoValidate) Text('end date should be ahead of start date'),
                         RaisedButton(
                           color: Colors.black,
                           textColor: Colors.white,
                           onPressed: () async {
-                            if (_formKey.currentState.validate()) {
+                            if (_formKey.currentState.validate() && !isAhead(_startDate, _endDate)) {
                               _formKey.currentState.save();
                               Task task = new Task();
                               task.title = _taskTitle;
@@ -193,10 +194,35 @@ class _CreateTaskState extends State<CreateTask> {
                               AddTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
                                   .addTask(AddTaskRequest()
                                 ..task = task);
-                              print(response.resultCode);
+                              return showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                          'SUCCESS'),
+                                      content: const Text(
+                                          'Subtask successfully added!'),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text('Ok'),
+                                          onPressed: () {
+                                            Navigator.of(
+                                                context).pop();
+                                            int neighborhoodId = widget.id;
+                                            Navigator.pushReplacementNamed(
+                                                context, '/Neighborhoods/$neighborhoodId/tasks');
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  }
+                              );
                             }
                             else {
                               setState(() {
+                                if(isAhead(_startDate, _endDate)) {
+                                  _correctdate = false;
+                                }
                                 _autoValidate = true;
                               });
                             }
@@ -214,5 +240,9 @@ class _CreateTaskState extends State<CreateTask> {
           }
         }
     );
+  }
+
+  bool isAhead(DateTime startDate, DateTime endDate) {
+    return endDate.difference(startDate).isNegative;
   }
 }

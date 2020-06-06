@@ -44,9 +44,9 @@ class _TasksState extends State<Tasks> {
               child: Scaffold(
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    int id = 139;
+                    int neighborhoodId = widget.id;
                     Navigator.pushReplacementNamed(
-                        context, '/CreateTask/$id');
+                        context, '/Neighborhoods/$neighborhoodId/CreateTask');
                   },
                   child: Icon(Icons.add),
                   backgroundColor: Colors.black,

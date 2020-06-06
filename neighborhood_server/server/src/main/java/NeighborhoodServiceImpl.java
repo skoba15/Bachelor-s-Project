@@ -384,7 +384,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                 taskBuilder.addSubTask(NeighborhoodAPI.SubTask.newBuilder()
                         .setId(subTask.getId().intValue())
                         .setTitle(subTask.getTitle())
-                        .setDescription(subTask.getTitle())
+                        .setDescription(subTask.getDescription())
                         .setStatus(subTask.getStatus().name())
                         .setAssigneeId(assignee.getId().intValue())
                         .setAssigneeName(assignee.getFirstName() + " " + assignee.getLastName())

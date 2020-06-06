@@ -1,7 +1,6 @@
 import 'dart:html';
 import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,14 +32,16 @@ class _CreateSubtaskState extends State<CreateSubtask> {
 
   bool _autoValidate = false;
 
-  String _description;
+  String _description = "";
 
-  String _title;
+  String _title = "";
 
 
   int _selected = -1;
 
-  String _assigneeName;
+  String _assigneeName = "";
+
+  bool _assigned = true;
 
   List<UserInfoItem> _users;
 
@@ -53,10 +54,6 @@ class _CreateSubtaskState extends State<CreateSubtask> {
     return Future.value("done");
   }
 
-
-  Future<Null> _showList1() async {
-
-  }
 
 
   @override
@@ -92,7 +89,9 @@ class _CreateSubtaskState extends State<CreateSubtask> {
                                 _title = val;
                               },
                               validator: (value) {
+                                print("Value " + value);
                                 if (value.isEmpty) {
+                                  print("Movida");
                                   return 'Empty titles not allowed';
                                 }
                                 return null;
@@ -150,8 +149,11 @@ class _CreateSubtaskState extends State<CreateSubtask> {
                                           );
                                         });
                                     stState(() {
-                                      _selected = index;
-                                      _assigneeName = _users[index].userFullName;
+                                       if(index != null) {
+                                         _selected = index;
+                                         _assigneeName =
+                                             _users[index].userFullName;
+                                       }
                                     });
                                   },
                                 ),
@@ -160,20 +162,48 @@ class _CreateSubtaskState extends State<CreateSubtask> {
                             );
                           }
                           ),
+                          if(_autoValidate && !_assigned)Text('Please select assignee', style: TextStyle(color: Colors.red)),
                           RaisedButton(
                             color: Colors.black,
                             textColor: Colors.white,
                             onPressed: () async {
-                              if (_formKey.currentState.validate()) {
+                              if (_formKey.currentState.validate() && _assigneeName != "") {
                                 _formKey.currentState.save();
                                 SubTask subtask = new SubTask()..title = _title..description = _description..taskId = widget.taskId..assigneeId = _users[_selected].userId;
                                  AddSubTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
                                     .addSubTask(AddSubTaskRequest()
                                   ..subTask = subtask);
                                  print(response.resultCode);
+                                return showDialog<void>(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text(
+                                            'SUCCESS'),
+                                        content: const Text(
+                                            'Subtask successfully added!'),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                            child: Text('Ok'),
+                                            onPressed: () {
+                                              Navigator.of(
+                                                  context).pop();
+                                              int neighborhoodId = widget.neighborhoodId;
+                                              int taskId = widget.taskId;
+                                              Navigator.pushReplacementNamed(
+                                                  context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                );
                               }
                               else {
                                 setState(() {
+                                  if(_assigneeName == "") {
+                                    _assigned = false;
+                                  }
                                   _autoValidate = true;
                                 });
                               }

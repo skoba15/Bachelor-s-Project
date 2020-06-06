@@ -36,137 +36,139 @@ class _RegisterState extends State<Register> {
         body: Form(
           key: _formKey,
           autovalidate: _autoValidate,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
 
-            children: <Widget>[
-              Center(child: Text('Register',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,)),
-              SizedBox(height: 20),
-              TextFormField(
+              children: <Widget>[
+                Center(child: Text('Register',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,)),
+                SizedBox(height: 20),
+                TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: 'First Name'
+                    ),
+                    onSaved: (String val) {
+                      _firstName = val;
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Empty first names not allowed';
+                      }
+                      return null;
+                    }
+                ),
+                SizedBox(height: 20),
+                TextFormField(
                   decoration: const InputDecoration(
-                      labelText: 'First Name'
+                      labelText: 'Last Name'
                   ),
                   onSaved: (String val) {
-                    _firstName = val;
+                    _lastName = val;
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Empty first names not allowed';
+                      return 'Empty last name not allowed';
                     }
                     return null;
-                  }
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                    labelText: 'Last Name'
+                  },
                 ),
-                onSaved: (String val) {
-                  _lastName = val;
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Empty last name not allowed';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                    labelText: 'Username'
+                TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'Username'
+                  ),
+                  onSaved: (String val) {
+                    _username = val;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Empty username not allowed';
+                    }
+                    return null;
+                  },
                 ),
-                onSaved: (String val) {
-                  _username = val;
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Empty username not allowed';
-                  }
-                  return null;
-                },
-              ),
-              Text(_usernameExists ? 'username exists' : '', style: TextStyle(color: Colors.red),),
-              new TextFormField(
-                decoration: const InputDecoration(
-                    labelText: 'Mobile'
+                Text(_usernameExists ? 'username exists' : '', style: TextStyle(color: Colors.red),),
+                new TextFormField(
+                  decoration: const InputDecoration(
+                      labelText: 'Mobile'
+                  ),
+                  keyboardType: TextInputType.phone,
+                  validator: (value) {
+                    if (value.length != 9) {
+                      return 'invalid phone number';
+                    }
+                    return null;
+                  },
+                  onSaved: (String val) {
+                    _phoneNumber = val;
+                  },
                 ),
-                keyboardType: TextInputType.phone,
-                validator: (value) {
-                  if (value.length != 9) {
-                    return 'invalid phone number';
-                  }
-                  return null;
-                },
-                onSaved: (String val) {
-                  _phoneNumber = val;
-                },
-              ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                    labelText: 'Password'
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: const InputDecoration(
+                      labelText: 'Password'
+                  ),
+                  onSaved: (String val) {
+                    _password = val;
+                  },
+                  validator: (value) {
+                    if (value.length < 8) {
+                      return 'Empty password not allowed';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
                 ),
-                onSaved: (String val) {
-                  _password = val;
-                },
-                validator: (value) {
-                  if (value.length < 8) {
-                    return 'Empty password not allowed';
-                  }
-                  return null;
-                },
-                obscureText: true,
-              ),
-              TextFormField(
-                controller: _repeatedPasswordController,
-                decoration: const InputDecoration(
-                    labelText: 'Repeat password'
+                TextFormField(
+                  controller: _repeatedPasswordController,
+                  decoration: const InputDecoration(
+                      labelText: 'Repeat password'
+                  ),
+                  onSaved: (String val) {
+                    _password = val;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Empty password not allowed';
+                    }
+                    if ( value != _passwordController.text) {
+                      return 'Passwords don\'t match';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
                 ),
-                onSaved: (String val) {
-                  _password = val;
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Empty password not allowed';
-                  }
-                  if ( value != _passwordController.text) {
-                    return 'Passwords don\'t match';
-                  }
-                  return null;
-                },
-                obscureText: true,
-              ),
-              SizedBox(height: 20,),
-              RaisedButton(
-                color: Colors.black,
-                textColor: Colors.white,
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    final response = await ServiceClient(ClientSingleton().getChannel()).registerUser(
-                        RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password);
-                    if(response.resultCode == "failed") {
-                      setState(() {
-                        _autoValidate = true;
-                        _usernameExists = true;
-                      });
+                SizedBox(height: 20,),
+                RaisedButton(
+                  color: Colors.black,
+                  textColor: Colors.white,
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      final response = await ServiceClient(ClientSingleton().getChannel()).registerUser(
+                          RegisterUserRequest()..firstName = _firstName..lastName = _lastName..username = _username..phoneNumber = _phoneNumber..password = _password);
+                      if(response.resultCode == "failed") {
+                        setState(() {
+                          _autoValidate = true;
+                          _usernameExists = true;
+                        });
+                      }
+                      else {
+                        Navigator.pushReplacementNamed(context, '/Success');
+                      }
                     }
                     else {
-                      Navigator.pushReplacementNamed(context, '/Success');
+                      setState(() {
+                        _autoValidate = true;
+                      });
                     }
-                  }
-                  else {
-                    setState(() {
-                      _autoValidate = true;
-                    });
-                  }
-                },
-                child: Text('Sign up'),
-              ),
-            ],
+                  },
+                  child: Text('Sign up'),
+                ),
+              ],
+            ),
           ),
         )
     );
