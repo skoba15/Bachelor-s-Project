@@ -14,12 +14,17 @@ import 'package:flutter/src/widgets/async.dart' as a;
 
 
 class ShowTask extends StatefulWidget {
-  final int id;
 
-  ShowTask({Key key, @required this.id}) : super(key: key);
+  final int taskId;
+
+  final int neighborhoodId;
+
+
+  ShowTask({Key key, @required this.neighborhoodId, @required this.taskId}) : super(key: key);
 
   @override
   _ShowTaskState createState() => _ShowTaskState();
+
 }
 
 
@@ -30,7 +35,7 @@ class _ShowTaskState extends State<ShowTask> {
   Future<String> getTask() async {
      GetTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTask(GetTaskRequest()
-      ..taskId = widget.id);
+      ..taskId = widget.taskId);
      _task = response.task;
     return Future.value("done");
   }
@@ -59,7 +64,17 @@ class _ShowTaskState extends State<ShowTask> {
                 children: <Widget> [
                   Center(child: Text(_task.title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)),
                   SizedBox(height: 20,),
-                  Text(_task.description, style: TextStyle(fontSize: 18),)
+                  Text(_task.description, style: TextStyle(fontSize: 18),),
+                  RaisedButton(
+                    child:Text('Add subtask'),
+                    color: Colors.black,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      int neighborhoodId = widget.neighborhoodId;
+                      int taskId = widget.taskId;
+                      Navigator.pushNamed(context, '/Neighborhoods/$neighborhoodId/tasks/$taskId/CreateSubtask');
+                    },
+                  ),
                 ]
               ),
             );

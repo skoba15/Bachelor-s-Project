@@ -114,9 +114,10 @@ class _TasksState extends State<Tasks> {
                                     style: TextStyle(
                                         color: Colors.black),),
                                   onTap: () {
-                                    int idd = _tasks[index].id;
+                                    int neighborhoodId = widget.id;
+                                    int taskId = _tasks[index].id;
                                     Navigator.pushNamed(
-                                        context, '/task/$idd');
+                                        context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
                                   },
                                   trailing: Text(_tasks[index].status),
                                 ),

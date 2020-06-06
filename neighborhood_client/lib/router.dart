@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:neighborhood_client/src/screens/CreateSubtask.dart';
 import 'package:neighborhood_client/src/screens/CreateTask.dart';
 import 'package:neighborhood_client/src/screens/Createneighborhood.dart';
 import 'package:neighborhood_client/src/screens/Login.dart';
@@ -49,7 +50,10 @@ class FluroRouter {
           CreateTask(id: int.parse(params['id'][0])));
   static Handler _showTaskHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          ShowTask(id: int.parse(params['id'][0])));
+          ShowTask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),));
+  static Handler _createSubtaskHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          CreateSubtask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),));
 
   static void setupRouter() {
     router.define(
@@ -93,7 +97,7 @@ class FluroRouter {
     );
 
     router.define(
-      'tasks/:id',
+      'Neighborhoods/:id/tasks',
       handler: _tasksHandler,
     );
 
@@ -103,8 +107,13 @@ class FluroRouter {
     );
 
     router.define(
-      'task/:id',
+      'Neighborhoods/:neighborhoodId/tasks/:taskId',
       handler: _showTaskHandler,
+    );
+
+    router.define(
+      'Neighborhoods/:neighborhoodId/tasks/:taskId/CreateSubtask',
+      handler: _createSubtaskHandler,
     );
   }
 }
