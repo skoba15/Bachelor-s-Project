@@ -104,8 +104,16 @@ service Service {
     rpc GetTaskByNeighborhood (GetTaskByNeighborhoodRequest) returns (GetTaskByNeighborhoodResponse) {
     }
 
-
     rpc ChangeTaskStatus (ChangeTaskStatusRequest) returns (ChangeTaskStatusResponse) {
+    }
+
+    rpc AddSubTask (AddSubTaskRequest) returns (AddSubTaskResponse) {
+    }
+
+    rpc getUserTasks (getUserTasksRequest) returns (getUserTasksResponse) {
+    }
+
+    rpc ChangeSubTaskStatus (ChangeSubTaskStatusRequest) returns (ChangeSubTaskStatusResponse) {
     }
 
     // კომენტარი
@@ -152,6 +160,17 @@ message Task {
     int32 neighborhood_id = 6;
     Date start_date = 7;
     Date close_date = 8;
+}
+
+// ქვედავალება
+message SubTask {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+    string status = 4;
+    int32 assignee_id = 5;
+    string assignee_name = 6;
+    int32 task_id = 7;
 }
 
 // პოსტი
@@ -326,13 +345,13 @@ message AddUserToNeighborhoodResponse {
 
 
 message ApproveUserToNeighborhoodRequest {
-    int32 userId = 1;
-    int32 neighborhoodId = 2;
+    int32 user_id = 1;
+    int32 neighborhood_id = 2;
 }
 
 message RejectUserToNeighborhoodRequest {
-    int32 userId = 1;
-    int32 neighborhoodId = 2;
+    int32 user_id = 1;
+    int32 neighborhood_id = 2;
 }
 
 message ApproveUserToNeighborhoodResponse {
@@ -344,8 +363,8 @@ message RejectUserToNeighborhoodResponse {
 }
 
 message GetUserRequestListResponseItem {
-    int32 userId = 1;
-    string userName = 2;
+    int32 user_id = 1;
+    string user_name = 2;
 }
 
 message GetUserRequestListRequest {
@@ -445,6 +464,31 @@ message ChangeTaskStatusRequest {
 message ChangeTaskStatusResponse {
     string result_code = 1;
     Task task = 2;
+}
+
+message AddSubTaskRequest {
+    SubTask sub_task = 1;
+}
+
+message AddSubTaskResponse {
+    string result_code = 1;
+}
+
+message getUserTasksRequest {
+    int32 user_id = 1;
+}
+
+message getUserTasksResponse {
+    repeated SubTask sub_task = 1;
+}
+
+message ChangeSubTaskStatusRequest {
+    int32 sub_task_id = 1;
+    string status = 2;
+}
+
+message ChangeSubTaskStatusResponse {
+    string result_code = 1;
 }
 
 
