@@ -320,7 +320,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         if(creator == null) {
             resultCode = "User does not exist";
-        }  else if(neighborhood == null) {
+        } else if(neighborhood == null) {
             resultCode = "Neighborhood does not exist";
         } else {
             TaskEntity task = new TaskEntity();
@@ -391,6 +391,44 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void changeTaskStatus(NeighborhoodAPI.ChangeTaskStatusRequest request, StreamObserver<NeighborhoodAPI.ChangeTaskStatusResponse> responseObserver) {
+
+    }
+
+    @Override
+    public void addSubTask(NeighborhoodAPI.AddSubTaskRequest request, StreamObserver<NeighborhoodAPI.AddSubTaskResponse> responseObserver) {
+        String resultCode;
+
+        NeighborhoodAPI.SubTask subTaskInfo = request.getSubTask();
+        UserEntity assignee = userService.findUserById((long)subTaskInfo.getAssigneeId());
+        TaskEntity parentTask = taskService.getTaskById((long)subTaskInfo.getTaskId());
+
+        if(assignee == null) {
+            resultCode = "Assignee does not exist";
+        } else if (parentTask == null) {
+            resultCode = "Parent task does not exist";
+        } else {
+            SubTaskEntity subTask = new SubTaskEntity();
+            subTask.setTitle(subTaskInfo.getTitle());
+            subTask.setDescription(subTaskInfo.getDescription());
+            subTask.setStatus(TaskStatus.NEW);
+            subTask.setAssignee(assignee);
+            subTask.setParentTask(parentTask);
+
+            Long addSubTaskResult = taskService.addSubTask(subTask);
+            resultCode = addSubTaskResult != null ? "SubTask " + addSubTaskResult + " added to task " + parentTask.getId() : "Could not add Task";
+        }
+
+        responseObserver.onNext(NeighborhoodAPI.AddSubTaskResponse.newBuilder().setResultCode(resultCode).build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getUserTasks(NeighborhoodAPI.getUserTasksRequest request, StreamObserver<NeighborhoodAPI.getUserTasksResponse> responseObserver) {
+
+    }
+
+    @Override
+    public void changeSubTaskStatus(NeighborhoodAPI.ChangeSubTaskStatusRequest request, StreamObserver<NeighborhoodAPI.ChangeSubTaskStatusResponse> responseObserver) {
 
     }
 

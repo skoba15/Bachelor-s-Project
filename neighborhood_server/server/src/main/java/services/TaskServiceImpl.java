@@ -39,9 +39,12 @@ public class TaskServiceImpl implements TaskService {
         Long result = (Long) session.save(subTaskEntity);
 
         UserEntity assignee = subTaskEntity.getAssignee();
+        TaskEntity parentTask = subTaskEntity.getParentTask();
 
         assignee.getSubTasksList().add(subTaskEntity);
+        parentTask.getSubTasks().add(subTaskEntity);
         session.merge(assignee);
+        session.merge(parentTask);
 
         try {
             session.getTransaction().commit();

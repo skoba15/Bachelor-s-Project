@@ -237,6 +237,97 @@ class Task extends $pb.GeneratedMessage {
   Date ensureCloseDate() => $_ensure(7);
 }
 
+class SubTask extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('SubTask', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
+    ..aOS(2, 'title')
+    ..aOS(3, 'description')
+    ..aOS(4, 'status')
+    ..a<$core.int>(5, 'assigneeId', $pb.PbFieldType.O3)
+    ..aOS(6, 'assigneeName')
+    ..a<$core.int>(7, 'taskId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  SubTask._() : super();
+  factory SubTask() => create();
+  factory SubTask.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SubTask.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  SubTask clone() => SubTask()..mergeFromMessage(this);
+  SubTask copyWith(void Function(SubTask) updates) => super.copyWith((message) => updates(message as SubTask));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SubTask create() => SubTask._();
+  SubTask createEmptyInstance() => create();
+  static $pb.PbList<SubTask> createRepeated() => $pb.PbList<SubTask>();
+  @$core.pragma('dart2js:noInline')
+  static SubTask getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubTask>(create);
+  static SubTask _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get title => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set title($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTitle() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTitle() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get description => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set description($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasDescription() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDescription() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get status => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set status($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasStatus() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStatus() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get assigneeId => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set assigneeId($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasAssigneeId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAssigneeId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get assigneeName => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set assigneeName($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasAssigneeName() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAssigneeName() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get taskId => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set taskId($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasTaskId() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearTaskId() => clearField(7);
+}
+
 class Post extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Post', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
@@ -1520,8 +1611,8 @@ class AddUserToNeighborhoodResponse extends $pb.GeneratedMessage {
 
 class ApproveUserToNeighborhoodRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ApproveUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3, protoName: 'userId')
-    ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3, protoName: 'neighborhoodId')
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1561,8 +1652,8 @@ class ApproveUserToNeighborhoodRequest extends $pb.GeneratedMessage {
 
 class RejectUserToNeighborhoodRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('RejectUserToNeighborhoodRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3, protoName: 'userId')
-    ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3, protoName: 'neighborhoodId')
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1664,8 +1755,8 @@ class RejectUserToNeighborhoodResponse extends $pb.GeneratedMessage {
 
 class GetUserRequestListResponseItem extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserRequestListResponseItem', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3, protoName: 'userId')
-    ..aOS(2, 'userName', protoName: 'userName')
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..aOS(2, 'userName')
     ..hasRequiredFields = false
   ;
 
@@ -2435,6 +2526,198 @@ class ChangeTaskStatusResponse extends $pb.GeneratedMessage {
   void clearTask() => clearField(2);
   @$pb.TagNumber(2)
   Task ensureTask() => $_ensure(1);
+}
+
+class AddSubTaskRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddSubTaskRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOM<SubTask>(1, 'subTask', subBuilder: SubTask.create)
+    ..hasRequiredFields = false
+  ;
+
+  AddSubTaskRequest._() : super();
+  factory AddSubTaskRequest() => create();
+  factory AddSubTaskRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AddSubTaskRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  AddSubTaskRequest clone() => AddSubTaskRequest()..mergeFromMessage(this);
+  AddSubTaskRequest copyWith(void Function(AddSubTaskRequest) updates) => super.copyWith((message) => updates(message as AddSubTaskRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AddSubTaskRequest create() => AddSubTaskRequest._();
+  AddSubTaskRequest createEmptyInstance() => create();
+  static $pb.PbList<AddSubTaskRequest> createRepeated() => $pb.PbList<AddSubTaskRequest>();
+  @$core.pragma('dart2js:noInline')
+  static AddSubTaskRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddSubTaskRequest>(create);
+  static AddSubTaskRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  SubTask get subTask => $_getN(0);
+  @$pb.TagNumber(1)
+  set subTask(SubTask v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSubTask() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSubTask() => clearField(1);
+  @$pb.TagNumber(1)
+  SubTask ensureSubTask() => $_ensure(0);
+}
+
+class AddSubTaskResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddSubTaskResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'resultCode')
+    ..hasRequiredFields = false
+  ;
+
+  AddSubTaskResponse._() : super();
+  factory AddSubTaskResponse() => create();
+  factory AddSubTaskResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AddSubTaskResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  AddSubTaskResponse clone() => AddSubTaskResponse()..mergeFromMessage(this);
+  AddSubTaskResponse copyWith(void Function(AddSubTaskResponse) updates) => super.copyWith((message) => updates(message as AddSubTaskResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AddSubTaskResponse create() => AddSubTaskResponse._();
+  AddSubTaskResponse createEmptyInstance() => create();
+  static $pb.PbList<AddSubTaskResponse> createRepeated() => $pb.PbList<AddSubTaskResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AddSubTaskResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddSubTaskResponse>(create);
+  static AddSubTaskResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get resultCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set resultCode($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResultCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResultCode() => clearField(1);
+}
+
+class getUserTasksRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('getUserTasksRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  getUserTasksRequest._() : super();
+  factory getUserTasksRequest() => create();
+  factory getUserTasksRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory getUserTasksRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  getUserTasksRequest clone() => getUserTasksRequest()..mergeFromMessage(this);
+  getUserTasksRequest copyWith(void Function(getUserTasksRequest) updates) => super.copyWith((message) => updates(message as getUserTasksRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static getUserTasksRequest create() => getUserTasksRequest._();
+  getUserTasksRequest createEmptyInstance() => create();
+  static $pb.PbList<getUserTasksRequest> createRepeated() => $pb.PbList<getUserTasksRequest>();
+  @$core.pragma('dart2js:noInline')
+  static getUserTasksRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<getUserTasksRequest>(create);
+  static getUserTasksRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserId() => clearField(1);
+}
+
+class getUserTasksResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('getUserTasksResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..pc<SubTask>(1, 'subTask', $pb.PbFieldType.PM, subBuilder: SubTask.create)
+    ..hasRequiredFields = false
+  ;
+
+  getUserTasksResponse._() : super();
+  factory getUserTasksResponse() => create();
+  factory getUserTasksResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory getUserTasksResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  getUserTasksResponse clone() => getUserTasksResponse()..mergeFromMessage(this);
+  getUserTasksResponse copyWith(void Function(getUserTasksResponse) updates) => super.copyWith((message) => updates(message as getUserTasksResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static getUserTasksResponse create() => getUserTasksResponse._();
+  getUserTasksResponse createEmptyInstance() => create();
+  static $pb.PbList<getUserTasksResponse> createRepeated() => $pb.PbList<getUserTasksResponse>();
+  @$core.pragma('dart2js:noInline')
+  static getUserTasksResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<getUserTasksResponse>(create);
+  static getUserTasksResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<SubTask> get subTask => $_getList(0);
+}
+
+class ChangeSubTaskStatusRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeSubTaskStatusRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'subTaskId', $pb.PbFieldType.O3)
+    ..aOS(2, 'status')
+    ..hasRequiredFields = false
+  ;
+
+  ChangeSubTaskStatusRequest._() : super();
+  factory ChangeSubTaskStatusRequest() => create();
+  factory ChangeSubTaskStatusRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChangeSubTaskStatusRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ChangeSubTaskStatusRequest clone() => ChangeSubTaskStatusRequest()..mergeFromMessage(this);
+  ChangeSubTaskStatusRequest copyWith(void Function(ChangeSubTaskStatusRequest) updates) => super.copyWith((message) => updates(message as ChangeSubTaskStatusRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ChangeSubTaskStatusRequest create() => ChangeSubTaskStatusRequest._();
+  ChangeSubTaskStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<ChangeSubTaskStatusRequest> createRepeated() => $pb.PbList<ChangeSubTaskStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ChangeSubTaskStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeSubTaskStatusRequest>(create);
+  static ChangeSubTaskStatusRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get subTaskId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set subTaskId($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSubTaskId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSubTaskId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get status => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set status($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasStatus() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStatus() => clearField(2);
+}
+
+class ChangeSubTaskStatusResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeSubTaskStatusResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
+    ..aOS(1, 'resultCode')
+    ..hasRequiredFields = false
+  ;
+
+  ChangeSubTaskStatusResponse._() : super();
+  factory ChangeSubTaskStatusResponse() => create();
+  factory ChangeSubTaskStatusResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChangeSubTaskStatusResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ChangeSubTaskStatusResponse clone() => ChangeSubTaskStatusResponse()..mergeFromMessage(this);
+  ChangeSubTaskStatusResponse copyWith(void Function(ChangeSubTaskStatusResponse) updates) => super.copyWith((message) => updates(message as ChangeSubTaskStatusResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ChangeSubTaskStatusResponse create() => ChangeSubTaskStatusResponse._();
+  ChangeSubTaskStatusResponse createEmptyInstance() => create();
+  static $pb.PbList<ChangeSubTaskStatusResponse> createRepeated() => $pb.PbList<ChangeSubTaskStatusResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ChangeSubTaskStatusResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeSubTaskStatusResponse>(create);
+  static ChangeSubTaskStatusResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get resultCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set resultCode($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResultCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResultCode() => clearField(1);
 }
 
 class AddCommentRequest extends $pb.GeneratedMessage {
