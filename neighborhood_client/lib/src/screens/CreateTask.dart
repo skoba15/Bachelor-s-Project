@@ -201,7 +201,7 @@ class _CreateTaskState extends State<CreateTask> {
                                       title: Text(
                                           'SUCCESS'),
                                       content: const Text(
-                                          'Subtask successfully added!'),
+                                          'Task successfully added!'),
                                       actions: <Widget>[
                                         FlatButton(
                                           child: Text('Ok'),
@@ -209,8 +209,11 @@ class _CreateTaskState extends State<CreateTask> {
                                             Navigator.of(
                                                 context).pop();
                                             int neighborhoodId = widget.id;
-                                            Navigator.pushReplacementNamed(
-                                                context, '/Neighborhoods/$neighborhoodId/tasks');
+                                            if (response.taskId != null) {
+                                              int taskId = response.taskId;
+                                              Navigator.pushReplacementNamed(
+                                                  context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                            }
                                           },
                                         ),
                                       ],

@@ -24,12 +24,17 @@ class _TasksState extends State<Tasks> {
 
   List<Task> _tasks;
 
+  List<SubTask> _subTasks;
+
   Future<String> getMyNeighborhoodsList() async {
     GetTaskByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTaskByNeighborhood(GetTaskByNeighborhoodRequest()
       ..neighborhoodId = widget.id);
     _tasks = response.tasks;
-    print(_tasks.length);
+    GetUserTasksResponse subtaskResponse = await ServiceClient(ClientSingleton().getChannel())
+        .getUserTasks(GetUserTasksRequest()
+      ..neighborhoodId = widget.id);
+    _subTasks = subtaskResponse.subTask;
     return Future.value("WTF");
   }
 
@@ -65,36 +70,39 @@ class _TasksState extends State<Tasks> {
                 ),
                 body: TabBarView(
                   children: [
-                    ListView.builder(
-                      itemCount: _tasks.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: Column(
+                    Expanded(
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: _subTasks.length,
+                        itemBuilder: (context, index) {
+                          print(_subTasks[index].description);
+                          return Column(
                               children: <Widget>[
                                 ListTile(
                                   title: Text(
-                                    '${_tasks[index].title}',
+                                    '${_subTasks[index].title}',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold),),
                                   leading: Icon(Icons.note,),
                                   subtitle: Text(
-                                    'Start Date: ${_tasks[index].startDate.day}/${_tasks[index].startDate.month}/${_tasks[index].startDate.year}\nEnd Date: ${_tasks[index].closeDate.day}/${_tasks[index].closeDate.month}/${_tasks[index].closeDate.year}',
+                                    'Description: ${_subTasks[index].description}\n Assignee: ${_subTasks[index].assigneeName}',
                                     style: TextStyle(
                                         color: Colors.black),),
                                   onTap: () {
-//                                    int idd = _response.neighborhood[index].id;
-//                                    Navigator.pushNamed(
-//                                        context, '/Neighborhood/$idd');
+                                    int taskId = _subTasks[index].taskId;
+                                    int neighborhoodId = widget.id;
+                                    Navigator.pushNamed(
+                                        context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
                                   },
-                                  trailing: Text(_tasks[index].status),
+                                  trailing: Icon(Icons.radio_button_unchecked),
+                                  isThreeLine: true,
                                 ),
                               ]
-
-                          ),
-
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                     ListView.builder(
                       itemCount: _tasks.length,
