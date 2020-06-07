@@ -2387,6 +2387,7 @@ class AddTaskRequest extends $pb.GeneratedMessage {
 class AddTaskResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddTaskResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
+    ..a<$core.int>(2, 'taskId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2413,6 +2414,15 @@ class AddTaskResponse extends $pb.GeneratedMessage {
   $core.bool hasResultCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearResultCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get taskId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set taskId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTaskId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTaskId() => clearField(2);
 }
 
 class GetTaskRequest extends $pb.GeneratedMessage {

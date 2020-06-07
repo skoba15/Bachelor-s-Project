@@ -337,6 +337,8 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         UserEntity creator = userService.findUserById((long)creatorId);
         NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)taskInfo.getNeighborhoodId());
 
+        NeighborhoodAPI.AddTaskResponse.Builder builder = NeighborhoodAPI.AddTaskResponse.newBuilder();
+
         if(creator == null) {
             resultCode = "User does not exist";
         } else if(neighborhood == null) {
@@ -353,10 +355,15 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             task.setNeighborhood(neighborhood);
 
             Long addTaskResult = taskService.addTask(task);
+
+            if(addTaskResult != null) {
+                builder.setTaskId(addTaskResult.intValue());
+            }
+
             resultCode = addTaskResult != null ? "Task " + addTaskResult + " added" : "Could not add Task";
         }
 
-        responseObserver.onNext(NeighborhoodAPI.AddTaskResponse.newBuilder().setResultCode(resultCode).build());
+        responseObserver.onNext(builder.setResultCode(resultCode).build());
         responseObserver.onCompleted();
 
     }

@@ -451,6 +451,7 @@ message AddTaskRequest {
 
 message AddTaskResponse {
     string result_code = 1;
+    int32 task_id = 2;
 }
 
 message GetTaskRequest {
