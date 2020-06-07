@@ -77,7 +77,7 @@ public class TaskServiceImpl implements TaskService {
     public SubTaskEntity getSubTaskById(Long subTaskId) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
-        String hql = "FROM TaskEntity as t WHERE t.id = :id";
+        String hql = "FROM SubTaskEntity as t WHERE t.id = :id";
         Query query = session.createQuery(hql);
         query.setParameter("id", subTaskId);
         SubTaskEntity result;
