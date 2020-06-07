@@ -137,7 +137,7 @@ class Task extends $pb.GeneratedMessage {
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
     ..aOS(2, 'title')
     ..aOS(3, 'description')
-    ..aOS(4, 'status')
+    ..a<$core.int>(4, 'status', $pb.PbFieldType.O3)
     ..a<$core.int>(5, 'creatorId', $pb.PbFieldType.O3)
     ..a<$core.int>(6, 'neighborhoodId', $pb.PbFieldType.O3)
     ..aOM<Date>(7, 'startDate', subBuilder: Date.create)
@@ -189,9 +189,9 @@ class Task extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get status => $_getSZ(3);
+  $core.int get status => $_getIZ(3);
   @$pb.TagNumber(4)
-  set status($core.String v) { $_setString(3, v); }
+  set status($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasStatus() => $_has(3);
   @$pb.TagNumber(4)
@@ -246,7 +246,7 @@ class SubTask extends $pb.GeneratedMessage {
     ..a<$core.int>(1, 'id', $pb.PbFieldType.O3)
     ..aOS(2, 'title')
     ..aOS(3, 'description')
-    ..aOS(4, 'status')
+    ..a<$core.int>(4, 'status', $pb.PbFieldType.O3)
     ..a<$core.int>(5, 'assigneeId', $pb.PbFieldType.O3)
     ..aOS(6, 'assigneeName')
     ..a<$core.int>(7, 'taskId', $pb.PbFieldType.O3)
@@ -296,9 +296,9 @@ class SubTask extends $pb.GeneratedMessage {
   void clearDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get status => $_getSZ(3);
+  $core.int get status => $_getIZ(3);
   @$pb.TagNumber(4)
-  set status($core.String v) { $_setString(3, v); }
+  set status($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasStatus() => $_has(3);
   @$pb.TagNumber(4)
@@ -2555,90 +2555,6 @@ class GetTaskByNeighborhoodResponse extends $pb.GeneratedMessage {
   $core.List<Task> get tasks => $_getList(0);
 }
 
-class ChangeTaskStatusRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeTaskStatusRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'taskId', $pb.PbFieldType.O3)
-    ..aOS(2, 'status')
-    ..hasRequiredFields = false
-  ;
-
-  ChangeTaskStatusRequest._() : super();
-  factory ChangeTaskStatusRequest() => create();
-  factory ChangeTaskStatusRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ChangeTaskStatusRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ChangeTaskStatusRequest clone() => ChangeTaskStatusRequest()..mergeFromMessage(this);
-  ChangeTaskStatusRequest copyWith(void Function(ChangeTaskStatusRequest) updates) => super.copyWith((message) => updates(message as ChangeTaskStatusRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ChangeTaskStatusRequest create() => ChangeTaskStatusRequest._();
-  ChangeTaskStatusRequest createEmptyInstance() => create();
-  static $pb.PbList<ChangeTaskStatusRequest> createRepeated() => $pb.PbList<ChangeTaskStatusRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ChangeTaskStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeTaskStatusRequest>(create);
-  static ChangeTaskStatusRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get taskId => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set taskId($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasTaskId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearTaskId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get status => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set status($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasStatus() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearStatus() => clearField(2);
-}
-
-class ChangeTaskStatusResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeTaskStatusResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'resultCode')
-    ..aOM<Task>(2, 'task', subBuilder: Task.create)
-    ..hasRequiredFields = false
-  ;
-
-  ChangeTaskStatusResponse._() : super();
-  factory ChangeTaskStatusResponse() => create();
-  factory ChangeTaskStatusResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ChangeTaskStatusResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ChangeTaskStatusResponse clone() => ChangeTaskStatusResponse()..mergeFromMessage(this);
-  ChangeTaskStatusResponse copyWith(void Function(ChangeTaskStatusResponse) updates) => super.copyWith((message) => updates(message as ChangeTaskStatusResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ChangeTaskStatusResponse create() => ChangeTaskStatusResponse._();
-  ChangeTaskStatusResponse createEmptyInstance() => create();
-  static $pb.PbList<ChangeTaskStatusResponse> createRepeated() => $pb.PbList<ChangeTaskStatusResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ChangeTaskStatusResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeTaskStatusResponse>(create);
-  static ChangeTaskStatusResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get resultCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set resultCode($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResultCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResultCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  Task get task => $_getN(1);
-  @$pb.TagNumber(2)
-  set task(Task v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasTask() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTask() => clearField(2);
-  @$pb.TagNumber(2)
-  Task ensureTask() => $_ensure(1);
-}
-
 class AddSubTaskRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddSubTaskRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOM<SubTask>(1, 'subTask', subBuilder: SubTask.create)
@@ -2772,7 +2688,7 @@ class GetUserTasksResponse extends $pb.GeneratedMessage {
 class ChangeSubTaskStatusRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeSubTaskStatusRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'subTaskId', $pb.PbFieldType.O3)
-    ..aOS(2, 'status')
+    ..a<$core.int>(2, 'status', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2801,9 +2717,9 @@ class ChangeSubTaskStatusRequest extends $pb.GeneratedMessage {
   void clearSubTaskId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get status => $_getSZ(1);
+  $core.int get status => $_getIZ(1);
   @$pb.TagNumber(2)
-  set status($core.String v) { $_setString(1, v); }
+  set status($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasStatus() => $_has(1);
   @$pb.TagNumber(2)
@@ -2813,6 +2729,8 @@ class ChangeSubTaskStatusRequest extends $pb.GeneratedMessage {
 class ChangeSubTaskStatusResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChangeSubTaskStatusResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
+    ..a<$core.int>(2, 'subTaskNewStatus', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, 'parentTaskNewStatus', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2839,6 +2757,24 @@ class ChangeSubTaskStatusResponse extends $pb.GeneratedMessage {
   $core.bool hasResultCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearResultCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get subTaskNewStatus => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set subTaskNewStatus($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSubTaskNewStatus() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSubTaskNewStatus() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get parentTaskNewStatus => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set parentTaskNewStatus($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasParentTaskNewStatus() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearParentTaskNewStatus() => clearField(3);
 }
 
 class AddCommentRequest extends $pb.GeneratedMessage {

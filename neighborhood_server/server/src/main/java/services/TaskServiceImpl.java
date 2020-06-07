@@ -96,16 +96,18 @@ public class TaskServiceImpl implements TaskService {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
 
+        int result = -1;
         TaskEntity task = getTaskById(taskId);
 
         if(task != null) {
             task.setStatus(newStatus);
             session.merge(task);
+            session.getTransaction().commit();
+            result = 0;
         }
 
-        session.getTransaction().commit();
         session.close();
-        return 0;
+        return result;
     }
 
     @Override
@@ -113,15 +115,17 @@ public class TaskServiceImpl implements TaskService {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
 
+        int result = -1;
         SubTaskEntity subTask = getSubTaskById(subTaskId);
 
         if(subTask != null) {
             subTask.setStatus(newStatus);
             session.merge(subTask);
+            session.getTransaction().commit();
+            result = 0;
         }
 
-        session.getTransaction().commit();
         session.close();
-        return 0;
+        return result;
     }
 }

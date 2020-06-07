@@ -177,12 +177,6 @@ class ServiceClient extends $grpc.Client {
       ($0.GetTaskByNeighborhoodRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.GetTaskByNeighborhoodResponse.fromBuffer(value));
-  static final _$changeTaskStatus = $grpc.ClientMethod<
-          $0.ChangeTaskStatusRequest, $0.ChangeTaskStatusResponse>(
-      '/neighborhood.server.Service/ChangeTaskStatus',
-      ($0.ChangeTaskStatusRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $0.ChangeTaskStatusResponse.fromBuffer(value));
   static final _$addSubTask =
       $grpc.ClientMethod<$0.AddSubTaskRequest, $0.AddSubTaskResponse>(
           '/neighborhood.server.Service/AddSubTask',
@@ -454,15 +448,6 @@ class ServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getTaskByNeighborhood, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$0.ChangeTaskStatusResponse> changeTaskStatus(
-      $0.ChangeTaskStatusRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$changeTaskStatus, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -754,15 +739,6 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.GetTaskByNeighborhoodRequest.fromBuffer(value),
         ($0.GetTaskByNeighborhoodResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ChangeTaskStatusRequest,
-            $0.ChangeTaskStatusResponse>(
-        'ChangeTaskStatus',
-        changeTaskStatus_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $0.ChangeTaskStatusRequest.fromBuffer(value),
-        ($0.ChangeTaskStatusResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddSubTaskRequest, $0.AddSubTaskResponse>(
         'AddSubTask',
         addSubTask_Pre,
@@ -971,12 +947,6 @@ abstract class ServiceBase extends $grpc.Service {
     return getTaskByNeighborhood(call, await request);
   }
 
-  $async.Future<$0.ChangeTaskStatusResponse> changeTaskStatus_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.ChangeTaskStatusRequest> request) async {
-    return changeTaskStatus(call, await request);
-  }
-
   $async.Future<$0.AddSubTaskResponse> addSubTask_Pre($grpc.ServiceCall call,
       $async.Future<$0.AddSubTaskRequest> request) async {
     return addSubTask(call, await request);
@@ -1069,8 +1039,6 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.GetTaskRequest request);
   $async.Future<$0.GetTaskByNeighborhoodResponse> getTaskByNeighborhood(
       $grpc.ServiceCall call, $0.GetTaskByNeighborhoodRequest request);
-  $async.Future<$0.ChangeTaskStatusResponse> changeTaskStatus(
-      $grpc.ServiceCall call, $0.ChangeTaskStatusRequest request);
   $async.Future<$0.AddSubTaskResponse> addSubTask(
       $grpc.ServiceCall call, $0.AddSubTaskRequest request);
   $async.Future<$0.GetUserTasksResponse> getUserTasks(

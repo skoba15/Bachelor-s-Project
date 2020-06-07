@@ -381,7 +381,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             taskBuilder.setId(task.getId().intValue())
                     .setTitle(task.getTitle())
                     .setDescription(task.getDescription())
-                    .setStatus(task.getStatus().name())
+                    .setStatus(task.getStatus().getValue())
                     .setStartDate(convertFromTimestamp(task.getStartDate()))
                     .setCloseDate(convertFromTimestamp(task.getCloseDate()))
                     .setCreatorId(task.getCreator().getId().intValue());
@@ -392,7 +392,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                         .setId(subTask.getId().intValue())
                         .setTitle(subTask.getTitle())
                         .setDescription(subTask.getDescription())
-                        .setStatus(subTask.getStatus().name())
+                        .setStatus(subTask.getStatus().getValue())
                         .setAssigneeId(assignee.getId().intValue())
                         .setAssigneeName(assignee.getFirstName() + " " + assignee.getLastName())
                         .setTaskId(task.getId().intValue()));
@@ -418,7 +418,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                         .setId(task.getId().intValue())
                         .setTitle(task.getTitle())
                         .setDescription(task.getDescription())
-                        .setStatus(task.getStatus().name())
+                        .setStatus(task.getStatus().getValue())
                         .setStartDate(convertFromTimestamp(task.getStartDate()))
                         .setCloseDate(convertFromTimestamp(task.getCloseDate()))
                         .setCreatorId(task.getCreator().getId().intValue()));
@@ -427,11 +427,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         responseObserver.onNext(builder.build());
         responseObserver.onCompleted();
-    }
-
-    @Override
-    public void changeTaskStatus(NeighborhoodAPI.ChangeTaskStatusRequest request, StreamObserver<NeighborhoodAPI.ChangeTaskStatusResponse> responseObserver) {
-
     }
 
     @Override
@@ -478,7 +473,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                         .setId(subTask.getId().intValue())
                         .setTitle(subTask.getTitle())
                         .setDescription(subTask.getDescription())
-                        .setStatus(subTask.getStatus().name())
+                        .setStatus(subTask.getStatus().getValue())
                         .setAssigneeId(user.getId().intValue())
                         .setAssigneeName(user.getFirstName() + " " + user.getLastName())
                         .setTaskId(subTask.getParentTask().getId().intValue()));
@@ -491,7 +486,42 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void changeSubTaskStatus(NeighborhoodAPI.ChangeSubTaskStatusRequest request, StreamObserver<NeighborhoodAPI.ChangeSubTaskStatusResponse> responseObserver) {
+        long subTaskId = (long)request.getSubTaskId();
+        int status = request.getStatus();
+        int changeResultCode = -1, newSubTaskStatus = -1, newParentTaskStatus = -1;
 
+        SubTaskEntity subTask = taskService.getSubTaskById(subTaskId);
+        TaskEntity parentTask = subTask.getParentTask();
+
+        if(TaskStatus.valueOf(status) == TaskStatus.IN_PROGRESS) {
+            if(parentTask.getStatus() == TaskStatus.NEW) {
+                int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.IN_PROGRESS);
+                newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
+            }
+            changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.IN_PROGRESS);
+            newSubTaskStatus = changeResultCode == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
+        } else if(TaskStatus.valueOf(status) == TaskStatus.CLOSED) {
+            boolean shouldClose = true;
+            for(SubTaskEntity st : parentTask.getSubTasks()) {
+                if(st.getStatus() != TaskStatus.CLOSED) {
+                    shouldClose = false;
+                    break;
+                }
+            }
+            if(shouldClose) {
+                int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.CLOSED);
+                newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
+            }
+            changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.CLOSED);
+            newSubTaskStatus = changeResultCode == 0 ? TaskStatus.CLOSED.getValue() : 0;
+        }
+        String resultCode = changeResultCode == 0 ? "SUCCESS" : "FAIL";
+        responseObserver.onNext(NeighborhoodAPI.ChangeSubTaskStatusResponse.newBuilder()
+                .setResultCode(resultCode)
+                .setSubTaskNewStatus(newSubTaskStatus)
+                .setParentTaskNewStatus(newParentTaskStatus)
+                .build());
+        responseObserver.onCompleted();
     }
 
     @Override

@@ -35,7 +35,7 @@ const Task$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     const {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     const {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    const {'1': 'status', '3': 4, '4': 1, '5': 9, '10': 'status'},
+    const {'1': 'status', '3': 4, '4': 1, '5': 5, '10': 'status'},
     const {'1': 'creator_id', '3': 5, '4': 1, '5': 5, '10': 'creatorId'},
     const {'1': 'neighborhood_id', '3': 6, '4': 1, '5': 5, '10': 'neighborhoodId'},
     const {'1': 'start_date', '3': 7, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'startDate'},
@@ -50,7 +50,7 @@ const SubTask$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     const {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     const {'1': 'description', '3': 3, '4': 1, '5': 9, '10': 'description'},
-    const {'1': 'status', '3': 4, '4': 1, '5': 9, '10': 'status'},
+    const {'1': 'status', '3': 4, '4': 1, '5': 5, '10': 'status'},
     const {'1': 'assignee_id', '3': 5, '4': 1, '5': 5, '10': 'assigneeId'},
     const {'1': 'assignee_name', '3': 6, '4': 1, '5': 9, '10': 'assigneeName'},
     const {'1': 'task_id', '3': 7, '4': 1, '5': 5, '10': 'taskId'},
@@ -521,22 +521,6 @@ const GetTaskByNeighborhoodResponse$json = const {
   ],
 };
 
-const ChangeTaskStatusRequest$json = const {
-  '1': 'ChangeTaskStatusRequest',
-  '2': const [
-    const {'1': 'task_id', '3': 1, '4': 1, '5': 5, '10': 'taskId'},
-    const {'1': 'status', '3': 2, '4': 1, '5': 9, '10': 'status'},
-  ],
-};
-
-const ChangeTaskStatusResponse$json = const {
-  '1': 'ChangeTaskStatusResponse',
-  '2': const [
-    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'task', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Task', '10': 'task'},
-  ],
-};
-
 const AddSubTaskRequest$json = const {
   '1': 'AddSubTaskRequest',
   '2': const [
@@ -570,7 +554,7 @@ const ChangeSubTaskStatusRequest$json = const {
   '1': 'ChangeSubTaskStatusRequest',
   '2': const [
     const {'1': 'sub_task_id', '3': 1, '4': 1, '5': 5, '10': 'subTaskId'},
-    const {'1': 'status', '3': 2, '4': 1, '5': 9, '10': 'status'},
+    const {'1': 'status', '3': 2, '4': 1, '5': 5, '10': 'status'},
   ],
 };
 
@@ -578,6 +562,8 @@ const ChangeSubTaskStatusResponse$json = const {
   '1': 'ChangeSubTaskStatusResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
+    const {'1': 'sub_task_new_status', '3': 2, '4': 1, '5': 5, '10': 'subTaskNewStatus'},
+    const {'1': 'parent_task_new_status', '3': 3, '4': 1, '5': 5, '10': 'parentTaskNewStatus'},
   ],
 };
 
