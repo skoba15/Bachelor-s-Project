@@ -93,11 +93,35 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public int changeTaskStatus(Long taskId, TaskStatus newStatus) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        TaskEntity task = getTaskById(taskId);
+
+        if(task != null) {
+            task.setStatus(newStatus);
+            session.merge(task);
+        }
+
+        session.getTransaction().commit();
+        session.close();
         return 0;
     }
 
     @Override
     public int changeSubTaskStatus(Long subTaskId, TaskStatus newStatus) {
+        Session session = JdbcConnection.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        SubTaskEntity subTask = getSubTaskById(subTaskId);
+
+        if(subTask != null) {
+            subTask.setStatus(newStatus);
+            session.merge(subTask);
+        }
+
+        session.getTransaction().commit();
+        session.close();
         return 0;
     }
 }

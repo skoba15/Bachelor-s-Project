@@ -28,10 +28,10 @@ public class NeighborhoodEntity {
     @Column(name = "ADDRESS")
     private String address;
 
-    @OneToMany(mappedBy = "neighborhoodEntity", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "neighborhoodEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserToNeighborhoodEntity> usersList = new HashSet<UserToNeighborhoodEntity>();
 
-    @OneToMany(mappedBy = "neighborhood", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "neighborhood", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<TaskEntity> taskList = new HashSet<TaskEntity>();
 
     public NeighborhoodEntity() {}
