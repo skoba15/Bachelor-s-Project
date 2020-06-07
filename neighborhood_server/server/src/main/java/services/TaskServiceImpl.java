@@ -100,8 +100,21 @@ public class TaskServiceImpl implements TaskService {
         TaskEntity task = getTaskById(taskId);
 
         if(task != null) {
+            UserEntity user = task.getCreator();
+            NeighborhoodEntity neighborhood = task.getNeighborhood();
+
+            user.getTasksList().remove(task);
+            neighborhood.getTaskList().remove(task);
+
             task.setStatus(newStatus);
             session.merge(task);
+
+            user.getTasksList().add(task);
+            neighborhood.getTaskList().add(task);
+
+            session.merge(user);
+            session.merge(neighborhood);
+
             session.getTransaction().commit();
             result = 0;
         }
@@ -119,8 +132,21 @@ public class TaskServiceImpl implements TaskService {
         SubTaskEntity subTask = getSubTaskById(subTaskId);
 
         if(subTask != null) {
+            UserEntity assignee = subTask.getAssignee();
+            TaskEntity parentTask = subTask.getParentTask();
+
+            assignee.getSubTasksList().remove(subTask);
+            parentTask.getSubTasks().remove(subTask);
+
             subTask.setStatus(newStatus);
             session.merge(subTask);
+
+            assignee.getSubTasksList().add(subTask);
+            parentTask.getSubTasks().add(subTask);
+
+            session.merge(assignee);
+            session.merge(parentTask);
+
             session.getTransaction().commit();
             result = 0;
         }
