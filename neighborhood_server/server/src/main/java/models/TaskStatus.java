@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum TaskStatus {
-    NEW(1),
-    IN_PROGRESS(2),
-    CLOSED(3);
+    NEW(0),
+    IN_PROGRESS(1),
+    CLOSED(2);
 
     private int value;
     private static Map map = new HashMap<>();

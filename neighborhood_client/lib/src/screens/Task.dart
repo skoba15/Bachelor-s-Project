@@ -30,7 +30,10 @@ class ShowTask extends StatefulWidget {
 
 class _ShowTaskState extends State<ShowTask> {
 
+
   Task _task;
+
+  int _selectedStatus = -1;
 
   List<SubTask> _subTasks;
 
@@ -51,7 +54,7 @@ class _ShowTaskState extends State<ShowTask> {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return Scaffold(
               floatingActionButton: FloatingActionButton(
-                onPressed: () {
+                onPressed: () async{
                   int neighborhoodId = widget.neighborhoodId;
                   int taskId = widget.taskId;
                   Navigator.pushNamed(context, '/Neighborhoods/$neighborhoodId/tasks/$taskId/CreateSubtask');
@@ -101,7 +104,47 @@ class _ShowTaskState extends State<ShowTask> {
 //                                    Navigator.pushNamed(
 //                                        context, '/Neighborhood/$idd');
                                   },
-                                  trailing: Icon(Icons.radio_button_unchecked),
+                                  trailing: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                                    return Container(
+                                      width: 80,
+                                      child: Row(
+                                        children: <Widget>[
+                                          _subTasks[index].status == 0
+                                              ? Icon(Icons.radio_button_unchecked)
+                                              : (( _subTasks[index].status == 1) ? Icon(
+                                              Icons.radio_button_unchecked,
+                                              color: Colors.yellow) : Icon(
+                                              Icons.done, color: Colors.green)),
+                                          if(_subTasks[index].status != 2)PopupMenuButton<int>(
+                                            onSelected: (int result) async {
+                                              if(result > _subTasks[index].status) {
+                                                ChangeSubTaskStatusResponse response = await ServiceClient(ClientSingleton().getChannel())
+                                                    .changeSubTaskStatus(ChangeSubTaskStatusRequest()..subTaskId = _subTasks[index].id..status = result);
+                                                print('New subtask status ${response.subTaskNewStatus} ');
+                                                stState(() {
+                                                  _subTasks[index].status = response.subTaskNewStatus;
+                                                  print('New task status ${response.parentTaskNewStatus} ');
+                                                });
+                                              }
+                                            },
+                                            itemBuilder: (BuildContext context) =>
+                                            <PopupMenuEntry<int>>[
+                                              const PopupMenuItem<int>(
+                                                value: 1,
+                                                child: Text('IN PROGRESS'),
+                                              ),
+                                              const PopupMenuItem<int>(
+                                                value: 2,
+                                                child: Text('DONE'),
+                                              ),
+                                            ],
+                                          )
+
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                  ),
                                   isThreeLine: true,
                                 ),
                               ]

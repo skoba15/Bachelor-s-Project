@@ -96,7 +96,19 @@ class _TasksState extends State<Tasks> {
                                     Navigator.pushNamed(
                                         context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
                                   },
-                                  trailing: Icon(Icons.radio_button_unchecked),
+                                  trailing: Container(
+                                    width: 80,
+                                    child: Row(
+                                        children: <Widget> [
+                                          _subTasks[index].status == 0
+                                              ? Icon(Icons.radio_button_unchecked)
+                                              : (( _subTasks[index].status == 1) ? Icon(
+                                              Icons.radio_button_unchecked,
+                                              color: Colors.yellow) : Icon(
+                                              Icons.done, color: Colors.green)),
+                                        ]
+                                    ),
+                                  ),
                                   isThreeLine: true,
                                 ),
                               ]
@@ -108,32 +120,59 @@ class _TasksState extends State<Tasks> {
                       itemCount: _tasks.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          child: Column(
-                              children: <Widget>[
-                                ListTile(
-                                  title: Text(
-                                    '${_tasks[index].title}',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),),
-                                  leading: Icon(Icons.note,),
-                                  subtitle: Text(
-                                    'Start Date: ${_tasks[index].startDate.day}/${_tasks[index].startDate.month}/${_tasks[index].startDate.year}\nEnd Date: ${_tasks[index].closeDate.day}/${_tasks[index].closeDate.month}/${_tasks[index].closeDate.year}',
-                                    style: TextStyle(
-                                        color: Colors.black),),
-                                  onTap: () {
-                                    int neighborhoodId = widget.id;
-                                    int taskId = _tasks[index].id;
-                                    Navigator.pushNamed(
-                                        context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
-                                  },
-                                  trailing: Text(_tasks[index].status),
-                                ),
-                              ]
+                          child: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                            return Column(
+                                children: <Widget>[
+                                  ListTile(
+                                      title: Text(
+                                        '${_tasks[index].title}',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),),
+                                      leading: Icon(Icons.note,),
+                                      subtitle: Text(
+                                        'Start Date: ${_tasks[index].startDate
+                                            .day}/${_tasks[index].startDate
+                                            .month}/${_tasks[index].startDate
+                                            .year}\nEnd Date: ${_tasks[index]
+                                            .closeDate.day}/${_tasks[index]
+                                            .closeDate.month}/${_tasks[index]
+                                            .closeDate.year}',
+                                        style: TextStyle(
+                                            color: Colors.black),),
+                                      onTap: () {
+                                        int neighborhoodId = widget.id;
+                                        int taskId = _tasks[index].id;
+                                         Navigator
+                                            .pushNamed(
+                                            context,
+                                            '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                      },
+                                      trailing: Container(
+                                        width: 80,
+                                        child: Row(
+                                            children: <Widget>[
+                                              _tasks[index].status == 0
+                                                  ? Icon(
+                                                  Icons.radio_button_unchecked)
+                                                  : ((_tasks[index].status == 1)
+                                                  ? Icon(
+                                                  Icons.radio_button_unchecked,
+                                                  color: Colors.yellow)
+                                                  : Icon(
+                                                  Icons.done,
+                                                  color: Colors.green)),
+                                            ]
+                                        ),
+                                      )
+                                  ),
+                                ]
 
+                            );
+                          }
                           ),
+                          );
 
-                        );
                       },
                     ),
                   ]
