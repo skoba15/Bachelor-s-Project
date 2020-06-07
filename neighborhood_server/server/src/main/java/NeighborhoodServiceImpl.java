@@ -501,6 +501,10 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.IN_PROGRESS);
             newSubTaskStatus = changeResultCode == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
         } else if(TaskStatus.valueOf(status) == TaskStatus.CLOSED) {
+
+            changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.CLOSED);
+            newSubTaskStatus = changeResultCode == 0 ? TaskStatus.CLOSED.getValue() : 0;
+
             boolean shouldClose = true;
             for(SubTaskEntity st : parentTask.getSubTasks()) {
                 if(st.getStatus() != TaskStatus.CLOSED) {
@@ -516,9 +520,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                 int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.IN_PROGRESS);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
             }
-
-            changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.CLOSED);
-            newSubTaskStatus = changeResultCode == 0 ? TaskStatus.CLOSED.getValue() : 0;
         }
         String resultCode = changeResultCode == 0 ? "SUCCESS" : "FAIL";
         responseObserver.onNext(NeighborhoodAPI.ChangeSubTaskStatusResponse.newBuilder()
