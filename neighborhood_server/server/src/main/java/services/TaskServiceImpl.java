@@ -13,15 +13,15 @@ public class TaskServiceImpl implements TaskService {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
         Long result = (Long) session.save(taskEntity);
-
-        UserEntity creator = taskEntity.getCreator();
-        creator.getTasksList().add(taskEntity);
-
-        NeighborhoodEntity neighborhood = taskEntity.getNeighborhood();
-        neighborhood.getTaskList().add(taskEntity);
-
-        session.merge(creator);
-        session.merge(neighborhood);
+//
+//        UserEntity creator = taskEntity.getCreator();
+//        creator.getTasksList().add(taskEntity);
+//
+//        NeighborhoodEntity neighborhood = taskEntity.getNeighborhood();
+//        neighborhood.getTaskList().add(taskEntity);
+//
+//        session.merge(creator);
+//        session.merge(neighborhood);
 
         try {
             session.getTransaction().commit();
@@ -37,14 +37,14 @@ public class TaskServiceImpl implements TaskService {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
         Long result = (Long) session.save(subTaskEntity);
-
-        UserEntity assignee = subTaskEntity.getAssignee();
-        TaskEntity parentTask = subTaskEntity.getParentTask();
-
-        assignee.getSubTasksList().add(subTaskEntity);
-        parentTask.getSubTasks().add(subTaskEntity);
-        session.merge(assignee);
-        session.merge(parentTask);
+//
+//        UserEntity assignee = subTaskEntity.getAssignee();
+//        TaskEntity parentTask = subTaskEntity.getParentTask();
+//
+//        assignee.getSubTasksList().add(subTaskEntity);
+//        parentTask.getSubTasks().add(subTaskEntity);
+//        session.merge(assignee);
+//        session.merge(parentTask);
 
         try {
             session.getTransaction().commit();

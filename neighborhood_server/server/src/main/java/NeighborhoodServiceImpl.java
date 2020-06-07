@@ -508,10 +508,15 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                     break;
                 }
             }
+
             if(shouldClose) {
                 int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.CLOSED);
+                newParentTaskStatus = curRes == 0 ? TaskStatus.CLOSED.getValue() : 0;
+            } else if(parentTask.getStatus() == TaskStatus.NEW) {
+                int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.IN_PROGRESS);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
             }
+
             changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.CLOSED);
             newSubTaskStatus = changeResultCode == 0 ? TaskStatus.CLOSED.getValue() : 0;
         }
