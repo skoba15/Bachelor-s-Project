@@ -70,111 +70,121 @@ class _TasksState extends State<Tasks> {
                 ),
                 body: TabBarView(
                   children: [
-                    Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: _subTasks.length,
-                        itemBuilder: (context, index) {
-                          print(_subTasks[index].description);
-                          return Column(
-                              children: <Widget>[
-                                ListTile(
-                                  title: Text(
-                                    '${_subTasks[index].title}',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),),
-                                  leading: Icon(Icons.note,),
-                                  subtitle: Text(
-                                    'Description: ${_subTasks[index].description}\n Assignee: ${_subTasks[index].assigneeName}',
-                                    style: TextStyle(
-                                        color: Colors.black),),
-                                  onTap: () {
-                                    int taskId = _subTasks[index].taskId;
-                                    int neighborhoodId = widget.id;
-                                    Navigator.pushNamed(
-                                        context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
-                                  },
-                                  trailing: Container(
-                                    width: 80,
-                                    child: Row(
-                                        children: <Widget> [
-                                          _subTasks[index].status == 0
-                                              ? Icon(Icons.radio_button_unchecked)
-                                              : (( _subTasks[index].status == 1) ? Icon(
-                                              Icons.radio_button_unchecked,
-                                              color: Colors.yellow) : Icon(
-                                              Icons.done, color: Colors.green)),
-                                        ]
-                                    ),
-                                  ),
-                                  isThreeLine: true,
-                                ),
-                              ]
-                          );
-                        },
-                      ),
-                    ),
-                    ListView.builder(
-                      itemCount: _tasks.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                    Column(
+                      children: <Widget> [
+                        Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: _subTasks.length,
+                          itemBuilder: (context, index) {
+                            print(_subTasks[index].description);
                             return Column(
                                 children: <Widget>[
                                   ListTile(
-                                      title: Text(
-                                        '${_tasks[index].title}',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),),
-                                      leading: Icon(Icons.note,),
-                                      subtitle: Text(
-                                        'Start Date: ${_tasks[index].startDate
-                                            .day}/${_tasks[index].startDate
-                                            .month}/${_tasks[index].startDate
-                                            .year}\nEnd Date: ${_tasks[index]
-                                            .closeDate.day}/${_tasks[index]
-                                            .closeDate.month}/${_tasks[index]
-                                            .closeDate.year}',
-                                        style: TextStyle(
-                                            color: Colors.black),),
-                                      onTap: () {
-                                        int neighborhoodId = widget.id;
-                                        int taskId = _tasks[index].id;
-                                         Navigator
-                                            .pushNamed(
-                                            context,
-                                            '/Neighborhoods/$neighborhoodId/tasks/$taskId');
-                                      },
-                                      trailing: Container(
-                                        width: 80,
-                                        child: Row(
-                                            children: <Widget>[
-                                              _tasks[index].status == 0
-                                                  ? Icon(
-                                                  Icons.radio_button_unchecked)
-                                                  : ((_tasks[index].status == 1)
-                                                  ? Icon(
-                                                  Icons.radio_button_unchecked,
-                                                  color: Colors.yellow)
-                                                  : Icon(
-                                                  Icons.done,
-                                                  color: Colors.green)),
-                                            ]
-                                        ),
-                                      )
+                                    title: Text(
+                                      '${_subTasks[index].title}',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),),
+                                    leading: Icon(Icons.note,),
+                                    subtitle: Text(
+                                      'Description: ${_subTasks[index].description}\n Assignee: ${_subTasks[index].assigneeName}',
+                                      style: TextStyle(
+                                          color: Colors.black),),
+                                    onTap: () {
+                                      int taskId = _subTasks[index].taskId;
+                                      int neighborhoodId = widget.id;
+                                      Navigator.pushNamed(
+                                          context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                    },
+                                    trailing: Container(
+                                      width: 80,
+                                      child: Row(
+                                          children: <Widget> [
+                                            _subTasks[index].status == 0
+                                                ? Icon(Icons.radio_button_unchecked)
+                                                : (( _subTasks[index].status == 1) ? Icon(
+                                                Icons.radio_button_unchecked,
+                                                color: Colors.yellow) : Icon(
+                                                Icons.done, color: Colors.green)),
+                                          ]
+                                      ),
+                                    ),
+                                    isThreeLine: true,
                                   ),
                                 ]
-
                             );
-                          }
-                          ),
-                          );
-
-                      },
+                          },
+                        ),
+                      ),
+                      ]
                     ),
+                    Column(
+                      children: <Widget> [
+                        Expanded(
+                      child: ListView.builder(
+                        itemCount: _tasks.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                              return Column(
+                                  children: <Widget>[
+                                    ListTile(
+                                        title: Text(
+                                          '${_tasks[index].title}',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),),
+                                        leading: Icon(Icons.note,),
+                                        subtitle: Text(
+                                          'Start Date: ${_tasks[index].startDate
+                                              .day}/${_tasks[index].startDate
+                                              .month}/${_tasks[index].startDate
+                                              .year}\nEnd Date: ${_tasks[index]
+                                              .closeDate.day}/${_tasks[index]
+                                              .closeDate.month}/${_tasks[index]
+                                              .closeDate.year}',
+                                          style: TextStyle(
+                                              color: Colors.black),),
+                                        onTap: () {
+                                          int neighborhoodId = widget.id;
+                                          int taskId = _tasks[index].id;
+                                           Navigator
+                                              .pushNamed(
+                                              context,
+                                              '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                        },
+                                        trailing: Container(
+                                          width: 80,
+                                          child: Row(
+                                              children: <Widget>[
+                                                _tasks[index].status == 0
+                                                    ? Icon(
+                                                    Icons.radio_button_unchecked)
+                                                    : ((_tasks[index].status == 1)
+                                                    ? Icon(
+                                                    Icons.radio_button_unchecked,
+                                                    color: Colors.yellow)
+                                                    : Icon(
+                                                    Icons.done,
+                                                    color: Colors.green)),
+                                              ]
+                                          ),
+                                        )
+                                    ),
+                                  ]
+
+                              );
+                            }
+                            ),
+                            );
+
+                        },
+                      ),
+                    ),
+                    ]
+                  ),
                   ]
                 ),
               ),

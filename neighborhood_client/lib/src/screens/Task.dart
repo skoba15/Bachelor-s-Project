@@ -57,7 +57,10 @@ class _ShowTaskState extends State<ShowTask> {
                 onPressed: () async{
                   int neighborhoodId = widget.neighborhoodId;
                   int taskId = widget.taskId;
-                  Navigator.pushNamed(context, '/Neighborhoods/$neighborhoodId/tasks/$taskId/CreateSubtask');
+                  await Navigator.pushNamed(context, '/Neighborhoods/$neighborhoodId/tasks/$taskId/CreateSubtask');
+                  setState(() {
+
+                  });
                 },
                 child: Icon(Icons.add),
                 backgroundColor: Colors.black,

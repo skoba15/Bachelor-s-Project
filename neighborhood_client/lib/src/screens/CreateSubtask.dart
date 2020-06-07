@@ -173,7 +173,6 @@ class _CreateSubtaskState extends State<CreateSubtask> {
                                  AddSubTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
                                     .addSubTask(AddSubTaskRequest()
                                   ..subTask = subtask);
-                                 print(response.resultCode);
                                 return showDialog<void>(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -190,8 +189,8 @@ class _CreateSubtaskState extends State<CreateSubtask> {
                                                   context).pop();
                                               int neighborhoodId = widget.neighborhoodId;
                                               int taskId = widget.taskId;
-                                              Navigator.pushReplacementNamed(
-                                                  context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                              Navigator.pop(
+                                                  context);
                                             },
                                           ),
                                         ],
