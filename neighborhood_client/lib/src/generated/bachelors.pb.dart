@@ -2706,6 +2706,7 @@ class AddSubTaskResponse extends $pb.GeneratedMessage {
 class GetUserTasksRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetUserTasksRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, 'neighborhoodId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -2732,6 +2733,15 @@ class GetUserTasksRequest extends $pb.GeneratedMessage {
   $core.bool hasUserId() => $_has(0);
   @$pb.TagNumber(1)
   void clearUserId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get neighborhoodId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set neighborhoodId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNeighborhoodId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNeighborhoodId() => clearField(2);
 }
 
 class GetUserTasksResponse extends $pb.GeneratedMessage {

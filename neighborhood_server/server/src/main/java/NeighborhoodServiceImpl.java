@@ -464,7 +464,29 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getUserTasks(NeighborhoodAPI.GetUserTasksRequest request, StreamObserver<NeighborhoodAPI.GetUserTasksResponse> responseObserver) {
+        //        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        int userId = 1;
+        int neighborhoodId = request.getNeighborhoodId();
 
+        UserEntity user = userService.findUserById((long) userId);
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) neighborhoodId);
+        NeighborhoodAPI.GetUserTasksResponse.Builder builder = NeighborhoodAPI.GetUserTasksResponse.newBuilder();
+
+        if(user != null && neighborhood != null) {
+            for(SubTaskEntity subTask : user.getSubTasksList()) {
+                builder.addSubTask(NeighborhoodAPI.SubTask.newBuilder()
+                        .setId(subTask.getId().intValue())
+                        .setTitle(subTask.getTitle())
+                        .setDescription(subTask.getDescription())
+                        .setStatus(subTask.getStatus().name())
+                        .setAssigneeId(user.getId().intValue())
+                        .setAssigneeName(user.getFirstName() + " " + user.getLastName())
+                        .setTaskId(subTask.getParentTask().getId().intValue()));
+            }
+        }
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
     }
 
     @Override

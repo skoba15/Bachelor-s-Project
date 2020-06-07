@@ -555,6 +555,7 @@ const GetUserTasksRequest$json = const {
   '1': 'GetUserTasksRequest',
   '2': const [
     const {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'neighborhood_id', '3': 2, '4': 1, '5': 5, '10': 'neighborhoodId'},
   ],
 };
 
