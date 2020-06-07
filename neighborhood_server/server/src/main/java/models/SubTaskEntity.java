@@ -24,11 +24,11 @@ public class SubTaskEntity {
     @NotNull
     private TaskStatus status;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PARENT_TASK")
     private TaskEntity parentTask;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ASSIGNEE")
     private UserEntity assignee;
 

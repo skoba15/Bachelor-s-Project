@@ -38,15 +38,15 @@ public class TaskEntity {
     @Column(name = "CLOSE_DATE")
     private Timestamp closeDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creator")
     private UserEntity creator;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "neighbrhood")
     private NeighborhoodEntity neighborhood;
 
-    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parentTask", fetch = FetchType.EAGER)
     private Set<SubTaskEntity> subTasks = new HashSet<>();
 
     public TaskEntity() {}

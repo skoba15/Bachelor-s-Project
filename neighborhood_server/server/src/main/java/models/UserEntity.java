@@ -61,10 +61,10 @@ public class UserEntity {
     )
     private Set<ItemEntity> items = new HashSet<>();
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "assignee", fetch = FetchType.EAGER)
     private Set<SubTaskEntity> subTasksList = new HashSet<SubTaskEntity>();
 
-    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     private Set<TaskEntity> tasksList = new HashSet<TaskEntity>();
 
     public UserEntity() {}
