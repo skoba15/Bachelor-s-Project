@@ -37,6 +37,8 @@ class _ShowTaskState extends State<ShowTask> {
 
   List<SubTask> _subTasks;
 
+  SharedPreferences _prefs;
+
   Future<String> getTask() async {
      GetTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTask(GetTaskRequest()
@@ -57,7 +59,7 @@ class _ShowTaskState extends State<ShowTask> {
                 onPressed: () async{
                   int neighborhoodId = widget.neighborhoodId;
                   int taskId = widget.taskId;
-                  await Navigator.pushNamed(context, '/Neighborhoods/$neighborhoodId/tasks/$taskId/CreateSubtask');
+                  await Navigator.pushNamed(context, 'Neighborhoods/$neighborhoodId/tasks/$taskId/CreateSubtask');
                   setState(() {
 
                   });

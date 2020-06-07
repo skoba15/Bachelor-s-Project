@@ -50,8 +50,8 @@ class _TasksState extends State<Tasks> {
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
                     int neighborhoodId = widget.id;
-                    Navigator.pushReplacementNamed(
-                        context, '/Neighborhoods/$neighborhoodId/CreateTask');
+                    Navigator.pushNamed(
+                        context, 'Neighborhoods/$neighborhoodId/CreateTask');
                   },
                   child: Icon(Icons.add),
                   backgroundColor: Colors.black,
