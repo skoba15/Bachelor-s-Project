@@ -53,7 +53,7 @@ class _CreateTaskState extends State<CreateTask> {
   Widget build(BuildContext context) {
     return FutureBuilder <String>(
         future: getPreferences(),
-        builder: (context, AsyncSnapshot<String> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return Scaffold(
                 appBar: AppBar(

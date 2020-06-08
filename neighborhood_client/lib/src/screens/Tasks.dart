@@ -40,6 +40,7 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
+    print(context.toString());
     return FutureBuilder<String>(
         future: getMyNeighborhoodsList(),
         builder: (context, AsyncSnapshot<String> snapshot) {
@@ -96,7 +97,7 @@ class _TasksState extends State<Tasks> {
                                       int taskId = _subTasks[index].taskId;
                                       int neighborhoodId = widget.id;
                                       Navigator.pushNamed(
-                                          context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                          context, 'Neighborhoods/$neighborhoodId/tasks/$taskId');
                                     },
                                     trailing: Container(
                                       width: 80,
@@ -153,7 +154,7 @@ class _TasksState extends State<Tasks> {
                                            Navigator
                                               .pushNamed(
                                               context,
-                                              '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                              'Neighborhoods/$neighborhoodId/tasks/$taskId');
                                         },
                                         trailing: Container(
                                           width: 80,
