@@ -20,17 +20,20 @@ class Tasks extends StatefulWidget {
 class _TasksState extends State<Tasks> {
 
 
-  SharedPreferences _prefs;
 
   List<Task> _tasks;
 
   List<SubTask> _subTasks;
+
+  SharedPreferences _prefs;
+
 
   Future<String> getMyNeighborhoodsList() async {
     GetTaskByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTaskByNeighborhood(GetTaskByNeighborhoodRequest()
       ..neighborhoodId = widget.id);
     _tasks = response.tasks;
+    print(_tasks.length);
     GetUserTasksResponse subtaskResponse = await ServiceClient(ClientSingleton().getChannel())
         .getUserTasks(GetUserTasksRequest()
       ..neighborhoodId = widget.id);
@@ -49,10 +52,13 @@ class _TasksState extends State<Tasks> {
               length: 2,
               child: Scaffold(
                 floatingActionButton: FloatingActionButton(
-                  onPressed: () {
+                  onPressed: () async {
                     int neighborhoodId = widget.id;
-                    Navigator.pushNamed(
+                    await Navigator.pushNamed(
                         context, 'Neighborhoods/$neighborhoodId/CreateTask');
+                    setState(() {
+
+                    });
                   },
                   child: Icon(Icons.add),
                   backgroundColor: Colors.black,
@@ -93,7 +99,7 @@ class _TasksState extends State<Tasks> {
                                       'Description: ${_subTasks[index].description}\n Assignee: ${_subTasks[index].assigneeName}',
                                       style: TextStyle(
                                           color: Colors.black),),
-                                    onTap: () {
+                                    onTap: () async {
                                       int taskId = _subTasks[index].taskId;
                                       int neighborhoodId = widget.id;
                                       Navigator.pushNamed(
@@ -148,13 +154,16 @@ class _TasksState extends State<Tasks> {
                                               .closeDate.year}',
                                           style: TextStyle(
                                               color: Colors.black),),
-                                        onTap: () {
+                                        onTap: () async {
                                           int neighborhoodId = widget.id;
                                           int taskId = _tasks[index].id;
-                                           Navigator
+                                           await Navigator
                                               .pushNamed(
                                               context,
                                               'Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                          setState(() {
+
+                                          });
                                         },
                                         trailing: Container(
                                           width: 80,

@@ -52,7 +52,9 @@ class _CreateSubtaskState extends State<CreateSubtask> {
         .getUsersByNeighborhood(GetUsersByNeighborhoodRequest()
       ..neighborhoodId = widget.neighborhoodId);
      _users = response.users;
-    return Future.value("done");
+     _prefs = await SharedPreferences.getInstance();
+     _prefs.setString("key", "CreateSubtask");
+     return Future.value("done");
   }
 
 

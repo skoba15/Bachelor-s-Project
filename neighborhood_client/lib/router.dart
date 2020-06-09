@@ -13,11 +13,19 @@ import 'package:neighborhood_client/src/screens/Success.dart';
 import 'package:neighborhood_client/src/screens/Task.dart';
 import 'package:neighborhood_client/src/screens/Tasks.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
+Future<String> getPrefs() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future.value("done");
+}
 
 
 class FluroRouter {
+  static int a = 1;
+
+
   static Router router = Router();
   static Handler _loginHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
@@ -53,8 +61,10 @@ class FluroRouter {
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           ShowTask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),));
   static Handler _createSubtaskHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          CreateSubtask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+         return new CreateSubtask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),);
+      }
+  );
 
   static void setupRouter() {
     router.define(
