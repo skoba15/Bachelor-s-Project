@@ -92,12 +92,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public int changeTaskStatus(Long taskId, TaskStatus newStatus) {
+    public int changeTaskStatus(TaskEntity task, TaskStatus newStatus) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
 
         int result = -1;
-        TaskEntity task = getTaskById(taskId);
 
         if(task != null) {
             UserEntity user = task.getCreator();
@@ -124,12 +123,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public int changeSubTaskStatus(Long subTaskId, TaskStatus newStatus) {
+    public int changeSubTaskStatus(SubTaskEntity subTask, TaskStatus newStatus) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
 
         int result = -1;
-        SubTaskEntity subTask = getSubTaskById(subTaskId);
 
         if(subTask != null) {
             UserEntity assignee = subTask.getAssignee();

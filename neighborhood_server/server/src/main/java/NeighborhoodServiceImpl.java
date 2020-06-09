@@ -495,14 +495,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         if(TaskStatus.valueOf(status) == TaskStatus.IN_PROGRESS) {
             if(parentTask.getStatus() == TaskStatus.NEW) {
-                int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.IN_PROGRESS);
+                int curRes = taskService.changeTaskStatus(parentTask, TaskStatus.IN_PROGRESS);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
             }
-            changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.IN_PROGRESS);
+            changeResultCode = taskService.changeSubTaskStatus(subTask, TaskStatus.IN_PROGRESS);
             newSubTaskStatus = changeResultCode == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
         } else if(TaskStatus.valueOf(status) == TaskStatus.CLOSED) {
 
-            changeResultCode = taskService.changeSubTaskStatus(subTask.getId(), TaskStatus.CLOSED);
+            changeResultCode = taskService.changeSubTaskStatus(subTask, TaskStatus.CLOSED);
             newSubTaskStatus = changeResultCode == 0 ? TaskStatus.CLOSED.getValue() : 0;
 
             boolean shouldClose = true;
@@ -514,10 +514,10 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             }
 
             if(shouldClose) {
-                int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.CLOSED);
+                int curRes = taskService.changeTaskStatus(parentTask, TaskStatus.CLOSED);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.CLOSED.getValue() : 0;
             } else if(parentTask.getStatus() == TaskStatus.NEW) {
-                int curRes = taskService.changeTaskStatus(parentTask.getId(), TaskStatus.IN_PROGRESS);
+                int curRes = taskService.changeTaskStatus(parentTask, TaskStatus.IN_PROGRESS);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
             }
         }

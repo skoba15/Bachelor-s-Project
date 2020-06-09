@@ -43,11 +43,11 @@ public class TaskEntity {
     private UserEntity creator;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "neighbrhood")
+    @JoinColumn(name = "neighborhood")
     private NeighborhoodEntity neighborhood;
 
     @OneToMany(mappedBy = "parentTask", fetch = FetchType.EAGER)
-    private Set<SubTaskEntity> subTasks = new HashSet<>();
+    private Set<SubTaskEntity> subTasks = new HashSet<SubTaskEntity>();
 
     public TaskEntity() {}
 

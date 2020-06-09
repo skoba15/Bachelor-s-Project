@@ -14,8 +14,8 @@ public interface TaskService {
 
     SubTaskEntity getSubTaskById(Long subTaskId);
 
-    int changeTaskStatus(Long taskId, TaskStatus newStatus);
+    int changeTaskStatus(TaskEntity task, TaskStatus newStatus);
 
-    int changeSubTaskStatus(Long subTaskId, TaskStatus newStatus);
+    int changeSubTaskStatus(SubTaskEntity subTask, TaskStatus newStatus);
 
 }
