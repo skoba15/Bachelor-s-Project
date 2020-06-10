@@ -67,6 +67,12 @@ public class UserEntity {
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     private Set<TaskEntity> tasksList = new HashSet<TaskEntity>();
 
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
+    private Set<PostEntity> postsList = new HashSet<PostEntity>();
+
+    @OneToMany(mappedBy = "commentator", fetch = FetchType.EAGER)
+    private Set<CommentEntity> commentsList = new HashSet<CommentEntity>();
+
     public UserEntity() {}
 
     public UserEntity(String userName, String password, String firstName, String lastName, String phoneNumber, Timestamp registrationDate) {
@@ -81,7 +87,6 @@ public class UserEntity {
     public Long getId() {
         return id;
     }
-
 
     public String getUserName() {
         return userName;
@@ -135,6 +140,10 @@ public class UserEntity {
         this.car = car;
     }
 
+    public void setItems(Set<ItemEntity> items) {
+        this.items = items;
+    }
+
     public Set<ItemEntity> getItems() {
         return items;
     }
@@ -161,6 +170,22 @@ public class UserEntity {
 
     public void setTasksList(Set<TaskEntity> tasksList) {
         this.tasksList = tasksList;
+    }
+
+    public Set<PostEntity> getPostsList() {
+        return postsList;
+    }
+
+    public void setPostsList(Set<PostEntity> postsList) {
+        this.postsList = postsList;
+    }
+
+    public Set<CommentEntity> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(Set<CommentEntity> commentsList) {
+        this.commentsList = commentsList;
     }
 
     @Override

@@ -34,6 +34,9 @@ public class NeighborhoodEntity {
     @OneToMany(mappedBy = "neighborhood", fetch = FetchType.EAGER)
     private Set<TaskEntity> taskList = new HashSet<TaskEntity>();
 
+    @OneToMany(mappedBy = "neighborhood", fetch = FetchType.EAGER)
+    private Set<PostEntity> postList = new HashSet<PostEntity>();
+
     public NeighborhoodEntity() {}
 
     public NeighborhoodEntity(@NotNull String name, String city, String district, String address) {
@@ -97,6 +100,14 @@ public class NeighborhoodEntity {
 
     public void setTaskList(Set<TaskEntity> taskList) {
         this.taskList = taskList;
+    }
+
+    public Set<PostEntity> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(Set<PostEntity> postList) {
+        this.postList = postList;
     }
 
     @Override
