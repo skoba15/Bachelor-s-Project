@@ -153,12 +153,24 @@ class ServiceClient extends $grpc.Client {
           ($0.DeletePostRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.DeletePostResponse.fromBuffer(value));
-  static final _$getPosts =
+  static final _$getPost =
       $grpc.ClientMethod<$0.GetPostRequest, $0.GetPostResponse>(
-          '/neighborhood.server.Service/GetPosts',
+          '/neighborhood.server.Service/GetPost',
           ($0.GetPostRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetPostResponse.fromBuffer(value));
+  static final _$getPostsByNeighborhood = $grpc.ClientMethod<
+          $0.GetPostsByNeighborhoodRequest, $0.GetPostsByNeighborhoodResponse>(
+      '/neighborhood.server.Service/GetPostsByNeighborhood',
+      ($0.GetPostsByNeighborhoodRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetPostsByNeighborhoodResponse.fromBuffer(value));
+  static final _$addComment =
+      $grpc.ClientMethod<$0.AddCommentRequest, $0.AddCommentResponse>(
+          '/neighborhood.server.Service/AddComment',
+          ($0.AddCommentRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.AddCommentResponse.fromBuffer(value));
   static final _$addTask =
       $grpc.ClientMethod<$0.AddTaskRequest, $0.AddTaskResponse>(
           '/neighborhood.server.Service/AddTask',
@@ -195,12 +207,6 @@ class ServiceClient extends $grpc.Client {
       ($0.ChangeSubTaskStatusRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.ChangeSubTaskStatusResponse.fromBuffer(value));
-  static final _$addComment =
-      $grpc.ClientMethod<$0.AddCommentRequest, $0.AddCommentResponse>(
-          '/neighborhood.server.Service/AddComment',
-          ($0.AddCommentRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $0.AddCommentResponse.fromBuffer(value));
   static final _$addCar =
       $grpc.ClientMethod<$0.AddCarRequest, $0.AddCarResponse>(
           '/neighborhood.server.Service/AddCar',
@@ -422,9 +428,27 @@ class ServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.GetPostResponse> getPosts($0.GetPostRequest request,
+  $grpc.ResponseFuture<$0.GetPostResponse> getPost($0.GetPostRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(_$getPosts, $async.Stream.fromIterable([request]),
+    final call = $createCall(_$getPost, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetPostsByNeighborhoodResponse>
+      getPostsByNeighborhood($0.GetPostsByNeighborhoodRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getPostsByNeighborhood, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.AddCommentResponse> addComment(
+      $0.AddCommentRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$addComment, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -475,15 +499,6 @@ class ServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$changeSubTaskStatus, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$0.AddCommentResponse> addComment(
-      $0.AddCommentRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$addComment, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -710,12 +725,28 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) => $0.DeletePostRequest.fromBuffer(value),
         ($0.DeletePostResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetPostRequest, $0.GetPostResponse>(
-        'GetPosts',
-        getPosts_Pre,
+        'GetPost',
+        getPost_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.GetPostRequest.fromBuffer(value),
         ($0.GetPostResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetPostsByNeighborhoodRequest,
+            $0.GetPostsByNeighborhoodResponse>(
+        'GetPostsByNeighborhood',
+        getPostsByNeighborhood_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.GetPostsByNeighborhoodRequest.fromBuffer(value),
+        ($0.GetPostsByNeighborhoodResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AddCommentRequest, $0.AddCommentResponse>(
+        'AddComment',
+        addComment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.AddCommentRequest.fromBuffer(value),
+        ($0.AddCommentResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddTaskRequest, $0.AddTaskResponse>(
         'AddTask',
         addTask_Pre,
@@ -764,13 +795,6 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.ChangeSubTaskStatusRequest.fromBuffer(value),
         ($0.ChangeSubTaskStatusResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.AddCommentRequest, $0.AddCommentResponse>(
-        'AddComment',
-        addComment_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.AddCommentRequest.fromBuffer(value),
-        ($0.AddCommentResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddCarRequest, $0.AddCarResponse>(
         'AddCar',
         addCar_Pre,
@@ -926,9 +950,20 @@ abstract class ServiceBase extends $grpc.Service {
     return deletePost(call, await request);
   }
 
-  $async.Future<$0.GetPostResponse> getPosts_Pre(
+  $async.Future<$0.GetPostResponse> getPost_Pre(
       $grpc.ServiceCall call, $async.Future<$0.GetPostRequest> request) async {
-    return getPosts(call, await request);
+    return getPost(call, await request);
+  }
+
+  $async.Future<$0.GetPostsByNeighborhoodResponse> getPostsByNeighborhood_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.GetPostsByNeighborhoodRequest> request) async {
+    return getPostsByNeighborhood(call, await request);
+  }
+
+  $async.Future<$0.AddCommentResponse> addComment_Pre($grpc.ServiceCall call,
+      $async.Future<$0.AddCommentRequest> request) async {
+    return addComment(call, await request);
   }
 
   $async.Future<$0.AddTaskResponse> addTask_Pre(
@@ -962,11 +997,6 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call,
       $async.Future<$0.ChangeSubTaskStatusRequest> request) async {
     return changeSubTaskStatus(call, await request);
-  }
-
-  $async.Future<$0.AddCommentResponse> addComment_Pre($grpc.ServiceCall call,
-      $async.Future<$0.AddCommentRequest> request) async {
-    return addComment(call, await request);
   }
 
   $async.Future<$0.AddCarResponse> addCar_Pre(
@@ -1031,8 +1061,12 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.AddPostRequest request);
   $async.Future<$0.DeletePostResponse> deletePost(
       $grpc.ServiceCall call, $0.DeletePostRequest request);
-  $async.Future<$0.GetPostResponse> getPosts(
+  $async.Future<$0.GetPostResponse> getPost(
       $grpc.ServiceCall call, $0.GetPostRequest request);
+  $async.Future<$0.GetPostsByNeighborhoodResponse> getPostsByNeighborhood(
+      $grpc.ServiceCall call, $0.GetPostsByNeighborhoodRequest request);
+  $async.Future<$0.AddCommentResponse> addComment(
+      $grpc.ServiceCall call, $0.AddCommentRequest request);
   $async.Future<$0.AddTaskResponse> addTask(
       $grpc.ServiceCall call, $0.AddTaskRequest request);
   $async.Future<$0.GetTaskResponse> getTask(
@@ -1045,8 +1079,6 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.GetUserTasksRequest request);
   $async.Future<$0.ChangeSubTaskStatusResponse> changeSubTaskStatus(
       $grpc.ServiceCall call, $0.ChangeSubTaskStatusRequest request);
-  $async.Future<$0.AddCommentResponse> addComment(
-      $grpc.ServiceCall call, $0.AddCommentRequest request);
   $async.Future<$0.AddCarResponse> addCar(
       $grpc.ServiceCall call, $0.AddCarRequest request);
   $async.Future<$0.GetCarResponse> getCar(

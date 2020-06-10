@@ -12,14 +12,6 @@ const Car$json = const {
   ],
 };
 
-const Comment$json = const {
-  '1': 'Comment',
-  '2': const [
-    const {'1': 'text', '3': 1, '4': 1, '5': 9, '10': 'text'},
-    const {'1': 'post_id', '3': 2, '4': 1, '5': 5, '10': 'postId'},
-  ],
-};
-
 const Date$json = const {
   '1': 'Date',
   '2': const [
@@ -62,9 +54,23 @@ const Post$json = const {
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     const {'1': 'user_id', '3': 2, '4': 1, '5': 5, '10': 'userId'},
-    const {'1': 'neighborhood_id', '3': 3, '4': 1, '5': 5, '10': 'neighborhoodId'},
-    const {'1': 'title', '3': 4, '4': 1, '5': 9, '10': 'title'},
+    const {'1': 'user_full_name', '3': 3, '4': 1, '5': 9, '10': 'userFullName'},
+    const {'1': 'neighborhood_id', '3': 4, '4': 1, '5': 5, '10': 'neighborhoodId'},
     const {'1': 'text', '3': 5, '4': 1, '5': 9, '10': 'text'},
+    const {'1': 'create_date', '3': 6, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'createDate'},
+    const {'1': 'comment', '3': 7, '4': 3, '5': 11, '6': '.neighborhood.server.Comment', '10': 'comment'},
+  ],
+};
+
+const Comment$json = const {
+  '1': 'Comment',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+    const {'1': 'text', '3': 2, '4': 1, '5': 9, '10': 'text'},
+    const {'1': 'user_id', '3': 3, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'user_full_name', '3': 4, '4': 1, '5': 9, '10': 'userFullName'},
+    const {'1': 'post_id', '3': 5, '4': 1, '5': 5, '10': 'postId'},
+    const {'1': 'create_date', '3': 6, '4': 1, '5': 11, '6': '.neighborhood.server.Date', '10': 'createDate'},
   ],
 };
 
@@ -441,24 +447,18 @@ const AddPostRequest$json = const {
   ],
 };
 
-const DeletePostRequest$json = const {
-  '1': 'DeletePostRequest',
-  '2': const [
-    const {'1': 'post_id', '3': 1, '4': 1, '5': 5, '10': 'postId'},
-  ],
-};
-
-const GetPostRequest$json = const {
-  '1': 'GetPostRequest',
-  '2': const [
-    const {'1': 'post_id', '3': 1, '4': 1, '5': 5, '10': 'postId'},
-  ],
-};
-
 const AddPostResponse$json = const {
   '1': 'AddPostResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
+    const {'1': 'post_id', '3': 2, '4': 1, '5': 5, '10': 'postId'},
+  ],
+};
+
+const DeletePostRequest$json = const {
+  '1': 'DeletePostRequest',
+  '2': const [
+    const {'1': 'post_id', '3': 1, '4': 1, '5': 5, '10': 'postId'},
   ],
 };
 
@@ -469,11 +469,32 @@ const DeletePostResponse$json = const {
   ],
 };
 
+const GetPostRequest$json = const {
+  '1': 'GetPostRequest',
+  '2': const [
+    const {'1': 'post_id', '3': 1, '4': 1, '5': 5, '10': 'postId'},
+  ],
+};
+
 const GetPostResponse$json = const {
   '1': 'GetPostResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
     const {'1': 'post', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Post', '10': 'post'},
+  ],
+};
+
+const GetPostsByNeighborhoodRequest$json = const {
+  '1': 'GetPostsByNeighborhoodRequest',
+  '2': const [
+    const {'1': 'neighborhood_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodId'},
+  ],
+};
+
+const GetPostsByNeighborhoodResponse$json = const {
+  '1': 'GetPostsByNeighborhoodResponse',
+  '2': const [
+    const {'1': 'post', '3': 1, '4': 3, '5': 11, '6': '.neighborhood.server.Post', '10': 'post'},
   ],
 };
 
