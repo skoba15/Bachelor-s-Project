@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Long addComment(PostEntity post, CommentEntity comment) {
+    public Long addComment(CommentEntity comment) {
         Session session = JdbcConnection.getSessionFactory().openSession();
         session.beginTransaction();
         Long result = (Long) session.save(comment);

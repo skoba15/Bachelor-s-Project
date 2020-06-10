@@ -9,7 +9,7 @@ public interface PostService {
 
     PostEntity getPostById(Long postId);
 
-    Long addComment(PostEntity post, CommentEntity comment);
+    Long addComment(CommentEntity comment);
 
     CommentEntity getCommentById(Long commentId);
 }
