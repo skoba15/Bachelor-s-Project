@@ -25,6 +25,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     private NeighborhoodManagementService neighborhoodService = new NeighborhoodManagementServiceImpl();
     private ItemService itemService = new ItemServiceImpl();
     private TaskService taskService = new TaskServiceImpl();
+    private PostService postService = new PostServiceImpl();
 
 
     @Override
@@ -313,7 +314,39 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void addPost(NeighborhoodAPI.AddPostRequest request, StreamObserver<NeighborhoodAPI.AddPostResponse> responseObserver) {
+        String resultCode;
 
+        //        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        int creatorId = 1;
+
+        NeighborhoodAPI.Post postInfo = request.getPost();
+        UserEntity creator = userService.findUserById((long)creatorId);
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)postInfo.getNeighborhoodId());
+
+        NeighborhoodAPI.AddPostResponse.Builder builder = NeighborhoodAPI.AddPostResponse.newBuilder();
+
+        if(creator == null) {
+            resultCode = "User does not exist";
+        } else if(neighborhood == null) {
+            resultCode = "Neighborhood does not exist";
+        } else {
+            PostEntity post = new PostEntity();
+            post.setText(postInfo.getText());
+            post.setCreateDate(new Timestamp(new Date().getTime()));
+            post.setCreator(creator);
+            post.setNeighborhood(neighborhood);
+
+            Long addPostResult = postService.addPost(post);
+
+            if(addPostResult != null) {
+                builder.setPostId(addPostResult.intValue());
+            }
+
+            resultCode = addPostResult != null ? "Post " + addPostResult + " added" : "Could not add Post";
+        }
+
+        responseObserver.onNext(builder.setResultCode(resultCode).build());
+        responseObserver.onCompleted();
     }
 
     @Override
@@ -322,8 +355,91 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     }
 
     @Override
-    public void getPosts(NeighborhoodAPI.GetPostRequest request, StreamObserver<NeighborhoodAPI.GetPostResponse> responseObserver) {
+    public void getPost(NeighborhoodAPI.GetPostRequest request, StreamObserver<NeighborhoodAPI.GetPostResponse> responseObserver) {
+        PostEntity post = postService.getPostById((long)request.getPostId());
 
+        NeighborhoodAPI.GetPostResponse.Builder builder = NeighborhoodAPI.GetPostResponse.newBuilder();
+
+        if(post != null) {
+            NeighborhoodAPI.Post.Builder postBuilder = NeighborhoodAPI.Post.newBuilder();
+
+            UserEntity creator = post.getCreator();
+            postBuilder.setId(post.getId().intValue())
+                    .setText(post.getText())
+                    .setCreateDate(convertFromTimestamp(post.getCreateDate()))
+                    .setUserId(post.getCreator().getId().intValue())
+                    .setUserFullName(creator.getFirstName() + " " + creator.getLastName());
+
+            for(CommentEntity comment : post.getComments()) {
+                UserEntity commentator = comment.getCommentator();
+                postBuilder.addComment(NeighborhoodAPI.Comment.newBuilder()
+                        .setId(comment.getId().intValue())
+                        .setText(comment.getText())
+                        .setUserId(commentator.getId().intValue())
+                        .setUserFullName(commentator.getFirstName() + " " + commentator.getLastName())
+                        .setCreateDate(convertFromTimestamp(comment.getCreateDate())));
+            }
+
+            builder.setPost(postBuilder).setResultCode("200");
+        }
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getPostsByNeighborhood(NeighborhoodAPI.GetPostsByNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetPostsByNeighborhoodResponse> responseObserver) {
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)request.getNeighborhoodId());
+
+        NeighborhoodAPI.GetPostsByNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetPostsByNeighborhoodResponse.newBuilder();
+
+        if(neighborhood != null) {
+            for(PostEntity post : neighborhood.getPostList()) {
+                UserEntity creator = post.getCreator();
+                builder.addPost(NeighborhoodAPI.Post.newBuilder()
+                        .setId(post.getId().intValue())
+                        .setText(post.getText())
+                        .setCreateDate(convertFromTimestamp(post.getCreateDate()))
+                        .setUserId(post.getCreator().getId().intValue())
+                        .setUserFullName(creator.getFirstName() + " " + creator.getLastName()));
+            }
+        }
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void addComment(NeighborhoodAPI.AddCommentRequest request, StreamObserver<NeighborhoodAPI.AddCommentResponse> responseObserver) {
+        String resultCode;
+
+        //        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        int creatorId = 1;
+
+        NeighborhoodAPI.Comment commentInfo = request.getComment();
+        UserEntity commentator = userService.findUserById((long)creatorId);
+        PostEntity post = postService.getPostById((long)commentInfo.getPostId());
+
+        NeighborhoodAPI.AddCommentResponse.Builder builder = NeighborhoodAPI.AddCommentResponse.newBuilder();
+
+        if(commentator == null) {
+            resultCode = "User does not exist";
+        } else if(post == null) {
+            resultCode = "Post does not exist";
+        } else {
+            CommentEntity comment = new CommentEntity();
+            comment.setText(commentInfo.getText());
+            comment.setCreateDate(new Timestamp(new Date().getTime()));
+            comment.setCommentator(commentator);
+            comment.setParentPost(post);
+
+            Long addCommentResult = postService.addComment(comment);
+
+            resultCode = addCommentResult != null ? "Comment " + addCommentResult + " added" : "Could not add comment";
+        }
+
+        responseObserver.onNext(builder.setResultCode(resultCode).build());
+        responseObserver.onCompleted();
     }
 
     @Override
@@ -528,11 +644,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                 .setParentTaskNewStatus(newParentTaskStatus)
                 .build());
         responseObserver.onCompleted();
-    }
-
-    @Override
-    public void addComment(NeighborhoodAPI.AddCommentRequest request, StreamObserver<NeighborhoodAPI.AddCommentResponse> responseObserver) {
-
     }
 
     @Override
