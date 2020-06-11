@@ -435,13 +435,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         //        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         int creatorId = 1;
-
         NeighborhoodAPI.Comment commentInfo = request.getComment();
+
         UserEntity commentator = userService.findUserById((long)creatorId);
-        PostEntity post = postService.getPostById((long)commentInfo.getPostId());
+
+       PostEntity post = postService.getPostById((long)commentInfo.getPostId());
+
 
         NeighborhoodAPI.AddCommentResponse.Builder builder = NeighborhoodAPI.AddCommentResponse.newBuilder();
-
         if(commentator == null) {
             resultCode = "User does not exist";
         } else if(post == null) {
@@ -453,7 +454,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             comment.setCommentator(commentator);
             comment.setParentPost(post);
             Long addCommentResult = postService.addComment(comment);
-
             builder.setComment(NeighborhoodAPI.Comment.newBuilder()
                     .setId(comment.getId().intValue())
                     .setText(comment.getText())

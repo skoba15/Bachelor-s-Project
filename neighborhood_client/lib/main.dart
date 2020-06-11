@@ -12,7 +12,7 @@ import 'package:neighborhood_client/src/screens/Neighborhood.dart';
 void main() {
   FluroRouter.setupRouter();
   runApp(MaterialApp(
-    initialRoute: 'Neighborhood/1',
+    initialRoute: 'Neighborhoods/1/tasks',
     onGenerateRoute: FluroRouter.router.generator
   ));
 }

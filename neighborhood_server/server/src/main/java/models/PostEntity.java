@@ -21,11 +21,11 @@ public class PostEntity {
     @Column(name = "CREATE_DATE")
     private Timestamp createDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator")
     private UserEntity creator;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "neighborhood")
     private NeighborhoodEntity neighborhood;
 
@@ -79,6 +79,7 @@ public class PostEntity {
     public void setNeighborhood(NeighborhoodEntity neighborhood) {
         this.neighborhood = neighborhood;
     }
+
 
     public Set<CommentEntity> getComments() {
         return comments;

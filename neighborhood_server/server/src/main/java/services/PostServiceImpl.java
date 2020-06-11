@@ -61,7 +61,6 @@ public class PostServiceImpl implements PostService {
         parentPost.getComments().add(comment);
         session.merge(commentator);
         session.merge(parentPost);
-
         try {
             session.getTransaction().commit();
         } catch (Exception e) {
