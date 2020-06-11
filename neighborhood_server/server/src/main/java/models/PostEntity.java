@@ -101,14 +101,14 @@ public class PostEntity {
         return Objects.hash(id);
     }
 
-    @Override
-    public String toString() {
-        return "PostEntity{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", createDate=" + createDate +
-                ", creator=" + creator +
-                ", subTasks=" + comments +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "PostEntity{" +
+//                "id=" + id +
+//                ", text='" + text + '\'' +
+//                ", createDate=" + createDate +
+//                ", creator=" + creator +
+//                ", subTasks=" + comments +
+//                '}';
+//    }
 }

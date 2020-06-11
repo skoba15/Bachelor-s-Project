@@ -395,14 +395,27 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         if(neighborhood != null) {
             for(PostEntity post : neighborhood.getPostList()) {
+                NeighborhoodAPI.Post.Builder postBuilder = NeighborhoodAPI.Post.newBuilder();
                 UserEntity creator = post.getCreator();
-                builder.addPost(NeighborhoodAPI.Post.newBuilder()
-                        .setId(post.getId().intValue())
+                postBuilder.setId(post.getId().intValue())
                         .setText(post.getText())
                         .setCreateDate(convertFromTimestamp(post.getCreateDate()))
                         .setUserId(post.getCreator().getId().intValue())
-                        .setUserFullName(creator.getFirstName() + " " + creator.getLastName()));
+                        .setUserFullName(creator.getFirstName() + " " + creator.getLastName());
+
+                for(CommentEntity comment : post.getComments()) {
+                    UserEntity commentator = comment.getCommentator();
+                    postBuilder.addComment(NeighborhoodAPI.Comment.newBuilder()
+                            .setId(comment.getId().intValue())
+                            .setText(comment.getText())
+                            .setUserId(commentator.getId().intValue())
+                            .setUserFullName(commentator.getFirstName() + " " + commentator.getLastName())
+                            .setCreateDate(convertFromTimestamp(comment.getCreateDate())));
+                }
+                builder.addPost(postBuilder);
             }
+
+
         }
 
         responseObserver.onNext(builder.build());

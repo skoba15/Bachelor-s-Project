@@ -26,11 +26,29 @@ class _NeighborhoodState extends State<Neighborhood> {
 
   SharedPreferences _prefs;
 
-  bool _showComment = false;
+  List<Post> _posts;
+
+  List<bool> _showComment;
+
+  TextEditingController _postController = new TextEditingController();
+
+  List<TextEditingController> _commentControllers = new List<TextEditingController>();
+
 
   Future<String> getPreferences() async {
     _neighborhoodId = widget.id;
     _prefs = await SharedPreferences.getInstance();
+    GetPostsByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
+        .getPostsByNeighborhood(GetPostsByNeighborhoodRequest()
+      ..neighborhoodId = _neighborhoodId);
+    _posts = response.post;
+    for (int i = 0; i < _posts.length; i++) {
+      TextEditingController controller = new TextEditingController();
+      _commentControllers.add(controller);
+    }
+    _showComment = new List<bool>.filled(_posts.length, false, growable: true);
+    print(_posts[0].comment.length);
+
 //    IsManagerResponse managerResponse = await ServiceClient(
 //        ClientSingleton().getChannel(),
 //        options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
@@ -113,148 +131,191 @@ class _NeighborhoodState extends State<Neighborhood> {
                 backgroundColor: Colors.black,
                 centerTitle: true,
               ),
-              body: Padding(
-                padding: const EdgeInsets.all(40.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    TextField(
-                        minLines: 1,
-                        maxLines: 15,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          hintText: 'What\'s on your mind? ',
-                          filled: true,
-                          fillColor: Color(0xFFDBEDFF),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.grey),
+              body: StatefulBuilder(builder: (BuildContext context, StateSetter stState){
+                return Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      TextField(
+                          minLines: 1,
+                          maxLines: 15,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            hintText: 'What\'s on your mind? ',
+                            filled: true,
+                            fillColor: Color(0xFFDBEDFF),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                    ),
-                    RaisedButton(
-                      color: Colors.black,
-                      textColor: Colors.white,
-                      onPressed: () async {
-                        if (_postText != "") {
-
-                        }
-                        else {
-                          setState(() {
-
-                          });
-                        }
-                      },
-                      child: Text('Post'),
-                    ),
-                    SizedBox(height: 20,),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget> [
-                                    Text(
-                                      "Shota Kobakhidze",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+                        controller: _postController,
+                      ),
+                      RaisedButton(
+                        color: Colors.black,
+                        textColor: Colors.white,
+                        onPressed: () async {
+                          String text = _postController.text;
+                          if (text != "") {
+                              Post post = new Post()..text = text..neighborhoodId = _neighborhoodId;
+                              AddPostResponse response = await ServiceClient(ClientSingleton().getChannel())
+                                  .addPost(AddPostRequest()
+                                ..post = post);
+                              GetPostResponse postResponse = await ServiceClient(ClientSingleton().getChannel())
+                                  .getPost(GetPostRequest()
+                                ..postId = response.postId);
+                              stState(() {
+                                _commentControllers.insert(0, new TextEditingController());
+                                _posts.insert(0, postResponse.post);
+                                _showComment.insert(0, false);
+                              });
+                          }
+                        },
+                        child: Text('Post'),
+                      ),
+                      SizedBox(height: 20,),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: _posts.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget> [
+                                      Text(
+                                        _posts[index].userFullName,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
                                       ),
-                                    ),
-                                    new Spacer(),
-                                    Text(
-                                    "10/06/2020",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 11,
+                                      new Spacer(),
+                                      Text(
+                                      '${_posts[index].createDate.day}/${_posts[index].createDate.month}/${_posts[index].createDate.year}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 11,
+                                        ),
                                       ),
-                                    ),
-                                  ]
-                                ),
-                                SizedBox(height: 10,),
-                                Text('esaa chemi teqsti'),
-                                IconButton(
-                                  iconSize: 15,
-                                  icon: Icon(Icons.chat_bubble_outline),
-                                  onPressed: () {
-                                    setState(() {
-                                      _showComment = !_showComment;
-                                    });
-                                  },
-                                ),
-                                if(_showComment) ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: 1,
-                                  itemBuilder: (context, index) {
-                                    return Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding : const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  "Shota Kobakhidze",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  fontSize: 12),
-                                                ),
-                                                Text('esaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqstiesaa chemi teqsti'),
-                                              ],
-                                            )
-                                          ),
-                                        ]
-                                    );
-                                  }
-                                ),
-                                if(_showComment)
-                                    Padding(
-                                      padding : const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
-                                      child: Row(
-                                        children: <Widget> [
-                                          Expanded(
-                                            child: new TextField(
-                                              minLines: 1,
-                                              maxLines: 5,
-                                              decoration: new InputDecoration(
-                                                hintText: 'Write your comment here',
-                                                fillColor: Colors.white,
-                                                border: new OutlineInputBorder(
-                                                  borderRadius: new BorderRadius.circular(5.0),
-                                                  borderSide: new BorderSide(
+                                    ]
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text(_posts[index].text),
+                                  SizedBox(height: 10,),
+                                  Divider(
+                                    height: 10,
+                                    color: Colors.black,
+                                  ),
+                                  IconButton(
+                                      iconSize: 15,
+                                      icon: Icon(Icons.chat_bubble_outline),
+                                      onPressed: () {
+                                        stState(() {
+                                          _showComment[index] = !_showComment[index];
+                                        });
+                                      },
+                                  ),
+                                  if(_showComment[index]) ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: _posts[index].comment.length,
+                                    itemBuilder: (context, commentIndex) {
+                                      return Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding : const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget> [
+                                                      Text(
+                                                        _posts[index].comment[commentIndex].userFullName,
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                        fontSize: 12),
+                                                      ),
+                                                      new Spacer(),
+                                                      Text(
+                                                        '${_posts[index].createDate.day}/${_posts[index].createDate.month}/${_posts[index].createDate.year}',
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight.w300,
+                                                          fontSize: 11,
+                                                        ),
+                                                      )
+                                                    ]
+                                                  ),
+                                                  Text(_posts[index].comment[commentIndex].text),
+                                                ],
+                                              )
+                                            ),
+                                            SizedBox(height: 10,)
+                                          ]
+                                      );
+                                    }
+                                  ),
+                                  if(_showComment[index])
+                                      Padding(
+                                        padding : const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
+                                        child: Row(
+                                          children: <Widget> [
+                                            Expanded(
+                                              child: new TextField(
+                                                minLines: 1,
+                                                maxLines: 5,
+                                                decoration: new InputDecoration(
+                                                  hintText: 'Write your comment here',
+                                                  fillColor: Colors.white,
+                                                  border: new OutlineInputBorder(
+                                                    borderRadius: new BorderRadius.circular(5.0),
+                                                    borderSide: new BorderSide(
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              style: TextStyle(
-                                                fontSize: 12
+                                                style: TextStyle(
+                                                  fontSize: 12
+                                                ),
+                                                controller: _commentControllers[index],
                                               ),
                                             ),
-                                          ),
-                                          IconButton(
-                                           icon: Icon(Icons.send),
-                                            onPressed: () {
-
-                                            },
-                                          ),
-                                        ]
-                                      ),
-                                  ),
-                            ]
-                          );
-                        }
-                      ),
-                    )
-                  ],
-                ),
+                                            IconButton(
+                                             icon: Icon(Icons.send),
+                                              onPressed: () async {
+                                               print(_commentControllers[0].text);
+                                               print(_commentControllers[1].text);
+                                               String commentText = _commentControllers[index].text;
+                                                if(commentText != "") {
+                                                  print(_posts[index].id);
+                                                  Comment comment = new Comment()..text = commentText..postId = _posts[index].id;
+                                                  AddCommentResponse response = await ServiceClient(ClientSingleton().getChannel())
+                                                      .addComment(AddCommentRequest()
+                                                    ..comment = comment);
+                                                  stState(() {
+                                                    comment..userFullName = 'levan gasvini';
+                                                    _posts[index].comment.add(comment);
+                                                  });
+                                                }
+                                              },
+                                            ),
+                                          ]
+                                        ),
+                                    ),
+                              ]
+                            );
+                          }
+                        ),
+                      )
+                    ],
+                  ),
+                );
+               }
               ),
             );
           } else {

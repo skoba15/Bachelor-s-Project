@@ -54,7 +54,7 @@ public final class NeighborhoodServer {
     public static void main(String[] args) throws Exception {
         NeighborhoodServer server = new NeighborhoodServer(8081);
         server.start();
-//        JdbcConnection conn = new JdbcConnection();
+        JdbcConnection conn = new JdbcConnection();
 //
 //        UserService service = new UserServiceImpl();
 //        UserEntity user = service.findUserByUsername("makhvshi");

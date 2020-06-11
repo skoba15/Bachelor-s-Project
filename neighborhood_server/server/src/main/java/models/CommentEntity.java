@@ -89,14 +89,14 @@ public class CommentEntity {
         return Objects.hash(id);
     }
 
-    @Override
-    public String toString() {
-        return "CommentEntity{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", createDate=" + createDate +
-                ", parentPost=" + parentPost +
-                ", commentator=" + commentator +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "CommentEntity{" +
+//                "id=" + id +
+//                ", text='" + text + '\'' +
+//                ", createDate=" + createDate +
+//                ", parentPost=" + parentPost +
+//                ", commentator=" + commentator +
+//                '}';
+//    }
 }
