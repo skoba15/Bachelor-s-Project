@@ -451,7 +451,7 @@ const AddPostResponse$json = const {
   '1': 'AddPostResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'post_id', '3': 2, '4': 1, '5': 5, '10': 'postId'},
+    const {'1': 'post', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Post', '10': 'post'},
   ],
 };
 
@@ -599,6 +599,7 @@ const AddCommentResponse$json = const {
   '1': 'AddCommentResponse',
   '2': const [
     const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
+    const {'1': 'comment', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.Comment', '10': 'comment'},
   ],
 };
 

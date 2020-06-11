@@ -2245,7 +2245,7 @@ class AddPostRequest extends $pb.GeneratedMessage {
 class AddPostResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddPostResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
-    ..a<$core.int>(2, 'postId', $pb.PbFieldType.O3)
+    ..aOM<Post>(2, 'post', subBuilder: Post.create)
     ..hasRequiredFields = false
   ;
 
@@ -2274,13 +2274,15 @@ class AddPostResponse extends $pb.GeneratedMessage {
   void clearResultCode() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get postId => $_getIZ(1);
+  Post get post => $_getN(1);
   @$pb.TagNumber(2)
-  set postId($core.int v) { $_setSignedInt32(1, v); }
+  set post(Post v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasPostId() => $_has(1);
+  $core.bool hasPost() => $_has(1);
   @$pb.TagNumber(2)
-  void clearPostId() => clearField(2);
+  void clearPost() => clearField(2);
+  @$pb.TagNumber(2)
+  Post ensurePost() => $_ensure(1);
 }
 
 class DeletePostRequest extends $pb.GeneratedMessage {
@@ -2937,6 +2939,7 @@ class AddCommentRequest extends $pb.GeneratedMessage {
 class AddCommentResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCommentResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..aOS(1, 'resultCode')
+    ..aOM<Comment>(2, 'comment', subBuilder: Comment.create)
     ..hasRequiredFields = false
   ;
 
@@ -2963,6 +2966,17 @@ class AddCommentResponse extends $pb.GeneratedMessage {
   $core.bool hasResultCode() => $_has(0);
   @$pb.TagNumber(1)
   void clearResultCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  Comment get comment => $_getN(1);
+  @$pb.TagNumber(2)
+  set comment(Comment v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasComment() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearComment() => clearField(2);
+  @$pb.TagNumber(2)
+  Comment ensureComment() => $_ensure(1);
 }
 
 class AddCarRequest extends $pb.GeneratedMessage {

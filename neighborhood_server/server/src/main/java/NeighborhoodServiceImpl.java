@@ -339,7 +339,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             Long addPostResult = postService.addPost(post);
 
             if(addPostResult != null) {
-                builder.setPostId(addPostResult.intValue());
+                NeighborhoodAPI.Post.Builder postBuilder = NeighborhoodAPI.Post.newBuilder();
+
+
+                builder.setPost(postBuilder.setId(post.getId().intValue())
+                        .setText(post.getText())
+                        .setCreateDate(convertFromTimestamp(post.getCreateDate()))
+                        .setUserId(post.getCreator().getId().intValue())
+                        .setUserFullName(creator.getFirstName() + " " + creator.getLastName()));
             }
 
             resultCode = addPostResult != null ? "Post " + addPostResult + " added" : "Could not add Post";
@@ -445,8 +452,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
             comment.setCreateDate(new Timestamp(new Date().getTime()));
             comment.setCommentator(commentator);
             comment.setParentPost(post);
-
             Long addCommentResult = postService.addComment(comment);
+
+            builder.setComment(NeighborhoodAPI.Comment.newBuilder()
+                    .setId(comment.getId().intValue())
+                    .setText(comment.getText())
+                    .setUserId(commentator.getId().intValue())
+                    .setUserFullName(commentator.getFirstName() + " " + commentator.getLastName())
+                    .setCreateDate(convertFromTimestamp(comment.getCreateDate())));
 
             resultCode = addCommentResult != null ? "Comment " + addCommentResult + " added" : "Could not add comment";
         }

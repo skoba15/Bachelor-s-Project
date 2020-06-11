@@ -429,7 +429,7 @@ message AddPostRequest {
 
 message AddPostResponse {
     string result_code = 1;
-    int32 post_id = 2;
+    Post post = 2;
 }
 
 message DeletePostRequest {
@@ -519,6 +519,7 @@ message AddCommentRequest {
 
 message AddCommentResponse {
     string result_code = 1;
+    Comment comment = 2;
 }
 
 message AddCarRequest {

@@ -30,6 +30,8 @@ class _NeighborhoodState extends State<Neighborhood> {
 
   List<bool> _showComment;
 
+  bool _showPost = false;
+
   TextEditingController _postController = new TextEditingController();
 
   List<TextEditingController> _commentControllers = new List<TextEditingController>();
@@ -131,14 +133,14 @@ class _NeighborhoodState extends State<Neighborhood> {
                 backgroundColor: Colors.black,
                 centerTitle: true,
               ),
-              body: StatefulBuilder(builder: (BuildContext context, StateSetter stState){
+              body: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
                 return Padding(
                   padding: const EdgeInsets.all(40.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      TextField(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        TextField(
                           minLines: 1,
                           maxLines: 15,
                           autocorrect: false,
@@ -147,176 +149,226 @@ class _NeighborhoodState extends State<Neighborhood> {
                             filled: true,
                             fillColor: Color(0xFFDBEDFF),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0)),
                               borderSide: BorderSide(color: Colors.grey),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0)),
                               borderSide: BorderSide(color: Colors.grey),
                             ),
                           ),
-                        controller: _postController,
-                      ),
-                      RaisedButton(
-                        color: Colors.black,
-                        textColor: Colors.white,
-                        onPressed: () async {
-                          String text = _postController.text;
-                          if (text != "") {
-                              Post post = new Post()..text = text..neighborhoodId = _neighborhoodId;
-                              AddPostResponse response = await ServiceClient(ClientSingleton().getChannel())
+                          controller: _postController,
+                        ),
+                        RaisedButton(
+                          color: Colors.black,
+                          textColor: Colors.white,
+                          onPressed: () async {
+                            String text = _postController.text;
+                            if (text != "") {
+                              Post post = new Post()
+                                ..text = text
+                                ..neighborhoodId = _neighborhoodId;
+                              AddPostResponse response = await ServiceClient(
+                                  ClientSingleton().getChannel())
                                   .addPost(AddPostRequest()
                                 ..post = post);
-                              GetPostResponse postResponse = await ServiceClient(ClientSingleton().getChannel())
-                                  .getPost(GetPostRequest()
-                                ..postId = response.postId);
+                              Post resultPost = response.post;
                               stState(() {
-                                _commentControllers.insert(0, new TextEditingController());
-                                _posts.insert(0, postResponse.post);
+                                _commentControllers.insert(
+                                    0, new TextEditingController());
+                                _posts.insert(0, resultPost);
                                 _showComment.insert(0, false);
                               });
-                          }
-                        },
-                        child: Text('Post'),
-                      ),
-                      SizedBox(height: 20,),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: _posts.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget> [
-                                      Text(
-                                        _posts[index].userFullName,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                      new Spacer(),
-                                      Text(
-                                      '${_posts[index].createDate.day}/${_posts[index].createDate.month}/${_posts[index].createDate.year}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                    ]
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Text(_posts[index].text),
-                                  SizedBox(height: 10,),
-                                  Divider(
-                                    height: 10,
-                                    color: Colors.black,
-                                  ),
-                                  IconButton(
-                                      iconSize: 15,
-                                      icon: Icon(Icons.chat_bubble_outline),
-                                      onPressed: () {
-                                        stState(() {
-                                          _showComment[index] = !_showComment[index];
-                                        });
-                                      },
-                                  ),
-                                  if(_showComment[index]) ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: _posts[index].comment.length,
-                                    itemBuilder: (context, commentIndex) {
-                                      return Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding : const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Row(
-                                                    children: <Widget> [
-                                                      Text(
-                                                        _posts[index].comment[commentIndex].userFullName,
-                                                        style: TextStyle(
-                                                          fontWeight: FontWeight.bold,
-                                                        fontSize: 12),
-                                                      ),
-                                                      new Spacer(),
-                                                      Text(
-                                                        '${_posts[index].createDate.day}/${_posts[index].createDate.month}/${_posts[index].createDate.year}',
-                                                        style: TextStyle(
-                                                          fontWeight: FontWeight.w300,
-                                                          fontSize: 11,
-                                                        ),
-                                                      )
-                                                    ]
-                                                  ),
-                                                  Text(_posts[index].comment[commentIndex].text),
-                                                ],
-                                              )
-                                            ),
-                                            SizedBox(height: 10,)
-                                          ]
-                                      );
-                                    }
-                                  ),
-                                  if(_showComment[index])
-                                      Padding(
-                                        padding : const EdgeInsets.fromLTRB(15.0, 0, 0, 0),
-                                        child: Row(
-                                          children: <Widget> [
-                                            Expanded(
-                                              child: new TextField(
-                                                minLines: 1,
-                                                maxLines: 5,
-                                                decoration: new InputDecoration(
-                                                  hintText: 'Write your comment here',
-                                                  fillColor: Colors.white,
-                                                  border: new OutlineInputBorder(
-                                                    borderRadius: new BorderRadius.circular(5.0),
-                                                    borderSide: new BorderSide(
-                                                    ),
-                                                  ),
-                                                ),
-                                                style: TextStyle(
-                                                  fontSize: 12
-                                                ),
-                                                controller: _commentControllers[index],
-                                              ),
-                                            ),
-                                            IconButton(
-                                             icon: Icon(Icons.send),
-                                              onPressed: () async {
-                                               print(_commentControllers[0].text);
-                                               print(_commentControllers[1].text);
-                                               String commentText = _commentControllers[index].text;
-                                                if(commentText != "") {
-                                                  print(_posts[index].id);
-                                                  Comment comment = new Comment()..text = commentText..postId = _posts[index].id;
-                                                  AddCommentResponse response = await ServiceClient(ClientSingleton().getChannel())
-                                                      .addComment(AddCommentRequest()
-                                                    ..comment = comment);
-                                                  stState(() {
-                                                    comment..userFullName = 'levan gasvini';
-                                                    _posts[index].comment.add(comment);
-                                                  });
-                                                }
-                                              },
-                                            ),
-                                          ]
-                                        ),
-                                    ),
-                              ]
-                            );
-                          }
+                            }
+                          },
+                          child: Text('Post'),
                         ),
-                      )
-                    ],
+                        SizedBox(height: 20,),
+                        Expanded(
+                            child: ListView.builder(
+                                itemCount: _posts.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      children: <Widget>[
+                                        Row(
+                                            children: <Widget>[
+                                              Text(
+                                                _posts[index].userFullName,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                              new Spacer(),
+                                              Text(
+                                                '${_posts[index].createDate
+                                                    .day}/${_posts[index]
+                                                    .createDate
+                                                    .month}/${_posts[index]
+                                                    .createDate.year}',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w300,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ]
+                                        ),
+                                        SizedBox(height: 10,),
+                                        Text(_posts[index].text),
+                                        IconButton(
+                                          iconSize: 15,
+                                          icon: Icon(Icons.chat_bubble_outline),
+                                          onPressed: () {
+                                            stState(() {
+                                              _showComment[index] =
+                                              !_showComment[index];
+                                            });
+                                          },
+                                        ),
+                                        if(_showComment[index])  Column(
+                                                  children: <Widget>[
+                                                    ListView.builder(
+                                                        shrinkWrap: true,
+                                                        itemCount: _posts[index]
+                                                            .comment.length,
+                                                        itemBuilder: (context,
+                                                            commentIndex) {
+                                                          return Column(
+                                                              crossAxisAlignment: CrossAxisAlignment
+                                                                  .start,
+                                                              children: <
+                                                                  Widget>[
+                                                                Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .fromLTRB(
+                                                                        15.0, 0,
+                                                                        0, 0),
+                                                                    child: Column(
+                                                                      crossAxisAlignment: CrossAxisAlignment
+                                                                          .start,
+                                                                      children: <
+                                                                          Widget>[
+                                                                        Row(
+                                                                            children: <Widget>[
+                                                                              Text(
+                                                                                _posts[index]
+                                                                                    .comment[commentIndex]
+                                                                                    .userFullName,
+                                                                                style: TextStyle(
+                                                                                    fontWeight: FontWeight
+                                                                                        .bold,
+                                                                                    fontSize: 12),
+                                                                              ),
+                                                                              new Spacer(),
+                                                                              Text(
+                                                                                '${_posts[index]
+                                                                                    .createDate
+                                                                                    .day}/${_posts[index]
+                                                                                    .createDate
+                                                                                    .month}/${_posts[index]
+                                                                                    .createDate
+                                                                                    .year}',
+                                                                                style: TextStyle(
+                                                                                  fontWeight: FontWeight
+                                                                                      .w300,
+                                                                                  fontSize: 11,
+                                                                                ),
+                                                                              )
+                                                                            ]
+                                                                        ),
+                                                                        Text(
+                                                                            _posts[index]
+                                                                                .comment[commentIndex]
+                                                                                .text),
+                                                                      ],
+                                                                    )
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,)
+                                                              ]
+                                                          );
+                                                        }
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                          .fromLTRB(
+                                                          15.0, 0, 0, 0),
+                                                      child: Row(
+                                                          children: <Widget>[
+                                                            Expanded(
+                                                              child: new TextField(
+                                                                minLines: 1,
+                                                                maxLines: 5,
+                                                                decoration: new InputDecoration(
+                                                                  hintText: 'Write your comment here',
+                                                                  fillColor: Colors
+                                                                      .white,
+                                                                  border: new OutlineInputBorder(
+                                                                    borderRadius: new BorderRadius
+                                                                        .circular(
+                                                                        5.0),
+                                                                    borderSide: new BorderSide(
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                style: TextStyle(
+                                                                    fontSize: 12
+                                                                ),
+                                                                controller: _commentControllers[index],
+                                                              ),
+                                                            ),
+                                                            IconButton(
+                                                              icon: Icon(
+                                                                  Icons.send),
+                                                              onPressed: () async {
+                                                                String commentText = _commentControllers[index]
+                                                                    .text;
+                                                                if (commentText !=
+                                                                    "") {
+                                                                  print(
+                                                                      _posts[index]
+                                                                          .id);
+                                                                  Comment comment = new Comment()
+                                                                    ..text = commentText
+                                                                    ..postId = _posts[index]
+                                                                        .id;
+                                                                  print(DateTime.now());
+                                                                  AddCommentResponse response = await ServiceClient(
+                                                                      ClientSingleton()
+                                                                          .getChannel())
+                                                                      .addComment(
+                                                                      AddCommentRequest()
+                                                                        ..comment = comment);
+                                                                  Comment resultComment = response
+                                                                      .comment;
+                                                                  stState(() {
+                                                                    print(DateTime.now());
+                                                                    _posts[index]
+                                                                        .comment
+                                                                        .add(
+                                                                        resultComment);
+                                                                  });
+                                                                }
+                                                              },
+                                                            ),
+                                                          ]
+                                                      ),
+                                                    ),
+                                                  ]
+                                              ),
+                                      ]
+                                  );
+                                }
+                            )
+                        ),
+                      ]
                   ),
                 );
-               }
-              ),
+              }),
             );
           } else {
             return CircularProgressIndicator();
