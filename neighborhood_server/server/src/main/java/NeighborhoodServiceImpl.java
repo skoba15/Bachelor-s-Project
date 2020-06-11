@@ -517,9 +517,11 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         NeighborhoodAPI.GetTaskResponse.Builder builder = NeighborhoodAPI.GetTaskResponse.newBuilder();
 
+
         if(task != null) {
             NeighborhoodAPI.Task.Builder taskBuilder = NeighborhoodAPI.Task.newBuilder();
-
+            System.out.println("================= id = " + task.getId());
+            System.out.println("================= title = " + task.getTitle());
             taskBuilder.setId(task.getId().intValue())
                     .setTitle(task.getTitle())
                     .setDescription(task.getDescription())

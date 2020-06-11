@@ -212,7 +212,7 @@ class _CreateTaskState extends State<CreateTask> {
                                             if (response.taskId != null) {
                                               int taskId = response.taskId;
                                               Navigator.pushReplacementNamed(
-                                                  context, '/Neighborhoods/$neighborhoodId/tasks/$taskId');
+                                                  context, 'Neighborhoods/$neighborhoodId/tasks/$taskId');
                                             }
                                           },
                                         ),

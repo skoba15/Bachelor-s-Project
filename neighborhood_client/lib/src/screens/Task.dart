@@ -50,7 +50,6 @@ class _ShowTaskState extends State<ShowTask> {
 
   @override
   Widget build(BuildContext context) {
-    print(context.toString());
     return FutureBuilder<String>(
         future: getTask(),
         builder: (context, AsyncSnapshot<String> snapshot) {

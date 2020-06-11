@@ -38,7 +38,7 @@ public class TaskEntity {
     @Column(name = "CLOSE_DATE")
     private Timestamp closeDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creator")
     private UserEntity creator;
 
