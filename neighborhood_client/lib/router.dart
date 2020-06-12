@@ -50,10 +50,10 @@ class FluroRouter {
           Requests(id: int.parse(params['neighborhoodId'][0]),));
   static Handler _neighborhoodHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Neighborhood(id: int.parse(params['id'][0]),));
+          Neighborhood(id: int.parse(params['neighborhoodId'][0]),));
   static Handler _tasksHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Tasks(id: int.parse(params['id'][0])));
+          Tasks(id: int.parse(params['neighborhoodId'][0])));
   static Handler _createTaskHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           CreateTask(id: int.parse(params['neighborhoodId'][0])));
@@ -88,12 +88,12 @@ class FluroRouter {
     );
 
     router.define(
-      'Neighborhood/:id',
+      'Neighborhoods/:neighborhoodId',
       handler: _neighborhoodHandler,
     );
 
     router.define(
-      'Requests/:neighborhoodId',
+      'Neighborhoods/:neighborhoodId/Requests',
       handler: _requestsHandler,
     );
 
@@ -108,7 +108,7 @@ class FluroRouter {
     );
 
     router.define(
-      'Neighborhoods/:id/tasks',
+      'Neighborhoods/:neighborhoodId/tasks',
       handler: _tasksHandler,
     );
 

@@ -39,10 +39,30 @@ class _ShowTaskState extends State<ShowTask> {
 
   SharedPreferences _prefs;
 
+  int _isManager = 0;
+
+  int _current_id = 0;
+
   Future<String> getTask() async {
+    _prefs = await SharedPreferences.getInstance();
      GetTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTask(GetTaskRequest()
       ..taskId = widget.taskId);
+
+     IsManagerResponse managerResponse = await ServiceClient(
+         ClientSingleton().getChannel(),
+         options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+         .isManager(IsManagerRequest()
+       ..neighborhoodId = widget.neighborhoodId);
+     _isManager = (managerResponse.resultCode == 'Y') ? 1 : 0;
+
+     UserIdResponse idResponse = await ServiceClient(
+         ClientSingleton().getChannel(),
+         options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+         .userId(UserIdRequest()
+       ..dummy = 1);
+     _current_id = idResponse.id;
+
      _task = response.task;
      _subTasks = _task.subTask;
     return Future.value("done");
@@ -55,7 +75,7 @@ class _ShowTaskState extends State<ShowTask> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return Scaffold(
-              floatingActionButton: FloatingActionButton(
+              floatingActionButton: (_isManager == 1) ? FloatingActionButton(
                 onPressed: () async{
                   int neighborhoodId = widget.neighborhoodId;
                   int taskId = widget.taskId;
@@ -66,7 +86,7 @@ class _ShowTaskState extends State<ShowTask> {
                 },
                 child: Icon(Icons.add),
                 backgroundColor: Colors.black,
-              ),
+              ) : null,
               appBar: new AppBar(
                 title: Text('Neighborhood App'),
                 backgroundColor: Colors.black,
@@ -120,7 +140,7 @@ class _ShowTaskState extends State<ShowTask> {
                                               Icons.radio_button_unchecked,
                                               color: Colors.yellow) : Icon(
                                               Icons.done, color: Colors.green)),
-                                          if(_subTasks[index].status != 2)PopupMenuButton<int>(
+                                          if(_subTasks[index].status != 2 && (_subTasks[index].assigneeId == _current_id || _isManager == 1 ) )PopupMenuButton<int>(
                                             onSelected: (int result) async {
                                               if(result > _subTasks[index].status) {
                                                 ChangeSubTaskStatusResponse response = await ServiceClient(ClientSingleton().getChannel())

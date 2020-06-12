@@ -47,10 +47,13 @@ class _CreateSubtaskState extends State<CreateSubtask> {
   List<UserInfoItem> _users;
 
 
+  int _isManager = 0;
+
   Future<String> createSubtask() async {
      GetUsersByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getUsersByNeighborhood(GetUsersByNeighborhoodRequest()
       ..neighborhoodId = widget.neighborhoodId);
+
      _users = response.users;
      _prefs = await SharedPreferences.getInstance();
      _prefs.setString("key", "CreateSubtask");

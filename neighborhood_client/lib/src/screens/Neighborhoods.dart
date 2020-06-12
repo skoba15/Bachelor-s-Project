@@ -57,7 +57,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                         title: Text('Neighborhoods', style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),),
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, '/Neighborhoods');
+                          Navigator.pushReplacementNamed(context, 'Neighborhoods');
                         },
                       ),
                       ListTile(
@@ -73,7 +73,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                             ..dummy = 1);
                           int id = idResponse.id;
                           Navigator.pushNamed(
-                              context, '/Profile/$id');
+                              context, 'Profile/$id');
                         },
                       ),
                     ],
@@ -81,7 +81,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/CreateNeighborhood');
+                    Navigator.pushReplacementNamed(context, 'CreateNeighborhood');
                   },
                   child: Icon(Icons.add),
                   backgroundColor: Colors.black,
@@ -118,7 +118,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                     onTap: () {
                                       int idd = _response.neighborhood[index].id;
                                       Navigator.pushNamed(
-                                          context, '/Neighborhood/$idd');
+                                          context, 'Neighborhoods/$idd');
                                     },
 
                                   ),

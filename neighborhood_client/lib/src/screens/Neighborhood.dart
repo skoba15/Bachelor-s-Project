@@ -51,12 +51,12 @@ class _NeighborhoodState extends State<Neighborhood> {
     _showComment = new List<bool>.filled(_posts.length, false, growable: true);
     print(_posts[0].comment.length);
 
-//    IsManagerResponse managerResponse = await ServiceClient(
-//        ClientSingleton().getChannel(),
-//        options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
-//        .isManager(IsManagerRequest()
-//      ..neighborhoodId = _neighborhoodId);
-//    _isManager = (managerResponse.resultCode == 'Y') ? 1 : 0;
+    IsManagerResponse managerResponse = await ServiceClient(
+        ClientSingleton().getChannel(),
+        options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+        .isManager(IsManagerRequest()
+      ..neighborhoodId = _neighborhoodId);
+    _isManager = (managerResponse.resultCode == 'Y') ? 1 : 0;
     return Future.value("done");
   }
 
@@ -81,7 +81,8 @@ class _NeighborhoodState extends State<Neighborhood> {
                             leading: Icon(Icons.accessibility),
                             title: Text('Requests', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                             onTap: () {
-                              Navigator.pushNamed(context, '/Requests/$_neighborhoodId');
+                              int id = widget.id;
+                              Navigator.pushNamed(context, 'Neighborhoods/$id/Requests');
                             },
                           ),
                           ListTile(
@@ -105,15 +106,9 @@ class _NeighborhoodState extends State<Neighborhood> {
                             title: Text('Tasks', style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),),
                             onTap: () async {
-//                              UserIdResponse idResponse = await ServiceClient(
-//                                  ClientSingleton().getChannel(),
-//                                  options: CallOptions(
-//                                      metadata: {'jwt': _prefs.get('jwt')}))
-//                                  .userId(UserIdRequest()
-//                                ..dummy = 1);
-                              int id = 139;
+                              int neighborhoodId = widget.id;
                               Navigator.pushNamed(
-                                  context, '/Tasks/$id');
+                                  context, 'Neighborhoods/$neighborhoodId/tasks');
                             },
                           ),
                           ListTile(
@@ -122,7 +117,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                                 fontSize: 20, fontWeight: FontWeight.bold),),
                             onTap: () {
                               Navigator.pushReplacementNamed(
-                                  context, '/Neighborhoods');
+                                  context, 'Neighborhoods');
                             },
                           ),
                     ],
@@ -171,7 +166,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                                 ..text = text
                                 ..neighborhoodId = _neighborhoodId;
                               AddPostResponse response = await ServiceClient(
-                                  ClientSingleton().getChannel())
+                                  ClientSingleton().getChannel(), options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
                                   .addPost(AddPostRequest()
                                 ..post = post);
                               Post resultPost = response.post;
@@ -339,7 +334,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                                                                   print(DateTime.now());
                                                                   AddCommentResponse response = await ServiceClient(
                                                                       ClientSingleton()
-                                                                          .getChannel())
+                                                                          .getChannel(), options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
                                                                       .addComment(
                                                                       AddCommentRequest()
                                                                         ..comment = comment);

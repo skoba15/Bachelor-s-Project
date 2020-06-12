@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
                         SharedPreferences prefs = await SharedPreferences.getInstance();
                         String token = response.resultCode;
                         await prefs.setString('jwt', token);
-                        Navigator.pushReplacementNamed(context, '/Neighborhoods');
+                        Navigator.pushReplacementNamed(context, 'Neighborhoods');
                     }
                     else {
                       setState(() {

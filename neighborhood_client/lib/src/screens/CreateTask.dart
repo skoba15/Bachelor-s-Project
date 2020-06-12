@@ -39,12 +39,19 @@ class _CreateTaskState extends State<CreateTask> {
 
   TextEditingController _endDateController = TextEditingController();
 
+  int _isManager = 0;
 
   bool _correctdate = true;
 
 
   Future<String> getPreferences() async {
     _prefs = await SharedPreferences.getInstance();
+    IsManagerResponse managerResponse = await ServiceClient(
+        ClientSingleton().getChannel(),
+        options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+        .isManager(IsManagerRequest()
+      ..neighborhoodId = widget.id);
+    _isManager = (managerResponse.resultCode == 'Y') ? 1 : 0;
     return Future.value("done");
   }
 
@@ -188,10 +195,10 @@ class _CreateTaskState extends State<CreateTask> {
                               task.title = _taskTitle;
                               task.description = _taskDescription;
                               task.creatorId = 1;
-                              task.neighborhoodId = 1;
+                              task.neighborhoodId = widget.id;
                               task.startDate = new Date()..day = _startDate.day..month = _startDate.month..year = _startDate.year;
                               task.closeDate = new Date()..day = _endDate.day..month = _endDate.month..year = _endDate.year;
-                              AddTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
+                              AddTaskResponse response = await ServiceClient(ClientSingleton().getChannel(), options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
                                   .addTask(AddTaskRequest()
                                 ..task = task);
                               return showDialog<void>(

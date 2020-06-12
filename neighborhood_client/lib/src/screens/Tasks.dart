@@ -27,23 +27,30 @@ class _TasksState extends State<Tasks> {
 
   SharedPreferences _prefs;
 
+  int _isManager = 0;
 
   Future<String> getMyNeighborhoodsList() async {
+    _prefs = await SharedPreferences.getInstance();
     GetTaskByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTaskByNeighborhood(GetTaskByNeighborhoodRequest()
       ..neighborhoodId = widget.id);
     _tasks = response.tasks;
-    print(_tasks.length);
-    GetUserTasksResponse subtaskResponse = await ServiceClient(ClientSingleton().getChannel())
-        .getUserTasks(GetUserTasksRequest()
+    GetUserTasksResponse subtaskResponse = await ServiceClient(ClientSingleton().getChannel(), options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+        .getUserTasks(GetUserTasksRequest()..userId = 1
       ..neighborhoodId = widget.id);
     _subTasks = subtaskResponse.subTask;
+
+    IsManagerResponse managerResponse = await ServiceClient(
+        ClientSingleton().getChannel(),
+        options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+        .isManager(IsManagerRequest()
+      ..neighborhoodId = widget.id);
+    _isManager = (managerResponse.resultCode == 'Y') ? 1 : 0;
     return Future.value("WTF");
   }
 
   @override
   Widget build(BuildContext context) {
-    print(context.toString());
     return FutureBuilder<String>(
         future: getMyNeighborhoodsList(),
         builder: (context, AsyncSnapshot<String> snapshot) {
@@ -51,7 +58,7 @@ class _TasksState extends State<Tasks> {
             return DefaultTabController(
               length: 2,
               child: Scaffold(
-                floatingActionButton: FloatingActionButton(
+                floatingActionButton: (_isManager == 1) ? FloatingActionButton(
                   onPressed: () async {
                     int neighborhoodId = widget.id;
                     await Navigator.pushNamed(
@@ -62,7 +69,7 @@ class _TasksState extends State<Tasks> {
                   },
                   child: Icon(Icons.add),
                   backgroundColor: Colors.black,
-                ),
+                ) : null,
                 appBar: AppBar(
                   title: Text('Neighborhood App'),
                   backgroundColor: Colors.black,

@@ -83,285 +83,287 @@ class _ProfileState extends State<Profile> {
                   ),
                   body: TabBarView(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(20, 30, 30, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: CircleAvatar(
-                                radius: 40,
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 30, 30, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Center(
+                                child: CircleAvatar(
+                                  radius: 40,
+                                ),
                               ),
-                            ),
-                            Divider(
-                              height: 50,
-                              color: Colors.white,
-                            ),
-                            Text('USERNAME', style: TextStyle(
-                                color: Colors.grey[400], letterSpacing: 2.0),),
-                            SizedBox(height: 10.0),
-                            Text(_profile.username, style: TextStyle(
-                                color: Colors.yellow,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold),),
-                            SizedBox(height: 15.0),
-                            Text('FIRST NAME', style: TextStyle(
-                                color: Colors.grey[400], letterSpacing: 2.0),),
-                            SizedBox(height: 10.0),
-                            Text(_profile.firstName, style: TextStyle(
-                                color: Colors.yellow,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold),),
-                            SizedBox(height: 15.0),
-                            Text('LAST NAME', style: TextStyle(
-                                color: Colors.grey[400], letterSpacing: 2.0),),
-                            SizedBox(height: 10.0),
-                            Text(_profile.lastName, style: TextStyle(
-                                color: Colors.yellow,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold),),
-                            SizedBox(height: 15.0),
-                            StatefulBuilder(
-                              builder: (BuildContext context, StateSetter stState) {
-                                return Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start,
-                                  children: <Widget>[
-                                    Row(
-                                        children: <Widget>[
-                                          Text('PHONE NUMBER', style: TextStyle(
-                                              color: Colors.grey[400],
-                                              letterSpacing: 2.0),),
-                                          SizedBox(width: 15,),
-                                          if(!_phoneEdit && _id == _current_id) FlatButton.icon(
-                                            color: Colors.blue,
-                                            icon: Icon(Icons.edit),
-                                            //`Icon` to display
-                                            label: Text('Edit'),
-                                            //`Text` to display
-                                            onPressed: () {
-                                              stState(() {
-                                                _phoneEdit = true;
-                                              });
-                                            },
-                                          ),
-                                        ]
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    if(!_phoneEdit) Text(
-                                      _profile.phoneNumber, style: TextStyle(
-                                        color: Colors.yellow,
-                                        fontSize: 24.0,
-                                        fontWeight: FontWeight.bold),),
-                                    if(_phoneEdit) Row(
-                                        children: <Widget>[
-                                          Container(
-                                            child: TextField(
-                                              keyboardType: TextInputType.phone,
-                                              style: TextStyle(
-                                                  color: Colors.yellow,
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold),
-                                              controller: phoneController,
+                              Divider(
+                                height: 50,
+                                color: Colors.white,
+                              ),
+                              Text('USERNAME', style: TextStyle(
+                                  color: Colors.grey[400], letterSpacing: 2.0),),
+                              SizedBox(height: 10.0),
+                              Text(_profile.username, style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold),),
+                              SizedBox(height: 15.0),
+                              Text('FIRST NAME', style: TextStyle(
+                                  color: Colors.grey[400], letterSpacing: 2.0),),
+                              SizedBox(height: 10.0),
+                              Text(_profile.firstName, style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold),),
+                              SizedBox(height: 15.0),
+                              Text('LAST NAME', style: TextStyle(
+                                  color: Colors.grey[400], letterSpacing: 2.0),),
+                              SizedBox(height: 10.0),
+                              Text(_profile.lastName, style: TextStyle(
+                                  color: Colors.yellow,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold),),
+                              SizedBox(height: 15.0),
+                              StatefulBuilder(
+                                builder: (BuildContext context, StateSetter stState) {
+                                  return Column(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                    children: <Widget>[
+                                      Row(
+                                          children: <Widget>[
+                                            Text('PHONE NUMBER', style: TextStyle(
+                                                color: Colors.grey[400],
+                                                letterSpacing: 2.0),),
+                                            SizedBox(width: 15,),
+                                            if(!_phoneEdit && _id == _current_id) FlatButton.icon(
+                                              color: Colors.blue,
+                                              icon: Icon(Icons.edit),
+                                              //`Icon` to display
+                                              label: Text('Edit'),
+                                              //`Text` to display
+                                              onPressed: () {
+                                                stState(() {
+                                                  _phoneEdit = true;
+                                                });
+                                              },
                                             ),
-                                            width: 200,
+                                          ]
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      if(!_phoneEdit) Text(
+                                        _profile.phoneNumber, style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontSize: 24.0,
+                                          fontWeight: FontWeight.bold),),
+                                      if(_phoneEdit) Row(
+                                          children: <Widget>[
+                                            Container(
+                                              child: TextField(
+                                                keyboardType: TextInputType.phone,
+                                                style: TextStyle(
+                                                    color: Colors.yellow,
+                                                    fontSize: 24.0,
+                                                    fontWeight: FontWeight.bold),
+                                                controller: phoneController,
+                                              ),
+                                              width: 200,
 
-                                          ),
-                                          RaisedButton(
-                                            child: Text(
-                                                'SAVE'
                                             ),
-                                            color: Colors.green,
-                                            textColor: Colors.white,
-                                            onPressed: () async {
-                                              EditPhoneNumberResponse response = await ServiceClient(
-                                                  ClientSingleton()
-                                                      .getChannel(),
-                                                  options: CallOptions(
-                                                      metadata: {
-                                                        'jwt': _prefs.get('jwt')
-                                                      }))
-                                                  .editPhoneNumber(
-                                                  EditPhoneNumberRequest()
-                                                    ..phoneNumber = phoneController
-                                                        .text);
+                                            RaisedButton(
+                                              child: Text(
+                                                  'SAVE'
+                                              ),
+                                              color: Colors.green,
+                                              textColor: Colors.white,
+                                              onPressed: () async {
+                                                EditPhoneNumberResponse response = await ServiceClient(
+                                                    ClientSingleton()
+                                                        .getChannel(),
+                                                    options: CallOptions(
+                                                        metadata: {
+                                                          'jwt': _prefs.get('jwt')
+                                                        }))
+                                                    .editPhoneNumber(
+                                                    EditPhoneNumberRequest()
+                                                      ..phoneNumber = phoneController
+                                                          .text);
 
-                                              if (response.resultCode == 'ok') {
+                                                if (response.resultCode == 'ok') {
+                                                  stState(() {
+                                                    _phoneEdit = false;
+                                                    _profile.phoneNumber =
+                                                        phoneController.text;
+                                                  });
+                                                }
+                                                else {
+                                                  return showDialog<void>(
+                                                    context: context,
+                                                    builder: (
+                                                        BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                            'Wrong Number'),
+                                                        content: const Text(
+                                                            'Malformed phone number'),
+                                                        actions: <Widget>[
+                                                          FlatButton(
+                                                            child: Text('Ok'),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                  context).pop();
+                                                            },
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                            SizedBox(width: 20,),
+                                            RaisedButton(
+                                              child: Text(
+                                                  'CANCEL'
+                                              ),
+                                              color: Colors.red,
+                                              textColor: Colors.white,
+                                              onPressed: () {
                                                 stState(() {
                                                   _phoneEdit = false;
-                                                  _profile.phoneNumber =
-                                                      phoneController.text;
                                                 });
-                                              }
-                                              else {
-                                                return showDialog<void>(
-                                                  context: context,
-                                                  builder: (
-                                                      BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'Wrong Number'),
-                                                      content: const Text(
-                                                          'Malformed phone number'),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text('Ok'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                context).pop();
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              }
-                                            },
-                                          ),
-                                          SizedBox(width: 20,),
-                                          RaisedButton(
-                                            child: Text(
-                                                'CANCEL'
+                                              },
                                             ),
-                                            color: Colors.red,
-                                            textColor: Colors.white,
-                                            onPressed: () {
-                                              stState(() {
-                                                _phoneEdit = false;
-                                              });
-                                            },
-                                          ),
-                                        ]
-                                    ),
-                                    ]
-                                );
-                                }
-                               ),
-                               StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
-                                 return Column(
-                                     crossAxisAlignment: CrossAxisAlignment
-                                         .start,
-                                     children: <Widget>[
-                                       Row(
-                                           children: <Widget>[
-                                             Text('CAR PLATE NUMBER',
-                                               style: TextStyle(
-                                                   color: Colors.grey[400],
-                                                   letterSpacing: 2.0),),
-                                             SizedBox(width: 15,),
-                                             if(!_plateEdit && _id == _current_id)FlatButton.icon(
-                                               color: Colors.blue,
-                                               icon: Icon(Icons.edit),
-                                               //`Icon` to display
-                                               label: Text('Edit'),
-                                               //`Text` to display
-                                               onPressed: () {
-                                                 stState(() {
-                                                   _plateEdit = true;
-                                                 });
-                                               },
-                                             ),
-                                           ]
-                                       ),
-                                       SizedBox(height: 10.0),
-                                       if(!_plateEdit) Text(
-                                         _profile.carPlateNumber,
-                                         style: TextStyle(
-                                             color: Colors.yellow,
-                                             fontSize: 24.0,
-                                             fontWeight: FontWeight.bold),),
-                                       if(_plateEdit) Row(
-                                           children: <Widget>[
-                                             Container(
-                                               child: TextField(
-                                                 decoration: const InputDecoration(
-                                                   labelText: '',
-                                                 ),
+                                          ]
+                                      ),
+                                      ]
+                                  );
+                                  }
+                                 ),
+                                 StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                                   return Column(
+                                       crossAxisAlignment: CrossAxisAlignment
+                                           .start,
+                                       children: <Widget>[
+                                         Row(
+                                             children: <Widget>[
+                                               Text('CAR PLATE NUMBER',
                                                  style: TextStyle(
-                                                     color: Colors.yellow,
-                                                     fontSize: 24.0,
-                                                     fontWeight: FontWeight
-                                                         .bold),
-                                                 controller: _plateController,
-                                               ),
-                                               width: 200,
-                                             ),
-                                             RaisedButton(
-                                               child: Text(
-                                                   'SAVE'
-                                               ),
-                                               color: Colors.green,
-                                               textColor: Colors.white,
-                                               onPressed: () async {
-                                                 EditPlateNumberResponse response = await ServiceClient(
-                                                     ClientSingleton()
-                                                         .getChannel(),
-                                                     options: CallOptions(
-                                                         metadata: {
-                                                           'jwt': _prefs.get(
-                                                               'jwt')
-                                                         }))
-                                                     .editPlateNumber(
-                                                     EditPlateNumberRequest()
-                                                       ..plateNumber = _plateController
-                                                           .text);
-                                                 if (response.resultCode ==
-                                                     'ok') {
+                                                     color: Colors.grey[400],
+                                                     letterSpacing: 2.0),),
+                                               SizedBox(width: 15,),
+                                               if(!_plateEdit && _id == _current_id)FlatButton.icon(
+                                                 color: Colors.blue,
+                                                 icon: Icon(Icons.edit),
+                                                 //`Icon` to display
+                                                 label: Text('Edit'),
+                                                 //`Text` to display
+                                                 onPressed: () {
                                                    stState(() {
-                                                     _profile.carPlateNumber = _plateController.text;
+                                                     _plateEdit = true;
+                                                   });
+                                                 },
+                                               ),
+                                             ]
+                                         ),
+                                         SizedBox(height: 10.0),
+                                         if(!_plateEdit) Text(
+                                           _profile.carPlateNumber,
+                                           style: TextStyle(
+                                               color: Colors.yellow,
+                                               fontSize: 24.0,
+                                               fontWeight: FontWeight.bold),),
+                                         if(_plateEdit) Row(
+                                             children: <Widget>[
+                                               Container(
+                                                 child: TextField(
+                                                   decoration: const InputDecoration(
+                                                     labelText: '',
+                                                   ),
+                                                   style: TextStyle(
+                                                       color: Colors.yellow,
+                                                       fontSize: 24.0,
+                                                       fontWeight: FontWeight
+                                                           .bold),
+                                                   controller: _plateController,
+                                                 ),
+                                                 width: 200,
+                                               ),
+                                               RaisedButton(
+                                                 child: Text(
+                                                     'SAVE'
+                                                 ),
+                                                 color: Colors.green,
+                                                 textColor: Colors.white,
+                                                 onPressed: () async {
+                                                   EditPlateNumberResponse response = await ServiceClient(
+                                                       ClientSingleton()
+                                                           .getChannel(),
+                                                       options: CallOptions(
+                                                           metadata: {
+                                                             'jwt': _prefs.get(
+                                                                 'jwt')
+                                                           }))
+                                                       .editPlateNumber(
+                                                       EditPlateNumberRequest()
+                                                         ..plateNumber = _plateController
+                                                             .text);
+                                                   if (response.resultCode ==
+                                                       'ok') {
+                                                     stState(() {
+                                                       _profile.carPlateNumber = _plateController.text;
+                                                       _plateEdit = false;
+                                                     });
+                                                   }
+                                                   else {
+                                                     return showDialog<void>(
+                                                       context: context,
+                                                       builder: (
+                                                           BuildContext context) {
+                                                         return AlertDialog(
+                                                           title: Text(
+                                                               "Invalid Action"),
+                                                           content: Text(
+                                                               response
+                                                                   .resultCode),
+                                                           actions: <Widget>[
+                                                             FlatButton(
+                                                               child: Text('Ok'),
+                                                               onPressed: () {
+                                                                 Navigator.of(
+                                                                     context)
+                                                                     .pop();
+                                                               },
+                                                             ),
+                                                           ],
+                                                         );
+                                                       },
+                                                     );
+                                                   }
+                                                 },
+                                               ),
+                                               SizedBox(width: 20,),
+                                               RaisedButton(
+                                                 child: Text(
+                                                     'CANCEL'
+                                                 ),
+                                                 color: Colors.red,
+                                                 textColor: Colors.white,
+                                                 onPressed: () {
+                                                   stState(() {
                                                      _plateEdit = false;
                                                    });
-                                                 }
-                                                 else {
-                                                   return showDialog<void>(
-                                                     context: context,
-                                                     builder: (
-                                                         BuildContext context) {
-                                                       return AlertDialog(
-                                                         title: Text(
-                                                             "Invalid Action"),
-                                                         content: Text(
-                                                             response
-                                                                 .resultCode),
-                                                         actions: <Widget>[
-                                                           FlatButton(
-                                                             child: Text('Ok'),
-                                                             onPressed: () {
-                                                               Navigator.of(
-                                                                   context)
-                                                                   .pop();
-                                                             },
-                                                           ),
-                                                         ],
-                                                       );
-                                                     },
-                                                   );
-                                                 }
-                                               },
-                                             ),
-                                             SizedBox(width: 20,),
-                                             RaisedButton(
-                                               child: Text(
-                                                   'CANCEL'
+                                                 },
                                                ),
-                                               color: Colors.red,
-                                               textColor: Colors.white,
-                                               onPressed: () {
-                                                 stState(() {
-                                                   _plateEdit = false;
-                                                 });
-                                               },
-                                             ),
-                                           ]
-                                       ),
-                                       SizedBox(height: 55.0),
-                                     ]
-                                 );
-                               }
-                               ),
-                                  ],
-                                )
-                            ),
+                                             ]
+                                         ),
+                                         SizedBox(height: 55.0),
+                                       ]
+                                   );
+                                 }
+                                 ),
+                                    ],
+                                  )
+                              ),
+                      ),
                                StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
                                  return Column(
 

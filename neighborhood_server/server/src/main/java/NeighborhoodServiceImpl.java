@@ -316,8 +316,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     public void addPost(NeighborhoodAPI.AddPostRequest request, StreamObserver<NeighborhoodAPI.AddPostResponse> responseObserver) {
         String resultCode;
 
-        //        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        int creatorId = 1;
+        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
 
         NeighborhoodAPI.Post postInfo = request.getPost();
         UserEntity creator = userService.findUserById((long)creatorId);
@@ -433,8 +432,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     public void addComment(NeighborhoodAPI.AddCommentRequest request, StreamObserver<NeighborhoodAPI.AddCommentResponse> responseObserver) {
         String resultCode;
 
-        //        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        int creatorId = 1;
+        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         NeighborhoodAPI.Comment commentInfo = request.getComment();
 
         UserEntity commentator = userService.findUserById((long)creatorId);
@@ -472,8 +470,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     public void addTask(NeighborhoodAPI.AddTaskRequest request, StreamObserver<NeighborhoodAPI.AddTaskResponse> responseObserver) {
         String resultCode;
 
-//        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        int creatorId = 1;
+        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
 
         NeighborhoodAPI.Task taskInfo = request.getTask();
         UserEntity creator = userService.findUserById((long)creatorId);
@@ -603,24 +600,24 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getUserTasks(NeighborhoodAPI.GetUserTasksRequest request, StreamObserver<NeighborhoodAPI.GetUserTasksResponse> responseObserver) {
-        //        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        int userId = 1;
+        int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         int neighborhoodId = request.getNeighborhoodId();
-
         UserEntity user = userService.findUserById((long) userId);
         NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) neighborhoodId);
         NeighborhoodAPI.GetUserTasksResponse.Builder builder = NeighborhoodAPI.GetUserTasksResponse.newBuilder();
 
         if(user != null && neighborhood != null) {
             for(SubTaskEntity subTask : user.getSubTasksList()) {
-                builder.addSubTask(NeighborhoodAPI.SubTask.newBuilder()
-                        .setId(subTask.getId().intValue())
-                        .setTitle(subTask.getTitle())
-                        .setDescription(subTask.getDescription())
-                        .setStatus(subTask.getStatus().getValue())
-                        .setAssigneeId(user.getId().intValue())
-                        .setAssigneeName(user.getFirstName() + " " + user.getLastName())
-                        .setTaskId(subTask.getParentTask().getId().intValue()));
+                if(subTask.getParentTask().getNeighborhood().getId() == neighborhoodId) {
+                    builder.addSubTask(NeighborhoodAPI.SubTask.newBuilder()
+                            .setId(subTask.getId().intValue())
+                            .setTitle(subTask.getTitle())
+                            .setDescription(subTask.getDescription())
+                            .setStatus(subTask.getStatus().getValue())
+                            .setAssigneeId(user.getId().intValue())
+                            .setAssigneeName(user.getFirstName() + " " + user.getLastName())
+                            .setTaskId(subTask.getParentTask().getId().intValue()));
+                }
             }
         }
 
