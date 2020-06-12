@@ -25,17 +25,17 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void registerUser(NeighborhoodAPI.RegisterUserRequest request, StreamObserver<NeighborhoodAPI.RegisterUserResponse> responseObserver) {
-           log.info(" Username  {}", request.getUsername());
-           UserEntity newUser = new UserEntity(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(), request.getPhoneNumber(), new Timestamp(new Date().getTime()));
-           Long result = userService.save(newUser);
-           String resultCode = "User Successfully registered!";
-           if(result == null) {
-               resultCode = "failed";
-           }
-           responseObserver.onNext(NeighborhoodAPI.RegisterUserResponse.newBuilder()
-                   .setResultCode(resultCode)
-                   .build());
-           responseObserver.onCompleted();
+        log.info(" Username  {}", request.getUsername());
+        UserEntity newUser = new UserEntity(request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(), request.getPhoneNumber(), new Timestamp(new Date().getTime()));
+        Long result = userService.save(newUser);
+        String resultCode = "User Successfully registered!";
+        if (result == null) {
+            resultCode = "failed";
+        }
+        responseObserver.onNext(NeighborhoodAPI.RegisterUserResponse.newBuilder()
+                .setResultCode(resultCode)
+                .build());
+        responseObserver.onCompleted();
     }
 
     @Override
@@ -43,9 +43,9 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         log.info(" Username  {}", request.getUsername());
         UserEntity user = userService.findUserByUsername(request.getUsername());
         log.info(" ===========================================  {}", user.toString());
-        if(user != null && user.getPassword().equals(request.getPassword())) {
+        if (user != null && user.getPassword().equals(request.getPassword())) {
             responseObserver.onNext(NeighborhoodAPI.LoginUserResponse.newBuilder()
-                    .setResultCode(JwtUtil.createJWT(""+user.getId()))
+                    .setResultCode(JwtUtil.createJWT("" + user.getId()))
                     .build());
         } else {
             responseObserver.onNext(NeighborhoodAPI.LoginUserResponse.newBuilder()
@@ -57,7 +57,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     private List<String> getItemNames(Set<ItemEntity> items) {
         List<String> itemNames = new ArrayList<String>();
-        for(ItemEntity item : items) {
+        for (ItemEntity item : items) {
             itemNames.add(item.getName());
         }
         return itemNames;
@@ -99,10 +99,9 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void userId(NeighborhoodAPI.UserIdRequest request, StreamObserver<NeighborhoodAPI.UserIdResponse> responseObserver) {
         responseObserver.onNext(NeighborhoodAPI.UserIdResponse.newBuilder().setId(Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get()))
-               .build());
+                .build());
         responseObserver.onCompleted();
     }
-
 
 
     @Override
@@ -125,9 +124,9 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         String resultCodeStr = "Fail";
 
-        if(result != null) {
+        if (result != null) {
             int addManagerStatus = neighborhoodService.addUserToNeighborhood((long) userId, result, UserRole.MANAGER, UserToNeighborhoodStatus.ACTIVE);
-            if(addManagerStatus == 0) {
+            if (addManagerStatus == 0) {
                 resultCodeStr = "Success";
             }
         }
@@ -143,11 +142,11 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         int neighborhoodId = request.getNeighborhoodId();
 
-        UserToNeighborhoodEntity utn = neighborhoodService.getUserToNeighborhoodEntity((long) userId, (long)neighborhoodId);
+        UserToNeighborhoodEntity utn = neighborhoodService.getUserToNeighborhoodEntity((long) userId, (long) neighborhoodId);
 
         String response = "N";
 
-        if(utn != null && utn.getStatus() == UserToNeighborhoodStatus.ACTIVE && utn.getUserRole() == UserRole.MANAGER) {
+        if (utn != null && utn.getStatus() == UserToNeighborhoodStatus.ACTIVE && utn.getUserRole() == UserRole.MANAGER) {
             response = "Y";
         }
 
@@ -160,11 +159,11 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void getMyNeighborhoodList(NeighborhoodAPI.GetMyNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetMyNeighborhoodResponse> responseObserver) {
         int id = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        UserEntity user = userService.findUserById((long)id);
+        UserEntity user = userService.findUserById((long) id);
         System.out.println("===============================" + id);
         NeighborhoodAPI.GetMyNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetMyNeighborhoodResponse.newBuilder();
-        for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
-            if(utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
+        for (UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
+            if (utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
             NeighborhoodEntity n = utn.getNeighborhoodEntity();
             int isManager = utn.getUserRole() == UserRole.MANAGER ? 1 : 0;
             builder.addNeighborhood(NeighborhoodAPI.Neighborhood.newBuilder().setId(n.getId().intValue()).setName(n.getName()).setCity(n.getCity()).setAddress(n.getAddress()).setDistrict(n.getDistrict()).setIsManager(isManager).setStatus(0));
@@ -177,20 +176,20 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void getOtherNeighborhoodList(NeighborhoodAPI.GetOtherNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetOtherNeighborhoodResponse> responseObserver) {
         int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
-        UserEntity user = userService.findUserById((long)userId);
+        UserEntity user = userService.findUserById((long) userId);
         System.out.println("===============================" + userId);
         NeighborhoodAPI.GetOtherNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetOtherNeighborhoodResponse.newBuilder();
 
         Set<NeighborhoodEntity> otherNeighborhoods = new HashSet<>(neighborhoodService.getNeighborhoodList());
 
-        for(UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
-            if(utn.getStatus() == UserToNeighborhoodStatus.ACTIVE) {
+        for (UserToNeighborhoodEntity utn : user.getNeighborhoodsList()) {
+            if (utn.getStatus() == UserToNeighborhoodStatus.ACTIVE) {
                 otherNeighborhoods.remove(utn.getNeighborhoodEntity());
             }
         }
 
-        for(NeighborhoodEntity n : otherNeighborhoods) {
-            UserToNeighborhoodEntity utn = neighborhoodService.getUserToNeighborhoodEntity((long)userId, n.getId());
+        for (NeighborhoodEntity n : otherNeighborhoods) {
+            UserToNeighborhoodEntity utn = neighborhoodService.getUserToNeighborhoodEntity((long) userId, n.getId());
             int isPending = 0;
             if (utn != null && utn.getStatus() == UserToNeighborhoodStatus.PENDING) {
                 isPending = 1;
@@ -204,13 +203,13 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getUsersByNeighborhood(NeighborhoodAPI.GetUsersByNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetUsersByNeighborhoodResponse> responseObserver) {
-        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)request.getNeighborhoodId());
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) request.getNeighborhoodId());
 
         NeighborhoodAPI.GetUsersByNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetUsersByNeighborhoodResponse.newBuilder();
 
-        if(neighborhood != null) {
-            for(UserToNeighborhoodEntity utn : neighborhood.getUsersList()) {
-                if(utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
+        if (neighborhood != null) {
+            for (UserToNeighborhoodEntity utn : neighborhood.getUsersList()) {
+                if (utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
                 UserEntity user = utn.getUserEntity();
                 builder.addUsers(NeighborhoodAPI.UserInfoItem.newBuilder()
                         .setUserId(user.getId().intValue())
@@ -276,7 +275,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
         List<UserToNeighborhoodEntity> requests = neighborhoodService.getUserRequestListByNeighborhood((long) neighborhoodId);
         System.out.println("===================" + requests.size());
-        for(UserToNeighborhoodEntity utn : requests) {
+        for (UserToNeighborhoodEntity utn : requests) {
             UserEntity user = utn.getUserEntity();
             builder.addRequests(NeighborhoodAPI.GetUserRequestListResponseItem.newBuilder().setUserId(user.getId().intValue()).setUserName(user.getUserName()));
         }
@@ -314,14 +313,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
 
         NeighborhoodAPI.Post postInfo = request.getPost();
-        UserEntity creator = userService.findUserById((long)creatorId);
-        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)postInfo.getNeighborhoodId());
+        UserEntity creator = userService.findUserById((long) creatorId);
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) postInfo.getNeighborhoodId());
 
         NeighborhoodAPI.AddPostResponse.Builder builder = NeighborhoodAPI.AddPostResponse.newBuilder();
 
-        if(creator == null) {
+        if (creator == null) {
             resultCode = "User does not exist";
-        } else if(neighborhood == null) {
+        } else if (neighborhood == null) {
             resultCode = "Neighborhood does not exist";
         } else {
             PostEntity post = new PostEntity();
@@ -332,7 +331,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
             Long addPostResult = postService.addPost(post);
 
-            if(addPostResult != null) {
+            if (addPostResult != null) {
                 NeighborhoodAPI.Post.Builder postBuilder = NeighborhoodAPI.Post.newBuilder();
 
 
@@ -357,11 +356,11 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getPost(NeighborhoodAPI.GetPostRequest request, StreamObserver<NeighborhoodAPI.GetPostResponse> responseObserver) {
-        PostEntity post = postService.getPostById((long)request.getPostId());
+        PostEntity post = postService.getPostById((long) request.getPostId());
 
         NeighborhoodAPI.GetPostResponse.Builder builder = NeighborhoodAPI.GetPostResponse.newBuilder();
 
-        if(post != null) {
+        if (post != null) {
             NeighborhoodAPI.Post.Builder postBuilder = NeighborhoodAPI.Post.newBuilder();
 
             UserEntity creator = post.getCreator();
@@ -371,7 +370,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                     .setUserId(post.getCreator().getId().intValue())
                     .setUserFullName(creator.getFirstName() + " " + creator.getLastName());
 
-            for(CommentEntity comment : post.getComments()) {
+            for (CommentEntity comment : post.getComments()) {
                 UserEntity commentator = comment.getCommentator();
                 postBuilder.addComment(NeighborhoodAPI.Comment.newBuilder()
                         .setId(comment.getId().intValue())
@@ -390,12 +389,12 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getPostsByNeighborhood(NeighborhoodAPI.GetPostsByNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetPostsByNeighborhoodResponse> responseObserver) {
-        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)request.getNeighborhoodId());
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) request.getNeighborhoodId());
 
         NeighborhoodAPI.GetPostsByNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetPostsByNeighborhoodResponse.newBuilder();
 
-        if(neighborhood != null) {
-            for(PostEntity post : neighborhood.getPostList()) {
+        if (neighborhood != null) {
+            for (PostEntity post : neighborhood.getPostList()) {
                 NeighborhoodAPI.Post.Builder postBuilder = NeighborhoodAPI.Post.newBuilder();
                 UserEntity creator = post.getCreator();
                 postBuilder.setId(post.getId().intValue())
@@ -404,7 +403,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                         .setUserId(post.getCreator().getId().intValue())
                         .setUserFullName(creator.getFirstName() + " " + creator.getLastName());
 
-                for(CommentEntity comment : post.getComments()) {
+                for (CommentEntity comment : post.getComments()) {
                     UserEntity commentator = comment.getCommentator();
                     postBuilder.addComment(NeighborhoodAPI.Comment.newBuilder()
                             .setId(comment.getId().intValue())
@@ -428,15 +427,15 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
         NeighborhoodAPI.Comment commentInfo = request.getComment();
 
-        UserEntity commentator = userService.findUserById((long)creatorId);
+        UserEntity commentator = userService.findUserById((long) creatorId);
 
-       PostEntity post = postService.getPostById((long)commentInfo.getPostId());
+        PostEntity post = postService.getPostById((long) commentInfo.getPostId());
 
 
         NeighborhoodAPI.AddCommentResponse.Builder builder = NeighborhoodAPI.AddCommentResponse.newBuilder();
-        if(commentator == null) {
+        if (commentator == null) {
             resultCode = "User does not exist";
-        } else if(post == null) {
+        } else if (post == null) {
             resultCode = "Post does not exist";
         } else {
             CommentEntity comment = new CommentEntity();
@@ -466,14 +465,14 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
 
         NeighborhoodAPI.Task taskInfo = request.getTask();
-        UserEntity creator = userService.findUserById((long)creatorId);
-        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)taskInfo.getNeighborhoodId());
+        UserEntity creator = userService.findUserById((long) creatorId);
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) taskInfo.getNeighborhoodId());
 
         NeighborhoodAPI.AddTaskResponse.Builder builder = NeighborhoodAPI.AddTaskResponse.newBuilder();
 
-        if(creator == null) {
+        if (creator == null) {
             resultCode = "User does not exist";
-        } else if(neighborhood == null) {
+        } else if (neighborhood == null) {
             resultCode = "Neighborhood does not exist";
         } else {
             TaskEntity task = new TaskEntity();
@@ -488,7 +487,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
             Long addTaskResult = taskService.addTask(task);
 
-            if(addTaskResult != null) {
+            if (addTaskResult != null) {
                 builder.setTaskId(addTaskResult.intValue());
             }
 
@@ -503,12 +502,12 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void getTask(NeighborhoodAPI.GetTaskRequest request, StreamObserver<NeighborhoodAPI.GetTaskResponse> responseObserver) {
 
-        TaskEntity task = taskService.getTaskById((long)request.getTaskId());
+        TaskEntity task = taskService.getTaskById((long) request.getTaskId());
 
         NeighborhoodAPI.GetTaskResponse.Builder builder = NeighborhoodAPI.GetTaskResponse.newBuilder();
 
 
-        if(task != null) {
+        if (task != null) {
             NeighborhoodAPI.Task.Builder taskBuilder = NeighborhoodAPI.Task.newBuilder();
             System.out.println("================= id = " + task.getId());
             System.out.println("================= title = " + task.getTitle());
@@ -520,7 +519,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                     .setCloseDate(convertFromTimestamp(task.getCloseDate()))
                     .setCreatorId(task.getCreator().getId().intValue());
 
-            for(SubTaskEntity subTask : task.getSubTasks()) {
+            for (SubTaskEntity subTask : task.getSubTasks()) {
                 UserEntity assignee = subTask.getAssignee();
                 taskBuilder.addSubTask(NeighborhoodAPI.SubTask.newBuilder()
                         .setId(subTask.getId().intValue())
@@ -542,12 +541,12 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
     @Override
     public void getTaskByNeighborhood(NeighborhoodAPI.GetTaskByNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.GetTaskByNeighborhoodResponse> responseObserver) {
 
-        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long)request.getNeighborhoodId());
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) request.getNeighborhoodId());
 
         NeighborhoodAPI.GetTaskByNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetTaskByNeighborhoodResponse.newBuilder();
 
-        if(neighborhood != null) {
-            for(TaskEntity task : neighborhood.getTaskList()) {
+        if (neighborhood != null) {
+            for (TaskEntity task : neighborhood.getTaskList()) {
                 builder.addTasks(NeighborhoodAPI.Task.newBuilder()
                         .setId(task.getId().intValue())
                         .setTitle(task.getTitle())
@@ -568,10 +567,10 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         String resultCode;
 
         NeighborhoodAPI.SubTask subTaskInfo = request.getSubTask();
-        UserEntity assignee = userService.findUserById((long)subTaskInfo.getAssigneeId());
-        TaskEntity parentTask = taskService.getTaskById((long)subTaskInfo.getTaskId());
+        UserEntity assignee = userService.findUserById((long) subTaskInfo.getAssigneeId());
+        TaskEntity parentTask = taskService.getTaskById((long) subTaskInfo.getTaskId());
 
-        if(assignee == null) {
+        if (assignee == null) {
             resultCode = "Assignee does not exist";
         } else if (parentTask == null) {
             resultCode = "Parent task does not exist";
@@ -599,9 +598,9 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) neighborhoodId);
         NeighborhoodAPI.GetUserTasksResponse.Builder builder = NeighborhoodAPI.GetUserTasksResponse.newBuilder();
 
-        if(user != null && neighborhood != null) {
-            for(SubTaskEntity subTask : user.getSubTasksList()) {
-                if(subTask.getParentTask().getNeighborhood().getId() == neighborhoodId) {
+        if (user != null && neighborhood != null) {
+            for (SubTaskEntity subTask : user.getSubTasksList()) {
+                if (subTask.getParentTask().getNeighborhood().getId() == neighborhoodId) {
                     builder.addSubTask(NeighborhoodAPI.SubTask.newBuilder()
                             .setId(subTask.getId().intValue())
                             .setTitle(subTask.getTitle())
@@ -620,37 +619,37 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void changeSubTaskStatus(NeighborhoodAPI.ChangeSubTaskStatusRequest request, StreamObserver<NeighborhoodAPI.ChangeSubTaskStatusResponse> responseObserver) {
-        long subTaskId = (long)request.getSubTaskId();
+        long subTaskId = (long) request.getSubTaskId();
         int status = request.getStatus();
         int changeResultCode = -1, newSubTaskStatus = -1, newParentTaskStatus = -1;
 
         SubTaskEntity subTask = taskService.getSubTaskById(subTaskId);
         TaskEntity parentTask = subTask.getParentTask();
 
-        if(TaskStatus.valueOf(status) == TaskStatus.IN_PROGRESS) {
-            if(parentTask.getStatus() == TaskStatus.NEW) {
+        if (TaskStatus.valueOf(status) == TaskStatus.IN_PROGRESS) {
+            if (parentTask.getStatus() == TaskStatus.NEW) {
                 int curRes = taskService.changeTaskStatus(parentTask, TaskStatus.IN_PROGRESS);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
             }
             changeResultCode = taskService.changeSubTaskStatus(subTask, TaskStatus.IN_PROGRESS);
             newSubTaskStatus = changeResultCode == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
-        } else if(TaskStatus.valueOf(status) == TaskStatus.CLOSED) {
+        } else if (TaskStatus.valueOf(status) == TaskStatus.CLOSED) {
 
             changeResultCode = taskService.changeSubTaskStatus(subTask, TaskStatus.CLOSED);
             newSubTaskStatus = changeResultCode == 0 ? TaskStatus.CLOSED.getValue() : 0;
 
             boolean shouldClose = true;
-            for(SubTaskEntity st : parentTask.getSubTasks()) {
-                if(st.getStatus() != TaskStatus.CLOSED) {
+            for (SubTaskEntity st : parentTask.getSubTasks()) {
+                if (st.getStatus() != TaskStatus.CLOSED) {
                     shouldClose = false;
                     break;
                 }
             }
 
-            if(shouldClose) {
+            if (shouldClose) {
                 int curRes = taskService.changeTaskStatus(parentTask, TaskStatus.CLOSED);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.CLOSED.getValue() : 0;
-            } else if(parentTask.getStatus() == TaskStatus.NEW) {
+            } else if (parentTask.getStatus() == TaskStatus.NEW) {
                 int curRes = taskService.changeTaskStatus(parentTask, TaskStatus.IN_PROGRESS);
                 newParentTaskStatus = curRes == 0 ? TaskStatus.IN_PROGRESS.getValue() : 0;
             }
