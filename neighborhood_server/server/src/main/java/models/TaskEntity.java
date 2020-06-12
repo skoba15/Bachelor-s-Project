@@ -42,7 +42,7 @@ public class TaskEntity {
     @JoinColumn(name = "creator")
     private UserEntity creator;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "neighborhood")
     private NeighborhoodEntity neighborhood;
 
