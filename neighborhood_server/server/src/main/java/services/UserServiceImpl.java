@@ -23,6 +23,8 @@ public class UserServiceImpl implements UserService{
         UserEntity user;
         try {
             user = (UserEntity) query.getSingleResult();
+            Hibernate.initialize(user.getPostsList());
+            Hibernate.initialize(user.getCommentsList());
         } catch (Exception e) {
             user = null;
         }
@@ -57,6 +59,8 @@ public class UserServiceImpl implements UserService{
         UserEntity user;
         try {
             user = (UserEntity) query.getSingleResult();
+            Hibernate.initialize(user.getPostsList());
+            Hibernate.initialize(user.getCommentsList());
         } catch (Exception e) {
             user = null;
         }

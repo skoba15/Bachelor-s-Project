@@ -67,10 +67,10 @@ public class UserEntity {
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     private Set<TaskEntity> tasksList = new HashSet<TaskEntity>();
 
-    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
     private Set<PostEntity> postsList = new HashSet<PostEntity>();
 
-    @OneToMany(mappedBy = "commentator", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "commentator", fetch = FetchType.LAZY)
     private Set<CommentEntity> commentsList = new HashSet<CommentEntity>();
 
     public UserEntity() {}
