@@ -38,11 +38,11 @@ public class TaskEntity {
     @Column(name = "CLOSE_DATE")
     private Timestamp closeDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator")
     private UserEntity creator;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "neighborhood")
     private NeighborhoodEntity neighborhood;
 

@@ -2,6 +2,7 @@ package services;
 
 import db.JdbcConnection;
 import models.*;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -65,6 +66,8 @@ public class TaskServiceImpl implements TaskService {
         TaskEntity result;
         try {
             result = (TaskEntity) query.getSingleResult();
+            Hibernate.initialize(result.getCreator());
+            Hibernate.initialize(result.getNeighborhood());
         } catch (Exception e) {
             result = null;
         }
@@ -83,6 +86,8 @@ public class TaskServiceImpl implements TaskService {
         SubTaskEntity result;
         try {
             result = (SubTaskEntity) query.getSingleResult();
+            Hibernate.initialize(result.getParentTask());
+            Hibernate.initialize(result.getAssignee());
         } catch (Exception e) {
             result = null;
         }
