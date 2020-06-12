@@ -5,17 +5,12 @@ import neighborhood.server.*;
 import org.slf4j.*;
 import services.*;
 
-import javax.validation.*;
-
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
-
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
-
 
 public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
@@ -420,8 +415,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                 }
                 builder.addPost(postBuilder);
             }
-
-
         }
 
         responseObserver.onNext(builder.build());
