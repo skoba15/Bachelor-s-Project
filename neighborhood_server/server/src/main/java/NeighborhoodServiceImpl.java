@@ -675,7 +675,24 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void getContactByCar(NeighborhoodAPI.GetContactByCarRequest request, StreamObserver<NeighborhoodAPI.GetContactByCarResponse> responseObserver) {
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) request.getNeighborhoodId());
+        String plateNumber = request.getPlateNumber();
 
+        NeighborhoodAPI.GetContactByCarResponse.Builder builder = NeighborhoodAPI.GetContactByCarResponse.newBuilder();
+
+        if (neighborhood != null) {
+            for (UserToNeighborhoodEntity utn : neighborhood.getUsersList()) {
+                UserEntity user = utn.getUserEntity();
+                if(user.getCar().getPlateNumber().toUpperCase().equals(plateNumber.toUpperCase()))
+                builder.setUser(NeighborhoodAPI.UserInfoItem.newBuilder()
+                        .setUserId(user.getId().intValue())
+                        .setUserFullName(user.getFirstName() + " " + user.getLastName()))
+                        .setResultCode("Success");
+                break;
+            }
+        }
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
     }
 
     private Timestamp convertToTimestamp(NeighborhoodAPI.Date dateInfo) {
