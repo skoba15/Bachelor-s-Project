@@ -683,12 +683,13 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         if (neighborhood != null) {
             for (UserToNeighborhoodEntity utn : neighborhood.getUsersList()) {
                 UserEntity user = utn.getUserEntity();
-                if(user.getCar().getPlateNumber().toUpperCase().equals(plateNumber.toUpperCase()))
-                builder.setUser(NeighborhoodAPI.UserInfoItem.newBuilder()
-                        .setUserId(user.getId().intValue())
-                        .setUserFullName(user.getFirstName() + " " + user.getLastName()))
-                        .setResultCode("Success");
-                break;
+                if(user.getCar().getPlateNumber().toUpperCase().equals(plateNumber.toUpperCase())){
+                    builder.setUser(NeighborhoodAPI.UserInfoItem.newBuilder()
+                            .setUserId(user.getId().intValue())
+                            .setUserFullName(user.getFirstName() + " " + user.getLastName()))
+                            .setResultCode("Success");
+                    break;
+                }
             }
         }
         responseObserver.onNext(builder.build());
