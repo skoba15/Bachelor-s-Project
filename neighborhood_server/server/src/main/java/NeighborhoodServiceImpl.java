@@ -103,17 +103,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         responseObserver.onCompleted();
     }
 
-
-    @Override
-    public void resetPassword(NeighborhoodAPI.ResetPasswordRequest request, StreamObserver<NeighborhoodAPI.ResetPasswordResponse> responseObserver) {
-
-    }
-
-    @Override
-    public void deleteContact(NeighborhoodAPI.DeleteContactRequest request, StreamObserver<NeighborhoodAPI.DeleteContactResponse> responseObserver) {
-
-    }
-
     @Override
     public void addNeighborhood(NeighborhoodAPI.AddNeighborhoodRequest request, StreamObserver<NeighborhoodAPI.AddNeighborhoodResponse> responseObserver) {
         int userId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
@@ -303,7 +292,28 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
 
     @Override
     public void searchItem(NeighborhoodAPI.SearchItemRequest request, StreamObserver<NeighborhoodAPI.SearchItemResponse> responseObserver) {
+        int creatorId = Integer.valueOf(Constant.CLIENT_ID_CONTEXT_KEY.get());
+        NeighborhoodEntity neighborhood = neighborhoodService.getNeighborhoodById((long) request.getNeighborhoodId());
+        String itemName = request.getItemName();
 
+        NeighborhoodAPI.SearchItemResponse.Builder builder = NeighborhoodAPI.SearchItemResponse.newBuilder();
+
+        if (neighborhood != null) {
+            for (UserToNeighborhoodEntity utn : neighborhood.getUsersList()) {
+                if (utn.getStatus() != UserToNeighborhoodStatus.ACTIVE) continue;
+                UserEntity user = utn.getUserEntity();
+                for (ItemEntity item : user.getItems()) {
+                    if (item.getName().toLowerCase().contains(itemName.toLowerCase())) {
+                        builder.addUsers(NeighborhoodAPI.UserInfoItem.newBuilder()
+                                .setUserId(user.getId().intValue())
+                                .setUserFullName(user.getFirstName() + " " + user.getLastName()));
+                        break;
+                    }
+                }
+            }
+        }
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
     }
 
     @Override
@@ -661,16 +671,6 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                 .setParentTaskNewStatus(newParentTaskStatus)
                 .build());
         responseObserver.onCompleted();
-    }
-
-    @Override
-    public void addCar(NeighborhoodAPI.AddCarRequest request, StreamObserver<NeighborhoodAPI.AddCarResponse> responseObserver) {
-
-    }
-
-    @Override
-    public void getCar(NeighborhoodAPI.GetCarRequest request, StreamObserver<NeighborhoodAPI.GetCarResponse> responseObserver) {
-
     }
 
     @Override

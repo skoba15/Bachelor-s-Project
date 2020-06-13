@@ -30,14 +30,6 @@ service Service {
     rpc EditPlateNumber (EditPlateNumberRequest) returns (EditPlateNumberResponse) {
     }
 
-    // პროფილის რედაქტირება
-    rpc ResetPassword (ResetPasswordRequest) returns (ResetPasswordResponse) {
-    }
-
-
-    rpc DeleteContact (DeleteContactRequest) returns (DeleteContactResponse) {
-    }
-
     // სამეზობლოს დამატება
     rpc AddNeighborhood (AddNeighborhoodRequest) returns (AddNeighborhoodResponse) {
     }
@@ -123,21 +115,10 @@ service Service {
     }
 
     // მანქანასთან დაკავშირებული სერვისები
-    rpc AddCar (AddCarRequest) returns (AddCarResponse) {
-    }
-
-    rpc GetCar (GetCarRequest) returns (GetCarResponse) {
-    }
-
     rpc GetContactByCar (GetContactByCarRequest) returns (GetContactByCarResponse) {
     }
 
 
-}
-
-
-message Car {
-    string plate_number = 1;
 }
 
 message Date {
@@ -415,12 +396,11 @@ message DeleteItemToUserResponse {
 
 message SearchItemRequest {
     int32 neighborhood_id = 1;
-    int32 item_id = 2;
+    string item_name = 2;
 }
 
 message SearchItemResponse {
-    string result_code = 1;
-    repeated int32 user_ids = 2;
+    repeated UserInfoItem users = 1;
 }
 
 message AddPostRequest {
@@ -522,28 +502,12 @@ message AddCommentResponse {
     Comment comment = 2;
 }
 
-message AddCarRequest {
-    Car car = 1;
-}
-
-message AddCarResponse {
-    string result_code = 1;
-}
-
-
-message GetCarRequest {
-    int32 user_id = 1;
-}
-
-message GetCarResponse {
-    string result_code = 1;
-    repeated Car car = 2;
-}
-
 message GetContactByCarRequest {
-    Car car = 1;
+    int32 neighborhood_id = 1;
+    string plate_number = 2;
 }
 
 message GetContactByCarResponse {
-    string phone_number = 1;
+    string result_code = 1;
+    UserInfoItem user = 2;
 }
