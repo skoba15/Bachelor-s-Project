@@ -9,6 +9,7 @@ import 'package:neighborhood_client/src/screens/Neighborhoods.dart';
 import 'package:neighborhood_client/src/screens/Profile.dart';
 import 'package:neighborhood_client/src/screens/Register.dart';
 import 'package:neighborhood_client/src/screens/Requests.dart';
+import 'package:neighborhood_client/src/screens/Search.dart';
 import 'package:neighborhood_client/src/screens/Success.dart';
 import 'package:neighborhood_client/src/screens/Task.dart';
 import 'package:neighborhood_client/src/screens/Tasks.dart';
@@ -65,6 +66,9 @@ class FluroRouter {
          return new CreateSubtask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),);
       }
   );
+  static Handler _searchHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          Search(type: int.parse(params['type'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),));
 
   static void setupRouter() {
     router.define(
@@ -125,6 +129,11 @@ class FluroRouter {
     router.define(
       'Neighborhoods/:neighborhoodId/tasks/:taskId/CreateSubtask',
       handler: _createSubtaskHandler,
+    );
+
+    router.define(
+      'Neighborhoods/:neighborhoodId/Search/:type',
+      handler: _searchHandler,
     );
   }
 }

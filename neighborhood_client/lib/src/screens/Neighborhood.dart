@@ -111,6 +111,26 @@ class _NeighborhoodState extends State<Neighborhood> {
                                   context, 'Neighborhoods/$neighborhoodId/tasks');
                             },
                           ),
+                        ListTile(
+                          leading: Icon(Icons.search),
+                          title: Text('Search Items', style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),),
+                          onTap: () {
+                            int neighborhoodId = widget.id;
+                            Navigator.pushNamed(
+                                context, 'Neighborhoods/$neighborhoodId/Search/1');
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.search),
+                          title: Text('Search Car', style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),),
+                          onTap: () {
+                            int neighborhoodId = widget.id;
+                            Navigator.pushNamed(
+                                context, 'Neighborhoods/$neighborhoodId/Search/2');
+                          },
+                        ),
                           ListTile(
                             leading: Icon(Icons.keyboard_backspace),
                             title: Text('Back', style: TextStyle(
