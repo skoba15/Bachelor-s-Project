@@ -5,13 +5,6 @@
 // @dart = 2.3
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
 
-const Car$json = const {
-  '1': 'Car',
-  '2': const [
-    const {'1': 'plate_number', '3': 1, '4': 1, '5': 9, '10': 'plateNumber'},
-  ],
-};
-
 const Date$json = const {
   '1': 'Date',
   '2': const [
@@ -428,15 +421,14 @@ const SearchItemRequest$json = const {
   '1': 'SearchItemRequest',
   '2': const [
     const {'1': 'neighborhood_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodId'},
-    const {'1': 'item_id', '3': 2, '4': 1, '5': 5, '10': 'itemId'},
+    const {'1': 'item_name', '3': 2, '4': 1, '5': 9, '10': 'itemName'},
   ],
 };
 
 const SearchItemResponse$json = const {
   '1': 'SearchItemResponse',
   '2': const [
-    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'user_ids', '3': 2, '4': 3, '5': 5, '10': 'userIds'},
+    const {'1': 'users', '3': 1, '4': 3, '5': 11, '6': '.neighborhood.server.UserInfoItem', '10': 'users'},
   ],
 };
 
@@ -603,46 +595,19 @@ const AddCommentResponse$json = const {
   ],
 };
 
-const AddCarRequest$json = const {
-  '1': 'AddCarRequest',
-  '2': const [
-    const {'1': 'car', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Car', '10': 'car'},
-  ],
-};
-
-const AddCarResponse$json = const {
-  '1': 'AddCarResponse',
-  '2': const [
-    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-  ],
-};
-
-const GetCarRequest$json = const {
-  '1': 'GetCarRequest',
-  '2': const [
-    const {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
-  ],
-};
-
-const GetCarResponse$json = const {
-  '1': 'GetCarResponse',
-  '2': const [
-    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
-    const {'1': 'car', '3': 2, '4': 3, '5': 11, '6': '.neighborhood.server.Car', '10': 'car'},
-  ],
-};
-
 const GetContactByCarRequest$json = const {
   '1': 'GetContactByCarRequest',
   '2': const [
-    const {'1': 'car', '3': 1, '4': 1, '5': 11, '6': '.neighborhood.server.Car', '10': 'car'},
+    const {'1': 'neighborhood_id', '3': 1, '4': 1, '5': 5, '10': 'neighborhoodId'},
+    const {'1': 'plate_number', '3': 2, '4': 1, '5': 9, '10': 'plateNumber'},
   ],
 };
 
 const GetContactByCarResponse$json = const {
   '1': 'GetContactByCarResponse',
   '2': const [
-    const {'1': 'phone_number', '3': 1, '4': 1, '5': 9, '10': 'phoneNumber'},
+    const {'1': 'result_code', '3': 1, '4': 1, '5': 9, '10': 'resultCode'},
+    const {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.neighborhood.server.UserInfoItem', '10': 'user'},
   ],
 };
 

@@ -9,37 +9,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class Car extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('Car', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'plateNumber')
-    ..hasRequiredFields = false
-  ;
-
-  Car._() : super();
-  factory Car() => create();
-  factory Car.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Car.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  Car clone() => Car()..mergeFromMessage(this);
-  Car copyWith(void Function(Car) updates) => super.copyWith((message) => updates(message as Car));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static Car create() => Car._();
-  Car createEmptyInstance() => create();
-  static $pb.PbList<Car> createRepeated() => $pb.PbList<Car>();
-  @$core.pragma('dart2js:noInline')
-  static Car getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Car>(create);
-  static Car _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get plateNumber => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set plateNumber($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasPlateNumber() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPlateNumber() => clearField(1);
-}
-
 class Date extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Date', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'day', $pb.PbFieldType.O3)
@@ -2136,7 +2105,7 @@ class DeleteItemToUserResponse extends $pb.GeneratedMessage {
 class SearchItemRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('SearchItemRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, 'itemId', $pb.PbFieldType.O3)
+    ..aOS(2, 'itemName')
     ..hasRequiredFields = false
   ;
 
@@ -2165,19 +2134,18 @@ class SearchItemRequest extends $pb.GeneratedMessage {
   void clearNeighborhoodId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get itemId => $_getIZ(1);
+  $core.String get itemName => $_getSZ(1);
   @$pb.TagNumber(2)
-  set itemId($core.int v) { $_setSignedInt32(1, v); }
+  set itemName($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasItemId() => $_has(1);
+  $core.bool hasItemName() => $_has(1);
   @$pb.TagNumber(2)
-  void clearItemId() => clearField(2);
+  void clearItemName() => clearField(2);
 }
 
 class SearchItemResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('SearchItemResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'resultCode')
-    ..p<$core.int>(2, 'userIds', $pb.PbFieldType.P3)
+    ..pc<UserInfoItem>(1, 'users', $pb.PbFieldType.PM, subBuilder: UserInfoItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -2197,16 +2165,7 @@ class SearchItemResponse extends $pb.GeneratedMessage {
   static SearchItemResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get resultCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set resultCode($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResultCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResultCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.List<$core.int> get userIds => $_getList(1);
+  $core.List<UserInfoItem> get users => $_getList(0);
 }
 
 class AddPostRequest extends $pb.GeneratedMessage {
@@ -2979,139 +2938,10 @@ class AddCommentResponse extends $pb.GeneratedMessage {
   Comment ensureComment() => $_ensure(1);
 }
 
-class AddCarRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCarRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOM<Car>(1, 'car', subBuilder: Car.create)
-    ..hasRequiredFields = false
-  ;
-
-  AddCarRequest._() : super();
-  factory AddCarRequest() => create();
-  factory AddCarRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory AddCarRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  AddCarRequest clone() => AddCarRequest()..mergeFromMessage(this);
-  AddCarRequest copyWith(void Function(AddCarRequest) updates) => super.copyWith((message) => updates(message as AddCarRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static AddCarRequest create() => AddCarRequest._();
-  AddCarRequest createEmptyInstance() => create();
-  static $pb.PbList<AddCarRequest> createRepeated() => $pb.PbList<AddCarRequest>();
-  @$core.pragma('dart2js:noInline')
-  static AddCarRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddCarRequest>(create);
-  static AddCarRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  Car get car => $_getN(0);
-  @$pb.TagNumber(1)
-  set car(Car v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasCar() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCar() => clearField(1);
-  @$pb.TagNumber(1)
-  Car ensureCar() => $_ensure(0);
-}
-
-class AddCarResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AddCarResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'resultCode')
-    ..hasRequiredFields = false
-  ;
-
-  AddCarResponse._() : super();
-  factory AddCarResponse() => create();
-  factory AddCarResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory AddCarResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  AddCarResponse clone() => AddCarResponse()..mergeFromMessage(this);
-  AddCarResponse copyWith(void Function(AddCarResponse) updates) => super.copyWith((message) => updates(message as AddCarResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static AddCarResponse create() => AddCarResponse._();
-  AddCarResponse createEmptyInstance() => create();
-  static $pb.PbList<AddCarResponse> createRepeated() => $pb.PbList<AddCarResponse>();
-  @$core.pragma('dart2js:noInline')
-  static AddCarResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddCarResponse>(create);
-  static AddCarResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get resultCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set resultCode($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResultCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResultCode() => clearField(1);
-}
-
-class GetCarRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCarRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  GetCarRequest._() : super();
-  factory GetCarRequest() => create();
-  factory GetCarRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetCarRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  GetCarRequest clone() => GetCarRequest()..mergeFromMessage(this);
-  GetCarRequest copyWith(void Function(GetCarRequest) updates) => super.copyWith((message) => updates(message as GetCarRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static GetCarRequest create() => GetCarRequest._();
-  GetCarRequest createEmptyInstance() => create();
-  static $pb.PbList<GetCarRequest> createRepeated() => $pb.PbList<GetCarRequest>();
-  @$core.pragma('dart2js:noInline')
-  static GetCarRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCarRequest>(create);
-  static GetCarRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get userId => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set userId($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasUserId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearUserId() => clearField(1);
-}
-
-class GetCarResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCarResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'resultCode')
-    ..pc<Car>(2, 'car', $pb.PbFieldType.PM, subBuilder: Car.create)
-    ..hasRequiredFields = false
-  ;
-
-  GetCarResponse._() : super();
-  factory GetCarResponse() => create();
-  factory GetCarResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetCarResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  GetCarResponse clone() => GetCarResponse()..mergeFromMessage(this);
-  GetCarResponse copyWith(void Function(GetCarResponse) updates) => super.copyWith((message) => updates(message as GetCarResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static GetCarResponse create() => GetCarResponse._();
-  GetCarResponse createEmptyInstance() => create();
-  static $pb.PbList<GetCarResponse> createRepeated() => $pb.PbList<GetCarResponse>();
-  @$core.pragma('dart2js:noInline')
-  static GetCarResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCarResponse>(create);
-  static GetCarResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get resultCode => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set resultCode($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResultCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResultCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.List<Car> get car => $_getList(1);
-}
-
 class GetContactByCarRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetContactByCarRequest', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOM<Car>(1, 'car', subBuilder: Car.create)
+    ..a<$core.int>(1, 'neighborhoodId', $pb.PbFieldType.O3)
+    ..aOS(2, 'plateNumber')
     ..hasRequiredFields = false
   ;
 
@@ -3131,20 +2961,28 @@ class GetContactByCarRequest extends $pb.GeneratedMessage {
   static GetContactByCarRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  Car get car => $_getN(0);
+  $core.int get neighborhoodId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set car(Car v) { setField(1, v); }
+  set neighborhoodId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCar() => $_has(0);
+  $core.bool hasNeighborhoodId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCar() => clearField(1);
-  @$pb.TagNumber(1)
-  Car ensureCar() => $_ensure(0);
+  void clearNeighborhoodId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get plateNumber => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set plateNumber($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPlateNumber() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPlateNumber() => clearField(2);
 }
 
 class GetContactByCarResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetContactByCarResponse', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
-    ..aOS(1, 'phoneNumber')
+    ..aOS(1, 'resultCode')
+    ..aOM<UserInfoItem>(2, 'user', subBuilder: UserInfoItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -3164,12 +3002,23 @@ class GetContactByCarResponse extends $pb.GeneratedMessage {
   static GetContactByCarResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get phoneNumber => $_getSZ(0);
+  $core.String get resultCode => $_getSZ(0);
   @$pb.TagNumber(1)
-  set phoneNumber($core.String v) { $_setString(0, v); }
+  set resultCode($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPhoneNumber() => $_has(0);
+  $core.bool hasResultCode() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPhoneNumber() => clearField(1);
+  void clearResultCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  UserInfoItem get user => $_getN(1);
+  @$pb.TagNumber(2)
+  set user(UserInfoItem v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUser() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUser() => clearField(2);
+  @$pb.TagNumber(2)
+  UserInfoItem ensureUser() => $_ensure(1);
 }
 

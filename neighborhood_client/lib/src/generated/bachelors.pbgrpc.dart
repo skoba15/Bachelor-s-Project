@@ -49,18 +49,6 @@ class ServiceClient extends $grpc.Client {
           ($0.EditPlateNumberRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.EditPlateNumberResponse.fromBuffer(value));
-  static final _$resetPassword =
-      $grpc.ClientMethod<$0.ResetPasswordRequest, $0.ResetPasswordResponse>(
-          '/neighborhood.server.Service/ResetPassword',
-          ($0.ResetPasswordRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $0.ResetPasswordResponse.fromBuffer(value));
-  static final _$deleteContact =
-      $grpc.ClientMethod<$0.DeleteContactRequest, $0.DeleteContactResponse>(
-          '/neighborhood.server.Service/DeleteContact',
-          ($0.DeleteContactRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) =>
-              $0.DeleteContactResponse.fromBuffer(value));
   static final _$addNeighborhood =
       $grpc.ClientMethod<$0.AddNeighborhoodRequest, $0.AddNeighborhoodResponse>(
           '/neighborhood.server.Service/AddNeighborhood',
@@ -207,16 +195,6 @@ class ServiceClient extends $grpc.Client {
       ($0.ChangeSubTaskStatusRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.ChangeSubTaskStatusResponse.fromBuffer(value));
-  static final _$addCar =
-      $grpc.ClientMethod<$0.AddCarRequest, $0.AddCarResponse>(
-          '/neighborhood.server.Service/AddCar',
-          ($0.AddCarRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $0.AddCarResponse.fromBuffer(value));
-  static final _$getCar =
-      $grpc.ClientMethod<$0.GetCarRequest, $0.GetCarResponse>(
-          '/neighborhood.server.Service/GetCar',
-          ($0.GetCarRequest value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $0.GetCarResponse.fromBuffer(value));
   static final _$getContactByCar =
       $grpc.ClientMethod<$0.GetContactByCarRequest, $0.GetContactByCarResponse>(
           '/neighborhood.server.Service/GetContactByCar',
@@ -274,24 +252,6 @@ class ServiceClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$editPlateNumber, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$0.ResetPasswordResponse> resetPassword(
-      $0.ResetPasswordRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$resetPassword, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$0.DeleteContactResponse> deleteContact(
-      $0.DeleteContactRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$deleteContact, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -503,20 +463,6 @@ class ServiceClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.AddCarResponse> addCar($0.AddCarRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(_$addCar, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$0.GetCarResponse> getCar($0.GetCarRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(_$getCar, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
   $grpc.ResponseFuture<$0.GetContactByCarResponse> getContactByCar(
       $0.GetContactByCarRequest request,
       {$grpc.CallOptions options}) {
@@ -581,24 +527,6 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.EditPlateNumberRequest.fromBuffer(value),
         ($0.EditPlateNumberResponse value) => value.writeToBuffer()));
-    $addMethod(
-        $grpc.ServiceMethod<$0.ResetPasswordRequest, $0.ResetPasswordResponse>(
-            'ResetPassword',
-            resetPassword_Pre,
-            false,
-            false,
-            ($core.List<$core.int> value) =>
-                $0.ResetPasswordRequest.fromBuffer(value),
-            ($0.ResetPasswordResponse value) => value.writeToBuffer()));
-    $addMethod(
-        $grpc.ServiceMethod<$0.DeleteContactRequest, $0.DeleteContactResponse>(
-            'DeleteContact',
-            deleteContact_Pre,
-            false,
-            false,
-            ($core.List<$core.int> value) =>
-                $0.DeleteContactRequest.fromBuffer(value),
-            ($0.DeleteContactResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.AddNeighborhoodRequest,
             $0.AddNeighborhoodResponse>(
         'AddNeighborhood',
@@ -795,20 +723,6 @@ abstract class ServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.ChangeSubTaskStatusRequest.fromBuffer(value),
         ($0.ChangeSubTaskStatusResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.AddCarRequest, $0.AddCarResponse>(
-        'AddCar',
-        addCar_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.AddCarRequest.fromBuffer(value),
-        ($0.AddCarResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetCarRequest, $0.GetCarResponse>(
-        'GetCar',
-        getCar_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.GetCarRequest.fromBuffer(value),
-        ($0.GetCarResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetContactByCarRequest,
             $0.GetContactByCarResponse>(
         'GetContactByCar',
@@ -851,18 +765,6 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call,
       $async.Future<$0.EditPlateNumberRequest> request) async {
     return editPlateNumber(call, await request);
-  }
-
-  $async.Future<$0.ResetPasswordResponse> resetPassword_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.ResetPasswordRequest> request) async {
-    return resetPassword(call, await request);
-  }
-
-  $async.Future<$0.DeleteContactResponse> deleteContact_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.DeleteContactRequest> request) async {
-    return deleteContact(call, await request);
   }
 
   $async.Future<$0.AddNeighborhoodResponse> addNeighborhood_Pre(
@@ -999,16 +901,6 @@ abstract class ServiceBase extends $grpc.Service {
     return changeSubTaskStatus(call, await request);
   }
 
-  $async.Future<$0.AddCarResponse> addCar_Pre(
-      $grpc.ServiceCall call, $async.Future<$0.AddCarRequest> request) async {
-    return addCar(call, await request);
-  }
-
-  $async.Future<$0.GetCarResponse> getCar_Pre(
-      $grpc.ServiceCall call, $async.Future<$0.GetCarRequest> request) async {
-    return getCar(call, await request);
-  }
-
   $async.Future<$0.GetContactByCarResponse> getContactByCar_Pre(
       $grpc.ServiceCall call,
       $async.Future<$0.GetContactByCarRequest> request) async {
@@ -1027,10 +919,6 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.EditPhoneNumberRequest request);
   $async.Future<$0.EditPlateNumberResponse> editPlateNumber(
       $grpc.ServiceCall call, $0.EditPlateNumberRequest request);
-  $async.Future<$0.ResetPasswordResponse> resetPassword(
-      $grpc.ServiceCall call, $0.ResetPasswordRequest request);
-  $async.Future<$0.DeleteContactResponse> deleteContact(
-      $grpc.ServiceCall call, $0.DeleteContactRequest request);
   $async.Future<$0.AddNeighborhoodResponse> addNeighborhood(
       $grpc.ServiceCall call, $0.AddNeighborhoodRequest request);
   $async.Future<$0.GetMyNeighborhoodResponse> getMyNeighborhoodList(
@@ -1079,10 +967,6 @@ abstract class ServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.GetUserTasksRequest request);
   $async.Future<$0.ChangeSubTaskStatusResponse> changeSubTaskStatus(
       $grpc.ServiceCall call, $0.ChangeSubTaskStatusRequest request);
-  $async.Future<$0.AddCarResponse> addCar(
-      $grpc.ServiceCall call, $0.AddCarRequest request);
-  $async.Future<$0.GetCarResponse> getCar(
-      $grpc.ServiceCall call, $0.GetCarRequest request);
   $async.Future<$0.GetContactByCarResponse> getContactByCar(
       $grpc.ServiceCall call, $0.GetContactByCarRequest request);
 }
