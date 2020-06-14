@@ -40,6 +40,11 @@ class _ProfileState extends State<Profile> {
   UserProfileResponse _profile;
 
   Future<String> getProfile(int id) async {
+    _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
      _id = id;
      _profile = await ServiceClient(ClientSingleton().getChannel())
         .userProfile(UserProfileRequest()

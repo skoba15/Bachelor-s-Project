@@ -50,13 +50,16 @@ class _CreateSubtaskState extends State<CreateSubtask> {
   int _isManager = 0;
 
   Future<String> createSubtask() async {
+    _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
      GetUsersByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getUsersByNeighborhood(GetUsersByNeighborhoodRequest()
       ..neighborhoodId = widget.neighborhoodId);
 
      _users = response.users;
-     _prefs = await SharedPreferences.getInstance();
-     _prefs.setString("key", "CreateSubtask");
      return Future.value("done");
   }
 

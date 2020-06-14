@@ -36,6 +36,10 @@ class _SearchState extends State<Search> {
 
   Future<String> getData() async {
     _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
     return Future.value("done");
   }
 

@@ -46,6 +46,11 @@ class _CreateTaskState extends State<CreateTask> {
 
   Future<String> getPreferences() async {
     _prefs = await SharedPreferences.getInstance();
+    _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
     IsManagerResponse managerResponse = await ServiceClient(
         ClientSingleton().getChannel(),
         options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))

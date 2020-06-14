@@ -28,8 +28,12 @@ class _RequestsState extends State<Requests> {
 
 
   Future<String> getRequests() async {
-    _neighborhoodId = widget.id;
     _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
+    _neighborhoodId = widget.id;
     _requests = await ServiceClient(ClientSingleton().getChannel(),
         options: CallOptions(
             metadata: {'jwt': _prefs.get('jwt')})).getUserRequestList(

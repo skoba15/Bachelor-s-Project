@@ -31,6 +31,10 @@ class _TasksState extends State<Tasks> {
 
   Future<String> getMyNeighborhoodsList() async {
     _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
     GetTaskByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTaskByNeighborhood(GetTaskByNeighborhoodRequest()
       ..neighborhoodId = widget.id);

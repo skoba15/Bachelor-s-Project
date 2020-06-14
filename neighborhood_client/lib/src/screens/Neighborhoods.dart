@@ -21,6 +21,10 @@ class _NeighborhoodsState extends State<Neighborhoods> {
 
   Future<String> getMyNeighborhoodsList() async{
     _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
     _response = await ServiceClient(ClientSingleton().getChannel()).getMyNeighborhoodList(GetMyNeighborhoodRequest()..dummy = 1,
         options: CallOptions(
             metadata: {

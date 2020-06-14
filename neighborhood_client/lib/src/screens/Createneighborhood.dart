@@ -25,6 +25,10 @@ class _CreateNeighborhoodState extends State<CreateNeighborhood> {
 
   Future<String> getPreferences() async {
     _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
     return Future.value("done");
   }
 

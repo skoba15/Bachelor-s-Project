@@ -45,6 +45,10 @@ class _ShowTaskState extends State<ShowTask> {
 
   Future<String> getTask() async {
     _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
      GetTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getTask(GetTaskRequest()
       ..taskId = widget.taskId);

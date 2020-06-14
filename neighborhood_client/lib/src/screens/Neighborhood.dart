@@ -38,8 +38,12 @@ class _NeighborhoodState extends State<Neighborhood> {
 
 
   Future<String> getPreferences() async {
-    _neighborhoodId = widget.id;
     _prefs = await SharedPreferences.getInstance();
+    if(_prefs.get('jwt') == null) {
+      Navigator.pop(context);
+      return null;
+    }
+    _neighborhoodId = widget.id;
     GetPostsByNeighborhoodResponse response = await ServiceClient(ClientSingleton().getChannel())
         .getPostsByNeighborhood(GetPostsByNeighborhoodRequest()
       ..neighborhoodId = _neighborhoodId);

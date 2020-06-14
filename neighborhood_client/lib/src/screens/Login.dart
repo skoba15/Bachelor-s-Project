@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/src/widgets/async.dart' as a;
+
+
+import '../Preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,110 +22,139 @@ class _LoginState extends State<Login> {
   bool _autoValidate = false;
   bool _wrongInput = false;
 
+  SharedPreferences prefs;
 
+
+  Future<String> check() async {
+    prefs = await SharedPreferences.getInstance();
+    if (prefs.get('jwt') != null) {
+      Navigator.pop(context);
+      return null;
+    }
+    return Future.value("WTF");
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Neighborhood App'),
-        backgroundColor: Colors.black,
-        centerTitle: true,
-      ),
-      body: Form(
-        key: _formKey,
-        autovalidate: _autoValidate,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: <Widget>[
-            Center(child: Text('Welcome!', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,)),
-            SizedBox(height: 20),
-            TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Username'
+    return FutureBuilder<String>(
+        future: check(),
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.connectionState == a.ConnectionState.done) {
+            return Scaffold(
+                appBar: AppBar(
+                  title: Text('Neighborhood App'),
+                  backgroundColor: Colors.black,
+                  centerTitle: true,
                 ),
-                onSaved: (String val) {
-                  _username = val;
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Empty usernames not allowed';
-                  }
-                  return null;
-                }
-              ),
-            SizedBox(height: 20),
-            TextFormField(
-                decoration: const InputDecoration(
-                    labelText: 'Password'
-                ),
-                onSaved: (String val) {
-                  _password = val;
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Empty password not allowed';
-                  }
-                  return null;
-                },
-                obscureText: true,
-              ),
-            SizedBox(height: 10,),
-            Text(_wrongInput ? 'wrong username or password' : '', style: TextStyle(color: Colors.red)),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                body: Form(
+                  key: _formKey,
+                  autovalidate: _autoValidate,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
 
-              child: RaisedButton(
-                color: Colors.black,
-                textColor: Colors.white,
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    final response = await ServiceClient(ClientSingleton().getChannel()).loginUser(LoginUserRequest()..username = _username..password = _password);
-                    if (response.resultCode != "failed") {
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-                        String token = response.resultCode;
-                        await prefs.setString('jwt', token);
-                        Navigator.pushReplacementNamed(context, 'Neighborhoods');
-                    }
-                    else {
-                      setState(() {
-                        _wrongInput = true;
-                      });
-                    }
-                  }
-                  else {
-                      setState(() {
-                        _autoValidate = true;
-                      });
-                  }
-                },
-                child: Text('Sign in'),
-              ),
-            ),
-            SizedBox(height: 10,),
-            Center(
-              child: Column(
-                children: <Widget>[
-                  Text('Don\'t have an account?'),
-                  RaisedButton(
-                    child:Text(
-                      'Sign up'
-                    ),
-                    color: Colors.black,
-                    textColor: Colors.white,
-                    onPressed: () {
-                       Navigator.pushNamed(context, '/Register');
-                    },
+                    children: <Widget>[
+                      Center(child: Text('Welcome!', style: TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,)),
+                      SizedBox(height: 20),
+                      TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: 'Username'
+                          ),
+                          onSaved: (String val) {
+                            _username = val;
+                          },
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Empty usernames not allowed';
+                            }
+                            return null;
+                          }
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            labelText: 'Password'
+                        ),
+                        onSaved: (String val) {
+                          _password = val;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Empty password not allowed';
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                      ),
+                      SizedBox(height: 10,),
+                      Text(_wrongInput ? 'wrong username or password' : '',
+                          style: TextStyle(color: Colors.red)),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+
+                        child: RaisedButton(
+                          color: Colors.black,
+                          textColor: Colors.white,
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              _formKey.currentState.save();
+                              final response = await ServiceClient(
+                                  ClientSingleton().getChannel()).loginUser(
+                                  LoginUserRequest()
+                                    ..username = _username
+                                    ..password = _password);
+                              if (response.resultCode != "failed") {
+                                SharedPreferences prefs = await SharedPreferences
+                                    .getInstance();
+                                String token = response.resultCode;
+                                await prefs.setString('jwt', token);
+                                Navigator.pushReplacementNamed(
+                                    context, 'Neighborhoods');
+                              }
+                              else {
+                                setState(() {
+                                  _wrongInput = true;
+                                });
+                              }
+                            }
+                            else {
+                              setState(() {
+                                _autoValidate = true;
+                              });
+                            }
+                          },
+                          child: Text('Sign in'),
+                        ),
+                      ),
+                      SizedBox(height: 10,),
+                      Center(
+                          child: Column(
+                              children: <Widget>[
+                                Text('Don\'t have an account?'),
+                                RaisedButton(
+                                  child: Text(
+                                      'Sign up'
+                                  ),
+                                  color: Colors.black,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/Register');
+                                  },
+                                ),
+                              ]
+                          )
+                      )
+                    ],
                   ),
-                ]
-              )
-            )
-          ],
-        ),
-      )
+                )
+            );
+          }
+          else {
+            return CircularProgressIndicator();
+          }
+        }
     );
   }
 }

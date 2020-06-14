@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:neighborhood_client/src/Preferences.dart';
 import 'package:neighborhood_client/src/screens/CreateSubtask.dart';
 import 'package:neighborhood_client/src/screens/CreateTask.dart';
 import 'package:neighborhood_client/src/screens/Createneighborhood.dart';
@@ -22,51 +23,73 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FluroRouter {
 
-  SharedPreferences _prefs;
-
+  static SharedPreferences prefs = Preferences.getPreferences();
 
   static Router router = Router();
   static Handler _loginHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Login());
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return Login();
+      }
+  );
   static Handler _registerHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Register());
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return Register();
+      }
+  );
+
   static Handler _registerSuccessHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           Success());
   static Handler _neighborhoodsHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Neighborhoods());
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return Neighborhoods();
+      }
+  );
   static Handler _createNeighborhoodHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          CreateNeighborhood());
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return CreateNeighborhood();
+      }
+  );
   static Handler _profileHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Profile(id: int.parse(params['id'][0]),));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return Profile(id: int.parse(params['id'][0]),);
+      }
+  );
   static Handler _requestsHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Requests(id: int.parse(params['neighborhoodId'][0]),));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return  Requests(id: int.parse(params['neighborhoodId'][0]),);
+      }
+  );
   static Handler _neighborhoodHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Neighborhood(id: int.parse(params['neighborhoodId'][0]),));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return  Neighborhood(id: int.parse(params['neighborhoodId'][0]),);
+      }
+  );
   static Handler _tasksHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Tasks(id: int.parse(params['neighborhoodId'][0])));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return  Tasks(id: int.parse(params['neighborhoodId'][0]));
+      }
+  );
   static Handler _createTaskHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          CreateTask(id: int.parse(params['neighborhoodId'][0])));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+        return  Tasks(id: int.parse(params['neighborhoodId'][0]));
+      }
+  );
   static Handler _showTaskHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          ShowTask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return ShowTask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),);
+      }
+  );
   static Handler _createSubtaskHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-         return new CreateSubtask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),);
+        return CreateSubtask(taskId: int.parse(params['taskId'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),);
       }
   );
   static Handler _searchHandler = Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          Search(type: int.parse(params['type'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),));
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+          return Search(type: int.parse(params['type'][0]), neighborhoodId: int.parse(params['neighborhoodId'][0]),);
+      }
+  );
 
   static void setupRouter() {
     router.define(
