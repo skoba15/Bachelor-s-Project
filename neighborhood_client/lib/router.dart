@@ -17,14 +17,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-Future<String> getPrefs() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  Future.value("done");
-}
+
 
 
 class FluroRouter {
-  static int a = 1;
+
+  SharedPreferences _prefs;
 
 
   static Router router = Router();

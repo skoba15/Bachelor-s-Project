@@ -131,15 +131,25 @@ class _NeighborhoodState extends State<Neighborhood> {
                                 context, 'Neighborhoods/$neighborhoodId/Search/2');
                           },
                         ),
-                          ListTile(
-                            leading: Icon(Icons.keyboard_backspace),
-                            title: Text('Back', style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),),
-                            onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, 'Neighborhoods');
-                            },
-                          ),
+                        ListTile(
+                          leading: Icon(Icons.keyboard_backspace),
+                          title: Text('Neighborhoods', style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),),
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, 'Neighborhoods');
+                          },
+                        ),
+                      ListTile(
+                        leading: Icon(Icons.exit_to_app),
+                        title: Text('Sign Out', style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),),
+                        onTap: () {
+                          _prefs.remove('jwt');
+                          Navigator.of(context).popUntil((route) => route.isFirst);
+                          Navigator.pushReplacementNamed(context, 'login');
+                        },
+                      ),
                     ],
                 ),
               ),

@@ -76,6 +76,16 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                               context, 'Profile/$id');
                         },
                       ),
+                      ListTile(
+                        leading: Icon(Icons.exit_to_app),
+                        title: Text('Sign Out', style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),),
+                        onTap: () {
+                          _prefs.remove('jwt');
+                          Navigator.of(context).popUntil((route) => route.isFirst);
+                          Navigator.pushReplacementNamed(context, 'login');
+                        },
+                      ),
                     ],
                   ),
                 ),
