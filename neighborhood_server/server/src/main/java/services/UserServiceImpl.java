@@ -61,6 +61,8 @@ public class UserServiceImpl implements UserService{
             user = (UserEntity) query.getSingleResult();
             Hibernate.initialize(user.getPostsList());
             Hibernate.initialize(user.getCommentsList());
+            Hibernate.initialize(user.getTasksList());
+            Hibernate.initialize(user.getSubTasksList());
         } catch (Exception e) {
             user = null;
         }

@@ -2,6 +2,7 @@ package services;
 
 import db.JdbcConnection;
 import models.*;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
