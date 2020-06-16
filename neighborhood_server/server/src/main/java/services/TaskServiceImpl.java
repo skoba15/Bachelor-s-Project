@@ -87,7 +87,7 @@ public class TaskServiceImpl implements TaskService {
         try {
             result = (SubTaskEntity) query.getSingleResult();
             Hibernate.initialize(result.getParentTask());
-            Hibernate.initialize(result.getAssignee());
+
         } catch (Exception e) {
             result = null;
         }
@@ -115,7 +115,6 @@ public class TaskServiceImpl implements TaskService {
 
             user.getTasksList().add(task);
             neighborhood.getTaskList().add(task);
-
             session.merge(user);
             session.merge(neighborhood);
 
@@ -144,9 +143,9 @@ public class TaskServiceImpl implements TaskService {
             subTask.setStatus(newStatus);
             session.merge(subTask);
 
+
             assignee.getSubTasksList().add(subTask);
             parentTask.getSubTasks().add(subTask);
-
             session.merge(assignee);
             session.merge(parentTask);
 

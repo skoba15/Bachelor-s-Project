@@ -24,6 +24,13 @@ class _RegisterState extends State<Register> {
   TextEditingController _repeatedPasswordController = new TextEditingController();
 
 
+  Future<int> future;
+
+  @override
+  void initState() {
+    future = Future.value(42);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -72,7 +72,7 @@ class FluroRouter {
   );
   static Handler _createTaskHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-        return  Tasks(id: int.parse(params['neighborhoodId'][0]));
+        return  CreateTask(id: int.parse(params['neighborhoodId'][0]));
       }
   );
   static Handler _showTaskHandler = Handler(

@@ -28,7 +28,7 @@ public class SubTaskEntity {
     @JoinColumn(name = "PARENT_TASK")
     private TaskEntity parentTask;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ASSIGNEE")
     private UserEntity assignee;
 
