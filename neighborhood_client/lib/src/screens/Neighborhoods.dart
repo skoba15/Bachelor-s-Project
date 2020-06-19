@@ -5,6 +5,8 @@ import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Internationalization.dart';
+
 class Neighborhoods extends StatefulWidget {
   @override
   _NeighborhoodsState createState() => _NeighborhoodsState();
@@ -58,7 +60,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                       ),
                       ListTile(
                         leading: Icon(Icons.people),
-                        title: Text('Neighborhoods', style: TextStyle(
+                        title: Text(Internationalization.getValue('Neighborhoods'), style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),),
                         onTap: () {
                           Navigator.pushReplacementNamed(context, 'Neighborhoods');
@@ -66,7 +68,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                       ),
                       ListTile(
                         leading: Icon(Icons.person),
-                        title: Text('Profile', style: TextStyle(
+                        title: Text(Internationalization.getValue('Profile'), style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),),
                         onTap: () async {
                           UserIdResponse idResponse = await ServiceClient(
@@ -82,7 +84,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                       ),
                       ListTile(
                         leading: Icon(Icons.exit_to_app),
-                        title: Text('Sign Out', style: TextStyle(
+                        title: Text(Internationalization.getValue('Sign Out'), style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),),
                         onTap: () {
                           _prefs.remove('jwt');
@@ -95,7 +97,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'CreateNeighborhood');
+                    Navigator.pushNamed(context, 'CreateNeighborhood');
                   },
                   child: Icon(Icons.add),
                   backgroundColor: Colors.black,
@@ -106,8 +108,8 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                   centerTitle: true,
                   bottom: TabBar(
                       tabs: [
-                        Tab(icon: Icon(Icons.people), text: 'MY NEIGHBORHOODS'),
-                        Tab(icon: Icon(Icons.store), text: 'OTHER NEIGHBORHOODS',),
+                        Tab(icon: Icon(Icons.people), text: Internationalization.getValue('MY NEIGHBORHOODS')),
+                        Tab(icon: Icon(Icons.store), text: Internationalization.getValue('OTHER NEIGHBORHOODS',)),
                       ]
                   ),
                 ),
@@ -173,7 +175,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                     trailing: (_response2.neighborhood[index].status == 0)
                                         ? FlatButton.icon(
                                         icon: Icon(Icons.send),
-                                        label: Text('SEND REQUEST'),
+                                        label: Text(Internationalization.getValue('SEND REQUEST')),
                                         onPressed: () async {
                                           stState(()  {
                                             _response2.neighborhood[index]
@@ -190,7 +192,7 @@ class _NeighborhoodsState extends State<Neighborhoods> {
                                                 ..neighborhoodId = _response2
                                                     .neighborhood[index].id);
                                         })
-                                        : Text('PENDING', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.orange),),
+                                        : Text(Internationalization.getValue('PENDING'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.orange),),
 
                                   ),
                                 ]

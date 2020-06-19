@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_web/image_picker_web.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
@@ -106,7 +107,7 @@ class _ShowTaskState extends State<ShowTask> {
                       height: 50,
                       color: Colors.black,
                     ),
-                    Text('Subtasks', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                    Text(Internationalization.getValue('Subtasks'), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                     SizedBox(height: 20,),
                     Expanded(
                       child: ListView.builder(
@@ -125,7 +126,7 @@ class _ShowTaskState extends State<ShowTask> {
                                         fontWeight: FontWeight.bold),),
                                   leading: Icon(Icons.note,),
                                   subtitle: Text(
-                                    'Description: ${_subTasks[index].description}\n Assignee: ${_subTasks[index].assigneeName}',
+                                    '${Internationalization.getValue('Description')}: ${_subTasks[index].description}\n ${Internationalization.getValue('Assignee')}: ${_subTasks[index].assigneeName}',
                                     style: TextStyle(
                                         color: Colors.black),),
                                   onTap: () {
@@ -149,22 +150,20 @@ class _ShowTaskState extends State<ShowTask> {
                                               if(result > _subTasks[index].status) {
                                                 ChangeSubTaskStatusResponse response = await ServiceClient(ClientSingleton().getChannel())
                                                     .changeSubTaskStatus(ChangeSubTaskStatusRequest()..subTaskId = _subTasks[index].id..status = result);
-                                                print('New subtask status ${response.subTaskNewStatus} ');
                                                 stState(() {
                                                   _subTasks[index].status = response.subTaskNewStatus;
-                                                  print('New task status ${response.parentTaskNewStatus} ');
                                                 });
                                               }
                                             },
                                             itemBuilder: (BuildContext context) =>
                                             <PopupMenuEntry<int>>[
-                                              const PopupMenuItem<int>(
+                                              PopupMenuItem<int>(
                                                 value: 1,
-                                                child: Text('IN PROGRESS'),
+                                                child: Text(Internationalization.getValue('IN PROGRESS')),
                                               ),
-                                              const PopupMenuItem<int>(
+                                              PopupMenuItem<int>(
                                                 value: 2,
-                                                child: Text('DONE'),
+                                                child: Text(Internationalization.getValue('DONE')),
                                               ),
                                             ],
                                           )

@@ -3,6 +3,8 @@ import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 
+import '../Internationalization.dart';
+
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -49,62 +51,62 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.center,
 
               children: <Widget>[
-                Center(child: Text('Register',
+                Center(child: Text(Internationalization.getValue('Register'),
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,)),
                 SizedBox(height: 20),
                 TextFormField(
-                    decoration: const InputDecoration(
-                        labelText: 'First Name'
+                    decoration: InputDecoration(
+                        labelText: Internationalization.getValue('First Name'),
                     ),
                     onSaved: (String val) {
                       _firstName = val;
                     },
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Empty first names not allowed';
+                        return Internationalization.getValue('Empty first names not allowed');
                       }
                       return null;
                     }
                 ),
                 SizedBox(height: 20),
                 TextFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Last Name'
+                  decoration:  InputDecoration(
+                      labelText: Internationalization.getValue('Last Name'),
                   ),
                   onSaved: (String val) {
                     _lastName = val;
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Empty last name not allowed';
+                      return Internationalization.getValue('Empty last name not allowed');
                     }
                     return null;
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Username'
+                  decoration: InputDecoration(
+                      labelText: Internationalization.getValue('Username')
                   ),
                   onSaved: (String val) {
                     _username = val;
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Empty username not allowed';
+                      return Internationalization.getValue('Empty username not allowed');
                     }
                     return null;
                   },
                 ),
-                Text(_usernameExists ? 'username exists' : '', style: TextStyle(color: Colors.red),),
+                Text(_usernameExists ? Internationalization.getValue('username exists') : '', style: TextStyle(color: Colors.red),),
                 new TextFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Mobile'
+                  decoration: InputDecoration(
+                      labelText: Internationalization.getValue('Mobile'),
                   ),
                   keyboardType: TextInputType.phone,
                   validator: (value) {
                     if (value.length != 9) {
-                      return 'invalid phone number';
+                      return Internationalization.getValue('invalid phone number');
                     }
                     return null;
                   },
@@ -114,15 +116,15 @@ class _RegisterState extends State<Register> {
                 ),
                 TextFormField(
                   controller: _passwordController,
-                  decoration: const InputDecoration(
-                      labelText: 'Password'
+                  decoration: InputDecoration(
+                      labelText: Internationalization.getValue('Password'),
                   ),
                   onSaved: (String val) {
                     _password = val;
                   },
                   validator: (value) {
                     if (value.length < 8) {
-                      return 'Empty password not allowed';
+                      return Internationalization.getValue('Empty password not allowed');
                     }
                     return null;
                   },
@@ -130,18 +132,18 @@ class _RegisterState extends State<Register> {
                 ),
                 TextFormField(
                   controller: _repeatedPasswordController,
-                  decoration: const InputDecoration(
-                      labelText: 'Repeat password'
+                  decoration: InputDecoration(
+                      labelText: Internationalization.getValue('Repeat password'),
                   ),
                   onSaved: (String val) {
                     _password = val;
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Empty password not allowed';
+                      return Internationalization.getValue('Empty password not allowed');
                     }
                     if ( value != _passwordController.text) {
-                      return 'Passwords don\'t match';
+                      return Internationalization.getValue('Passwords don\'t match');
                     }
                     return null;
                   },
@@ -172,7 +174,7 @@ class _RegisterState extends State<Register> {
                       });
                     }
                   },
-                  child: Text('Sign up'),
+                  child: Text(Internationalization.getValue('Sign up')),
                 ),
               ],
             ),

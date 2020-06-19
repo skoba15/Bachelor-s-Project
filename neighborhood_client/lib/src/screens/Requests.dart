@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/service_api.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
@@ -76,7 +77,7 @@ class _RequestsState extends State<Requests> {
                                           },
                                         style: TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)
                                       ),
-                                      TextSpan(text: ' wants to join the neighborhood', style: TextStyle(color : Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
+                                      TextSpan(text: Internationalization.getValue(' wants to join the neighborhood'), style: TextStyle(color : Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
                                     ]
                                   )
                               ),
@@ -89,7 +90,7 @@ class _RequestsState extends State<Requests> {
                                   children: <Widget>[
                                     RaisedButton(
                                       child: Text(
-                                          'ACCEPT'
+                                      Internationalization.getValue('ACCEPT')
                                       ),
                                       color: Colors.green,
                                       textColor: Colors.white,
@@ -109,7 +110,7 @@ class _RequestsState extends State<Requests> {
                                     SizedBox(width: 15,),
                                     RaisedButton(
                                       child: Text(
-                                          'REJECT'
+                      Internationalization.getValue('REJECT')
                                       ),
                                       color: Colors.red,
                                       textColor: Colors.white,
@@ -133,8 +134,8 @@ class _RequestsState extends State<Requests> {
                                   ],
                                 ),
                               )
-                              : ((_statuses[index] == -1) ? Text('REJECTED', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.red),) : Text(
-                                'ACCEPTED', style: TextStyle(
+                              : ((_statuses[index] == -1) ? Text(Internationalization.getValue('REJECTED'), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.red),) : Text(
+                      Internationalization.getValue('ACCEPTED'), style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                   color: Colors.green),))

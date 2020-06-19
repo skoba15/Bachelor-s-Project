@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/service_api.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
@@ -80,9 +81,9 @@ class _TasksState extends State<Tasks> {
                   centerTitle: true,
                   bottom: TabBar(
                       tabs: [
-                        Tab(icon: Icon(Icons.assignment_ind), text: 'MY TASKS'),
+                        Tab(icon: Icon(Icons.assignment_ind), text: Internationalization.getValue('MY TASKS')),
                         Tab(icon: Icon(Icons.assessment),
-                          text: 'ALL TASKS',),
+                          text: Internationalization.getValue('ALL TASKS',)),
                       ]
                   ),
                 ),
@@ -107,7 +108,7 @@ class _TasksState extends State<Tasks> {
                                           fontWeight: FontWeight.bold),),
                                     leading: Icon(Icons.note,),
                                     subtitle: Text(
-                                      'Description: ${_subTasks[index].description}\n Assignee: ${_subTasks[index].assigneeName}',
+                                      '${Internationalization.getValue('Description')}: ${_subTasks[index].description}\n ${Internationalization.getValue('Assignee')}: ${_subTasks[index].assigneeName}',
                                       style: TextStyle(
                                           color: Colors.black),),
                                     onTap: () async {
@@ -156,10 +157,10 @@ class _TasksState extends State<Tasks> {
                                               fontWeight: FontWeight.bold),),
                                         leading: Icon(Icons.note,),
                                         subtitle: Text(
-                                          'Start Date: ${_tasks[index].startDate
+                                          '${Internationalization.getValue('Start Date')}: ${_tasks[index].startDate
                                               .day}/${_tasks[index].startDate
                                               .month}/${_tasks[index].startDate
-                                              .year}\nEnd Date: ${_tasks[index]
+                                              .year}\n${Internationalization.getValue('End Date')}: ${_tasks[index]
                                               .closeDate.day}/${_tasks[index]
                                               .closeDate.month}/${_tasks[index]
                                               .closeDate.year}',

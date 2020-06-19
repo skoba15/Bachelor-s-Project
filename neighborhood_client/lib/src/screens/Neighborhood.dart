@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc/service_api.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
@@ -83,7 +84,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                           ),
                           if(_isManager == 1)ListTile(
                             leading: Icon(Icons.accessibility),
-                            title: Text('Requests', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                            title: Text(Internationalization.getValue('Requests'), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                             onTap: () {
                               int id = widget.id;
                               Navigator.pushNamed(context, 'Neighborhoods/$id/Requests');
@@ -91,7 +92,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                           ),
                           ListTile(
                             leading: Icon(Icons.person),
-                            title: Text('Profile', style: TextStyle(
+                            title: Text(Internationalization.getValue('Profile'), style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),),
                             onTap: () async {
                               UserIdResponse idResponse = await ServiceClient(
@@ -107,7 +108,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                           ),
                           ListTile(
                             leading: Icon(Icons.assignment),
-                            title: Text('Tasks', style: TextStyle(
+                            title: Text(Internationalization.getValue('Tasks'), style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),),
                             onTap: () async {
                               int neighborhoodId = widget.id;
@@ -117,7 +118,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                           ),
                         ListTile(
                           leading: Icon(Icons.search),
-                          title: Text('Search Items', style: TextStyle(
+                          title: Text(Internationalization.getValue('Search Items'), style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),),
                           onTap: () {
                             int neighborhoodId = widget.id;
@@ -127,7 +128,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                         ),
                         ListTile(
                           leading: Icon(Icons.search),
-                          title: Text('Search Car', style: TextStyle(
+                          title: Text(Internationalization.getValue('Search Car'), style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),),
                           onTap: () {
                             int neighborhoodId = widget.id;
@@ -137,7 +138,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                         ),
                         ListTile(
                           leading: Icon(Icons.keyboard_backspace),
-                          title: Text('Neighborhoods', style: TextStyle(
+                          title: Text(Internationalization.getValue('Neighborhoods'), style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),),
                           onTap: () {
                             Navigator.pushReplacementNamed(
@@ -146,7 +147,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                         ),
                       ListTile(
                         leading: Icon(Icons.exit_to_app),
-                        title: Text('Sign Out', style: TextStyle(
+                        title: Text(Internationalization.getValue('Sign Out'), style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),),
                         onTap: () {
                           _prefs.remove('jwt');
@@ -174,7 +175,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                           maxLines: 15,
                           autocorrect: false,
                           decoration: InputDecoration(
-                            hintText: 'What\'s on your mind? ',
+                            hintText: Internationalization.getValue('What\'s on your mind? '),
                             filled: true,
                             fillColor: Color(0xFFDBEDFF),
                             enabledBorder: OutlineInputBorder(
@@ -212,7 +213,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                               });
                             }
                           },
-                          child: Text('Post'),
+                          child: Text(Internationalization.getValue('Post')),
                         ),
                         SizedBox(height: 20,),
                         Expanded(
@@ -333,7 +334,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                                                                 minLines: 1,
                                                                 maxLines: 5,
                                                                 decoration: new InputDecoration(
-                                                                  hintText: 'Write your comment here',
+                                                                  hintText: Internationalization.getValue('Write your comment here'),
                                                                   fillColor: Colors
                                                                       .white,
                                                                   border: new OutlineInputBorder(

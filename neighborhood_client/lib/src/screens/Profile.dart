@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_web/image_picker_web.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
@@ -81,8 +82,8 @@ class _ProfileState extends State<Profile> {
                     bottom: TabBar(
                         tabs:
                         [
-                          Tab(icon: Icon(Icons.person), text: 'GENERAL INFO'),
-                          Tab(icon: Icon(Icons.format_list_bulleted), text: 'ITEMS',),
+                          Tab(icon: Icon(Icons.person), text: Internationalization.getValue('GENERAL INFO')),
+                          Tab(icon: Icon(Icons.format_list_bulleted), text: Internationalization.getValue('ITEMS',)),
                         ]
                     ),
                   ),
@@ -103,7 +104,7 @@ class _ProfileState extends State<Profile> {
                                 height: 50,
                                 color: Colors.white,
                               ),
-                              Text('USERNAME', style: TextStyle(
+                              Text(Internationalization.getValue('USERNAME'), style: TextStyle(
                                   color: Colors.grey[400], letterSpacing: 2.0),),
                               SizedBox(height: 10.0),
                               Text(_profile.username, style: TextStyle(
@@ -111,7 +112,7 @@ class _ProfileState extends State<Profile> {
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.bold),),
                               SizedBox(height: 15.0),
-                              Text('FIRST NAME', style: TextStyle(
+                              Text(Internationalization.getValue('FIRST NAME'), style: TextStyle(
                                   color: Colors.grey[400], letterSpacing: 2.0),),
                               SizedBox(height: 10.0),
                               Text(_profile.firstName, style: TextStyle(
@@ -119,7 +120,7 @@ class _ProfileState extends State<Profile> {
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.bold),),
                               SizedBox(height: 15.0),
-                              Text('LAST NAME', style: TextStyle(
+                              Text(Internationalization.getValue('LAST NAME'), style: TextStyle(
                                   color: Colors.grey[400], letterSpacing: 2.0),),
                               SizedBox(height: 10.0),
                               Text(_profile.lastName, style: TextStyle(
@@ -135,7 +136,7 @@ class _ProfileState extends State<Profile> {
                                     children: <Widget>[
                                       Row(
                                           children: <Widget>[
-                                            Text('PHONE NUMBER', style: TextStyle(
+                                            Text(Internationalization.getValue('PHONE NUMBER'), style: TextStyle(
                                                 color: Colors.grey[400],
                                                 letterSpacing: 2.0),),
                                             SizedBox(width: 15,),
@@ -143,7 +144,7 @@ class _ProfileState extends State<Profile> {
                                               color: Colors.blue,
                                               icon: Icon(Icons.edit),
                                               //`Icon` to display
-                                              label: Text('Edit'),
+                                              label: Text(Internationalization.getValue('Edit')),
                                               //`Text` to display
                                               onPressed: () {
                                                 stState(() {
@@ -175,7 +176,7 @@ class _ProfileState extends State<Profile> {
                                             ),
                                             RaisedButton(
                                               child: Text(
-                                                  'SAVE'
+                                  Internationalization.getValue('SAVE'),
                                               ),
                                               color: Colors.green,
                                               textColor: Colors.white,
@@ -206,9 +207,9 @@ class _ProfileState extends State<Profile> {
                                                         BuildContext context) {
                                                       return AlertDialog(
                                                         title: Text(
-                                                            'Wrong Number'),
-                                                        content: const Text(
-                                                            'Malformed phone number'),
+                                                          Internationalization.getValue('Wrong Number')),
+                                                        content: Text(
+                                                      Internationalization.getValue('Malformed phone number')),
                                                         actions: <Widget>[
                                                           FlatButton(
                                                             child: Text('Ok'),
@@ -227,7 +228,7 @@ class _ProfileState extends State<Profile> {
                                             SizedBox(width: 20,),
                                             RaisedButton(
                                               child: Text(
-                                                  'CANCEL'
+                                  Internationalization.getValue('CANCEL')
                                               ),
                                               color: Colors.red,
                                               textColor: Colors.white,
@@ -250,7 +251,7 @@ class _ProfileState extends State<Profile> {
                                        children: <Widget>[
                                          Row(
                                              children: <Widget>[
-                                               Text('CAR PLATE NUMBER',
+                                               Text(Internationalization.getValue('CAR PLATE NUMBER'),
                                                  style: TextStyle(
                                                      color: Colors.grey[400],
                                                      letterSpacing: 2.0),),
@@ -259,7 +260,7 @@ class _ProfileState extends State<Profile> {
                                                  color: Colors.blue,
                                                  icon: Icon(Icons.edit),
                                                  //`Icon` to display
-                                                 label: Text('Edit'),
+                                                 label: Text(Internationalization.getValue('Edit')),
                                                  //`Text` to display
                                                  onPressed: () {
                                                    stState(() {
@@ -294,7 +295,7 @@ class _ProfileState extends State<Profile> {
                                                ),
                                                RaisedButton(
                                                  child: Text(
-                                                     'SAVE'
+                                               Internationalization.getValue('SAVE')
                                                  ),
                                                  color: Colors.green,
                                                  textColor: Colors.white,
@@ -325,10 +326,10 @@ class _ProfileState extends State<Profile> {
                                                            BuildContext context) {
                                                          return AlertDialog(
                                                            title: Text(
-                                                               "Invalid Action"),
+                                                             Internationalization.getValue('Invalid Action')),
                                                            content: Text(
-                                                               response
-                                                                   .resultCode),
+                                                         Internationalization.getValue(response
+                                                                   .resultCode)),
                                                            actions: <Widget>[
                                                              FlatButton(
                                                                child: Text('Ok'),
@@ -348,7 +349,7 @@ class _ProfileState extends State<Profile> {
                                                SizedBox(width: 20,),
                                                RaisedButton(
                                                  child: Text(
-                                                     'CANCEL'
+                                   Internationalization.getValue('CANCEL')
                                                  ),
                                                  color: Colors.red,
                                                  textColor: Colors.white,
@@ -380,7 +381,7 @@ class _ProfileState extends State<Profile> {
                                              color: Colors.blue,
                                              icon: Icon(Icons.add),
                                              //`Icon` to display
-                                             label: Text('Add Item'),
+                                             label: Text(Internationalization.getValue('Add Item')),
                                              //`Text` to display
                                              onPressed: () {
                                                return showDialog(
@@ -391,19 +392,19 @@ class _ProfileState extends State<Profile> {
                                                          height: 150,
                                                          child: new Column(
                                                            children: <Widget>[
-                                                             Text('Add new item',
+                                                             Text(Internationalization.getValue('Add new item'),
                                                                style: TextStyle(
                                                                    fontWeight: FontWeight
                                                                        .bold,
                                                                    fontSize: 24),),
                                                              new TextField(
                                                                decoration: new InputDecoration(
-                                                                   hintText: "Item name"),
+                                                                   hintText: Internationalization.getValue('Item name')),
                                                                controller: _addItemController,
                                                              ),
                                                              new FlatButton(
                                                                  child: new Text(
-                                                                     "ADD"),
+                                                                     Internationalization.getValue("ADD")),
                                                                  onPressed: () async {
                                                                    AddItemToUserResponse response = await ServiceClient(
                                                                        ClientSingleton()
@@ -444,7 +445,7 @@ class _ProfileState extends State<Profile> {
                                              color: Colors.red,
                                              icon: Icon(Icons.delete),
                                              //`Icon` to display
-                                             label: Text('Delete Item'),
+                                             label: Text(Internationalization.getValue('Delete Item')),
                                              //`Text` to display
                                              onPressed: () {
                                                if(_selected != -1)return showDialog<void>(
@@ -453,12 +454,12 @@ class _ProfileState extends State<Profile> {
                                                       BuildContext context) {
                                                     return AlertDialog(
                                                       title: Text(
-                                                          'Delete Item'),
-                                                      content: const Text(
-                                                          'Do you really want to remove this item?'),
+                                                        Internationalization.getValue('Delete Item')),
+                                                      content: Text(
+                                                    Internationalization.getValue('Do you really want to remove this item?')),
                                                       actions: <Widget>[
                                                         FlatButton(
-                                                          child: Text('Yes'),
+                                                          child: Text(Internationalization.getValue('Yes')),
                                                           onPressed: () async {
                                                             DeleteItemToUserResponse response = await ServiceClient(
                                                                 ClientSingleton()
@@ -483,7 +484,7 @@ class _ProfileState extends State<Profile> {
                                                           },
                                                         ),
                                                         FlatButton(
-                                                          child: Text('No'),
+                                                          child: Text(Internationalization.getValue('No')),
                                                           onPressed: () {
                                                             Navigator.of(
                                                                 context).pop();

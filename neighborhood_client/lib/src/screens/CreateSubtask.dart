@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_web/image_picker_web.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
@@ -77,151 +78,180 @@ class _CreateSubtaskState extends State<CreateSubtask> {
                   backgroundColor: Colors.black,
                   centerTitle: true,
                 ),
-                body: Form(
-                  key: _formKey,
-                  autovalidate: _autoValidate,
-                  child: Wrap(
-                      children: [Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Center(child: Text('Create Subtask',
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,)),
-                          SizedBox(height: 20),
-                          TextFormField(
-                              decoration: const InputDecoration(
-                                labelText: 'title',
-                              ),
-                              onSaved: (String val) {
-                                _title = val;
-                              },
-                              validator: (value) {
-                                print("Value " + value);
-                                if (value.isEmpty) {
-                                  print("Movida");
-                                  return 'Empty titles not allowed';
-                                }
-                                return null;
-                              }
-                          ),
-                          SizedBox(height: 20),
-                          TextFormField(
-                              minLines: 3,
-                              maxLines: 15,
-                              autocorrect: false,
-                              decoration: InputDecoration(
-                                hintText: 'Write subtask description here',
-                                filled: true,
-                                fillColor: Color(0xFFDBEDFF),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: Colors.grey),
+                body: StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
+                  return Form(
+                    key: _formKey,
+                    autovalidate: _autoValidate,
+                    child: Wrap(
+                        children: [Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Center(child: Text(
+                              Internationalization.getValue('Create Subtask'),
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,)),
+                            SizedBox(height: 20),
+                            TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: Internationalization.getValue(
+                                      'title'),
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                              ),
-                              onSaved: (String val) {
-                                _description = val;
-                              },
-                              validator: (value) {
-                                if(value.length > 250) {
-                                  return 'Too large text';
-                                }
-                                return null;
-                              }
-                          ),
-                          StatefulBuilder(builder: (BuildContext context, StateSetter stState) {
-                            return Row(
-                              children: <Widget>[
-                                RaisedButton(
-                                  child:Text('Select Assignee'),
-                                  color: Colors.black,
-                                  textColor: Colors.white,
-                                  onPressed: () async {
-                                    int index = await showDialog<int>(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return new SimpleDialog(
-                                            title: const Text('Select'),
-                                            children: _users.map((value) {
-                                              return new SimpleDialogOption(
-                                                onPressed: () {
-                                                  Navigator.pop(context, _users.indexOf(value));//here passing the index to be return on item selection
-                                                },
-                                                child: new Text(value.userFullName),//item value
-                                              );
-                                            }).toList(),
-                                          );
-                                        });
-                                    stState(() {
-                                       if(index != null) {
-                                         _selected = index;
-                                         _assigneeName =
-                                             _users[index].userFullName;
-                                       }
-                                    });
-                                  },
-                                ),
-                                Text(_selected == -1 ? '' : _users[_selected].userFullName,),
-                              ],
-                            );
-                          }
-                          ),
-                          if(_autoValidate && !_assigned)Text('Please select assignee', style: TextStyle(color: Colors.red)),
-                          RaisedButton(
-                            color: Colors.black,
-                            textColor: Colors.white,
-                            onPressed: () async {
-                              if (_formKey.currentState.validate() && _assigneeName != "") {
-                                _formKey.currentState.save();
-                                SubTask subtask = new SubTask()..title = _title..description = _description..taskId = widget.taskId..assigneeId = _users[_selected].userId;
-                                 AddSubTaskResponse response = await ServiceClient(ClientSingleton().getChannel())
-                                    .addSubTask(AddSubTaskRequest()
-                                  ..subTask = subtask);
-                                return showDialog<void>(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text(
-                                            'SUCCESS'),
-                                        content: const Text(
-                                            'Subtask successfully added!'),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            child: Text('Ok'),
-                                            onPressed: () {
-                                              Navigator.of(
-                                                  context).pop();
-                                              int neighborhoodId = widget.neighborhoodId;
-                                              int taskId = widget.taskId;
-                                              Navigator.pop(
-                                                  context);
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    }
-                                );
-                              }
-                              else {
-                                setState(() {
-                                  if(_assigneeName == "") {
-                                    _assigned = false;
+                                onSaved: (String val) {
+                                  _title = val;
+                                },
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return Internationalization.getValue(
+                                        'Empty titles not allowed');
                                   }
-                                  _autoValidate = true;
-                                });
-                              }
-                            },
-                            child: Text('Create'),
-                          ),
-                        ],
-                      ),
-                      ]
-                  ),
+                                  return null;
+                                }
+                            ),
+                            SizedBox(height: 20),
+                            TextFormField(
+                                minLines: 3,
+                                maxLines: 15,
+                                autocorrect: false,
+                                decoration: InputDecoration(
+                                  hintText: Internationalization.getValue(
+                                      'Write subtask description here'),
+                                  filled: true,
+                                  fillColor: Color(0xFFDBEDFF),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0)),
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0)),
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+                                ),
+                                onSaved: (String val) {
+                                  _description = val;
+                                },
+                                validator: (value) {
+                                  if (value.length > 250) {
+                                    return Internationalization.getValue(
+                                        'Too large text');
+                                  }
+                                  return null;
+                                }
+                            ),
+                            StatefulBuilder(builder: (BuildContext context,
+                                StateSetter stState) {
+                              return Row(
+                                children: <Widget>[
+                                  RaisedButton(
+                                    child: Text(Internationalization.getValue(
+                                        'Select Assignee')),
+                                    color: Colors.black,
+                                    textColor: Colors.white,
+                                    onPressed: () async {
+                                      int index = await showDialog<int>(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return new SimpleDialog(
+                                              title: Text(
+                                                  Internationalization.getValue(
+                                                      'Select')),
+                                              children: _users.map((value) {
+                                                return new SimpleDialogOption(
+                                                  onPressed: () {
+                                                    Navigator.pop(context,
+                                                        _users.indexOf(
+                                                            value)); //here passing the index to be return on item selection
+                                                  },
+                                                  child: new Text(value
+                                                      .userFullName), //item value
+                                                );
+                                              }).toList(),
+                                            );
+                                          });
+                                      stState(() {
+                                        if (index != null) {
+                                          _selected = index;
+                                          _assigneeName =
+                                              _users[index].userFullName;
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  Text(_selected == -1 ? '' : _users[_selected]
+                                      .userFullName,),
+                                ],
+                              );
+                            }
+                            ),
+                            if(_autoValidate && !_assigned)Text(
+                                Internationalization.getValue(
+                                    'Please select assignee'),
+                                style: TextStyle(color: Colors.red)),
+                            RaisedButton(
+                              color: Colors.black,
+                              textColor: Colors.white,
+                              onPressed: () async {
+                                if (_formKey.currentState.validate() &&
+                                    _assigneeName != "") {
+                                  _formKey.currentState.save();
+                                  SubTask subtask = new SubTask()
+                                    ..title = _title
+                                    ..description = _description
+                                    ..taskId = widget.taskId
+                                    ..assigneeId = _users[_selected].userId;
+                                  AddSubTaskResponse response = await ServiceClient(
+                                      ClientSingleton().getChannel())
+                                      .addSubTask(AddSubTaskRequest()
+                                    ..subTask = subtask);
+                                  return showDialog<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              Internationalization.getValue(
+                                                  'SUCCESS')),
+                                          content: Text(
+                                              Internationalization.getValue(
+                                                  'Subtask successfully added!')),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              child: Text('Ok'),
+                                              onPressed: () {
+                                                Navigator.of(
+                                                    context).pop();
+                                                int neighborhoodId = widget
+                                                    .neighborhoodId;
+                                                int taskId = widget.taskId;
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                  );
+                                }
+                                else {
+                                  stState(() {
+                                    if (_assigneeName == "") {
+                                      _assigned = false;
+                                    }
+                                    _autoValidate = true;
+                                  });
+                                }
+                              },
+                              child: Text(
+                                  Internationalization.getValue('Create')),
+                            ),
+                          ],
+                        ),
+                        ]
+                    ),
+                  );
+                }
                 )
             );
           } else {

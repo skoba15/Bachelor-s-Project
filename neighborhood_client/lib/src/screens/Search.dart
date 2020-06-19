@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/service_api.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
@@ -67,9 +68,9 @@ class _SearchState extends State<Search> {
                                 child: TextField(
                                   autocorrect: false,
                                   decoration: InputDecoration(
-                                    hintText: 'Search for ${(widget.type == 1)
-                                        ? 'item '
-                                        : 'car '}',
+                                    hintText: '${Internationalization.getValue('Search for')} ${(widget.type == 1)
+                                        ? Internationalization.getValue('item ')
+                                        : Internationalization.getValue('car ') }',
                                     filled: true,
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
@@ -200,7 +201,7 @@ class _SearchState extends State<Search> {
                                       ]
                                   ),
                                 ),
-                        if((_found == 0 && _started == 1) || (_found == 0 && _started == 1)) Text('No matches found')
+                        if((_found == 0 && _started == 1) || (_found == 0 && _started == 1)) Text(Internationalization.getValue('No matches found'))
                       ],
                     ),
                   );

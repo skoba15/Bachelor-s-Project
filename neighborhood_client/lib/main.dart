@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neighborhood_client/router.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/Preferences.dart';
 import 'package:neighborhood_client/src/screens/Createneighborhood.dart';
 import 'package:neighborhood_client/src/screens/Login.dart';
@@ -13,6 +14,7 @@ import 'package:neighborhood_client/src/screens/Neighborhood.dart';
 void main() {
   Preferences.setPreferences();
   FluroRouter.setupRouter();
+  Internationalization.setPreferences();
   runApp(MaterialApp(
     initialRoute: 'login',
     onGenerateRoute: FluroRouter.router.generator

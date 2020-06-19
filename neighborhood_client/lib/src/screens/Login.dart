@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +46,24 @@ class _LoginState extends State<Login> {
                   title: Text('Neighborhood App'),
                   backgroundColor: Colors.black,
                   centerTitle: true,
+                  actions: <Widget>[
+                    IconButton(
+                      icon: new Image.asset("assets/ukIcon.png"),
+                      onPressed: () {
+                        setState(() {
+                          Internationalization.setLanguage('en');
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: new Image.asset("assets/geIcon.png"),
+                      onPressed: () {
+                        setState(() {
+                          Internationalization.setLanguage('ge');
+                        });
+                      },
+                    )
+                  ],
                 ),
                 body: Form(
                   key: _formKey,
@@ -54,42 +73,42 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.center,
 
                     children: <Widget>[
-                      Center(child: Text('Welcome!', style: TextStyle(
+                      Center(child: Text(Internationalization.getValue('Welcome'), style: TextStyle(
                           fontSize: 30, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,)),
                       SizedBox(height: 20),
                       TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: 'Username'
+                          decoration: InputDecoration(
+                              labelText: Internationalization.getValue('Username')
                           ),
                           onSaved: (String val) {
                             _username = val;
                           },
                           validator: (value) {
                             if (value.isEmpty) {
-                              return 'Empty usernames not allowed';
+                              return Internationalization.getValue('Empty usernames not allowed');
                             }
                             return null;
                           }
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        decoration: const InputDecoration(
-                            labelText: 'Password'
+                        decoration: InputDecoration(
+                            labelText: Internationalization.getValue('Password')
                         ),
                         onSaved: (String val) {
                           _password = val;
                         },
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Empty password not allowed';
+                            return Internationalization.getValue('Empty password not allowed');
                           }
                           return null;
                         },
                         obscureText: true,
                       ),
                       SizedBox(height: 10,),
-                      Text(_wrongInput ? 'wrong username or password' : '',
+                      Text(_wrongInput ? Internationalization.getValue('wrong username or password') : '',
                           style: TextStyle(color: Colors.red)),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -125,17 +144,17 @@ class _LoginState extends State<Login> {
                               });
                             }
                           },
-                          child: Text('Sign in'),
+                          child: Text(Internationalization.getValue('Sign in')),
                         ),
                       ),
                       SizedBox(height: 10,),
                       Center(
                           child: Column(
                               children: <Widget>[
-                                Text('Don\'t have an account?'),
+                                Text(Internationalization.getValue('Don\'t have an account?')),
                                 RaisedButton(
                                   child: Text(
-                                      'Sign up'
+                                      Internationalization.getValue('Sign up')
                                   ),
                                   color: Colors.black,
                                   textColor: Colors.white,
