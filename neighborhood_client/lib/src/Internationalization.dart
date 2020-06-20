@@ -123,6 +123,7 @@ class Internationalization {
       'DONE' : 'DONE',
       'MY TASKS' : 'MY TASKS',
       'ALL TASKS' : 'ALL TASKS',
+      'already owned' : 'already owned',
     },
     'ge': {
       'Welcome': 'კეთილი იყოს თქვენი მობრძანება',
@@ -227,7 +228,8 @@ class Internationalization {
       'IN PROGRESS' : 'პროგრესშია',
       'DONE' : 'შესრულებულია',
       'MY TASKS' : 'ჩემი დავალებები',
-      'ALL TASKS' : 'ყველა დავალება'
+      'ALL TASKS' : 'ყველა დავალება',
+      'already owned' : 'აღნიშნული მანქანა სხვის მფლობელობაშია'
     },
   };
 

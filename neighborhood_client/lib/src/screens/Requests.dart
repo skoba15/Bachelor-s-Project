@@ -85,15 +85,12 @@ class _RequestsState extends State<Requests> {
 
                               },
                               trailing: (_statuses[index] == 0) ? Container(
-                                width: 250,
+                                width: 120,
                                 child: Row(
                                   children: <Widget>[
-                                    RaisedButton(
-                                      child: Text(
-                                      Internationalization.getValue('ACCEPT')
-                                      ),
+                                    IconButton(
+                                      icon: Icon(Icons.done),
                                       color: Colors.green,
-                                      textColor: Colors.white,
                                       onPressed: () async {
                                         stState(() {
                                           _statuses[index] = 1;
@@ -108,12 +105,9 @@ class _RequestsState extends State<Requests> {
                                       },
                                     ),
                                     SizedBox(width: 15,),
-                                    RaisedButton(
-                                      child: Text(
-                      Internationalization.getValue('REJECT')
-                                      ),
+                                    IconButton(
+                                      icon: Icon(Icons.cancel),
                                       color: Colors.red,
-                                      textColor: Colors.white,
                                       onPressed: () async {
                                         stState(() {
                                           _statuses[index] = -1;

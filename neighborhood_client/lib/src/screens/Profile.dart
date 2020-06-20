@@ -170,12 +170,9 @@ class _ProfileState extends State<Profile> {
 
                                             ),
                                             Expanded(
-                                              child: RaisedButton(
-                                                child: Text(
-                                  Internationalization.getValue('SAVE'),
-                                                ),
+                                              child: IconButton(
+                                                icon: Icon(Icons.done),
                                                 color: Colors.green,
-                                                textColor: Colors.white,
                                                 onPressed: () async {
                                                   EditPhoneNumberResponse response = await ServiceClient(
                                                       ClientSingleton()
@@ -223,12 +220,9 @@ class _ProfileState extends State<Profile> {
                                               ),
                                             ),
                                             SizedBox(width: 20,),
-                                            RaisedButton(
-                                              child: Text(
-                                  Internationalization.getValue('CANCEL')
-                                              ),
+                                            IconButton(
+                                              icon: Icon(Icons.cancel),
                                               color: Colors.red,
-                                              textColor: Colors.white,
                                               onPressed: () {
                                                 stState(() {
                                                   _phoneEdit = false;
@@ -291,12 +285,9 @@ class _ProfileState extends State<Profile> {
                                                  width: 200,
                                                ),
                                                Expanded (
-                                                 child: RaisedButton(
-                                                   child: Text(
-                                                 Internationalization.getValue('SAVE')
-                                                   ),
+                                                 child: IconButton(
+                                                   icon: Icon(Icons.done),
                                                    color: Colors.green,
-                                                   textColor: Colors.white,
                                                    onPressed: () async {
                                                      EditPlateNumberResponse response = await ServiceClient(
                                                          ClientSingleton()
@@ -346,12 +337,9 @@ class _ProfileState extends State<Profile> {
                                                  ),
                                                ),
                                                SizedBox(width: 20,),
-                                               RaisedButton(
-                                                 child: Text(
-                                   Internationalization.getValue('CANCEL')
-                                                 ),
+                                               IconButton(
+                                                 icon: Icon(Icons.cancel),
                                                  color: Colors.red,
-                                                 textColor: Colors.white,
                                                  onPressed: () {
                                                    stState(() {
                                                      _plateEdit = false;
