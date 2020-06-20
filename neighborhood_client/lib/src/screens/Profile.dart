@@ -1,11 +1,6 @@
-import 'dart:html';
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
@@ -174,56 +169,58 @@ class _ProfileState extends State<Profile> {
                                               width: 200,
 
                                             ),
-                                            RaisedButton(
-                                              child: Text(
+                                            Expanded(
+                                              child: RaisedButton(
+                                                child: Text(
                                   Internationalization.getValue('SAVE'),
-                                              ),
-                                              color: Colors.green,
-                                              textColor: Colors.white,
-                                              onPressed: () async {
-                                                EditPhoneNumberResponse response = await ServiceClient(
-                                                    ClientSingleton()
-                                                        .getChannel(),
-                                                    options: CallOptions(
-                                                        metadata: {
-                                                          'jwt': _prefs.get('jwt')
-                                                        }))
-                                                    .editPhoneNumber(
-                                                    EditPhoneNumberRequest()
-                                                      ..phoneNumber = phoneController
-                                                          .text);
+                                                ),
+                                                color: Colors.green,
+                                                textColor: Colors.white,
+                                                onPressed: () async {
+                                                  EditPhoneNumberResponse response = await ServiceClient(
+                                                      ClientSingleton()
+                                                          .getChannel(),
+                                                      options: CallOptions(
+                                                          metadata: {
+                                                            'jwt': _prefs.get('jwt')
+                                                          }))
+                                                      .editPhoneNumber(
+                                                      EditPhoneNumberRequest()
+                                                        ..phoneNumber = phoneController
+                                                            .text);
 
-                                                if (response.resultCode == 'ok') {
-                                                  stState(() {
-                                                    _phoneEdit = false;
-                                                    _profile.phoneNumber =
-                                                        phoneController.text;
-                                                  });
-                                                }
-                                                else {
-                                                  return showDialog<void>(
-                                                    context: context,
-                                                    builder: (
-                                                        BuildContext context) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                          Internationalization.getValue('Wrong Number')),
-                                                        content: Text(
-                                                      Internationalization.getValue('Malformed phone number')),
-                                                        actions: <Widget>[
-                                                          FlatButton(
-                                                            child: Text('Ok'),
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                  context).pop();
-                                                            },
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                }
-                                              },
+                                                  if (response.resultCode == 'ok') {
+                                                    stState(() {
+                                                      _phoneEdit = false;
+                                                      _profile.phoneNumber =
+                                                          phoneController.text;
+                                                    });
+                                                  }
+                                                  else {
+                                                    return showDialog<void>(
+                                                      context: context,
+                                                      builder: (
+                                                          BuildContext context) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                            Internationalization.getValue('Wrong Number')),
+                                                          content: Text(
+                                                        Internationalization.getValue('Malformed phone number')),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                              child: Text('Ok'),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                    context).pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
+                                                },
+                                              ),
                                             ),
                                             SizedBox(width: 20,),
                                             RaisedButton(
@@ -293,58 +290,60 @@ class _ProfileState extends State<Profile> {
                                                  ),
                                                  width: 200,
                                                ),
-                                               RaisedButton(
-                                                 child: Text(
-                                               Internationalization.getValue('SAVE')
+                                               Expanded (
+                                                 child: RaisedButton(
+                                                   child: Text(
+                                                 Internationalization.getValue('SAVE')
+                                                   ),
+                                                   color: Colors.green,
+                                                   textColor: Colors.white,
+                                                   onPressed: () async {
+                                                     EditPlateNumberResponse response = await ServiceClient(
+                                                         ClientSingleton()
+                                                             .getChannel(),
+                                                         options: CallOptions(
+                                                             metadata: {
+                                                               'jwt': _prefs.get(
+                                                                   'jwt')
+                                                             }))
+                                                         .editPlateNumber(
+                                                         EditPlateNumberRequest()
+                                                           ..plateNumber = _plateController
+                                                               .text);
+                                                     if (response.resultCode ==
+                                                         'ok') {
+                                                       stState(() {
+                                                         _profile.carPlateNumber = _plateController.text;
+                                                         _plateEdit = false;
+                                                       });
+                                                     }
+                                                     else {
+                                                       return showDialog<void>(
+                                                         context: context,
+                                                         builder: (
+                                                             BuildContext context) {
+                                                           return AlertDialog(
+                                                             title: Text(
+                                                               Internationalization.getValue('Invalid Action')),
+                                                             content: Text(
+                                                           Internationalization.getValue(response
+                                                                     .resultCode)),
+                                                             actions: <Widget>[
+                                                               FlatButton(
+                                                                 child: Text('Ok'),
+                                                                 onPressed: () {
+                                                                   Navigator.of(
+                                                                       context)
+                                                                       .pop();
+                                                                 },
+                                                               ),
+                                                             ],
+                                                           );
+                                                         },
+                                                       );
+                                                     }
+                                                   },
                                                  ),
-                                                 color: Colors.green,
-                                                 textColor: Colors.white,
-                                                 onPressed: () async {
-                                                   EditPlateNumberResponse response = await ServiceClient(
-                                                       ClientSingleton()
-                                                           .getChannel(),
-                                                       options: CallOptions(
-                                                           metadata: {
-                                                             'jwt': _prefs.get(
-                                                                 'jwt')
-                                                           }))
-                                                       .editPlateNumber(
-                                                       EditPlateNumberRequest()
-                                                         ..plateNumber = _plateController
-                                                             .text);
-                                                   if (response.resultCode ==
-                                                       'ok') {
-                                                     stState(() {
-                                                       _profile.carPlateNumber = _plateController.text;
-                                                       _plateEdit = false;
-                                                     });
-                                                   }
-                                                   else {
-                                                     return showDialog<void>(
-                                                       context: context,
-                                                       builder: (
-                                                           BuildContext context) {
-                                                         return AlertDialog(
-                                                           title: Text(
-                                                             Internationalization.getValue('Invalid Action')),
-                                                           content: Text(
-                                                         Internationalization.getValue(response
-                                                                   .resultCode)),
-                                                           actions: <Widget>[
-                                                             FlatButton(
-                                                               child: Text('Ok'),
-                                                               onPressed: () {
-                                                                 Navigator.of(
-                                                                     context)
-                                                                     .pop();
-                                                               },
-                                                             ),
-                                                           ],
-                                                         );
-                                                       },
-                                                     );
-                                                   }
-                                                 },
                                                ),
                                                SizedBox(width: 20,),
                                                RaisedButton(

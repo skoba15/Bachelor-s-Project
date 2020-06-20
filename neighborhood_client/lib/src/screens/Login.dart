@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../Preferences.dart';
@@ -28,12 +28,11 @@ class _LoginState extends State<Login> {
 
   Future<String> check() async {
     prefs = await SharedPreferences.getInstance();
-    if (prefs.get('jwt') != null) {
-      Navigator.pop(context);
-      return null;
-    }
     return Future.value("WTF");
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,108 +64,110 @@ class _LoginState extends State<Login> {
                     )
                   ],
                 ),
-                body: Form(
-                  key: _formKey,
-                  autovalidate: _autoValidate,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                body: Wrap(
+                  children: <Widget> [Form(
+                    key: _formKey,
+                    autovalidate: _autoValidate,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: <Widget>[
-                      Center(child: Text(Internationalization.getValue('Welcome'), style: TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,)),
-                      SizedBox(height: 20),
-                      TextFormField(
+                      children: <Widget>[
+                        Center(child: Text(Internationalization.getValue('Welcome'), style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,)),
+                        SizedBox(height: 20),
+                        TextFormField(
+                            decoration: InputDecoration(
+                                labelText: Internationalization.getValue('Username')
+                            ),
+                            onSaved: (String val) {
+                              _username = val;
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return Internationalization.getValue('Empty usernames not allowed');
+                              }
+                              return null;
+                            }
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
                           decoration: InputDecoration(
-                              labelText: Internationalization.getValue('Username')
+                              labelText: Internationalization.getValue('Password')
                           ),
                           onSaved: (String val) {
-                            _username = val;
+                            _password = val;
                           },
                           validator: (value) {
                             if (value.isEmpty) {
-                              return Internationalization.getValue('Empty usernames not allowed');
+                              return Internationalization.getValue('Empty password not allowed');
                             }
                             return null;
-                          }
-                      ),
-                      SizedBox(height: 20),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            labelText: Internationalization.getValue('Password')
+                          },
+                          obscureText: true,
                         ),
-                        onSaved: (String val) {
-                          _password = val;
-                        },
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return Internationalization.getValue('Empty password not allowed');
-                          }
-                          return null;
-                        },
-                        obscureText: true,
-                      ),
-                      SizedBox(height: 10,),
-                      Text(_wrongInput ? Internationalization.getValue('wrong username or password') : '',
-                          style: TextStyle(color: Colors.red)),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        SizedBox(height: 10,),
+                        Text(_wrongInput ? Internationalization.getValue('wrong username or password') : '',
+                            style: TextStyle(color: Colors.red)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
 
-                        child: RaisedButton(
-                          color: Colors.black,
-                          textColor: Colors.white,
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              _formKey.currentState.save();
-                              final response = await ServiceClient(
-                                  ClientSingleton().getChannel()).loginUser(
-                                  LoginUserRequest()
-                                    ..username = _username
-                                    ..password = _password);
-                              if (response.resultCode != "failed") {
-                                SharedPreferences prefs = await SharedPreferences
-                                    .getInstance();
-                                String token = response.resultCode;
-                                await prefs.setString('jwt', token);
-                                Navigator.pushReplacementNamed(
-                                    context, 'Neighborhoods');
+                          child: RaisedButton(
+                            color: Colors.black,
+                            textColor: Colors.white,
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                _formKey.currentState.save();
+                                final response = await ServiceClient(
+                                    ClientSingleton().getChannel()).loginUser(
+                                    LoginUserRequest()
+                                      ..username = _username
+                                      ..password = _password);
+                                if (response.resultCode != "failed") {
+                                  SharedPreferences prefs = await SharedPreferences
+                                      .getInstance();
+                                  String token = response.resultCode;
+                                  await prefs.setString('jwt', token);
+                                  Navigator.pushReplacementNamed(
+                                      context, 'Neighborhoods');
+                                }
+                                else {
+                                  setState(() {
+                                    _wrongInput = true;
+                                  });
+                                }
                               }
                               else {
                                 setState(() {
-                                  _wrongInput = true;
+                                  _autoValidate = true;
                                 });
                               }
-                            }
-                            else {
-                              setState(() {
-                                _autoValidate = true;
-                              });
-                            }
-                          },
-                          child: Text(Internationalization.getValue('Sign in')),
+                            },
+                            child: Text(Internationalization.getValue('Sign in')),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10,),
-                      Center(
-                          child: Column(
-                              children: <Widget>[
-                                Text(Internationalization.getValue('Don\'t have an account?')),
-                                RaisedButton(
-                                  child: Text(
-                                      Internationalization.getValue('Sign up')
+                        SizedBox(height: 10,),
+                        Center(
+                            child: Column(
+                                children: <Widget>[
+                                  Text(Internationalization.getValue('Don\'t have an account?')),
+                                  RaisedButton(
+                                    child: Text(
+                                        Internationalization.getValue('Sign up')
+                                    ),
+                                    color: Colors.black,
+                                    textColor: Colors.white,
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/Register');
+                                    },
                                   ),
-                                  color: Colors.black,
-                                  textColor: Colors.white,
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/Register');
-                                  },
-                                ),
-                              ]
-                          )
-                      )
-                    ],
-                  ),
+                                ]
+                            )
+                        )
+                      ],
+                    ),
+                  )],
                 )
             );
           }

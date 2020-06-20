@@ -12,10 +12,8 @@ import 'package:neighborhood_client/src/screens/Success.dart';
 import 'package:neighborhood_client/src/screens/Neighborhood.dart';
 
 void main() {
-  Preferences.setPreferences();
   FluroRouter.setupRouter();
-  Internationalization.setPreferences();
-  runApp(MaterialApp(
+  runApp(new MaterialApp(
     initialRoute: 'login',
     onGenerateRoute: FluroRouter.router.generator
   ));

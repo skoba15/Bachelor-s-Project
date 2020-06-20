@@ -24,21 +24,12 @@ dependencies:
   flutter:
     sdk: flutter
   protobuf: ^1.0.1
-  grpc:
-      git:
-        url: https://github.com/grpc/grpc-dart
-        ref: grpc-web
-        resolved-ref: af63deb
-  international_phone_input: ^1.0.4
+  grpc: ^2.1.3
   shared_preferences: ^0.5.7+1
-  image_picker: ^0.6.6+4
-  image_picker_web: ^1.0.9
   fluro: ^1.6.3
   datetime_picker_formfield: ^1.0.0
-  provider: ^4.1.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
 
 
 dev_dependencies:

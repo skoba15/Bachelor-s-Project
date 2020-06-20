@@ -14,7 +14,6 @@ import 'package:neighborhood_client/src/screens/Search.dart';
 import 'package:neighborhood_client/src/screens/Success.dart';
 import 'package:neighborhood_client/src/screens/Task.dart';
 import 'package:neighborhood_client/src/screens/Tasks.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -23,7 +22,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FluroRouter {
 
-  static SharedPreferences prefs = Preferences.getPreferences();
 
   static Router router = Router();
   static Handler _loginHandler = Handler(

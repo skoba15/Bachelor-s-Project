@@ -1,10 +1,4 @@
-import 'dart:html';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:grpc/grpc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 import 'package:neighborhood_client/src/Internationalization.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pb.dart';
 import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';

@@ -237,7 +237,6 @@ class Internationalization {
   }
 
   static setLanguage(String language) {
-    _prefs.setString('lang', language);
     _language = language;
   }
 

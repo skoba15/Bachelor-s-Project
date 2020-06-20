@@ -1,20 +1,24 @@
-import 'package:grpc/grpc_web.dart';
+import 'package:grpc/grpc.dart';
 
 class ClientSingleton {
   static final ClientSingleton _clientSingleton = ClientSingleton._internal();
 
 
-  GrpcWebClientChannel _channel;
+  ClientChannel channel;
 
   factory ClientSingleton() {
     return _clientSingleton;
   }
 
-  GrpcWebClientChannel getChannel() {
-    return _channel;
+  ClientChannel getChannel() {
+    return channel;
   }
 
   ClientSingleton._internal() {
-    _channel = GrpcWebClientChannel.xhr(Uri.parse('http://localhost:8080'));
+    channel = ClientChannel(
+      '10.0.2.2',
+      port: 8081,
+      options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+    );
   }
 }
