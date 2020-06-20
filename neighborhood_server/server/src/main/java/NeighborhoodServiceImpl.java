@@ -306,7 +306,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                     if (item.getName().toLowerCase().contains(itemName.toLowerCase())) {
                         builder.addUsers(NeighborhoodAPI.UserInfoItem.newBuilder()
                                 .setUserId(user.getId().intValue())
-                                .setUserFullName(user.getFirstName() + " " + user.getLastName()));
+                                .setUserFullName(user.getFirstName() + " " + user.getLastName()).setPhoneNumber(user.getPhoneNumber()));
                         break;
                     }
                 }
@@ -686,7 +686,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
                 if(user.getCar() != null && user.getCar().getPlateNumber().toUpperCase().equals(plateNumber.toUpperCase())){
                     builder.setUser(NeighborhoodAPI.UserInfoItem.newBuilder()
                             .setUserId(user.getId().intValue())
-                            .setUserFullName(user.getFirstName() + " " + user.getLastName()))
+                            .setUserFullName(user.getFirstName() + " " + user.getLastName()).setPhoneNumber(user.getPhoneNumber()))
                             .setResultCode("Success");
                     break;
                 }

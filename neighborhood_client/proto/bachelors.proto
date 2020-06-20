@@ -310,6 +310,7 @@ message GetOtherNeighborhoodResponse {
 message UserInfoItem {
     int32 user_id = 1;
     string user_full_name = 2;
+    string phone_number = 3;
 }
 
 message GetUsersByNeighborhoodRequest {

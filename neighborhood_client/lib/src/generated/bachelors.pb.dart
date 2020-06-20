@@ -1448,6 +1448,7 @@ class UserInfoItem extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('UserInfoItem', package: const $pb.PackageName('neighborhood.server'), createEmptyInstance: create)
     ..a<$core.int>(1, 'userId', $pb.PbFieldType.O3)
     ..aOS(2, 'userFullName')
+    ..aOS(3, 'phoneNumber')
     ..hasRequiredFields = false
   ;
 
@@ -1483,6 +1484,15 @@ class UserInfoItem extends $pb.GeneratedMessage {
   $core.bool hasUserFullName() => $_has(1);
   @$pb.TagNumber(2)
   void clearUserFullName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get phoneNumber => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set phoneNumber($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPhoneNumber() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPhoneNumber() => clearField(3);
 }
 
 class GetUsersByNeighborhoodRequest extends $pb.GeneratedMessage {

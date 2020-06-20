@@ -277,6 +277,7 @@ const UserInfoItem$json = const {
   '2': const [
     const {'1': 'user_id', '3': 1, '4': 1, '5': 5, '10': 'userId'},
     const {'1': 'user_full_name', '3': 2, '4': 1, '5': 9, '10': 'userFullName'},
+    const {'1': 'phone_number', '3': 3, '4': 1, '5': 9, '10': 'phoneNumber'},
   ],
 };
 

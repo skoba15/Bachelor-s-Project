@@ -5,6 +5,7 @@ import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 
 import '../Preferences.dart';

@@ -6,6 +6,7 @@ import 'package:neighborhood_client/src/generated/bachelors.pbgrpc.dart';
 import 'package:neighborhood_client/src/grpc/ClientSingleton.dart';
 import 'package:flutter/src/widgets/async.dart' as a;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class Search extends StatefulWidget {
 
@@ -164,6 +165,13 @@ class _SearchState extends State<Search> {
                                                   ]
                                               )
                                           ),
+                                          trailing: IconButton(
+                                            icon: Icon(Icons.call),
+                                            color: Colors.green,
+                                            onPressed: () {
+                                              UrlLauncher.launch('tel://${itemResults[index].phoneNumber}');
+                                            },
+                                          )
                                         ),
                                       ]
                                   ),
@@ -197,6 +205,13 @@ class _SearchState extends State<Search> {
                                                   ]
                                               )
                                           ),
+                                          trailing : IconButton(
+                                            icon: Icon(Icons.call),
+                                            color: Colors.green,
+                                            onPressed: () {
+                                              UrlLauncher.launch('tel://${_carResult.phoneNumber}');
+                                            },
+                                          )
                                         ),
                                       ]
                                   ),
