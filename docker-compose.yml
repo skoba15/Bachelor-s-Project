@@ -8,16 +8,11 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'neighborhood_db'
-      # So you don't have to use root, but you can if you like
       MYSQL_USER: 'root'
-      # You can use whatever password you like
       MYSQL_PASSWORD: 'iniesta5'
-      # Password for root access
       MYSQL_ROOT_PASSWORD: 'iniesta5'
     expose:
-      # Opens port 3306 on the container
       - '3306'
-      # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
     networks:
@@ -36,6 +31,5 @@ networks:
   datalink:
     driver: bridge
   
-# Names our volume
 volumes:
   my-db:
