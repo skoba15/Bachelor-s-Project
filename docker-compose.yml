@@ -1,0 +1,41 @@
+version: "3.2"
+
+
+
+services:
+  env:
+    build: envoy
+    image: "envoy_proxy"
+    ports:
+      - "8080:8080"
+      - "9901:9901"
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'neighborhood_db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'iniesta5'
+      MYSQL_ROOT_PASSWORD: 'iniesta5'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - datalink
+  server:
+    depends_on:
+       - db
+    build: neighborhood_server
+    image: "server_start"
+    ports:
+      - "8081:8081"
+    networks:
+      - datalink
+
+networks:
+  datalink:
+    driver: bridge
+  
+volumes:
+  my-db:
