@@ -52,7 +52,7 @@ public final class NeighborhoodServer {
     }
 
     public static void main(String[] args) throws Exception {
-        NeighborhoodServer server = new NeighborhoodServer(8081);
+        NeighborhoodServer server = new NeighborhoodServer(Integer.valueOf(args[0]));
         server.start();
         JdbcConnection conn = new JdbcConnection();
 //
