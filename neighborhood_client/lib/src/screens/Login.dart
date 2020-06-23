@@ -125,10 +125,8 @@ class _LoginState extends State<Login> {
                                     ..username = _username
                                     ..password = _password);
                               if (response.resultCode != "failed") {
-                                SharedPreferences prefs = await SharedPreferences
-                                    .getInstance();
                                 String token = response.resultCode;
-                                await prefs.setString('jwt', token);
+                                prefs.setString('jwt', token);
                                 Navigator.pushReplacementNamed(
                                     context, 'Neighborhoods');
                               }
