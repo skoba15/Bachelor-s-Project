@@ -55,6 +55,7 @@ public final class NeighborhoodServer {
         NeighborhoodServer server = new NeighborhoodServer(Integer.valueOf(args[0]));
         server.start();
         JdbcConnection conn = new JdbcConnection();
+        JdbcConnection.getSessionFactory();
 //
 //        UserService service = new UserServiceImpl();
 //        UserEntity user = service.findUserByUsername("makhvshi");
