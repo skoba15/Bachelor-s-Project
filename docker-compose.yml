@@ -3,12 +3,6 @@ version: "3.2"
 
 
 services:
-  env:
-    build: envoy
-    image: "envoy_proxy"
-    ports:
-      - "8080:8080"
-      - "9901:9901"
   db:
     image: mysql:5.7
     restart: always
