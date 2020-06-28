@@ -16,6 +16,7 @@ void main() {
   FluroRouter.setupRouter();
   Internationalization.setPreferences();
   runApp(MaterialApp(
+      debugShowCheckedModeBanner : false,
     initialRoute: 'login',
     onGenerateRoute: FluroRouter.router.generator
   ));
