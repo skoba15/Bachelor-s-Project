@@ -14,6 +14,7 @@ import 'package:neighborhood_client/src/screens/Neighborhood.dart';
 void main() {
   FluroRouter.setupRouter();
   runApp(new MaterialApp(
+      debugShowCheckedModeBanner : false,
     initialRoute: 'login',
     onGenerateRoute: FluroRouter.router.generator
   ));
