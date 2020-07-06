@@ -124,6 +124,7 @@ class Internationalization {
       'MY TASKS' : 'MY TASKS',
       'ALL TASKS' : 'ALL TASKS',
       'User successfully Registered!' : 'User successfully Registered!',
+      'already owned' : 'already owned',
     },
     'ge': {
       'Welcome': 'კეთილი იყოს თქვენი მობრძანება',
@@ -229,7 +230,8 @@ class Internationalization {
       'DONE' : 'შესრულებულია',
       'MY TASKS' : 'ჩემი დავალებები',
       'ALL TASKS' : 'ყველა დავალება',
-      'User successfully Registered!' : 'მომხმარებელი წარმატებით დარეგისტრირდა'
+      'User successfully Registered!' : 'მომხმარებელი წარმატებით დარეგისტრირდა',
+      'already owned' : 'აღნიშნული მანქანა სხვის მფლობელობაშია',
     },
   };
 
