@@ -203,7 +203,8 @@ class _CreateSubtaskState extends State<CreateSubtask> {
                                     ..taskId = widget.taskId
                                     ..assigneeId = _users[_selected].userId;
                                   AddSubTaskResponse response = await ServiceClient(
-                                      ClientSingleton().getChannel())
+                                      ClientSingleton().getChannel(),  options: CallOptions(
+                                      metadata: {'jwt': _prefs.get('jwt')}))
                                       .addSubTask(AddSubTaskRequest()
                                     ..subTask = subtask);
                                   return showDialog<void>(

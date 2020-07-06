@@ -54,8 +54,6 @@ class _NeighborhoodState extends State<Neighborhood> {
       _commentControllers.add(controller);
     }
     _showComment = new List<bool>.filled(_posts.length, false, growable: true);
-    print(_posts[0].comment.length);
-
     IsManagerResponse managerResponse = await ServiceClient(
         ClientSingleton().getChannel(),
         options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
