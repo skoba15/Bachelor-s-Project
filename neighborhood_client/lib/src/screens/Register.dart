@@ -165,7 +165,30 @@ class _RegisterState extends State<Register> {
                         });
                       }
                       else {
-                        Navigator.pushReplacementNamed(context, '/Success');
+                        return showDialog<void>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                    Internationalization.getValue(
+                                        'SUCCESS')),
+                                content: Text(
+                                    Internationalization.getValue(
+                                        'User successfully Registered!')),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('Ok'),
+                                    onPressed: () {
+                                      Navigator.of(
+                                          context).pop();
+                                      Navigator.pushReplacementNamed(
+                                          context, 'login');
+                                    },
+                                  ),
+                                ],
+                              );
+                            }
+                        );
                       }
                     }
                     else {
