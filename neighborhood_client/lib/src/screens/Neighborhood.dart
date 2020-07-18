@@ -236,7 +236,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                                                 '${_posts[index].createDate
                                                     .day}/${_posts[index]
                                                     .createDate
-                                                    .month}/${_posts[index]
+                                                    .month + 1}/${_posts[index]
                                                     .createDate.year}',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w300,
@@ -293,11 +293,11 @@ class _NeighborhoodState extends State<Neighborhood> {
                                                                               ),
                                                                               new Spacer(),
                                                                               Text(
-                                                                                '${_posts[index]
+                                                                                '${_posts[index].comment[commentIndex]
                                                                                     .createDate
-                                                                                    .day}/${_posts[index]
+                                                                                    .day}/${_posts[index].comment[commentIndex]
                                                                                     .createDate
-                                                                                    .month}/${_posts[index]
+                                                                                    .month + 1}/${_posts[index].comment[commentIndex]
                                                                                     .createDate
                                                                                     .year}',
                                                                                 style: TextStyle(

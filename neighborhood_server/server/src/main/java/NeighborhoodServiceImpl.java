@@ -410,6 +410,7 @@ public class NeighborhoodServiceImpl extends ServiceGrpc.ServiceImplBase {
         NeighborhoodAPI.GetPostsByNeighborhoodResponse.Builder builder = NeighborhoodAPI.GetPostsByNeighborhoodResponse.newBuilder();
 
         if (neighborhood != null) {
+            Collections.sort(neighborhood.getPostList(),  Comparator.comparing(PostEntity::getCreateDate).reversed());
             for (PostEntity post : neighborhood.getPostList()) {
                 NeighborhoodAPI.Post.Builder postBuilder = NeighborhoodAPI.Post.newBuilder();
                 UserEntity creator = post.getCreator();

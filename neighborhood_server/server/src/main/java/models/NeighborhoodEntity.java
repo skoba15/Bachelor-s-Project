@@ -2,9 +2,7 @@ package models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "NB_NEIGHBORHOOD")
@@ -35,7 +33,7 @@ public class NeighborhoodEntity {
     private Set<TaskEntity> taskList = new HashSet<TaskEntity>();
 
     @OneToMany(mappedBy = "neighborhood", fetch = FetchType.EAGER)
-    private Set<PostEntity> postList = new HashSet<PostEntity>();
+    private List<PostEntity> postList = new ArrayList<>();
 
     public NeighborhoodEntity() {}
 
@@ -102,11 +100,11 @@ public class NeighborhoodEntity {
         this.taskList = taskList;
     }
 
-    public Set<PostEntity> getPostList() {
+    public List<PostEntity> getPostList() {
         return postList;
     }
 
-    public void setPostList(Set<PostEntity> postList) {
+    public void setPostList(List<PostEntity> postList) {
         this.postList = postList;
     }
 
