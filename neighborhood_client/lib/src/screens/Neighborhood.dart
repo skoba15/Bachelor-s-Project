@@ -54,8 +54,6 @@ class _NeighborhoodState extends State<Neighborhood> {
       _commentControllers.add(controller);
     }
     _showComment = new List<bool>.filled(_posts.length, false, growable: true);
-    print(_posts[0].comment.length);
-
     IsManagerResponse managerResponse = await ServiceClient(
         ClientSingleton().getChannel(),
         options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
@@ -74,88 +72,88 @@ class _NeighborhoodState extends State<Neighborhood> {
           if (snapshot.connectionState == a.ConnectionState.done) {
             return Scaffold(
               drawer: Drawer(
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: <Widget>[
-                          DrawerHeader(
-                            decoration: BoxDecoration(
-                                color: Colors.yellow,
-                            ),
-                          ),
-                          if(_isManager == 1)ListTile(
-                            leading: Icon(Icons.accessibility),
-                            title: Text(Internationalization.getValue('Requests'), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                            onTap: () {
-                              int id = widget.id;
-                              Navigator.pushNamed(context, 'Neighborhoods/$id/Requests');
-                            },
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.person),
-                            title: Text(Internationalization.getValue('Profile'), style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),),
-                            onTap: () async {
-                              UserIdResponse idResponse = await ServiceClient(
-                                  ClientSingleton().getChannel(),
-                                  options: CallOptions(
-                                      metadata: {'jwt': _prefs.get('jwt')}))
-                                  .userId(UserIdRequest()
-                                ..dummy = 1);
-                              int id = idResponse.id;
-                              Navigator.pushNamed(
-                                  context, '/Profile/$id');
-                              },
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.assignment),
-                            title: Text(Internationalization.getValue('Tasks'), style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),),
-                            onTap: () async {
-                              int neighborhoodId = widget.id;
-                              Navigator.pushNamed(
-                                  context, 'Neighborhoods/$neighborhoodId/tasks');
-                            },
-                          ),
-                        ListTile(
-                          leading: Icon(Icons.search),
-                          title: Text(Internationalization.getValue('Search Items'), style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),),
-                          onTap: () {
-                            int neighborhoodId = widget.id;
-                            Navigator.pushNamed(
-                                context, 'Neighborhoods/$neighborhoodId/Search/1');
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.search),
-                          title: Text(Internationalization.getValue('Search Car'), style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),),
-                          onTap: () {
-                            int neighborhoodId = widget.id;
-                            Navigator.pushNamed(
-                                context, 'Neighborhoods/$neighborhoodId/Search/2');
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.keyboard_backspace),
-                          title: Text(Internationalization.getValue('Neighborhoods'), style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),),
-                          onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, 'Neighborhoods');
-                          },
-                        ),
-                      ListTile(
-                        leading: Icon(Icons.exit_to_app),
-                        title: Text(Internationalization.getValue('Sign Out'), style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),),
-                        onTap: () {
-                          _prefs.remove('jwt');
-                          Navigator.of(context).popUntil((route) => route.isFirst);
-                          Navigator.pushReplacementNamed(context, 'login');
-                        },
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: <Widget>[
+                    DrawerHeader(
+                      decoration: BoxDecoration(
+                        color: Colors.yellow,
                       ),
-                    ],
+                    ),
+                    if(_isManager == 1)ListTile(
+                      leading: Icon(Icons.accessibility),
+                      title: Text(Internationalization.getValue('Requests'), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                      onTap: () {
+                        int id = widget.id;
+                        Navigator.pushNamed(context, 'Neighborhoods/$id/Requests');
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text(Internationalization.getValue('Profile'), style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),),
+                      onTap: () async {
+                        UserIdResponse idResponse = await ServiceClient(
+                            ClientSingleton().getChannel(),
+                            options: CallOptions(
+                                metadata: {'jwt': _prefs.get('jwt')}))
+                            .userId(UserIdRequest()
+                          ..dummy = 1);
+                        int id = idResponse.id;
+                        Navigator.pushNamed(
+                            context, '/Profile/$id');
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.assignment),
+                      title: Text(Internationalization.getValue('Tasks'), style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),),
+                      onTap: () async {
+                        int neighborhoodId = widget.id;
+                        Navigator.pushNamed(
+                            context, 'Neighborhoods/$neighborhoodId/tasks');
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.search),
+                      title: Text(Internationalization.getValue('Search Items'), style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),),
+                      onTap: () {
+                        int neighborhoodId = widget.id;
+                        Navigator.pushNamed(
+                            context, 'Neighborhoods/$neighborhoodId/Search/1');
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.search),
+                      title: Text(Internationalization.getValue('Search Car'), style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),),
+                      onTap: () {
+                        int neighborhoodId = widget.id;
+                        Navigator.pushNamed(
+                            context, 'Neighborhoods/$neighborhoodId/Search/2');
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.keyboard_backspace),
+                      title: Text(Internationalization.getValue('Neighborhoods'), style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),),
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, 'Neighborhoods');
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.exit_to_app),
+                      title: Text(Internationalization.getValue('Sign Out'), style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),),
+                      onTap: () {
+                        _prefs.remove('jwt');
+                        Navigator.of(context).popUntil((route) => route.isFirst);
+                        Navigator.pushReplacementNamed(context, 'login');
+                      },
+                    ),
+                  ],
                 ),
               ),
               appBar: AppBar(
@@ -238,7 +236,7 @@ class _NeighborhoodState extends State<Neighborhood> {
                                                 '${_posts[index].createDate
                                                     .day}/${_posts[index]
                                                     .createDate
-                                                    .month}/${_posts[index]
+                                                    .month + 1}/${_posts[index]
                                                     .createDate.year}',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w300,
@@ -260,136 +258,136 @@ class _NeighborhoodState extends State<Neighborhood> {
                                           },
                                         ),
                                         if(_showComment[index])  Column(
-                                                  children: <Widget>[
-                                                    ListView.builder(
-                                                        shrinkWrap: true,
-                                                        itemCount: _posts[index]
-                                                            .comment.length,
-                                                        itemBuilder: (context,
-                                                            commentIndex) {
-                                                          return Column(
-                                                              crossAxisAlignment: CrossAxisAlignment
-                                                                  .start,
-                                                              children: <
-                                                                  Widget>[
-                                                                Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .fromLTRB(
-                                                                        15.0, 0,
-                                                                        0, 0),
-                                                                    child: Column(
-                                                                      crossAxisAlignment: CrossAxisAlignment
-                                                                          .start,
-                                                                      children: <
-                                                                          Widget>[
-                                                                        Row(
-                                                                            children: <Widget>[
-                                                                              Text(
-                                                                                _posts[index]
-                                                                                    .comment[commentIndex]
-                                                                                    .userFullName,
-                                                                                style: TextStyle(
-                                                                                    fontWeight: FontWeight
-                                                                                        .bold,
-                                                                                    fontSize: 12),
-                                                                              ),
-                                                                              new Spacer(),
-                                                                              Text(
-                                                                                '${_posts[index]
-                                                                                    .createDate
-                                                                                    .day}/${_posts[index]
-                                                                                    .createDate
-                                                                                    .month}/${_posts[index]
-                                                                                    .createDate
-                                                                                    .year}',
-                                                                                style: TextStyle(
-                                                                                  fontWeight: FontWeight
-                                                                                      .w300,
-                                                                                  fontSize: 11,
-                                                                                ),
-                                                                              )
-                                                                            ]
-                                                                        ),
+                                            children: <Widget>[
+                                              ListView.builder(
+                                                  shrinkWrap: true,
+                                                  itemCount: _posts[index]
+                                                      .comment.length,
+                                                  itemBuilder: (context,
+                                                      commentIndex) {
+                                                    return Column(
+                                                        crossAxisAlignment: CrossAxisAlignment
+                                                            .start,
+                                                        children: <
+                                                            Widget>[
+                                                          Padding(
+                                                              padding: const EdgeInsets
+                                                                  .fromLTRB(
+                                                                  15.0, 0,
+                                                                  0, 0),
+                                                              child: Column(
+                                                                crossAxisAlignment: CrossAxisAlignment
+                                                                    .start,
+                                                                children: <
+                                                                    Widget>[
+                                                                  Row(
+                                                                      children: <Widget>[
                                                                         Text(
-                                                                            _posts[index]
-                                                                                .comment[commentIndex]
-                                                                                .text),
-                                                                      ],
-                                                                    )
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 10,)
-                                                              ]
-                                                          );
-                                                        }
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .fromLTRB(
-                                                          15.0, 0, 0, 0),
-                                                      child: Row(
-                                                          children: <Widget>[
-                                                            Expanded(
-                                                              child: new TextField(
-                                                                minLines: 1,
-                                                                maxLines: 5,
-                                                                decoration: new InputDecoration(
-                                                                  hintText: Internationalization.getValue('Write your comment here'),
-                                                                  fillColor: Colors
-                                                                      .white,
-                                                                  border: new OutlineInputBorder(
-                                                                    borderRadius: new BorderRadius
-                                                                        .circular(
-                                                                        5.0),
-                                                                    borderSide: new BorderSide(
-                                                                    ),
+                                                                          _posts[index]
+                                                                              .comment[commentIndex]
+                                                                              .userFullName,
+                                                                          style: TextStyle(
+                                                                              fontWeight: FontWeight
+                                                                                  .bold,
+                                                                              fontSize: 12),
+                                                                        ),
+                                                                        new Spacer(),
+                                                                        Text(
+                                                                          '${_posts[index].comment[commentIndex]
+                                                                              .createDate
+                                                                              .day}/${_posts[index].comment[commentIndex]
+                                                                              .createDate
+                                                                              .month + 1}/${_posts[index].comment[commentIndex]
+                                                                              .createDate
+                                                                              .year}',
+                                                                          style: TextStyle(
+                                                                            fontWeight: FontWeight
+                                                                                .w300,
+                                                                            fontSize: 11,
+                                                                          ),
+                                                                        )
+                                                                      ]
                                                                   ),
-                                                                ),
-                                                                style: TextStyle(
-                                                                    fontSize: 12
-                                                                ),
-                                                                controller: _commentControllers[index],
+                                                                  Text(
+                                                                      _posts[index]
+                                                                          .comment[commentIndex]
+                                                                          .text),
+                                                                ],
+                                                              )
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,)
+                                                        ]
+                                                    );
+                                                  }
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets
+                                                    .fromLTRB(
+                                                    15.0, 0, 0, 0),
+                                                child: Row(
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                        child: new TextField(
+                                                          minLines: 1,
+                                                          maxLines: 5,
+                                                          decoration: new InputDecoration(
+                                                            hintText: Internationalization.getValue('Write your comment here'),
+                                                            fillColor: Colors
+                                                                .white,
+                                                            border: new OutlineInputBorder(
+                                                              borderRadius: new BorderRadius
+                                                                  .circular(
+                                                                  5.0),
+                                                              borderSide: new BorderSide(
                                                               ),
                                                             ),
-                                                            IconButton(
-                                                              icon: Icon(
-                                                                  Icons.send),
-                                                              onPressed: () async {
-                                                                String commentText = _commentControllers[index]
-                                                                    .text;
-                                                                if (commentText !=
-                                                                    "") {
-                                                                  print(
-                                                                      _posts[index]
-                                                                          .id);
-                                                                  Comment comment = new Comment()
-                                                                    ..text = commentText
-                                                                    ..postId = _posts[index]
-                                                                        .id;
-                                                                  print(DateTime.now());
-                                                                  AddCommentResponse response = await ServiceClient(
-                                                                      ClientSingleton()
-                                                                          .getChannel(), options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
-                                                                      .addComment(
-                                                                      AddCommentRequest()
-                                                                        ..comment = comment);
-                                                                  Comment resultComment = response
-                                                                      .comment;
-                                                                  stState(() {
-                                                                    print(DateTime.now());
-                                                                    _posts[index]
-                                                                        .comment
-                                                                        .add(
-                                                                        resultComment);
-                                                                  });
-                                                                }
-                                                              },
-                                                            ),
-                                                          ]
+                                                          ),
+                                                          style: TextStyle(
+                                                              fontSize: 12
+                                                          ),
+                                                          controller: _commentControllers[index],
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ]
+                                                      IconButton(
+                                                        icon: Icon(
+                                                            Icons.send),
+                                                        onPressed: () async {
+                                                          String commentText = _commentControllers[index]
+                                                              .text;
+                                                          if (commentText !=
+                                                              "") {
+                                                            print(
+                                                                _posts[index]
+                                                                    .id);
+                                                            Comment comment = new Comment()
+                                                              ..text = commentText
+                                                              ..postId = _posts[index]
+                                                                  .id;
+                                                            print(DateTime.now());
+                                                            AddCommentResponse response = await ServiceClient(
+                                                                ClientSingleton()
+                                                                    .getChannel(), options: CallOptions(metadata: {'jwt': _prefs.get('jwt')}))
+                                                                .addComment(
+                                                                AddCommentRequest()
+                                                                  ..comment = comment);
+                                                            Comment resultComment = response
+                                                                .comment;
+                                                            stState(() {
+                                                              print(DateTime.now());
+                                                              _posts[index]
+                                                                  .comment
+                                                                  .add(
+                                                                  resultComment);
+                                                            });
+                                                          }
+                                                        },
+                                                      ),
+                                                    ]
+                                                ),
                                               ),
+                                            ]
+                                        ),
                                       ]
                                   );
                                 }
@@ -403,7 +401,7 @@ class _NeighborhoodState extends State<Neighborhood> {
           } else {
             return CircularProgressIndicator();
           }
-      }
+        }
     );
   }
 }
